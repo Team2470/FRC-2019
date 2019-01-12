@@ -7,8 +7,7 @@
 //   Chris Struck       Feb. 2018  Initial design.
 //
 // Description:
-//
-//		f
+//    This class operates a variety of infrared sensors, at varying distances.
 // 
 // Dependencies:
 //    None
@@ -17,17 +16,17 @@
 /******************************************************************************
  * Include Files
  *****************************************************************************/
-//System Includes
+// System Includes //
 #include <iostream>
 
-// First Includes
+// First Includes //
 #include <frc/AnalogInput.h>
 
-//Our Includes
+// Our Includes //
 #include "ir_helper.hpp"
 
 /*-----------------------------------------------------------------------------
- * FUNCTION NAME:    MaxSonar
+ * FUNCTION NAME:    Infrared
  *---------------------------------------------------------------------------*/
 Infrared::Infrared(int irChannel, Infrared_Sensor_Type irType)
 {

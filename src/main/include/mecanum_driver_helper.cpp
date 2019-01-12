@@ -132,7 +132,7 @@ void BjorgMecanumDrive::setMovement()
 {
     if (multiMove)
     {
-        twoBtnDrive();
+        twoBtnMove();
     }
     else
     {
@@ -148,7 +148,7 @@ void BjorgMecanumDrive::setMovement()
         shiftValue = driveControllerShift->GetRawAxis(shiftCtrl);
     }
     
-    if (multirotate)
+    if (multiRotate)
     {
         twoBtnRotate();
     }

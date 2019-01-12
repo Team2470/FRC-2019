@@ -19,22 +19,20 @@
 /******************************************************************************
  * Include Files
  *****************************************************************************/
-// System Includes
+// System Includes //
 #include <math.h>
 #include <Timer.h>
 #include <iostream>
 
-// FIRST Includes
+// FIRST Includes //
 #include <frc/Spark.h>
 #include <frc/PWMSpeedController.h>
 #include <frc/Victor.h>
 #include <frc/VictorSP.h>
 #include <frc/Talon.h>
 
-// Our Includes
+// Our Includes //
 #include "motor_helper.hpp"
-
-using namespace frc;
 
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    Motor
@@ -49,22 +47,22 @@ Motor::Motor(int motorChannel, Motor_Type motorType)
 	switch(motorFamily)
 	{
 		case TALON :
-			motorTalon = new Talon(motorChannel);
+			motorTalon = new frc::Talon(motorChannel);
 			pwmMotor = motorTalon;
 			break;
 
 		case VICTOR :
-			motorVictor = new Victor(motorChannel);
+			motorVictor = new frc::Victor(motorChannel);
 			pwmMotor = motorVictor;
 			break;
 
 		case VICTOR_SP :
-			motorVictorSP = new VictorSP(motorChannel);
+			motorVictorSP = new frc::VictorSP(motorChannel);
 			pwmMotor = motorVictorSP;
 			break;
 
 		case SPARK :
-			motorSpark = new Spark(motorChannel);
+			motorSpark = new frc::Spark(motorChannel);
 			pwmMotor = motorSpark;
 			break;
 

@@ -7,8 +7,7 @@
 //   Chris Struck       Feb. 2018  Initial design.
 //
 // Description:
-//
-//		f
+//    This class operates a variety of infrared sensors, at varying distances.
 // 
 // Dependencies:
 //    None
@@ -20,7 +19,7 @@
 /******************************************************************************
  * Include Files
  *****************************************************************************/
- // First Includes
+// First Includes //
 #include <frc/AnalogInput.h>
 
 /******************************************************************************
@@ -49,9 +48,9 @@ enum Color
  *****************************************************************************/
 
 /******************************************************************************
- * CLASS      : MaxSonar
+ * CLASS      : Infrared
  *
- * DESCRIPTION: This class is to operate a PWM Motor.
+ * DESCRIPTION: This class is to operate a Infrared sensor.
  *
  * RETURNS    : None
  *****************************************************************************/
@@ -61,7 +60,7 @@ public:
     /**************************************************************************
      * FUNCTION   : Infrared
      *
-     * DESCRIPTION: Constructs the MaxSonar object with the specified 
+     * DESCRIPTION: Constructs the Infrared object with the specified 
      *              <irChannel> and <irType>.
      *
      * RETURNS    : A Infrared object
