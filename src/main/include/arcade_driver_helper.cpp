@@ -49,13 +49,12 @@ BjorgArcadeDrive::BjorgArcadeDrive(frc::Spark *m_leftMotor, frc::Spark *m_rightM
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    arcadeDrive
  *---------------------------------------------------------------------------*/
-void BjorgDrive::arcadeDrive()
+void BjorgArcadeDrive::arcadeDrive()
 {
     m_robotDrive->SetSafetyEnabled(true);
 
     setMovement();
     setRotate(rotateEnable);
-    /////////////////////////////////////////////////////////////////////////////////////////
 
     //joystick debounce
     if(movementValue <= 0.1f && movementValue >= -0.1f)
@@ -69,10 +68,12 @@ void BjorgDrive::arcadeDrive()
     }
 
     m_robotDrive->ArcadeDrive(reverseDrive * motorMultiplier * movementValue, rotateMult * rotationValue, sqrInputs);
+}
+
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    arcadeDrive
  *---------------------------------------------------------------------------*/
-void BjorgDrive::arcadeDrive(double movement, double rotate)
+void BjorgArcadeDrive::arcadeDrive(double movement, double rotate)
 {
     m_robotDrive->SetSafetyEnabled(true);
     m_robotDrive->ArcadeDrive(movement, rotate);
@@ -81,7 +82,7 @@ void BjorgDrive::arcadeDrive(double movement, double rotate)
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    twoBtnDrive
  *---------------------------------------------------------------------------*/
-void BjorgDrive::twoBtnDrive()
+void BjorgArcadeDrive::twoBtnDrive()
 {
     // Combines two inputs into one value
     movementValue = driveController1->GetRawAxis(fwdDrive) - driveController1->GetRawAxis(bckDrive);
@@ -90,7 +91,7 @@ void BjorgDrive::twoBtnDrive()
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    twoBtnRotate
  *---------------------------------------------------------------------------*/
-void BjorgDrive::twoBtnRotate()
+void BjorgArcadeDrive::twoBtnRotate()
 {
     float triggerVal = 0.0;
     float maxVal = 0.0;
@@ -122,7 +123,7 @@ void BjorgDrive::twoBtnRotate()
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    setMovement
  *---------------------------------------------------------------------------*/
-void BjorgDrive::setMovement()
+void BjorgArcadeDrive::setMovement()
 {
     if (multiMove)
     {
@@ -138,7 +139,7 @@ void BjorgDrive::setMovement()
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    setRotate
  *---------------------------------------------------------------------------*/
-void BjorgDrive::setRotate(bool rotateEn)
+void BjorgArcadeDrive::setRotate(bool rotateEn)
 {
     if (multiRotate)
     {

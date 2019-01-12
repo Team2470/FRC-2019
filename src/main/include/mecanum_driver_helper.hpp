@@ -20,8 +20,8 @@
 /******************************************************************************
  * Include Files
  *****************************************************************************/
-// FIRST Includes
-#include <MecanumDrive.h>
+// FIRST Includes //
+#include <frc/drive/MecanumDrive.h>
 #include <Joystick.h>
 #include <Spark.h>
 
@@ -34,9 +34,9 @@
  *****************************************************************************/
 
 /******************************************************************************
- * CLASS      : BjorgDrive
+ * CLASS      : BjorgMecanumDrive
  *
- * DESCRIPTION: This class creates a DifferentialDrive Object
+ * DESCRIPTION: This class creates a MecanumDrive Object
  *
  * RETURNS    : None
  *****************************************************************************/
@@ -50,19 +50,20 @@ public:
 	int moveCtrl 	 = 0;
     int shiftCtrl    = 0;
 	int rotateCtrl 	 = 0;
-	int rtTurn		 = 0;
-	int lftTurn		 = 0;
-	int fwdDrive	 = 0;
-	int bckDrive	 = 0;
+	//int rtTurn		 = 0;
+	//int lftTurn		 = 0;
+	//int fwdDrive	 = 0;
+	//int bckDrive	 = 0;
 	int joystickInt  = 0;
 	int reverseDrive = -1;
 
-	bool rotateEnable = true;
-	bool sqrInputs	 = false;
+	//bool rotateEnable = true;
+	//bool sqrInputs	 = false;
 	bool multiRotate = false;
 	bool multiMove   = false;
 	float motorMultiplier = 1.0;
-	float rotateMult = 0.5;
+    float shiftMultiplier = 1.0;
+	float rotateMultiplier = 1.0;
 	
     /**************************************************************************
      * FUNCTION   : BjorgMecanumDrive
@@ -103,15 +104,15 @@ public:
      *
      * RETURNS    : Void
      *************************************************************************/	
-	void twoBtnDrive();
+	//void twoBtnDrive();
 
 private:
 	float movementValue = 0.0;
     float shiftValue = 0.0;
-	float rotationValue = 0.0;
+	float rotateValue = 0.0;
 
 	frc::MecanumDrive *m_robotDrive;
-	frc::Joystick *driveController1Move;
+	frc::Joystick *driveControllerMove;
 	frc::Joystick *driveControllerShift;
     frc::Joystick *driveControllerRotate;
     
@@ -122,7 +123,7 @@ private:
      *
      * RETURNS    : Void
      *************************************************************************/	
-	void twoBtnRotate();
+	//void twoBtnRotate();
     
     /**************************************************************************
      * FUNCTION   : setMovement

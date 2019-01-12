@@ -1,5 +1,5 @@
 //*****************************************************************************
-// Filename:            mecanum_driver_helper.hpp
+// Filename:            mecanum_driver_helper.cpp
 //
 // Revision Record:
 //   Author             Date       Description
@@ -28,7 +28,7 @@
 #include <Spark.h>
 
 // Our Includes //
-#include "driver_helper.hpp"
+#include "mecanum_driver_helper.hpp"
 
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    BjorgMecanumDrive
@@ -39,7 +39,7 @@ BjorgMecanumDrive::BjorgMecanumDrive(frc::Spark *m_frontleftMotor, frc::Spark *m
     m_robotDrive = new frc::MecanumDrive { *m_frontleftMotor, *m_backleftMotor, *m_frontrightMotor, *m_backrightMotor };
     driveControllerMove = moveController;
     driveControllerShift = shiftController;
-    driveControllerRotation = rotateController;
+    driveControllerRotate = rotateController;
     m_robotDrive->SetExpiration(0.1);
 };
 
@@ -47,33 +47,38 @@ BjorgMecanumDrive::BjorgMecanumDrive(frc::Spark *m_frontleftMotor, frc::Spark *m
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    mecanumDrive
  *---------------------------------------------------------------------------*/
-void BjorgDrive::mecanumDrive()
+void BjorgMecanumDrive::mecanumDrive()
 {
     m_robotDrive->SetSafetyEnabled(true);
 
-    setMovement();    
+    setMovement();
+
+    m_robotDrive->DriveCartesian(motorMultiplier * movementValue, shiftMultiplier * shiftValue, rotateMultiplier * rotateValue);
 }
 
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    mecanumDrive
  *---------------------------------------------------------------------------*/
-void BjorgDrive::mecanumDrive(double movement, double shift, double rotate)
+void BjorgMecanumDrive::mecanumDrive(double movement, double shift, double rotate)
 {
+    m_robotDrive->SetSafetyEnabled(true);
+
+    m_robotDrive->DriveCartesian(movement, shift, rotate);
 }
 
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    twoBtnDrive
  *---------------------------------------------------------------------------*/
-void BjorgDrive::twoBtnDrive()
+/*void BjorgMecanumDrive::twoBtnDrive()
 {
     // Combines two inputs into one value
-    movementValue = driveController1->GetRawAxis(fwdDrive) - driveController1->GetRawAxis(bckDrive);
-}
+    movementValue = driveControllerMove->GetRawAxis(fwdDrive) - driveControllerMove->GetRawAxis(bckDrive);
+}*/
 	
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    twoBtnRotate
  *---------------------------------------------------------------------------*/
-void BjorgDrive::twoBtnRotate()
+/*void BjorgMecanumDrive::twoBtnRotate()
 {
     float triggerVal = 0.0;
     float maxVal = 0.0;
@@ -100,38 +105,38 @@ void BjorgDrive::twoBtnRotate()
     {
         rotationValue = maxVal;
     }
-}
+}*/
     
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    setMovement
  *---------------------------------------------------------------------------*/
-void BjorgDrive::setMovement()
+void BjorgMecanumDrive::setMovement()
 {
     if (multiMove)
     {
-        twoBtnDrive();
+        //twoBtnDrive();
     }
 
     else
     {
-        movementValue = driveController1->GetRawAxis(moveCtrl);
-        shiftValue = 
-        rotationValue
+        movementValue = driveControllerMove->GetRawAxis(moveCtrl);
+        shiftValue = driveControllerShift->GetRawAxis(shiftCtrl);
+        rotateValue = driveControllerRotate->GetRawAxis(rotateCtrl);
     }
 };
 
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    setRotate
  *---------------------------------------------------------------------------*/
-void BjorgDrive::setRotate(bool rotateEn)
+void BjorgMecanumDrive::setRotate(bool rotateEn)
 {
     if (multiRotate)
     {
-        twoBtnRotate();
+        //twoBtnRotate();
     }
 
     else
     {
-        rotationValue = (rotateEn ? driveController2->GetRawAxis(rotateCtrl) : 0);
+        //rotationValue = (rotateEn ? driveController2->GetRawAxis(rotateCtrl) : 0);
     }
 };
