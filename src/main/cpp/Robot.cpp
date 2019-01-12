@@ -5,12 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Robot.h"
-
+//CPP INCLUDES//
 #include <iostream>
 
+//FIRST INCLUDES//
 #include <frc/Timer.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+
+//OUR INCLUDES//
+#include "Robot.h"
 
 Robot::Robot() {
   // Note SmartDashboard is not initialized here, wait until RobotInit() to make

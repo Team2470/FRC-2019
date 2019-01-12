@@ -7,13 +7,20 @@
 
 #pragma once
 
+//CPP INCLUDES//
 #include <string>
 
+//FIRST INCLUDES//
 #include <frc/Joystick.h>
 #include <frc/PWMVictorSPX.h>
 #include <frc/SampleRobot.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/smartdashboard/SendableChooser.h>
+
+//OUR INCLUDES//
+#include "controller_helper.h"
+#include "driver_helper.hpp"
+#include "motor_helper.hpp"
 
 /**
  * This is a demo program showing the use of the DifferentialDrive class. The
