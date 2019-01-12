@@ -69,7 +69,7 @@ void BjorgDrive::arcadeDrive()
     }
 
     m_robotDrive->ArcadeDrive(reverseDrive * motorMultiplier * movementValue, rotateMult * rotationValue, sqrInputs);
--------------------------------------------------------------------
+/*-----------------------------------------------------------------------------
  * FUNCTION NAME:    arcadeDrive
  *---------------------------------------------------------------------------*/
 void BjorgDrive::arcadeDrive(double movement, double rotate)
