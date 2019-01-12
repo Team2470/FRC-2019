@@ -26,12 +26,12 @@
 #include <Timer.h>
 
 // FIRST Includes
-#include <PWMSpeedController.h>
-#include <Drive/DifferentialDrive.h>
-#include <Spark.h>
-#include <Victor.h>
-#include <VictorSP.h>
-#include <Talon.h>
+#include <frc/PWMSpeedController.h>
+#include <frc/Drive/DifferentialDrive.h>
+#include <frc/Spark.h>
+#include <frc/Victor.h>
+#include <frc/VictorSP.h>
+#include <frc/Talon.h>
 
 /******************************************************************************
  * Constants

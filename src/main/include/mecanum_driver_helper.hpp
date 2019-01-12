@@ -22,8 +22,8 @@
  *****************************************************************************/
 // FIRST Includes //
 #include <frc/drive/MecanumDrive.h>
-#include <Joystick.h>
-#include <Spark.h>
+#include <frc/Joystick.h>
+#include <frc/Spark.h>
 
 /******************************************************************************
  * Constants
@@ -52,15 +52,20 @@ public:
 	int rotateCtrl 	 = 0;
 	//int rtTurn		 = 0;
 	//int lftTurn		 = 0;
-	//int fwdDrive	 = 0;
-	//int bckDrive	 = 0;
+	int fwdMove	     = 0;
+	int bckMove	     = 0;
+    int fwdShift	 = 0;
+	int bckShift	 = 0;
+    int fwdRotate    = 0;
+	int bckRotate	 = 0;
 	int joystickInt  = 0;
 	int reverseDrive = -1;
 
 	//bool rotateEnable = true;
 	//bool sqrInputs	 = false;
-	bool multiRotate = false;
 	bool multiMove   = false;
+    bool multiShift  = false;
+    bool multiRotate = false;
 	float motorMultiplier = 1.0;
     float shiftMultiplier = 1.0;
 	float rotateMultiplier = 1.0;
@@ -98,13 +103,31 @@ public:
 	void mecanumDrive(double movement, double shift, double rotate);
 
     /**************************************************************************
-     * FUNCTION   : twoBtnDrive
+     * FUNCTION   : twoBtnMove
      *
      * DESCRIPTION: Create movement value out of two buttons.
      *
      * RETURNS    : Void
      *************************************************************************/	
-	//void twoBtnDrive();
+	void twoBtnMove();
+
+    /**************************************************************************
+     * FUNCTION   : twoBtnShift
+     *
+     * DESCRIPTION: Create shift value out of two buttons.
+     *
+     * RETURNS    : Void
+     *************************************************************************/	
+	void twoBtnShift();
+
+    /**************************************************************************
+     * FUNCTION   : twoBtnRotate
+     *
+     * DESCRIPTION: Create rotate value out of two buttons.
+     *
+     * RETURNS    : Void
+     *************************************************************************/	
+	void twoBtnRotate();
 
 private:
 	float movementValue = 0.0;

@@ -26,9 +26,9 @@
 #include <algorithm>
 
 // FIRST Includes //
-#include <Drive/DifferentialDrive.h>
-#include <Joystick.h>
-#include <Spark.h>
+#include <frc/Drive/DifferentialDrive.h>
+#include <frc/Joystick.h>
+#include <frc/Spark.h>
 
 // Our Includes //
 #include "arcade_driver_helper.hpp"

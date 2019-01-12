@@ -24,9 +24,9 @@
  * Include Files
  *****************************************************************************/
 // FIRST Includes //
-#include <Drive/DifferentialDrive.h>
-#include <Joystick.h>
-#include <Spark.h>
+#include <frc/Drive/DifferentialDrive.h>
+#include <frc/Joystick.h>
+#include <frc/Spark.h>
 
 /******************************************************************************
  * Constants

@@ -25,11 +25,11 @@
 #include <iostream>
 
 // FIRST Includes
-#include <Spark.h>
-#include <PWMSpeedController.h>
-#include <Victor.h>
-#include <VictorSP.h>
-#include <Talon.h>
+#include <frc/Spark.h>
+#include <frc/PWMSpeedController.h>
+#include <frc/Victor.h>
+#include <frc/VictorSP.h>
+#include <frc/Talon.h>
 
 // Our Includes
 #include "motor_helper.hpp"

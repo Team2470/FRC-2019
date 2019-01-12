@@ -23,9 +23,9 @@
 #include <algorithm>
 
 // FIRST Includes //
-#include <Drive/DifferentialDrive.h>
-#include <Joystick.h>
-#include <Spark.h>
+#include <frc/Drive/DifferentialDrive.h>
+#include <frc/Joystick.h>
+#include <frc/Spark.h>
 
 // Our Includes //
 #include "mecanum_driver_helper.hpp"
@@ -67,16 +67,34 @@ void BjorgMecanumDrive::mecanumDrive(double movement, double shift, double rotat
 }
 
 /*-----------------------------------------------------------------------------
- * FUNCTION NAME:    twoBtnDrive
+ * FUNCTION NAME:    twoBtnMove
  *---------------------------------------------------------------------------*/
-/*void BjorgMecanumDrive::twoBtnDrive()
+void BjorgMecanumDrive::twoBtnMove()
 {
     // Combines two inputs into one value
-    movementValue = driveControllerMove->GetRawAxis(fwdDrive) - driveControllerMove->GetRawAxis(bckDrive);
-}*/
-	
+    movementValue = driveControllerMove->GetRawAxis(fwdMove) - driveControllerMove->GetRawAxis(bckMove);
+}
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    twoBtnShift
+ *---------------------------------------------------------------------------*/
+void BjorgMecanumDrive::twoBtnShift()
+{
+    // Combines two inputs into one value
+    shiftValue = driveControllerShift->GetRawAxis(fwdShift) - driveControllerShift->GetRawAxis(bckShift);
+}
+
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    twoBtnRotate
+ *---------------------------------------------------------------------------*/
+void BjorgMecanumDrive::twoBtnRotate()
+{
+    // Combines two inputs into one value
+    rotateValue = driveControllerRotate->GetRawAxis(fwdRotate) - driveControllerRotate->GetRawAxis(bckRotate);
+}
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    twoBtnRotateOLD
  *---------------------------------------------------------------------------*/
 /*void BjorgMecanumDrive::twoBtnRotate()
 {
@@ -114,13 +132,28 @@ void BjorgMecanumDrive::setMovement()
 {
     if (multiMove)
     {
-        //twoBtnDrive();
+        twoBtnDrive();
     }
-
     else
     {
         movementValue = driveControllerMove->GetRawAxis(moveCtrl);
+    }
+
+    if (multiShift)
+    {
+        twoBtnShift();
+    }
+    else
+    {
         shiftValue = driveControllerShift->GetRawAxis(shiftCtrl);
+    }
+    
+    if (multirotate)
+    {
+        twoBtnRotate();
+    }
+    else
+    {
         rotateValue = driveControllerRotate->GetRawAxis(rotateCtrl);
     }
 };
