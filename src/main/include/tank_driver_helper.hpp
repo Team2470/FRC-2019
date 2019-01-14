@@ -1,24 +1,23 @@
 //*****************************************************************************
-// Filename:            arcade_driver_helper.hpp
+// Filename:            tank_driver_helper.hpp
 //
 // Revision Record:
 //   Author             Date       Description
 //   ------------------ ---------- --------------------------------------------
-//   Chris Struck       Jan. 2018  Initial design.
-//   Chris Struck       Jan. 2019  Renamed to arcade, to differentiate easier.
+//   Chris Struck       Jan. 2019  Initial design.
 //
 // Description:
 //    This class operates a SpeedController group using Differential Drive.
-//    The class has the ability to drive using tele-operated Arcade Drive, 
-//        autonomous arcade drive, and should be updated for other versions of 
+//    The class has the ability to drive using tele-operated Tank Drive, 
+//        autonomous tank drive, and should be updated for other versions of 
 //        as needed (tank, H, etc.).
 // 
 // Dependencies:
 //    None
 //*****************************************************************************
 
-#ifndef ARCADE_DRIVER_HELPER_HPP
-#define ARCADE_DRIVER_HELPER_HPP
+#ifndef TANK_DRIVER_HELPER_HPP
+#define TANK_DRIVER_HELPER_HPP
 
 /******************************************************************************
  * Include Files
@@ -37,92 +36,95 @@
  *****************************************************************************/
 
 /******************************************************************************
- * CLASS      : BjorgArcadeDrive
+ * CLASS      : BjorgTankDrive
  *
  * DESCRIPTION: This class creates a DifferentialDrive Object
  *
  * RETURNS    : None
  *****************************************************************************/
-class BjorgArcadeDrive 
+class BjorgTankDrive
 {
 public:
 	
     /**************************************************************************
      * Variables
      *************************************************************************/
-	int moveCtrl 	 = 0;
-	int rotateCtrl 	 = 0;
-	int rtTurn		 = 0;
-	int lftTurn		 = 0;
-	int fwdDrive	 = 0;
-	int bckDrive	 = 0;
+	int leftCtrl 	 = 0;
+	int rightCtrl 	 = 0;
+    //int rtTurn		 = 0;
+    //int lftTurn		 = 0;
+    int leftFwd 	 = 0;
+    int leftBck	     = 0;
+    int rightFwd	 = 0;
+    int rightBck	 = 0;
 	int joystickInt  = 0;
-	int reverseDrive = -1;
+	int leftReverse = -1;
+    int rightReverse = -1;
+    
 
 	bool rotateEnable = true;
 	bool sqrInputs	 = false;
-	bool multiRotate = false;
-	bool multiMove   = false;
-	float motorMultiplier = 1.0;
-	float rotateMult = 0.5;
+	bool multiLeft   = false;
+    bool multiRight   = false;
+	float leftMultiplier = 1.0;
+    float rightMultiplier = 1.0;
 	
     /**************************************************************************
-     * FUNCTION   : BjorgArcadeDrive
+     * FUNCTION   : BjorgTankDrive
      *
-     * DESCRIPTION: Construct class BjorgArcadeDrive, set the motors to be used for 
+     * DESCRIPTION: Construct class BjorgTankDrive, set the motors to be used for 
      *              driving with <m_leftMotor> and <m_rightMotor> and the 
      *              Joystick used to drive <Joystick>.
      *
      * RETURNS    : A DifferentialDrive object
      *************************************************************************/	
-	BjorgArcadeDrive(frc::Spark *m_leftMotor, frc::Spark *m_rightMotor, 
-        frc::Joystick *controllerMovement, frc::Joystick *controllerRotate);
+	BjorgTankDrive(frc::Spark *m_leftMotor, frc::Spark *m_rightMotor, 
+        frc::Joystick *controllerLeft, frc::Joystick *controllerRight);
 
     /**************************************************************************
-     * FUNCTION   : arcadeDrive
+     * FUNCTION   : tankDrive
      *
-     * DESCRIPTION: Arcade drive, forward motion with left joystick, turn with 
-     *              right joystick.
+     * DESCRIPTION: Tank drive, left motor motion with the left joystick,
+     *              right motor motion with the right joystick.
      *
      * RETURNS    : Void
      *************************************************************************/	
-	void arcadeDrive();
+	void tankDrive();
 
     /**************************************************************************
-     * FUNCTION   : arcadeDrive
+     * FUNCTION   : tankDrive
      *
-     * DESCRIPTION: Arcade drive, forward motion with <movement>, turn with 
-     *              <rotate>.
+     * DESCRIPTION: Tank drive, left motion with <leftMovement> and right with 
+     *              <rightMotion>.
      *
      * RETURNS    : Void
      *************************************************************************/	
-	void arcadeDrive(double movement, double rotate);
+	void tankDrive(double leftMovement, double rightMovement);
 
     /**************************************************************************
-     * FUNCTION   : twoBtnDrive
+     * FUNCTION   : twoBtnLeft
      *
      * DESCRIPTION: Create movement value out of two buttons.
      *
      * RETURNS    : Void
      *************************************************************************/	
-	void twoBtnDrive();
+	void twoBtnLeft();
 
-private:
-	float movementValue = 0.0;
-	float rotationValue = 0.0;
-
-	frc::DifferentialDrive *m_robotDrive;
-	frc::Joystick *driveControllerMovement;
-	frc::Joystick *driveControllerRotate;
-    
     /**************************************************************************
-     * FUNCTION   : twoBtnRotate
+     * FUNCTION   : twoBtnRight
      *
-     * DESCRIPTION: Create rotation value out of two buttons and joystick.
+     * DESCRIPTION: Create movement value out of two buttons.
      *
      * RETURNS    : Void
      *************************************************************************/	
-	void twoBtnRotate();
+	void twoBtnRight();
+private:
+	float leftValue = 0.0;
+	float rightValue = 0.0;
+
+	frc::DifferentialDrive *m_robotDrive;
+	frc::Joystick *driveControllerLeft;
+	frc::Joystick *driveControllerRight;
     
     /**************************************************************************
      * FUNCTION   : setMovement
@@ -143,4 +145,4 @@ private:
 	void setRotate(bool rotateEn = true);
 };
 
-#endif /* ARCADE_DRIVER_HELPER_HPP */
+#endif /* TANK_DRIVER_HELPER_HPP */

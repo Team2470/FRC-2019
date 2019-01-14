@@ -18,7 +18,7 @@
 Robot::Robot() {
   // Note SmartDashboard is not initialized here, wait until RobotInit() to make
   // SmartDashboard calls
-  m_robotDrive.SetExpiration(0.1);
+  //m_robotDrive.SetExpiration(0.1);
 }
 
 void Robot::RobotInit() {
@@ -46,28 +46,28 @@ void Robot::Autonomous() {
 
   // MotorSafety improves safety when motors are updated in loops but is
   // disabled here because motor updates are not looped in this autonomous mode.
-  m_robotDrive.SetSafetyEnabled(false);
+  //m_robotDrive.SetSafetyEnabled(false);
 
   if (autoSelected == kAutoNameCustom) {
     // Custom Auto goes here
     std::cout << "Running custom Autonomous" << std::endl;
 
     // Spin at half speed for two seconds
-    m_robotDrive.ArcadeDrive(0.0, 0.5);
+    //m_robotDrive.ArcadeDrive(0.0, 0.5);
     frc::Wait(2.0);
 
     // Stop robot
-    m_robotDrive.ArcadeDrive(0.0, 0.0);
+    //m_robotDrive.ArcadeDrive(0.0, 0.0);
   } else {
     // Default Auto goes here
     std::cout << "Running default Autonomous" << std::endl;
 
     // Drive forwards at half speed for two seconds
-    m_robotDrive.ArcadeDrive(-0.5, 0.0);
+    //m_robotDrive.ArcadeDrive(-0.5, 0.0);
     frc::Wait(2.0);
 
     // Stop robot
-    m_robotDrive.ArcadeDrive(0.0, 0.0);
+    //m_robotDrive.ArcadeDrive(0.0, 0.0);
   }
 }
 
@@ -75,36 +75,45 @@ void Robot::Autonomous() {
  * Runs the motors with arcade steering.
  */
 void Robot::OperatorControl() {
-  m_driveSystem->moveCtrl(0);
-  m_driveSystem->shiftCtrl(1);
-  m_driveSystem->rotateCtrl(1);
+  //Drive system variables
+  m_driveSystem->moveCtrl = RightDriveJoystick.GetYChannel();
+  m_driveSystem->shiftCtrl = RightDriveJoystick.GetXChannel();
+  m_driveSystem->rotateCtrl = LeftDriveJoystick.GetXChannel();
+  m_driveSystem->multiMove = false;
+  m_driveSystem->multiShift = false;
+  m_driveSystem->multiRotate = false;
 
-  m_robotDrive.SetSafetyEnabled(true);
+  //Cargo system variables
+  m_cargoSystem->moveCtrl = FlightJoystick.GetYChannel();
+  m_cargoSystem->multiMove = false;
+  m_cargoSystem->multiRotate = false;
+  m_cargoSystem->rotateEnable = false;
+  m_cargoSystem->reverseDrive = -1;
+
+  //m_robotDrive.SetSafetyEnabled(true);
   while (IsOperatorControl() && IsEnabled()) {
     
     if (LeftButtonHub.GetRawButton(Generic_Controller_Left::SWITCH_A))
     {
-      m_driveSystem->motorMultiplier = 0.5;
+      m_driveSystem->moveMultiplier = 0.5;
       m_driveSystem->shiftMultiplier = 0.5;
       m_driveSystem->rotateMultiplier = 0.5;
     }
     else
     {
-      m_driveSystem->motorMultiplier = 1.0;
+      m_driveSystem->moveMultiplier = 1.0;
       m_driveSystem->shiftMultiplier = 1.0;
       m_driveSystem->rotateMultiplier = 1.0;
     }
 
-    if (Generic_Controller_Right::SWITCH_SAFE3)
+    if (RightButtonHub.GetRawButton(Generic_Controller_Right::SWITCH_X))
     {
-
+      m_cargoSystem->arcadeDrive();
     }
     else
     {
-      
+      m_cargoSystem->arcadeDrive(0, 0);
     }
-
-
 
     m_driveSystem->mecanumDrive();
 

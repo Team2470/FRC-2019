@@ -37,11 +37,11 @@
  * FUNCTION NAME:    BjorgArcadeDrive
  *---------------------------------------------------------------------------*/
 BjorgArcadeDrive::BjorgArcadeDrive(frc::Spark *m_leftMotor, frc::Spark *m_rightMotor, 
-    frc::Joystick *controller1, frc::Joystick *controller2)
+    frc::Joystick *controllerMovement, frc::Joystick *controllerRotate)
 {
     m_robotDrive = new frc::DifferentialDrive { *m_leftMotor, *m_rightMotor };
-    driveController1 = controller1;
-    driveController2 = controller2;
+    driveControllerMovement = controllerMovement;
+    driveControllerRotate = controllerRotate;
     m_robotDrive->SetExpiration(0.1);
 };
 
@@ -132,7 +132,7 @@ void BjorgArcadeDrive::setMovement()
 
     else
     {
-        movementValue = driveController1->GetRawAxis(moveCtrl);
+        movementValue = driveControllerMovement->GetRawAxis(moveCtrl);
     }
 };
 
@@ -148,6 +148,6 @@ void BjorgArcadeDrive::setRotate(bool rotateEn)
 
     else
     {
-        rotationValue = (rotateEn ? driveController2->GetRawAxis(rotateCtrl) : 0);
+        rotationValue = (rotateEn ? driveControllerRotate->GetRawAxis(rotateCtrl) : 0);
     }
 };

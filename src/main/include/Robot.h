@@ -22,6 +22,7 @@
 #include "controller_helper.h"
 #include "mecanum_driver_helper.hpp"
 #include "arcade_driver_helper.hpp"
+#include "tank_driver_helper.hpp"
 #include "motor_helper.hpp"
 #include "solenoid_helper.hpp"
 #include "sonar_helper.hpp"
@@ -61,9 +62,11 @@ class Robot : public frc::SampleRobot {
 	frc::Spark* m_frontrightMotor = new frc::Spark(Channel_PWM::FRONT_RIGHT_MOTOR);
   frc::Spark* m_backrightMotor = new frc::Spark(Channel_PWM::BACK_RIGHT_MOTOR);
 	frc::Spark* m_cargoMotor = new frc::Spark(Channel_PWM::CARGO_MOTOR);
+  frc::Spark* m_placeholderNotor = new frc::Spark(Channel_PWM::PLACEHOLDER_MOTOR);
 
   //Our BjorgDrive systems for driving the robot, the function takes in four motors and three joysticks from above
   BjorgMecanumDrive* m_driveSystem = new BjorgMecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor, &RightDriveJoystick, &RightDriveJoystick, &LeftDriveJoystick);
+  BjorgArcadeDrive* m_cargoSystem = new BjorgArcadeDrive(m_cargoMotor, m_placeholderNotor, &FlightJoystick, &FlightJoystick);
 
   //Our generic motors, take the PWM channel and the motor type
 	//Motor* m_otherMotor = new Motor(Channel_PWM::LIFT_MOTOR, Motor_Type::SPARK);

@@ -23,7 +23,7 @@
  * Include Files
  *****************************************************************************/
 // System Includes //
-#include <Timer.h>
+#include <frc/Timer.h>
 
 // FIRST Includes //
 #include <frc/PWMSpeedController.h>

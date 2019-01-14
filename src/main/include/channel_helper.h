@@ -19,7 +19,8 @@ enum Channel_PWM
 	BACK_LEFT_MOTOR = 1,
 	FRONT_RIGHT_MOTOR = 2,
 	BACK_RIGHT_MOTOR = 3,
-	CARGO_MOTOR = 4
+	CARGO_MOTOR = 4,
+	PLACEHOLDER_MOTOR = 10
 };
 
 enum Channel_Analog
