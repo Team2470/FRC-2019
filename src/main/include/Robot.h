@@ -18,9 +18,14 @@
 #include <frc/smartdashboard/SendableChooser.h>
 
 //OUR INCLUDES//
+#include "channel_helper.h"
 #include "controller_helper.h"
 #include "mecanum_driver_helper.hpp"
+#include "arcade_driver_helper.hpp"
 #include "motor_helper.hpp"
+#include "solenoid_helper.hpp"
+#include "sonar_helper.hpp"
+#include "ir_helper.hpp"
 
 /**
  * This is a demo program showing the use of the DifferentialDrive class. The
@@ -43,12 +48,25 @@ class Robot : public frc::SampleRobot {
   void Test() override;
 
  private:
-  // Robot drive system
-  frc::PWMVictorSPX m_leftMotor{0};
-  frc::PWMVictorSPX m_rightMotor{1};
-  frc::DifferentialDrive m_robotDrive{m_leftMotor, m_rightMotor};
+  //Our joysticks (includes the xbox and logitech controllers, the arcadee joysticks, and the button hubs)
+  frc::Joystick LeftDriveJoystick { Channel_Controller::LEFT_DRIVE_JOYSTICK };
+  frc::Joystick RightDriveJoystick { Channel_Controller::RIGHT_DRIVE_JOYSTICK };
+	frc::Joystick FlightJoystick { Channel_Controller::FLIGHT_JOYSTICK };
+	frc::Joystick LeftButtonHub { Channel_Controller::LEFT_BUTTON_HUB };
+	frc::Joystick RightButtonHub { Channel_Controller::RIGHT_BUTTON_HUB };
 
-  frc::Joystick m_stick{0};
+  //Our standalone spark motors
+	frc::Spark* m_frontleftMotor = new frc::Spark(Channel_PWM::FRONT_LEFT_MOTOR);
+	frc::Spark* m_backleftMotor = new frc::Spark(Channel_PWM::BACK_LEFT_MOTOR);
+	frc::Spark* m_frontrightMotor = new frc::Spark(Channel_PWM::FRONT_RIGHT_MOTOR);
+  frc::Spark* m_backrightMotor = new frc::Spark(Channel_PWM::BACK_RIGHT_MOTOR);
+	frc::Spark* m_cargoMotor = new frc::Spark(Channel_PWM::CARGO_MOTOR);
+
+  //Our BjorgDrive systems for driving the robot, the function takes in four motors and three joysticks from above
+  BjorgMecanumDrive* m_driveSystem = new BjorgMecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor, &RightDriveJoystick, &RightDriveJoystick, &LeftDriveJoystick);
+
+  //Our generic motors, take the PWM channel and the motor type
+	//Motor* m_otherMotor = new Motor(Channel_PWM::LIFT_MOTOR, Motor_Type::SPARK);
 
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";

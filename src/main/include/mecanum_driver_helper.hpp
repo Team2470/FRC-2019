@@ -66,7 +66,7 @@ public:
 	bool multiMove   = false;
     bool multiShift  = false;
     bool multiRotate = false;
-	float motorMultiplier = 1.0;
+	float moveMultiplier = 1.0;
     float shiftMultiplier = 1.0;
 	float rotateMultiplier = 1.0;
 	

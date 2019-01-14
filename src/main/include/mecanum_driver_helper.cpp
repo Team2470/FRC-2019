@@ -53,7 +53,7 @@ void BjorgMecanumDrive::mecanumDrive()
 
     setMovement();
 
-    m_robotDrive->DriveCartesian(motorMultiplier * movementValue, shiftMultiplier * shiftValue, rotateMultiplier * rotateValue);
+    m_robotDrive->DriveCartesian(moveMultiplier * movementValue, shiftMultiplier * shiftValue, rotateMultiplier * rotateValue);
 }
 
 /*-----------------------------------------------------------------------------

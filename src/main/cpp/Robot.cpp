@@ -75,12 +75,39 @@ void Robot::Autonomous() {
  * Runs the motors with arcade steering.
  */
 void Robot::OperatorControl() {
+  m_driveSystem->moveCtrl(0);
+  m_driveSystem->shiftCtrl(1);
+  m_driveSystem->rotateCtrl(1);
+
   m_robotDrive.SetSafetyEnabled(true);
   while (IsOperatorControl() && IsEnabled()) {
-    // Drive with arcade style (use right stick)
-    m_robotDrive.ArcadeDrive(-m_stick.GetY(), m_stick.GetX());
+    
+    if (LeftButtonHub.GetRawButton(Generic_Controller_Left::SWITCH_A))
+    {
+      m_driveSystem->motorMultiplier = 0.5;
+      m_driveSystem->shiftMultiplier = 0.5;
+      m_driveSystem->rotateMultiplier = 0.5;
+    }
+    else
+    {
+      m_driveSystem->motorMultiplier = 1.0;
+      m_driveSystem->shiftMultiplier = 1.0;
+      m_driveSystem->rotateMultiplier = 1.0;
+    }
 
-    // The motors will be updated every 5ms
+    if (Generic_Controller_Right::SWITCH_SAFE3)
+    {
+
+    }
+    else
+    {
+      
+    }
+
+
+
+    m_driveSystem->mecanumDrive();
+
     frc::Wait(0.005);
   }
 }
