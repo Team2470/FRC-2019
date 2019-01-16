@@ -21,7 +21,7 @@
  *****************************************************************************/
 // System Includes //
 #include <math.h>
-#include <Timer.h>
+#include <frc/Timer.h>
 #include <iostream>
 
 // FIRST Includes //
@@ -69,7 +69,7 @@ Motor::Motor(int motorChannel, Motor_Type motorType)
 		default :
 			break;
 	}
-};
+}
 
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    GradualRotation

@@ -85,7 +85,7 @@ void BjorgArcadeDrive::arcadeDrive(double movement, double rotate)
 void BjorgArcadeDrive::twoBtnDrive()
 {
     // Combines two inputs into one value
-    movementValue = driveController1->GetRawAxis(fwdDrive) - driveController1->GetRawAxis(bckDrive);
+    movementValue = driveControllerMovement->GetRawAxis(fwdDrive) - driveControllerMovement->GetRawAxis(bckDrive);
 }
 	
 /*-----------------------------------------------------------------------------
@@ -99,14 +99,14 @@ void BjorgArcadeDrive::twoBtnRotate()
 
     //Combines the trigger values so if the right trigger is pressed the robot 
     //turns right and if the left trigger is pressed the robot turns left
-    triggerVal = driveController1->GetRawAxis(lftTurn) -
-        driveController1->GetRawAxis(rtTurn);
+    triggerVal = driveControllerMovement->GetRawAxis(lftTurn) -
+        driveControllerMovement->GetRawAxis(rtTurn);
     //Finds the max value from the combined trigger value and right joystick 
     //x-axis
-    maxVal = std::max(double(std::abs(triggerVal)), std::abs(driveController1->GetRawAxis(joystickInt)));
+    maxVal = std::max(double(std::abs(triggerVal)), std::abs(driveControllerMovement->GetRawAxis(joystickInt)));
     //Adds the combined trigger value and the right joystick x-axis to find the
     //sign (positive or negative) of the max value
-    addVal = triggerVal + driveController1->GetRawAxis(joystickInt);
+    addVal = triggerVal + driveControllerMovement->GetRawAxis(joystickInt);
 
     //Combines the max value and the add value to decide the rotate value so it
     //turns correctly

@@ -42,7 +42,7 @@ BjorgTankDrive::BjorgTankDrive(frc::Spark *m_leftMotor, frc::Spark *m_rightMotor
     driveControllerLeft = controllerLeft;
     driveControllerRight = controllerRight;
     m_robotDrive->SetExpiration(0.1);
-};
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -99,7 +99,7 @@ void BjorgTankDrive::twoBtnRight()
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    setMovement
  *---------------------------------------------------------------------------*/
-void BjorgArcadeDrive::setMovement()
+void BjorgTankDrive::setMovement()
 {
     if (multiLeft)
     {
@@ -118,12 +118,12 @@ void BjorgArcadeDrive::setMovement()
     {
         rightValue = driveControllerRight->GetRawAxis(rightCtrl);
     }
-};
+}
 
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    setRotate
  *---------------------------------------------------------------------------*/
-void BjorgTankDrive::setRotate(bool rotateEn)
+/*void BjorgTankDrive::setRotate(bool rotateEn)
 {
     if (multiRotate)
     {
@@ -134,4 +134,4 @@ void BjorgTankDrive::setRotate(bool rotateEn)
     {
         rotationValue = (rotateEn ? driveController2->GetRawAxis(rotateCtrl) : 0);
     }
-};
+};*/
