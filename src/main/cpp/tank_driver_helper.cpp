@@ -119,19 +119,3 @@ void BjorgTankDrive::setMovement()
         rightValue = driveControllerRight->GetRawAxis(rightCtrl);
     }
 }
-
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    setRotate
- *---------------------------------------------------------------------------*/
-/*void BjorgTankDrive::setRotate(bool rotateEn)
-{
-    if (multiRotate)
-    {
-        twoBtnRotate();
-    }
-
-    else
-    {
-        rotationValue = (rotateEn ? driveController2->GetRawAxis(rotateCtrl) : 0);
-    }
-};*/

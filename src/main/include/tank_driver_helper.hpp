@@ -134,15 +134,6 @@ private:
      * RETURNS    : Void
      *************************************************************************/	
 	void setMovement();
-    
-    /**************************************************************************
-     * FUNCTION   : setRotate
-     *
-     * DESCRIPTION: Update <rotateValue> to be used with drive.
-     *
-     * RETURNS    : Void
-     *************************************************************************/	
-	void setRotate(bool rotateEn = true);
 };
 
 #endif /* TANK_DRIVER_HELPER_HPP */

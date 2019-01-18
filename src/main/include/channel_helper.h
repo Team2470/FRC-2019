@@ -2,7 +2,6 @@ enum Channel_Controller
 {
 	//The number correlates to the 'USB Order' number on the driver station
 	//XBOX_CONTROLLER = 0,				//When we are using the logitech and xbox controllers
-	//The logitech controller and the trigger joystick share the same channel because the FRC driver station only allows for 6 (0-5) channels
 	//LOGITECH_CONTROLLER = 1,			//When we are using the logitech and xbox controllers
 	FLIGHT_JOYSTICK = 1,				//When we are using the driver station
 	LEFT_DRIVE_JOYSTICK = 2,			//When we are using the driver station
@@ -14,6 +13,9 @@ enum Channel_Controller
 enum Channel_PWM
 {
 	//Channels for the PWM motors on the roboRIO
+	//For when we are using the logitech and xbox controllers
+	//LEFT_MOTOR = 0,
+	//RIGHT_MOTOR = 1,
 	//placeholder values
 	FRONT_LEFT_MOTOR = 0,
 	BACK_LEFT_MOTOR = 1,

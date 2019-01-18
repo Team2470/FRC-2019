@@ -50,6 +50,8 @@ class Robot : public frc::SampleRobot {
 
  private:
   //Our joysticks (includes the xbox and logitech controllers, the arcadee joysticks, and the button hubs)
+  //frc::Joystick XboxController { Channel_Controller::XBOX_CONTROLLER };
+	//frc::Joystick LogitechController { Channel_Controller::LOGITECH_CONTROLLER };
   frc::Joystick LeftDriveJoystick { Channel_Controller::LEFT_DRIVE_JOYSTICK };
   frc::Joystick RightDriveJoystick { Channel_Controller::RIGHT_DRIVE_JOYSTICK };
 	frc::Joystick FlightJoystick { Channel_Controller::FLIGHT_JOYSTICK };
@@ -62,11 +64,14 @@ class Robot : public frc::SampleRobot {
 	frc::Spark* m_frontrightMotor = new frc::Spark(Channel_PWM::FRONT_RIGHT_MOTOR);
   frc::Spark* m_backrightMotor = new frc::Spark(Channel_PWM::BACK_RIGHT_MOTOR);
 	frc::Spark* m_cargoMotor = new frc::Spark(Channel_PWM::CARGO_MOTOR);
+  //frc::Spark* m_leftMotor = new frc::Spark(Channel_PWM::LEFT_MOTOR);
+  //frc::Spark* m_rightMotor = new frc::Spark(Channel_PWM::RIGHT_MOTOR);
   frc::Spark* m_placeholderNotor = new frc::Spark(Channel_PWM::PLACEHOLDER_MOTOR);
 
   //Our BjorgDrive systems for driving the robot, the function takes in four motors and three joysticks from above
   BjorgMecanumDrive* m_driveSystem = new BjorgMecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor, &RightDriveJoystick, &RightDriveJoystick, &LeftDriveJoystick);
   BjorgArcadeDrive* m_cargoSystem = new BjorgArcadeDrive(m_cargoMotor, m_placeholderNotor, &FlightJoystick, &FlightJoystick);
+  //BjorgArcadeDrive* m_arcdriveSystem = new BjorgArcadeDrive(m_leftMotor, m_rightMotor, &XboxController, &XboxController);
 
   //Our generic motors, take the PWM channel and the motor type
 	//Motor* m_otherMotor = new Motor(Channel_PWM::LIFT_MOTOR, Motor_Type::SPARK);
