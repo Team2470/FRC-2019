@@ -1,5 +1,5 @@
 //*****************************************************************************
-// Filename:            solenoid_helper.cpp
+// Filename:            pneumatic_helper.cpp
 //
 // Revision Record:
 //   Author             Date       Description
@@ -22,9 +22,10 @@
 // First Includes
 #include <frc/Solenoid.h>
 #include <frc/DoubleSolenoid.h>
+#include <frc/Compressor.h>
 
 //Our Includes
-#include "solenoid_helper.hpp"
+#include "pneumatic_helper.hpp"
 
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    SingleSolenoid
@@ -113,4 +114,57 @@ void DoubleSolenoid::deactivate()
 {
 	m_solenoidDouble->Set(frc::DoubleSolenoid::Value::kOff);
 	currentState = frc::DoubleSolenoid::Value::kOff;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    Compressor
+ *---------------------------------------------------------------------------*/
+Compressor::Compressor(int compressorChannel)
+{
+    m_compressor = new frc::Compressor(compressorChannel);
+}
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    toggleCompressor
+ *---------------------------------------------------------------------------*/
+void Compressor::toggleCompressor()
+{
+	if (currentState)
+	{
+		m_compressor->Stop();
+		currentState = !currentState;
+	}
+	else
+	{
+		m_compressor->Start();
+		currentState = !currentState;
+	}
+}
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    activate
+ *---------------------------------------------------------------------------*/
+void Compressor::activate()
+{
+	m_compressor->Start();
+	currentState = true;
+}
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    deactivate
+ *---------------------------------------------------------------------------*/
+void Compressor::deactivate()
+{
+	m_compressor->Stop();
+	currentState = false;
+}
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    getVal
+ *---------------------------------------------------------------------------*/
+bool Compressor::getVal()
+{
+	return m_compressor->Enabled();
 }

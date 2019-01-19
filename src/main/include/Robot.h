@@ -16,6 +16,8 @@
 #include <frc/SampleRobot.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/smartdashboard/SendableChooser.h>
+#include <frc/PowerDistributionPanel.h>
+#include <Compressor.h>
 
 //OUR INCLUDES//
 #include "channel_helper.h"
@@ -24,7 +26,7 @@
 #include "arcade_driver_helper.hpp"
 #include "tank_driver_helper.hpp"
 #include "motor_helper.hpp"
-#include "solenoid_helper.hpp"
+#include "pneumatic_helper.hpp"
 #include "sonar_helper.hpp"
 #include "ir_helper.hpp"
 
@@ -49,6 +51,9 @@ class Robot : public frc::SampleRobot {
   void Test() override;
 
  private:
+  //The PDP can be used to check current draw, input voltage, and other useful readings.
+  frc::PowerDistributionPanel* pdp = new frc::PowerDistributionPanel();
+
   //Our joysticks (includes the xbox and logitech controllers, the arcadee joysticks, and the button hubs)
   //frc::Joystick XboxController { Channel_Controller::XBOX_CONTROLLER };
 	//frc::Joystick LogitechController { Channel_Controller::LOGITECH_CONTROLLER };
@@ -79,4 +84,6 @@ class Robot : public frc::SampleRobot {
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
+
+  double inputVoltage;
 };

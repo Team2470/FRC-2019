@@ -90,16 +90,10 @@ void Robot::OperatorControl() {
   m_cargoSystem->rotateEnable = false;
   m_cargoSystem->reverseDrive = -1;
 
-//  m_arcdriveSystem->moveCtrl = Axis_XBOX::XBOX_RIGHT_JOYSTICK_Y;
-//  m_arcdriveSystem->rotateCtrl = Axis_XBOX::XBOX_LEFT_JOYSTICK_X;
-//  m_arcdriveSystem->multiMove = false;
-//  m_arcdriveSystem->multiRotate = false;
-//  m_arcdriveSystem->rotateEnable = true;
-//  m_arcdriveSystem->reverseDrive = -1;
-
-  //m_robotDrive.SetSafetyEnabled(true);
   while (IsOperatorControl() && IsEnabled())
-  {  
+  {
+    inputVoltage = pdp->getVoltage();
+
     if (LeftButtonHub.GetRawButton(Generic_Controller_Left::SWITCH_A))
     {
       m_driveSystem->moveMultiplier = 0.5;
@@ -119,19 +113,8 @@ void Robot::OperatorControl() {
     }
     else
     {
-      m_cargoSystem->arcadeDrive(0, 0);
+      m_cargoSystem->stop();
     }
-
-    /*if (XboxController.GetRawButton(Button_XBOX::XBOX_A))
-    {
-      m_arcdriveSystem->motorMultiplier = 0.5;
-    }
-    else
-    {
-      m_arcdriveSystem->motorMultiplier = 1.0;
-    }*/
-
-    //m_arcdriveSystem->arcadeDrive();
 
     m_driveSystem->mecanumDrive();
 

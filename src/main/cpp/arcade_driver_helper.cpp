@@ -76,7 +76,15 @@ void BjorgArcadeDrive::arcadeDrive()
 void BjorgArcadeDrive::arcadeDrive(double movement, double rotate)
 {
     m_robotDrive->SetSafetyEnabled(true);
-    m_robotDrive->ArcadeDrive(movement, rotate);
+    m_robotDrive->ArcadeDrive(movement, rotate, sqrInputs);
+}
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    stop
+ *---------------------------------------------------------------------------*/
+void BjorgArcadeDrive::stop()
+{
+    m_robotDrive->ArcadeDrive(0, 0, sqrInputs);
 }
 
 /*-----------------------------------------------------------------------------

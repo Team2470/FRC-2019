@@ -1,5 +1,5 @@
 //*****************************************************************************
-// Filename:            solenoid_helper.hpp
+// Filename:            pneumatic_helper.hpp
 //
 // Revision Record:
 //   Author             Date       Description
@@ -13,8 +13,8 @@
 //    None
 //*****************************************************************************
 
-#ifndef SOLENOID_HELPER_HPP
-#define SOLENOID_HELPER_HPP
+#ifndef PNEUMATIC_HELPER_HPP
+#define PNEUMATIC_HELPER_HPP
 
 /******************************************************************************
  * Include Files
@@ -22,6 +22,7 @@
 // First Includes //
 #include <frc/Solenoid.h>
 #include <frc/DoubleSolenoid.h>
+#include <frc/Compressor.h>
 
 /******************************************************************************
  * Constants
@@ -96,6 +97,8 @@ private:
 	frc::Solenoid *m_solenoidSingle;
 };
 
+/////////////////////////////////////////////////////////////////////////////
+
 /******************************************************************************
  * CLASS      : DoubleSolenoid
  *
@@ -161,9 +164,72 @@ public:
 	 *************************************************************************/
 	bool getVal();
 private:
-     frc::DoubleSolenoid::Value currentState = frc::DoubleSolenoid::Value::kOff;
+    frc::DoubleSolenoid::Value currentState = frc::DoubleSolenoid::Value::kOff;
 
 	frc::DoubleSolenoid *m_solenoidDouble;
 };
 
-#endif /* SOLENOID_HELPER_HPP */
+/////////////////////////////////////////////////////////////////////////////
+
+/******************************************************************************
+ * CLASS      : Compressor
+ *
+ * DESCRIPTION: This class is to operate a Compressor.
+ *
+ * RETURNS    : None
+ *****************************************************************************/
+class Compressor
+{
+public:
+	/**************************************************************************
+     * FUNCTION   : Compressor
+     *
+     * DESCRIPTION: Constructs the Compressor object with the specified 
+     *              <compressorChannel>.
+     *
+     * RETURNS    : A Compressor object
+     *************************************************************************/
+	DoubleSolenoid(int compressorChannel = 0);
+
+    /**************************************************************************
+     * FUNCTION   : toggleCompressor
+     *
+     * DESCRIPTION: Toggles the current state of the compressor.
+     *
+     * RETURNS    : Void
+     *************************************************************************/
+	bool toggleCompressor();
+
+	/**************************************************************************
+	 * FUNCTION   : activate
+	 *
+	 * DESCRIPTION: Activates the compressor.
+	 *
+	 * RETURNS    : Void
+	 *************************************************************************/
+	void activate();
+
+	/**************************************************************************
+	 * FUNCTION   : deactivate
+	 *
+	 * DESCRIPTION: Deactivates the compressor.
+	 *
+	 * RETURNS    : Void
+	 *************************************************************************/
+	void deactivate();
+
+     /**************************************************************************
+	 * FUNCTION   : getVal
+	 *
+	 * DESCRIPTION: Gets the value of the compressor.
+	 *
+	 * RETURNS    : Boolean, if the compressor is on or off.
+	 *************************************************************************/
+	bool getVal();
+private:
+	bool currentState = false;
+
+	frc::Compressor *m_compressor;
+};
+
+#endif /* PNEUMATIC_HELPER_HPP */
