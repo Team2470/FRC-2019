@@ -35,6 +35,7 @@
 /******************************************************************************
  * Variables
  *****************************************************************************/
+bool loopControl = false;
 
 /******************************************************************************
  * CLASS      : SingleSolenoid
@@ -189,7 +190,7 @@ public:
      *
      * RETURNS    : A Compressor object
      *************************************************************************/
-	DoubleSolenoid(int compressorChannel = 0);
+	Compressor(int compressorChannel = 0);
 
     /**************************************************************************
      * FUNCTION   : toggleCompressor
@@ -218,6 +219,33 @@ public:
 	 *************************************************************************/
 	void deactivate();
 
+	/**************************************************************************
+	 * FUNCTION   : lowPressureActivate
+	 *
+	 * DESCRIPTION: Sets the compressor to activate when the pressure is low.
+	 *
+	 * RETURNS    : Void
+	 *************************************************************************/
+	void lowPressureActivate(bool state);
+
+	/**************************************************************************
+	 * FUNCTION   : getPressureActivate
+	 *
+	 * DESCRIPTION: If the compressor will activate when the pressure is low.
+	 *
+	 * RETURNS    : Bool
+	 *************************************************************************/
+	bool getPressureActivate();
+
+	/**************************************************************************
+	 * FUNCTION   : getSwitch
+	 *
+	 * DESCRIPTION: If the pressure switch is activated.
+	 *
+	 * RETURNS    : Bool
+	 *************************************************************************/
+	bool getSwitch();
+
      /**************************************************************************
 	 * FUNCTION   : getVal
 	 *
@@ -226,8 +254,41 @@ public:
 	 * RETURNS    : Boolean, if the compressor is on or off.
 	 *************************************************************************/
 	bool getVal();
+
+	/**************************************************************************
+	 * FUNCTION   : getCurrent
+	 *
+	 * DESCRIPTION: Gets the current draw of the compressor.
+	 *
+	 * RETURNS    : Double, the current in amps.
+	 *************************************************************************/
+	double getCurrent();
+
+	/**************************************************************************
+	 * FUNCTION   : testFaults
+	 *
+	 * DESCRIPTION: Queries the compressor about various things.
+	 *
+	 * RETURNS    : Void
+	 *************************************************************************/
+	void testFaults();
+
+	/**************************************************************************
+	 * FUNCTION   : clearStickyFaults
+	 *
+	 * DESCRIPTION: Clears the sticky faults.
+	 *
+	 * RETURNS    : Void
+	 *************************************************************************/
+	void clearStickyFaults();
 private:
 	bool currentState = false;
+	bool currentHighFault = false;//GetCompressorCurrentTooHighFault
+	bool currentHighFaultSticky = false;//GetCompressorCurrentTooHighStickyFault
+	bool notConnectedFault = false;//GetCompressorNotConnectedFault
+	bool notConnectedFaultSticky = false;//GetCompressorNotConnectedStickyFault
+	bool shortCircuitFault = false;//GetCompressorShortedFault
+	bool shortCircuitFaultSticky = false;//GetCompressorShortedStickyFault
 
 	frc::Compressor *m_compressor;
 };

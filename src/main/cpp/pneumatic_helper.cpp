@@ -162,9 +162,64 @@ void Compressor::deactivate()
 }
 
 /*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    lowPressureActivate
+ *---------------------------------------------------------------------------*/
+void Compressor::lowPressureActivate(bool state)
+{
+	m_compressor->SetClosedLoopControl(state);
+	loopControl = state;//GetClosedLoopControl
+}
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    getPressureActivate
+ *---------------------------------------------------------------------------*/
+bool Compressor::getPressureActivate()
+{
+	return m_compressor->GetClosedLoopControl();
+}
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    getSwitch
+ *---------------------------------------------------------------------------*/
+bool Compressor::getSwitch()
+{
+	return m_compressor->GetPressureSwitchValue();
+}
+
+/*-----------------------------------------------------------------------------
  * FUNCTION NAME:    getVal
  *---------------------------------------------------------------------------*/
 bool Compressor::getVal()
 {
 	return m_compressor->Enabled();
+}
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    getCurrent
+ *---------------------------------------------------------------------------*/
+double Compressor::getCurrent()
+{
+	return m_compressor->GetCompressorCurrent();
+}
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    testFaults
+ *---------------------------------------------------------------------------*/
+void Compressor::testFaults()
+{
+	currentHighFault = m_compressor->GetCompressorCurrentTooHighFault();
+	currentHighFaultSticky = m_compressor->GetCompressorCurrentTooHighStickyFault();
+	notConnectedFault = m_compressor->GetCompressorNotConnectedFault();
+	notConnectedFaultSticky = m_compressor->GetCompressorNotConnectedStickyFault();
+	shortCircuitFault = m_compressor->GetCompressorShortedFault();
+	shortCircuitFaultSticky = m_compressor->GetCompressorShortedStickyFault();
+}
+
+/*-----------------------------------------------------------------------------
+ * FUNCTION NAME:    clearStickyFaults
+ *---------------------------------------------------------------------------*/
+void Compressor::clearStickyFaults()
+{
+	m_compressor->ClearAllPCMStickyFaults();
+	m_compressor->testFaults();
 }
