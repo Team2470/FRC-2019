@@ -15,22 +15,11 @@
 //    None
 //*****************************************************************************
 
-/******************************************************************************
- * Include Files
- *****************************************************************************/
-//System Includes
 #include <iostream>
-
-// First Includes
 #include <frc/AnalogInput.h>
 #include <frc/Ultrasonic.h>
-
-//Our Includes
 #include "sonar_helper.hpp"
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    MaxSonar
- *---------------------------------------------------------------------------*/
 MaxSonar::MaxSonar(int ultrasonicChannel, Ultrasonic_Sensor_Type sonarType)
 {
     ultrasonicSensor = new frc::AnalogInput(ultrasonicChannel);
@@ -52,20 +41,13 @@ MaxSonar::MaxSonar(int ultrasonicChannel, Ultrasonic_Sensor_Type sonarType)
 	}
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    sonarRange
- *---------------------------------------------------------------------------*/
 double MaxSonar::sonarRange()
 {
-	//Gets the ultrasonic sensor voltage and converts it into inches
 	double rangeInches = 0.0;
 	rangeInches = ultrasonicSensor->GetVoltage() / VOLTAGE_SCALING;
 	return rangeInches;
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    Voltage
- *---------------------------------------------------------------------------*/
 double MaxSonar::Voltage()
 {
 	double volt = 0;
