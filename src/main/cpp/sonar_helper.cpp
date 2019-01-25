@@ -5,22 +5,26 @@
 
 MaxSonar::MaxSonar(int ultrasonicChannel, Ultrasonic_Sensor_Type sonarType)
 {
-    ultrasonicSensor = new frc::AnalogInput(ultrasonicChannel);
-    sensorFamily = sonarType;
+    	ultrasonicSensor = new frc::AnalogInput(ultrasonicChannel);
+    	sensorFamily = sonarType;
     
-    switch(sensorFamily)
+    	switch(sensorFamily)
 	{
-	case HRLV :
-		VOLTAGE_SCALING = (1 / 41.0105);//0.00096063044;
-		break;
-	case HRUSB : VOLTAGE_SCALING = 1;
-		break;
-	case LV : VOLTAGE_SCALING = 0.0098;
-		break;
-	case XL : VOLTAGE_SCALING = 1;
-		break;
-	default : VOLTAGE_SCALING = 1;
-		break;
+		case HRLV:
+			VOLTAGE_SCALING = (1 / 41.0105);//0.00096063044;
+			break;
+		case HRUSB: 
+			VOLTAGE_SCALING = 1;
+			break;
+		case LV: 
+			VOLTAGE_SCALING = 0.0098;
+			break;
+		case XL: 
+			VOLTAGE_SCALING = 1;
+			break;
+		default: 
+			VOLTAGE_SCALING = 1;
+			break;
 	}
 }
 
