@@ -1,20 +1,3 @@
-//*****************************************************************************
-// Filename:            sonar_helper.cpp
-//
-// Revision Record:
-//   Author             Date       Description
-//   ------------------ ---------- --------------------------------------------
-//   Chris Struck       Jan. 2018  Initial design.
-//
-// Description:
-//    This class operates a MaxSonar, Ultrasonic Senor such as the following:
-//        LV, HRLV, HRUSB, XL
-//    The class has the ability to return the current distance.
-// 
-// Dependencies:
-//    None
-//*****************************************************************************
-
 #include <iostream>
 #include <frc/AnalogInput.h>
 #include <frc/Ultrasonic.h>
