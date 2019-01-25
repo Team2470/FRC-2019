@@ -8,10 +8,10 @@ assignees: ''
 ---
 
 **What is being affected**
-A clear and concise description of what the bug is.
+A clear and concise description of what is being changed.
 
-**What is being changed**
-Steps to reproduce the behavior:
+**How is it being changed**
+How is the code being changed.
 
 **Additional context**
-Add any other context about the problem here.
+Add any other context here.
