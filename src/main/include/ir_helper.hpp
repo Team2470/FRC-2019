@@ -1,115 +1,78 @@
-//*****************************************************************************
-// Filename:            ir_helper.hpp
-//
-// Revision Record:
-//   Author             Date       Description
-//   ------------------ ---------- --------------------------------------------
-//   Chris Struck       Feb. 2018  Initial design.
-//
-// Description:
-//    This class operates a variety of infrared sensors, at varying distances.
-// 
-// Dependencies:
-//    None
-//*****************************************************************************
-
 #ifndef IR_HELPER_HPP
 #define IR_HELPER_HPP
 
-/******************************************************************************
- * Include Files
- *****************************************************************************/
-// First Includes //
 #include <frc/AnalogInput.h>
 
-/******************************************************************************
- * Constants
- *****************************************************************************/
-
-/******************************************************************************
- * Types
- *****************************************************************************/
+/**
+ * @enum	Infrared_Sensor_Type
+ * @description Holds the different types of infrared sensor.
+ */
 enum Infrared_Sensor_Type
-	{
-		GP2Y0A710K0F,	//3 - 18 feet
-		GP2Y0A02YK0F,	//7 - 59 inches
-		OPB732WZ		//up to 3 inches
-	};
+{
+	GP2Y0A710K0F, // 3 - 18 feet
+	GP2Y0A02YK0F, // 7 - 59 inches
+	OPB732WZ      // up to 3 inches
+};
 
+/**
+ * @enum	Color
+ * @description Holds three different colors.
+ */
 enum Color
-	{
-		BLACK,
-		WHITE,
-		GRAY
-	};
-    
-/******************************************************************************
- * Variables
- *****************************************************************************/
+{
+	BLACK,
+	WHITE,
+	GRAY
+};
 
-/******************************************************************************
- * CLASS      : Infrared
- *
- * DESCRIPTION: This class is to operate a Infrared sensor.
- *
- * RETURNS    : None
- *****************************************************************************/
+/**
+ * @class 	Infrared
+ * @description This class operates an infrared sensor.
+ */
 class Infrared
 {
 public:
-    /**************************************************************************
-     * FUNCTION   : Infrared
-     *
-     * DESCRIPTION: Constructs the Infrared object with the specified 
-     *              <irChannel> and <irType>.
-     *
-     * RETURNS    : A Infrared object
-     *************************************************************************/
+	/**
+	 * @constructor Infrared
+	 * @description Constructs the Infrared object.
+	 * @param	irChannel -- the input channel of the sensor.
+	 * @param	irType    -- the type of sensor.
+	 */
 	Infrared(int irChannel, Infrared_Sensor_Type irType);
 
-	/**************************************************************************
-	 * FUNCTION   : checkColor
-	 *
-	 * DESCRIPTION: Returns the current range in inches.
-	 *
-	 * RETURNS    : Range as a double
-	 *************************************************************************/
+	/**
+	 * @function    checkColor
+	 * @description Attempt to read the current color value from the IR sensor.
+	 * @returns     The registered color value in enumeration form.
+	 */
 	Color checkColor();
 
-	/**************************************************************************
-	 * FUNCTION   : irRange
-	 *
-	 * DESCRIPTION: Returns the current range in inches.
-	 *
-	 * RETURNS    : Range as a double
-	 *************************************************************************/
+	/**
+	 * @function    irRange
+	 * @description Reads a distance value from the infrared sensor.
+	 * @returns     The read distance value.
+	 */
 	double irRange();
 
-	/**************************************************************************
-	 * FUNCTION   : Voltage
-	 *
-	 * DESCRIPTION: Returns the current voltage as read by the sensor.
-	 *
-	 * RETURNS    : Voltage as a double
-	 *************************************************************************/
+	/**
+	 * @function    Voltage
+	 * @description Reads the current voltage of the IR sensor.
+	 * @returns     The read voltage.
+	 */
 	double Voltage();
-
-	/**************************************************************************
-	 * FUNCTION   : AverageRaw
-	 *
-	 * DESCRIPTION: Returns the average raw value as read by the sensor.
-	 *
-	 * RETURNS    : value as an int
-	 *************************************************************************/
+	
+	/**
+	 * @function    AverageRaw
+	 * @description Calculates the average value read by the sensor.
+	 * @returns     The calculated average value.
+	 */
 	int AverageRaw();
 
 private:
-	double VOLTAGE_SCALING = 1.0;		//placeholder value
-	double VOLTAGE_INTERCEPT = 1.0;		//placeholder value
-
+	double VOLTAGE_SCALING = 1.0;
+	double VOLTAGE_INTERCEPT = 1.0;
 	Infrared_Sensor_Type sensorFamily;
-
-	frc::AnalogInput *irSensor;
+	frc::AnalogInput* irSensor;
 
 	static constexpr double colorError = 0.1;
 	static constexpr double whiteValue = 0.0;
@@ -117,4 +80,4 @@ private:
 	static constexpr double grayValue = 2.0;
 };
 
-#endif /* IR_HELPER_HPP */
+#endif
