@@ -5,7 +5,7 @@
 #include <frc/AnalogInput.h>
 
 /**
- * @enum 		Ultrasonic_Sensor_Type
+ * @enum 	Ultrasonic_Sensor_Type
  * @description Holds the four different supported ultrasonic sensor types.
  */ 
 enum Ultrasonic_Sensor_Type
@@ -17,10 +17,10 @@ enum Ultrasonic_Sensor_Type
 };
 
 /**
- * @class 		MaxSonar
+ * @class 	MaxSonar
  * @description This class operates a MaxSonar, Ultrasonic Senor such as the following:
- * 		   			LV, HRLV, HRUSB, XL
- *				This class has the ability to return the current distance.
+ * 		   LV, HRLV, HRUSB, XL
+ *		This class has the ability to return the current distance.
  */
 class MaxSonar
 {
@@ -28,16 +28,16 @@ public:
 	/**
 	 * @constructor MaxSonar
 	 * @description Constructs a MaxSonar object.
-	 * @param		ultrasonicChannel -- the analog channel for the ultrasonic sensor.
-	 * @param		sonarType		    -- the category of ultrasonic sensor.
+	 * @param	ultrasonicChannel -- the analog channel for the ultrasonic sensor.
+	 * @param	sonarType	  -- the category of ultrasonic sensor.
 	 */
-    MaxSonar(int ultrasonicChannel, Ultrasonic_Sensor_Type sonarType);
+    	MaxSonar(int ultrasonicChannel, Ultrasonic_Sensor_Type sonarType);
 
-    /**
-	 * @function    sonarRange
-	 * @description Calculates the current distance (inches) read by the sensor.
-	 * @returns     Returns the calculated distance.
-	 */
+    	/**
+ 	* @function    sonarRange
+ 	* @description Calculates the current distance (inches) read by the sensor.
+ 	* @returns     Returns the calculated distance.
+ 	*/
 	double sonarRange();
 
 	/**
