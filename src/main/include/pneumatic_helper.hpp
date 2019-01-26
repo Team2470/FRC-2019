@@ -1,29 +1,16 @@
-//*****************************************************************************
-// Filename:            pneumatic_helper.hpp
-//
-// Revision Record:
-//   Author             Date       Description
-//   ------------------ ---------- --------------------------------------------
-//   Chris Struck       Jan. 2019  Initial design.
-//
-// Description:
-//    Operates a single or double solenoid.
-// 
-// Dependencies:
-//    None
-//*****************************************************************************
-
 #ifndef PNEUMATIC_HELPER_HPP
 #define PNEUMATIC_HELPER_HPP
 
-/******************************************************************************
- * Include Files
- *****************************************************************************/
-// First Includes //
 #include <frc/Solenoid.h>
 #include <frc/DoubleSolenoid.h>
 #include <frc/Compressor.h>
 
+<<<<<<< HEAD
+/**
+ * @class	SingleSolenoid
+ * @description Operates a single solenoid.
+ */
+=======
 /******************************************************************************
  * Constants
  *****************************************************************************/
@@ -43,154 +30,121 @@
  *
  * RETURNS    : None
  *****************************************************************************/
+>>>>>>> master
 class SingleSolenoid
 {
 public:
-    /**************************************************************************
-     * FUNCTION   : SingleSolenoid
-     *
-     * DESCRIPTION: Constructs the Solenoid object with the specified 
-     *              <solenoidChannel>.
-     *
-     * RETURNS    : A Solenoid object
-     *************************************************************************/
+	/**
+	 * @constructor SingleSolenoid
+	 * @description Construct the Solenoid object.
+	 * @param 	solenoidChannel -- The channel of the solenoid.
+	 */
 	SingleSolenoid(int solenoidChannel);
 
-    /**************************************************************************
-     * FUNCTION   : toggleSolenoid
-     *
-     * DESCRIPTION: Toggles the current state of the solenoid.
-     *
-     * RETURNS    : Void
-     *************************************************************************/
+	/**
+	 * @function    toggleSolenoid
+	 * @description Toggles the current state of the solenoid.
+	 */
 	void toggleSolenoid();
 
-	/**************************************************************************
-	 * FUNCTION   : activate
-	 *
-	 * DESCRIPTION: Activates the solenoid.
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function	activate
+	 * @description Activates the solenoid.
+	 */
 	void activate();
 
-	/**************************************************************************
-	 * FUNCTION   : deactivate
-	 *
-	 * DESCRIPTION: Deactivates the solenoid.
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function    deactivate
+	 * @description Deactivates the solenoid.
+	 */
 	void deactivate();
 
-     /**************************************************************************
-	 * FUNCTION   : getVal
-	 *
-	 * DESCRIPTION: Gets the value of the solenoid.
-	 *
-	 * RETURNS    : Boolean, if the solenoid is on or off.
-	 *************************************************************************/
+	/**
+	 * @function	getVal
+	 * @description Gets the value of the solenoid.
+	 * @returns     The current state of the solenoid.
+	 */
 	bool getVal();
-private:
-     bool currentState = false;
 
-	frc::Solenoid *m_solenoidSingle;
+private:
+	bool currentState = false;
+	frc::Solenoid* m_solenoidSingle;
 };
 
-/////////////////////////////////////////////////////////////////////////////
 
-/******************************************************************************
- * CLASS      : DoubleSolenoid
- *
- * DESCRIPTION: This class is to operate a Double Solenoid.
- *
- * RETURNS    : None
- *****************************************************************************/
+/**
+ * @class       DoubleSolenoid
+ * @description This class operates a double solenoid.
+ */
 class DoubleSolenoid
 {
 public:
-	/**************************************************************************
-     * FUNCTION   : DoubleSolenoid
-     *
-     * DESCRIPTION: Constructs the Solenoid object with the specified 
-     *              <solenoidChannelFwd> and <solenoidChannelBck>.
-     *
-     * RETURNS    : A Solenoid object
-     *************************************************************************/
+	/**
+	 * @constructor DoubleSolenoid
+	 * @description Constructs the Solenoid objecte.
+	 * @param	solenoidChannelFwd -- The forward channel of the solenoid.
+	 * @param	solenoidChannelBck -- The backward channel of the solenoid.
+	 */
 	DoubleSolenoid(int solenoidChannelFwd, int solenoidChannelBck);
 
-    /**************************************************************************
-     * FUNCTION   : toggleSolenoid
-     *
-     * DESCRIPTION: Toggles the current state of the solenoid.
-     *
-     * RETURNS    : Void
-     *************************************************************************/
+	/**
+	 * @function	toggleSolenoid
+	 * @description Toggles the current state of the solenoid.
+	 */
 	void toggleSolenoid();
 
-	/**************************************************************************
-	 * FUNCTION   : activateFwd
-	 *
-	 * DESCRIPTION: Activates the solenoid forwards.
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function	forwards
+	 * @description Activates the solenoid forward.
+	 */
 	void forwards();
 
-     /**************************************************************************
-	 * FUNCTION   : activateRev
-	 *
-	 * DESCRIPTION: Activates the solenoid reverse.
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function	reverse
+	 * @description Activates the solenoid reverse.
+	 */
 	void reverse();
 
-	/**************************************************************************
-	 * FUNCTION   : deactivate
-	 *
-	 * DESCRIPTION: Deactivates the solenoid.
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function	deactivate
+	 * @description Deactivates the solenoid.
+	 */ 
 	void deactivate();
 
-     /**************************************************************************
-	 * FUNCTION   : getVal
-	 *
-	 * DESCRIPTION: Gets the value of the solenoid.
-	 *
-	 * RETURNS    : Boolean, if the solenoid is on or off.
-	 *************************************************************************/
+	/**
+	 * @function    getVal
+	 * @description Gets the current value of the solenoid.
+	 * @returns     The current state of the solenoid.
+	 */
 	bool getVal();
 private:
-    frc::DoubleSolenoid::Value currentState = frc::DoubleSolenoid::Value::kOff;
-
-	frc::DoubleSolenoid *m_solenoidDouble;
+    	frc::DoubleSolenoid::Value currentState = frc::DoubleSolenoid::Value::kOff;
+	frc::DoubleSolenoid* m_solenoidDouble;
 };
 
-/////////////////////////////////////////////////////////////////////////////
 
-/******************************************************************************
- * CLASS      : Compressor
- *
- * DESCRIPTION: This class is to operate a Compressor.
- *
- * RETURNS    : None
- *****************************************************************************/
+/**
+ * @class	Compressor
+ * @description This class operates a compressor.
+ */
 class Compressor
 {
 public:
-	/**************************************************************************
-     * FUNCTION   : Compressor
-     *
-     * DESCRIPTION: Constructs the Compressor object with the specified 
-     *              <compressorChannel>.
-     *
-     * RETURNS    : A Compressor object
-     *************************************************************************/
+	/**
+	 * @constructor Compressor
+	 * @description Constructs the compressor object.
+	 * @param	compressorChannel -- The channel of the compressor. Defaults to zero.
+	 */
 	Compressor(int compressorChannel = 0);
 
+<<<<<<< HEAD
+	/**
+	 * @function	toggleCompressor
+	 * @description Toggles the current state of the compressor.
+	 * @returns	Returns the current state of the compressor.
+	 */
+	bool toggleCompressor();
+=======
     /**************************************************************************
      * FUNCTION   : toggleCompressor
      *
@@ -199,99 +153,77 @@ public:
      * RETURNS    : Void
      *************************************************************************/
 	void toggleCompressor();
+>>>>>>> master
 
-	/**************************************************************************
-	 * FUNCTION   : activate
-	 *
-	 * DESCRIPTION: Activates the compressor.
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function	activate
+	 * @description Activates the compressor.
+	 */
 	void activate();
 
-	/**************************************************************************
-	 * FUNCTION   : deactivate
-	 *
-	 * DESCRIPTION: Deactivates the compressor.
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function	deactivate
+	 * @description Deactivates the compressor.
+	 */
 	void deactivate();
 
-	/**************************************************************************
-	 * FUNCTION   : lowPressureActivate
-	 *
-	 * DESCRIPTION: Sets the compressor to activate when the pressure is low.
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function	lowPressureActivate
+	 * @description Sets the compressor to activate when the pressure is low.
+	 */
 	void lowPressureActivate(bool state);
 
-	/**************************************************************************
-	 * FUNCTION   : getPressureActivate
-	 *
-	 * DESCRIPTION: If the compressor will activate when the pressure is low.
-	 *
-	 * RETURNS    : Bool
-	 *************************************************************************/
+	/**
+	 * @function	getPressureActivate
+	 * @description Determines whether the compressor will activate when the pressure is low.
+	 * @returns 	Whether the compressor should activate.
+	 */
 	bool getPressureActivate();
 
-	/**************************************************************************
-	 * FUNCTION   : getSwitch
-	 *
-	 * DESCRIPTION: If the pressure switch is activated.
-	 *
-	 * RETURNS    : Bool
-	 *************************************************************************/
+	/**
+	 * @function    getSwitch
+	 * @description Determines if the pressure switch is activated.
+	 * @returns	Whether the switch is activated.
+	 */
 	bool getSwitch();
 
-     /**************************************************************************
-	 * FUNCTION   : getVal
-	 *
-	 * DESCRIPTION: Gets the value of the compressor.
-	 *
-	 * RETURNS    : Boolean, if the compressor is on or off.
-	 *************************************************************************/
+	/**
+	 * @function	getVal
+	 * @description Determine the current state of the compressor, on or off.
+	 * @returns     The current state.
+	 */
 	bool getVal();
 
-	/**************************************************************************
-	 * FUNCTION   : getCurrent
-	 *
-	 * DESCRIPTION: Gets the current draw of the compressor.
-	 *
-	 * RETURNS    : Double, the current in amps.
-	 *************************************************************************/
+	/**
+	 * @function	getCurrent
+	 * @description Determine the present current draw of the compressor.
+	 * @returns     The current, in amps.
+	 */
 	double getCurrent();
 
-	/**************************************************************************
-	 * FUNCTION   : testFaults
-	 *
-	 * DESCRIPTION: Queries the compressor about various things.
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function    testFaults
+	 * @description Test for compressor faults.
+	 */
 	void testFaults();
 
-	/**************************************************************************
-	 * FUNCTION   : clearStickyFaults
-	 *
-	 * DESCRIPTION: Clears the sticky faults.
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function    clearStickyFaults
+	 * @description Clear any current sticky faults.
+	 */
 	void clearStickyFaults();
+
 private:
 	bool loopControl = false;
 
 	bool currentState = false;
-	bool currentHighFault = false;//GetCompressorCurrentTooHighFault
-	bool currentHighFaultSticky = false;//GetCompressorCurrentTooHighStickyFault
-	bool notConnectedFault = false;//GetCompressorNotConnectedFault
-	bool notConnectedFaultSticky = false;//GetCompressorNotConnectedStickyFault
-	bool shortCircuitFault = false;//GetCompressorShortedFault
-	bool shortCircuitFaultSticky = false;//GetCompressorShortedStickyFault
-
-	frc::Compressor *m_compressor;
+	bool currentHighFault = false;        // GetCompressorCurrentTooHighFault
+	bool currentHighFaultSticky = false;  // GetCompressorCurrentTooHighStickyFault
+	bool notConnectedFault = false;       // GetCompressorNotConnectedFault
+	bool notConnectedFaultSticky = false; // GetCompressorNotConnectedStickyFault
+	bool shortCircuitFault = false;	      // GetCompressorShortedFault
+	bool shortCircuitFaultSticky = false; // GetCompressorShortedStickyFault
+	frc::Compressor* m_compressor;
 };
 
-#endif /* PNEUMATIC_HELPER_HPP */
+#endif
