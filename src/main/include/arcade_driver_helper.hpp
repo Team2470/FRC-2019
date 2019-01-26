@@ -23,7 +23,6 @@ public:
 	int bckDrive = 0;
 	int joystickInt = 0;
 	int reverseDrive = -1;
-
 	bool rotateEnable = true;
 	bool sqrInputs = false;
 	bool multiRotate = false;
