@@ -1,43 +1,14 @@
-//*****************************************************************************
-// Filename:            pneumatic_helper.cpp
-//
-// Revision Record:
-//   Author             Date       Description
-//   ------------------ ---------- --------------------------------------------
-//   Chris Struck       Jan. 2019  Initial design.
-//
-// Description:
-//    Operates a single or double solenoid.
-// 
-// Dependencies:
-//    None
-//*****************************************************************************
-
-/******************************************************************************
- * Include Files
- *****************************************************************************/
-//System Includes
 #include <iostream>
-
-// First Includes
 #include <frc/Solenoid.h>
 #include <frc/DoubleSolenoid.h>
 #include <frc/Compressor.h>
-
-//Our Includes
 #include "pneumatic_helper.hpp"
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    SingleSolenoid
- *---------------------------------------------------------------------------*/
 SingleSolenoid::SingleSolenoid(int solenoidChannel)
 {
-    m_solenoidSingle = new frc::Solenoid(solenoidChannel);
+	m_solenoidSingle = new frc::Solenoid(solenoidChannel);
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    toggleSolenoid
- *---------------------------------------------------------------------------*/
 void SingleSolenoid::toggleSolenoid()
 {
 	//turn solenoid on/off
@@ -45,90 +16,56 @@ void SingleSolenoid::toggleSolenoid()
 	currentState = !currentState;
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    activate
- *---------------------------------------------------------------------------*/
 void SingleSolenoid::activate()
 {
 	m_solenoidSingle->Set(true);
 	currentState = true;
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    deactivate
- *---------------------------------------------------------------------------*/
 void SingleSolenoid::deactivate()
 {
 	m_solenoidSingle->Set(false);
 	currentState = false;
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    getVal
- *---------------------------------------------------------------------------*/
 bool SingleSolenoid::getVal()
 {
 	return m_solenoidSingle->Get();
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    DoubleSolenoid
- *---------------------------------------------------------------------------*/
 DoubleSolenoid::DoubleSolenoid(int solenoidChannelFwd, int solenoidChannelBck)
 {
-    m_solenoidDouble = new frc::DoubleSolenoid(solenoidChannelFwd, solenoidChannelBck);
+    	m_solenoidDouble = new frc::DoubleSolenoid(solenoidChannelFwd, solenoidChannelBck);
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    getVal
- *---------------------------------------------------------------------------*/
 bool DoubleSolenoid::getVal()
 {
 	return m_solenoidDouble->Get();
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    forwards
- *---------------------------------------------------------------------------*/
 void DoubleSolenoid::forwards()
 {
 	m_solenoidDouble->Set(frc::DoubleSolenoid::Value::kForward);
 	currentState = frc::DoubleSolenoid::Value::kForward;
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    reverse
- *---------------------------------------------------------------------------*/
 void DoubleSolenoid::reverse()
 {
 	m_solenoidDouble->Set(frc::DoubleSolenoid::Value::kReverse);
 	currentState = frc::DoubleSolenoid::Value::kReverse;
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    deactivate
- *---------------------------------------------------------------------------*/
 void DoubleSolenoid::deactivate()
 {
 	m_solenoidDouble->Set(frc::DoubleSolenoid::Value::kOff);
 	currentState = frc::DoubleSolenoid::Value::kOff;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
-
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    Compressor
- *---------------------------------------------------------------------------*/
 Compressor::Compressor(int compressorChannel)
 {
-    m_compressor = new frc::Compressor(compressorChannel);
+	m_compressor = new frc::Compressor(compressorChannel);
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    toggleCompressor
- *---------------------------------------------------------------------------*/
 void Compressor::toggleCompressor()
 {
 	if (currentState)
@@ -143,68 +80,44 @@ void Compressor::toggleCompressor()
 	}
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    activate
- *---------------------------------------------------------------------------*/
 void Compressor::activate()
 {
 	m_compressor->Start();
 	currentState = true;
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    deactivate
- *---------------------------------------------------------------------------*/
 void Compressor::deactivate()
 {
 	m_compressor->Stop();
 	currentState = false;
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    lowPressureActivate
- *---------------------------------------------------------------------------*/
 void Compressor::lowPressureActivate(bool state)
 {
 	m_compressor->SetClosedLoopControl(state);
 	//loopControl = state;//GetClosedLoopControl
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    getPressureActivate
- *---------------------------------------------------------------------------*/
 bool Compressor::getPressureActivate()
 {
 	return m_compressor->GetClosedLoopControl();
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    getSwitch
- *---------------------------------------------------------------------------*/
 bool Compressor::getSwitch()
 {
 	return m_compressor->GetPressureSwitchValue();
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    getVal
- *---------------------------------------------------------------------------*/
 bool Compressor::getVal()
 {
 	return m_compressor->Enabled();
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    getCurrent
- *---------------------------------------------------------------------------*/
 double Compressor::getCurrent()
 {
 	return m_compressor->GetCompressorCurrent();
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    testFaults
- *---------------------------------------------------------------------------*/
 void Compressor::testFaults()
 {
 	currentHighFault = m_compressor->GetCompressorCurrentTooHighFault();
@@ -215,13 +128,9 @@ void Compressor::testFaults()
 	shortCircuitFaultSticky = m_compressor->GetCompressorShortedStickyFault();
 }
 
-/*-----------------------------------------------------------------------------
- * FUNCTION NAME:    clearStickyFaults
- *---------------------------------------------------------------------------*/
 void Compressor::clearStickyFaults()
 {
 	m_compressor->ClearAllPCMStickyFaults();
-
 	currentHighFault = m_compressor->GetCompressorCurrentTooHighFault();
 	currentHighFaultSticky = m_compressor->GetCompressorCurrentTooHighStickyFault();
 	notConnectedFault = m_compressor->GetCompressorNotConnectedFault();
