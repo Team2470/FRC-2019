@@ -5,32 +5,10 @@
 #include <frc/DoubleSolenoid.h>
 #include <frc/Compressor.h>
 
-<<<<<<< HEAD
 /**
  * @class	SingleSolenoid
  * @description Operates a single solenoid.
  */
-=======
-/******************************************************************************
- * Constants
- *****************************************************************************/
-
-/******************************************************************************
- * Types
- *****************************************************************************/
-    
-/******************************************************************************
- * Variables
- *****************************************************************************/
-
-/******************************************************************************
- * CLASS      : SingleSolenoid
- *
- * DESCRIPTION: This class is to operate a Single Solenoid.
- *
- * RETURNS    : None
- *****************************************************************************/
->>>>>>> master
 class SingleSolenoid
 {
 public:
@@ -137,23 +115,12 @@ public:
 	 */
 	Compressor(int compressorChannel = 0);
 
-<<<<<<< HEAD
 	/**
 	 * @function	toggleCompressor
 	 * @description Toggles the current state of the compressor.
 	 * @returns	Returns the current state of the compressor.
 	 */
 	bool toggleCompressor();
-=======
-    /**************************************************************************
-     * FUNCTION   : toggleCompressor
-     *
-     * DESCRIPTION: Toggles the current state of the compressor.
-     *
-     * RETURNS    : Void
-     *************************************************************************/
-	void toggleCompressor();
->>>>>>> master
 
 	/**
 	 * @function	activate

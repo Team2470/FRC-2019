@@ -9,20 +9,12 @@ Infrared::Infrared(int irChannel, Infrared_Sensor_Type irType)
     
     	switch(sensorFamily)
 	{
-<<<<<<< HEAD
 		case GP2Y0A710K0F:			//3-18 feet
-=======
-		case GP2Y0A710K0F:			// 3-18 feet
->>>>>>> master
 			VOLTAGE_SCALING = 137.5;
 			VOLTAGE_INTERCEPT = 1.125;
 			break;
 
-<<<<<<< HEAD
 		case GP2Y0A02YK0F:			//7-59 inches
-=======
-		case GP2Y0A02YK0F:			// 7-59 inches
->>>>>>> master
 			VOLTAGE_SCALING = 46.5909091;
 			VOLTAGE_INTERCEPT = 0.33522727272;
 			break;
