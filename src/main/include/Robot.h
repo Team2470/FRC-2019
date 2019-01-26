@@ -19,6 +19,7 @@
 #include <frc/SmartDashboard/SmartDashboard.h>
 #include <frc/PowerDistributionPanel.h>
 #include <frc/Compressor.h>
+#include <frc/Preferences.h>
 
 //OUR INCLUDES//
 #include "channel_helper.h"
@@ -84,13 +85,26 @@ class Robot : public frc::SampleRobot {
 
   Compressor* m_compressor = new Compressor(0);
 
+  Preferences *prefs;
 
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
 
+  //PDP
   double inputVoltage;
   double totalCurrent;
   double temp;
+  double totalEnergy;
+  double totalPower;
+
+  //Compressor
   double compressorCurrent;
+
+  //Driving
+  bool halfSpeed = false;
+  bool stopDrive = false;
+  double moveJoyVal = 0;
+  double shiftJoyVal = 0;
+  double rotateJoyVal = 0;
 };

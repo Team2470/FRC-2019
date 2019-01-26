@@ -15,15 +15,20 @@
 //OUR INCLUDES//
 #include "Robot.h"
 
-Robot::Robot() {
+Robot::Robot()
+{
   // Note SmartDashboard is not initialized here, wait until RobotInit() to make
   // SmartDashboard calls
   //m_robotDrive.SetExpiration(0.1);
 }
 
-void Robot::RobotInit() {
+void Robot::RobotInit()
+{
+  prefs = Preferences::GetInstance();
+
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
+  m_chooser.AddOption();
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 }
 
@@ -96,21 +101,33 @@ void Robot::OperatorControl() {
     inputVoltage = pdp->GetVoltage();
     totalCurrent = pdp->GetTotalCurrent();
     temp = pdp->GetTemperature();
+    totalEnergy = pdp->GetTotalEnergy();
+    totalPower = pdp->GetTotalPower();
 
     //Compressor
     compressorCurrent = m_compressor->getCurrent();
+
+    //Drive
+    moveJoyVal = RightDriveJoystick.GetY();
+    shiftJoyVal = RightDriveJoystick.GetX();
+    rotateJoyVal = LeftDriveJoystick.GetX();
+
 
     if (LeftButtonHub.GetRawButton(Generic_Controller_Left::SWITCH_A))
     {
       m_driveSystem->moveMultiplier = 0.5;
       m_driveSystem->shiftMultiplier = 0.5;
       m_driveSystem->rotateMultiplier = 0.5;
+
+      halfSpeed = true;
     }
     else
     {
       m_driveSystem->moveMultiplier = 1.0;
       m_driveSystem->shiftMultiplier = 1.0;
       m_driveSystem->rotateMultiplier = 1.0;
+
+      halfSpeed = false;
     }
 
     if (RightButtonHub.GetRawButton(Generic_Controller_Right::SWITCH_X))
@@ -130,9 +147,18 @@ void Robot::OperatorControl() {
     frc::SmartDashboard::PutNumber("InputVoltage", inputVoltage);
     frc::SmartDashboard::PutNumber("TotalCurrent", totalCurrent);
     frc::SmartDashboard::PutNumber("Temperature", temp);
+    frc::SmartDashboard::PutNumber("TotalEnergy", totalEnergy);
+    frc::SmartDashboard::PutNumber("TotalPower", totalPower);
 
-    //Compresor stuff
+    //Compressor stuff
     frc::SmartDashboard::PutNumber("CompressorCurrent", compressorCurrent);
+
+    //Drive stuff
+    frc::SmartDashboard::PutBoolean("HalfSpeed", halfSpeed);
+    frc::SmartDashboard::PutBoolean("StopDrive", stopDrive);
+    frc::SmartDashboard::PutNumber("MoveJoy", moveJoyVal);
+    frc::SmartDashboard::PutNumber("ShiftJoy", shiftJoyVal);
+    frc::SmartDashboard::PutNumber("RotateJoy", rotateJoyVal);
     frc::Wait(0.005);
   }
 }
