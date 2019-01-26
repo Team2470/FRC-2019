@@ -118,9 +118,8 @@ public:
 	/**
 	 * @function	toggleCompressor
 	 * @description Toggles the current state of the compressor.
-	 * @returns	Returns the current state of the compressor.
 	 */
-	bool toggleCompressor();
+	void toggleCompressor();
 
 	/**
 	 * @function	activate

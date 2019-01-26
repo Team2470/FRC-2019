@@ -24,11 +24,11 @@ Robot::Robot()
 
 void Robot::RobotInit()
 {
-  prefs = Preferences::GetInstance();
+  //prefs = Preferences::GetInstance();
 
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
-  m_chooser.AddOption();
+  //m_chooser.AddOption();
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 }
 
@@ -81,19 +81,19 @@ void Robot::Autonomous() {
  */
 void Robot::OperatorControl() {
   //Drive system variables
-  m_driveSystem->moveCtrl = RightDriveJoystick.GetYChannel();
-  m_driveSystem->shiftCtrl = RightDriveJoystick.GetXChannel();
-  m_driveSystem->rotateCtrl = LeftDriveJoystick.GetXChannel();
+  m_driveSystem->moveCtrl = Axis_XBOX::XBOX_RIGHT_JOYSTICK_Y;
+  m_driveSystem->shiftCtrl = Axis_XBOX::XBOX_RIGHT_JOYSTICK_X;
+  m_driveSystem->rotateCtrl = Axis_XBOX::XBOX_LEFT_JOYSTICK_X;
   m_driveSystem->multiMove = false;
   m_driveSystem->multiShift = false;
   m_driveSystem->multiRotate = false;
 
   //Intake system variables
-  m_intakeSystem->moveCtrl = FlightJoystick.GetYChannel();
-  m_intakeSystem->multiMove = false;
-  m_intakeSystem->multiRotate = false;
-  m_intakeSystem->rotateEnable = false;
-  m_intakeSystem->reverseDrive = -1;
+  //m_intakeSystem->moveCtrl = FlightJoystick.GetYChannel();
+  //m_intakeSystem->multiMove = false;
+  //m_intakeSystem->multiRotate = false;
+  //m_intakeSystem->rotateEnable = false;
+  //m_intakeSystem->reverseDrive = -1;
 
   while (IsOperatorControl() && IsEnabled())
   {
@@ -130,14 +130,14 @@ void Robot::OperatorControl() {
       halfSpeed = false;
     }
 
-    if (RightButtonHub.GetRawButton(Generic_Controller_Right::SWITCH_X))
+    /*if (RightButtonHub.GetRawButton(Generic_Controller_Right::SWITCH_X))
     {
       m_intakeSystem->arcadeDrive();
     }
     else
     {
       m_intakeSystem->stop();
-    }
+    }*/
 
     m_driveSystem->mecanumDrive();
 

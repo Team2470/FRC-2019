@@ -22,8 +22,8 @@
 #include <frc/Preferences.h>
 
 //OUR INCLUDES//
-#include "channel_helper.h"
-#include "controller_helper.h"
+#include "channel_helper.hpp"
+#include "controller_helper.hpp"
 #include "mecanum_driver_helper.hpp"
 #include "arcade_driver_helper.hpp"
 #include "tank_driver_helper.hpp"
@@ -57,11 +57,11 @@ class Robot : public frc::SampleRobot {
   frc::PowerDistributionPanel* pdp = new frc::PowerDistributionPanel();
 
   //Our joysticks (includes the xbox and logitech controllers, the arcadee joysticks, and the button hubs)
-  //frc::Joystick XboxController { Channel_Controller::XBOX_CONTROLLER };
-	//frc::Joystick LogitechController { Channel_Controller::LOGITECH_CONTROLLER };
+  frc::Joystick XboxController { Channel_Controller::XBOX_CONTROLLER };
+	frc::Joystick LogitechController { Channel_Controller::LOGITECH_CONTROLLER };
   frc::Joystick LeftDriveJoystick { Channel_Controller::LEFT_DRIVE_JOYSTICK };
   frc::Joystick RightDriveJoystick { Channel_Controller::RIGHT_DRIVE_JOYSTICK };
-	frc::Joystick FlightJoystick { Channel_Controller::FLIGHT_JOYSTICK };
+	//frc::Joystick FlightJoystick { Channel_Controller::FLIGHT_JOYSTICK };
 	frc::Joystick LeftButtonHub { Channel_Controller::LEFT_BUTTON_HUB };
 	frc::Joystick RightButtonHub { Channel_Controller::RIGHT_BUTTON_HUB };
 
@@ -76,8 +76,8 @@ class Robot : public frc::SampleRobot {
   frc::Spark* m_placeholderNotor = new frc::Spark(Channel_PWM::PLACEHOLDER_MOTOR);
 
   //Our BjorgDrive systems for driving the robot, the function takes in four motors and three joysticks from above
-  BjorgMecanumDrive* m_driveSystem = new BjorgMecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor, &RightDriveJoystick, &RightDriveJoystick, &LeftDriveJoystick);
-  BjorgArcadeDrive* m_intakeSystem = new BjorgArcadeDrive(m_intakeMotor, m_placeholderNotor, &FlightJoystick, &FlightJoystick);
+  BjorgMecanumDrive* m_driveSystem = new BjorgMecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor, &XboxController, &XboxController, &XboxController);
+  //BjorgArcadeDrive* m_intakeSystem = new BjorgArcadeDrive(m_intakeMotor, m_placeholderNotor, &FlightJoystick, &FlightJoystick);
   //BjorgArcadeDrive* m_arcdriveSystem = new BjorgArcadeDrive(m_leftMotor, m_rightMotor, &XboxController, &XboxController);
 
   //Our generic motors, take the PWM channel and the motor type
@@ -85,7 +85,7 @@ class Robot : public frc::SampleRobot {
 
   Compressor* m_compressor = new Compressor(0);
 
-  Preferences *prefs;
+  //Preferences *prefs;
 
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";

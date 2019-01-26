@@ -4,7 +4,7 @@
 		<location x="790" y="247"/>
 	</static-widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
-		<location x="1200" y="313"/>
+		<location x="1150" y="313"/>
 		<property name="Text" value="Rotation Joystick Valye"/>
 	</static-widget>
 	<widget field="RotateJoy" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.SimpleDial">
@@ -16,7 +16,7 @@
 		<property name="Tick Interval" value="0.1"/>
 	</widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
-		<location x="1200" y="158"/>
+		<location x="1150" y="158"/>
 		<property name="Text" value="Shift Joystick Value"/>
 	</static-widget>
 	<widget field="ShiftJoy" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.SimpleDial">
@@ -28,7 +28,7 @@
 		<property name="Tick Interval" value="0.1"/>
 	</widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
-		<location x="1200" y="11"/>
+		<location x="1150" y="11"/>
 		<property name="Text" value="Movement Joystick Value"/>
 	</static-widget>
 	<widget field="MoveJoy" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.SimpleDial">
