@@ -43,7 +43,7 @@ BjorgArcadeDrive::BjorgArcadeDrive(frc::Spark *m_leftMotor, frc::Spark *m_rightM
     driveControllerMovement = controllerMovement;
     driveControllerRotate = controllerRotate;
     m_robotDrive->SetExpiration(0.1);
-};
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -142,7 +142,7 @@ void BjorgArcadeDrive::setMovement()
     {
         movementValue = driveControllerMovement->GetRawAxis(moveCtrl);
     }
-};
+}
 
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    setRotate
@@ -158,4 +158,4 @@ void BjorgArcadeDrive::setRotate(bool rotateEn)
     {
         rotationValue = (rotateEn ? driveControllerRotate->GetRawAxis(rotateCtrl) : 0);
     }
-};
+}

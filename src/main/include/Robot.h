@@ -16,8 +16,9 @@
 #include <frc/SampleRobot.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/smartdashboard/SendableChooser.h>
+#include <frc/SmartDashboard/SmartDashboard.h>
 #include <frc/PowerDistributionPanel.h>
-#include <Compressor.h>
+#include <frc/Compressor.h>
 
 //OUR INCLUDES//
 #include "channel_helper.h"
@@ -68,22 +69,28 @@ class Robot : public frc::SampleRobot {
 	frc::Spark* m_backleftMotor = new frc::Spark(Channel_PWM::BACK_LEFT_MOTOR);
 	frc::Spark* m_frontrightMotor = new frc::Spark(Channel_PWM::FRONT_RIGHT_MOTOR);
   frc::Spark* m_backrightMotor = new frc::Spark(Channel_PWM::BACK_RIGHT_MOTOR);
-	frc::Spark* m_cargoMotor = new frc::Spark(Channel_PWM::CARGO_MOTOR);
+	frc::Spark* m_intakeMotor = new frc::Spark(Channel_PWM::INTAKE_MOTOR);
   //frc::Spark* m_leftMotor = new frc::Spark(Channel_PWM::LEFT_MOTOR);
   //frc::Spark* m_rightMotor = new frc::Spark(Channel_PWM::RIGHT_MOTOR);
   frc::Spark* m_placeholderNotor = new frc::Spark(Channel_PWM::PLACEHOLDER_MOTOR);
 
   //Our BjorgDrive systems for driving the robot, the function takes in four motors and three joysticks from above
   BjorgMecanumDrive* m_driveSystem = new BjorgMecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor, &RightDriveJoystick, &RightDriveJoystick, &LeftDriveJoystick);
-  BjorgArcadeDrive* m_cargoSystem = new BjorgArcadeDrive(m_cargoMotor, m_placeholderNotor, &FlightJoystick, &FlightJoystick);
+  BjorgArcadeDrive* m_intakeSystem = new BjorgArcadeDrive(m_intakeMotor, m_placeholderNotor, &FlightJoystick, &FlightJoystick);
   //BjorgArcadeDrive* m_arcdriveSystem = new BjorgArcadeDrive(m_leftMotor, m_rightMotor, &XboxController, &XboxController);
 
   //Our generic motors, take the PWM channel and the motor type
 	//Motor* m_otherMotor = new Motor(Channel_PWM::LIFT_MOTOR, Motor_Type::SPARK);
+
+  Compressor* m_compressor = new Compressor(0);
+
 
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
 
   double inputVoltage;
+  double totalCurrent;
+  double temp;
+  double compressorCurrent;
 };

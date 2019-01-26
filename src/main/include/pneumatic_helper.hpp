@@ -35,7 +35,6 @@
 /******************************************************************************
  * Variables
  *****************************************************************************/
-bool loopControl = false;
 
 /******************************************************************************
  * CLASS      : SingleSolenoid
@@ -199,7 +198,7 @@ public:
      *
      * RETURNS    : Void
      *************************************************************************/
-	bool toggleCompressor();
+	void toggleCompressor();
 
 	/**************************************************************************
 	 * FUNCTION   : activate
@@ -282,6 +281,8 @@ public:
 	 *************************************************************************/
 	void clearStickyFaults();
 private:
+	bool loopControl = false;
+
 	bool currentState = false;
 	bool currentHighFault = false;//GetCompressorCurrentTooHighFault
 	bool currentHighFaultSticky = false;//GetCompressorCurrentTooHighStickyFault

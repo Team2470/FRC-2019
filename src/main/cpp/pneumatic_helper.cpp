@@ -167,7 +167,7 @@ void Compressor::deactivate()
 void Compressor::lowPressureActivate(bool state)
 {
 	m_compressor->SetClosedLoopControl(state);
-	loopControl = state;//GetClosedLoopControl
+	//loopControl = state;//GetClosedLoopControl
 }
 
 /*-----------------------------------------------------------------------------
@@ -221,5 +221,11 @@ void Compressor::testFaults()
 void Compressor::clearStickyFaults()
 {
 	m_compressor->ClearAllPCMStickyFaults();
-	m_compressor->testFaults();
+
+	currentHighFault = m_compressor->GetCompressorCurrentTooHighFault();
+	currentHighFaultSticky = m_compressor->GetCompressorCurrentTooHighStickyFault();
+	notConnectedFault = m_compressor->GetCompressorNotConnectedFault();
+	notConnectedFaultSticky = m_compressor->GetCompressorNotConnectedStickyFault();
+	shortCircuitFault = m_compressor->GetCompressorShortedFault();
+	shortCircuitFaultSticky = m_compressor->GetCompressorShortedStickyFault();
 }

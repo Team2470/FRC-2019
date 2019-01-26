@@ -41,7 +41,7 @@ BjorgMecanumDrive::BjorgMecanumDrive(frc::Spark *m_frontleftMotor, frc::Spark *m
     driveControllerShift = shiftController;
     driveControllerRotate = rotateController;
     m_robotDrive->SetExpiration(0.1);
-};
+}
 
 
 /*-----------------------------------------------------------------------------
@@ -156,7 +156,7 @@ void BjorgMecanumDrive::setMovement()
     {
         rotateValue = driveControllerRotate->GetRawAxis(rotateCtrl);
     }
-};
+}
 
 /*-----------------------------------------------------------------------------
  * FUNCTION NAME:    setRotate
@@ -172,4 +172,4 @@ void BjorgMecanumDrive::setRotate(bool rotateEn)
     {
         //rotationValue = (rotateEn ? driveController2->GetRawAxis(rotateCtrl) : 0);
     }
-};
+}

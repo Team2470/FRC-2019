@@ -83,16 +83,22 @@ void Robot::OperatorControl() {
   m_driveSystem->multiShift = false;
   m_driveSystem->multiRotate = false;
 
-  //Cargo system variables
-  m_cargoSystem->moveCtrl = FlightJoystick.GetYChannel();
-  m_cargoSystem->multiMove = false;
-  m_cargoSystem->multiRotate = false;
-  m_cargoSystem->rotateEnable = false;
-  m_cargoSystem->reverseDrive = -1;
+  //Intake system variables
+  m_intakeSystem->moveCtrl = FlightJoystick.GetYChannel();
+  m_intakeSystem->multiMove = false;
+  m_intakeSystem->multiRotate = false;
+  m_intakeSystem->rotateEnable = false;
+  m_intakeSystem->reverseDrive = -1;
 
   while (IsOperatorControl() && IsEnabled())
   {
-    inputVoltage = pdp->getVoltage();
+    //PDP
+    inputVoltage = pdp->GetVoltage();
+    totalCurrent = pdp->GetTotalCurrent();
+    temp = pdp->GetTemperature();
+
+    //Compressor
+    compressorCurrent = m_compressor->getCurrent();
 
     if (LeftButtonHub.GetRawButton(Generic_Controller_Left::SWITCH_A))
     {
@@ -109,15 +115,24 @@ void Robot::OperatorControl() {
 
     if (RightButtonHub.GetRawButton(Generic_Controller_Right::SWITCH_X))
     {
-      m_cargoSystem->arcadeDrive();
+      m_intakeSystem->arcadeDrive();
     }
     else
     {
-      m_cargoSystem->stop();
+      m_intakeSystem->stop();
     }
 
     m_driveSystem->mecanumDrive();
 
+
+    //Driver Station//
+    //PDP stuff
+    frc::SmartDashboard::PutNumber("InputVoltage", inputVoltage);
+    frc::SmartDashboard::PutNumber("TotalCurrent", totalCurrent);
+    frc::SmartDashboard::PutNumber("Temperature", temp);
+
+    //Compresor stuff
+    frc::SmartDashboard::PutNumber("CompressorCurrent", compressorCurrent);
     frc::Wait(0.005);
   }
 }

@@ -1,0 +1,21 @@
+<xml version="1.0">
+<dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.MjpgStreamViewerImpl">
+		<location x="382" y="144"/>
+		<property name="MJPG Server URL" value="192.168.0.90/mjpg/video.mjpg"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="13" y="8"/>
+		<width>64</width>
+		<height>18</height>
+		<property name="Text" value="Connection:"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+		<location x="11" y="25"/>
+		<width>63</width>
+		<height>43</height>
+	</static-widget>
+</dashboard>
+<live-window>
+</live-window>
+</xml>
