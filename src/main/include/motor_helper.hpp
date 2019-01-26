@@ -1,31 +1,7 @@
-//*****************************************************************************
-// Filename:            motor_helper.hpp
-//
-// Revision Record:
-//   Author             Date       Description
-//   ------------------ ---------- --------------------------------------------
-//   Chris Struck       Jan. 2018  Initial design.
-//
-// Description:
-//    This class operates a PWM Motor such as the following drivers:
-//        Spark, Talon, Victor, VictorSP
-//    The class has the ability to drive the motor cw and ccw as well as
-//        accelerating/decelerating and reading the current speed.
-// 
-// Dependencies:
-//    None
-//*****************************************************************************
-
 #ifndef MOTOR_HELPER_HPP
 #define MOTOR_HELPER_HPP
 
-/******************************************************************************
- * Include Files
- *****************************************************************************/
-// System Includes //
 #include <frc/Timer.h>
-
-// FIRST Includes //
 #include <frc/PWMSpeedController.h>
 #include <frc/Drive/DifferentialDrive.h>
 #include <frc/Spark.h>
@@ -33,13 +9,10 @@
 #include <frc/VictorSP.h>
 #include <frc/Talon.h>
 
-/******************************************************************************
- * Constants
- *****************************************************************************/
-
-/******************************************************************************
- * Types
- *****************************************************************************/
+/**
+ * @enum 	Motor_Type
+ * @description Contains all the types of motors.
+ */
 enum Motor_Type
 {
 	TALON,
@@ -48,120 +21,105 @@ enum Motor_Type
 	SPARK
 };
 
+/**
+ * @enum	Behavior_Type
+ * @description Describes the two behaviors for motors.
+ */
 enum Behavior_Type
 {
 	Maintain = true,
 	Stop = false
 };
 
+/**
+ * @enum	Velocity_State
+ * @description Describes the two states for motors.
+ */
 enum Velocity_State
 {
 	Constant = 1,
 	Accelerate = 2
 };
 
-/******************************************************************************
- * CLASS      : Motor
- *
- * DESCRIPTION: This class is to operate a PWM Motor.
- *
- * RETURNS    : None
- *****************************************************************************/
+/**
+ * @class
+ * @description This class is used to operate a single motor, acceleration, deceleration, velocity
+ *		control, etc. It also contains a number of querying capabilities. It supports motors
+ *		of the types TALON, VICTOR, VICTOR_SP, and SPARK.
+ */
 class Motor
 {
 public:
-
-	/******************************************************************************
-	 * Variables
-	 *****************************************************************************/
 	Velocity_State motorState;
 
-    /**************************************************************************
-     * FUNCTION   : Motor
-     *
-     * DESCRIPTION: Constructs the PWM Motor object with the specified 
-     *              <motorChannel> and <motorType>.
-     *
-     * RETURNS    : A PWM SpeedController object
-     *************************************************************************/
+	/**
+	 * @constructor Motor
+	 * @description Constructs a Motor object.
+	 * @param	motorChannel -- The channel of the motor.
+	 * @param	motorType    -- The type of motor.
+	 */
 	Motor(int motorChannel, Motor_Type motorType);
     
-    /**************************************************************************
-     * FUNCTION   : GradualRotation
-     *
-     * DESCRIPTION: Changes the speed from the current speed to <motorMaxSpeed>
-     *              at a constant rate over <speedIncreaseDuration> seconds.
-     *              Once reaching the <motorMaxSpeed> the motor will continue
-     *              at <newBehavior>.
-     *              ResetAcceleration should be run prior to GradualRotation.
-     *
-     * RETURNS    : Void
-     *************************************************************************/	
-	void GradualRotation(double motorMaxSpeed,
-					     double speedIncreaseDuration,
-						 Behavior_Type newBehavior = Maintain);
-    
-    /**************************************************************************
-     * FUNCTION   : InstantaneousRotation
-     *
-     * DESCRIPTION: Sets the speed to <motorSpeed>.
-     *
-     * RETURNS    : Void
-     *************************************************************************/	
+	/**
+	 * @function    GradualRotation
+	 * @description Changes the speed of a motor over a specified time interval, changing the
+	 		motor to a new specified behavior when the new speed is reached.
+	 * @param       motorMaxSpeed 	      -- The new speed of the motor.
+	 * @param	speedIncreaseDuration -- The duration of time over which to increase the speed.
+	 * @param 	newBehavior	      -- The new behavior.
+	 */
+	void GradualRotation(
+		double motorMaxSpeed,
+		double speedIncreaseDuration,
+		Behavior_Type newBehavior = Maintain
+	);
+	
+	/**
+	 * @function	InstantaneousRotation
+	 * @description Instantly set the motor to a specified speed.
+	 * @param	motorSpeed -- The new speed of the motor.
+	 */
 	void InstantaneousRotation(double motorSpeed);
     
-    /**************************************************************************
-     * FUNCTION   : InstantaneousStop
-     *
-     * DESCRIPTION: Sets the speed to 0.0 (stop).
-     *
-     * RETURNS    : Void
-     *************************************************************************/	
+	/**
+	 * @function	InstantaneousStop
+	 * @description Instantly set the speed of the motor to zero.
+	 */
 	void InstantaneousStop();
     
-    /**************************************************************************
-     * FUNCTION   : GetSpeed
-     *
-     * DESCRIPTION: Returns the current speed of the motor.
-     *
-     * RETURNS    : Speed as double (-1.0 to 1.0)
-     *************************************************************************/	
+	/**
+	 * @function    GetSpeed
+	 * @description Obtain the current speed of the motor, in the range [-1.0, 1.0].
+	 * @returns     The speed of the motor as a double.
+	 */
 	double GetSpeed();
 
-    /**************************************************************************
-     * FUNCTION   : MaintainSpeed
-     *
-     * DESCRIPTION: Maintains the current speed of the motor.
-     *
-     * RETURNS    : Speed as double (-1.0 to 1.0)
-     *************************************************************************/
+	/**
+	 * @function    MaintainSpeed
+	 * @description Maintain the current speed of the motor.
+	 */
 	void MaintainSpeed();
 
-	/**************************************************************************
-	 * FUNCTION   : ResetAccelerate
-	 *
-	 * DESCRIPTION: Reset class after accelerating.
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function    ResetAccelerate
+	 * @description Reset class after accelerating.
+	 * @param       forceReset -- Whether or not to force the reset.
+	 */
 	void ResetAccelerate(bool forceReset = false);
 
-	/**************************************************************************
-	 * FUNCTION   : Brake
-	 *
-	 * DESCRIPTION: Holds the motor in place
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function    Brake
+	 * @description Hold the motor in place -- a brake.
+	 */
 	void Brake();
 
-	/**************************************************************************
-	 * FUNCTION   : SlowSpeed
-	 *
-	 * DESCRIPTION: Moves motor with an offset
-	 *
-	 * RETURNS    : Void
-	 *************************************************************************/
+	/**
+	 * @function    SlowSpeed
+	 * @description Accelerate or decelerate the motor over a specific period.
+	 * @param	period 	    -- The period over which to perform the speed change.
+	 * @param	changeSpeed -- The change in speed to perform.
+	 * @param	multiplier  -- Increases or decreases the period.
+	 */
 	void SlowSpeed(double period, double changeSpeed, double multiplier = 1);
 
 private:
@@ -172,7 +130,6 @@ private:
 	frc::Spark* motorSpark;
 	frc::PWMSpeedController* pwmMotor;
 	frc::Timer clock;
-
 	bool gradual_MaxSpeedReached = false;
 	bool firstRun;
 	int testSpeed = 1;
@@ -181,31 +138,23 @@ private:
 	double gradual_RoundedSpeed = 0;
 	double speedIncreaseRate = 0;
 	double brakeMotorSpeed = 0.15;
-
 	double lastTime = 0;
 	double currentTime = 0;
 	double brakeTimeLast = 0;
 	double brakeTimeCurrent = 0;
 	double slowTimeLast = 0;
 	double slowTimeCurrent = 0;
-
 	double timeOn = 0;
 	double timeOff = 0;
 	bool slowStatus = false;
-
 	Behavior_Type accelBehavior;
-
-
-    /**************************************************************************
-     * FUNCTION   : AccelerateMotor
-     *
-     * DESCRIPTION: Accelerates the motor at a constant rate based on
-     *              speedIncreaseRate.
-     *
-     * RETURNS    : Void
-     *************************************************************************/	
+	
+	/**
+	 * @function    AccelerateMotor
+	 * @description Accelerate the motor at a constant rate.
+	 */
 	void AccelerateMotor();
 
 };
 
-#endif /* MOTOR_HELPER_HPP */
+#endif
