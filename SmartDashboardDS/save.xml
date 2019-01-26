@@ -1,0 +1,91 @@
+<xml version="1.0">
+<dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.RobotPreferences">
+		<location x="790" y="247"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1200" y="313"/>
+		<property name="Text" value="Rotation Joystick Valye"/>
+	</static-widget>
+	<widget field="RotateJoy" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.SimpleDial">
+		<location x="1100" y="331"/>
+		<width>200</width>
+		<height>128</height>
+		<property name="Upper Limit" value="1.0"/>
+		<property name="Lower Limit" value="-1.0"/>
+		<property name="Tick Interval" value="0.1"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1200" y="158"/>
+		<property name="Text" value="Shift Joystick Value"/>
+	</static-widget>
+	<widget field="ShiftJoy" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.SimpleDial">
+		<location x="1100" y="173"/>
+		<width>200</width>
+		<height>128</height>
+		<property name="Upper Limit" value="1.0"/>
+		<property name="Lower Limit" value="-1.0"/>
+		<property name="Tick Interval" value="0.1"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1200" y="11"/>
+		<property name="Text" value="Movement Joystick Value"/>
+	</static-widget>
+	<widget field="MoveJoy" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.SimpleDial">
+		<location x="1100" y="30"/>
+		<width>200</width>
+		<height>128</height>
+		<property name="Upper Limit" value="1.0"/>
+		<property name="Lower Limit" value="-1.0"/>
+		<property name="Tick Interval" value="0.1"/>
+	</widget>
+	<widget field="StopDrive" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="1000" y="70"/>
+		<width>64</width>
+		<height>16</height>
+	</widget>
+	<widget field="HalfSpeed" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="1000" y="50"/>
+		<width>64</width>
+		<height>16</height>
+	</widget>
+	<widget field="Temperature" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="7" y="180"/>
+	</widget>
+	<widget field="CompressorCurrent" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="7" y="240"/>
+	</widget>
+	<widget field="TotalPower" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="7" y="220"/>
+	</widget>
+	<widget field="TotalEnergy" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="7" y="200"/>
+	</widget>
+	<widget field="TotalCurrent" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="7" y="160"/>
+	</widget>
+	<widget field="InputVoltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="7" y="140"/>
+	</widget>
+	<widget field="Auto Modes" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="0" y="69"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.MjpgStreamViewerImpl">
+		<location x="382" y="144"/>
+		<property name="MJPG Server URL" value="192.168.0.90/mjpg/video.mjpg"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="13" y="8"/>
+		<width>64</width>
+		<height>18</height>
+		<property name="Text" value="Connection:"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+		<location x="11" y="25"/>
+		<width>63</width>
+		<height>43</height>
+	</static-widget>
+</dashboard>
+<live-window>
+</live-window>
+</xml>
