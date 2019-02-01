@@ -106,12 +106,22 @@ void Robot::OperatorControl() {
 
     //Compressor
     compressorCurrent = m_compressor->getCurrent();
+    compressorEnabled = m_compressor->getVal();
 
     //Drive
     moveJoyVal = RightDriveJoystick.GetY();
     shiftJoyVal = RightDriveJoystick.GetX();
     rotateJoyVal = LeftDriveJoystick.GetX();
 
+    currentFrontLeft = pdp->GetCurrent(Channel_PDP::FRONT_LEFT_MOTOR);
+    currentBackLeft = pdp->GetCurrent(Channel_PDP::BACK_LEFT_MOTOR);
+    currentFrontRight = pdp->GetCurrent(Channel_PDP::FRONT_RIGHT_MOTOR);
+    currentBackRight = pdp->GetCurrent(Channel_PDP::BACK_RIGHT_MOTOR);
+    currentIntakeLeft = pdp->GetCurrent(Channel_PDP::INTAKE_LEFT_MOTOR);
+    currentIntakeRight = pdp->GetCurrent(Channel_PDP::INTAKE_RIGHT_MOTOR);
+
+    //Camera
+    currentLimelight = pdp->GetCurrent(Channel_PDP::LIMELIGHT_CAMERA);
 
     if (LeftButtonHub.GetRawButton(Generic_Controller_Left::SWITCH_A))
     {
@@ -160,9 +170,17 @@ void Robot::OperatorControl() {
     frc::SmartDashboard::PutNumber("MoveJoy", moveJoyVal);
     frc::SmartDashboard::PutNumber("ShiftJoy", shiftJoyVal);
     frc::SmartDashboard::PutNumber("RotateJoy", rotateJoyVal);
-    frc::SmartDashboard::PutNumber("Move Motor Current", moveMotorCurrent);
-    frc::SmartDashboard::PutNumber("Shift Motor Current", shiftMotorCurrent);
-    frc::SmartDashboard::PutNumber("Rotate Motor Current", rotateMotorCurrent);
+
+    frc::SmartDashboard::PutNumber("Front Left Motor Current", currentFrontLeft);
+    frc::SmartDashboard::PutNumber("Back Left Motor Current", currentBackLeft);
+    frc::SmartDashboard::PutNumber("Front Right Motor Current", currentFrontRight);
+    frc::SmartDashboard::PutNumber("Back Right Motor Current", currentBackRight);
+    frc::SmartDashboard::PutNumber("Intake Left Motor Current", currentIntakeLeft);
+    frc::SmartDashboard::PutNumber("Intake Right Motor Current", currentIntakeRight;
+
+
+    //Camera Stuff
+    frc::SmartDashboard::PutNumber("Limelight Camera Current", currentLimelight);
     frc::Wait(0.005);
   }
 }
