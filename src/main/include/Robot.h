@@ -108,7 +108,13 @@ class Robot : public frc::SampleRobot {
   double moveJoyVal = 0;
   double shiftJoyVal = 0;
   double rotateJoyVal = 0;
-  double moveMotorCurrent = -1;
-  double shiftMotorCurrent = -1;
-  double rotateMotorCurrent = -1;
+  double currentFrontLeft = -1;
+  double currentBackLeft = -1;
+  double currentFrontRight = -1;
+  double currentBackRight = -1;
+  double currentIntakeLeft = -1;
+  double currentIntakeRight = -1;
+
+  //Camera
+  double currentLimelight = -1;
 };
