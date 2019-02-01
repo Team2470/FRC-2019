@@ -2,10 +2,23 @@
 #define LIMELIGHT_CAMERA_HELPER_HPP
 
 #include <memory>
-#include <memory.h>
 #include <frc/smartdashboard/Smartdashboard.h>
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
+
+enum LimelightLedMode
+{
+    CURRENT_PIPELINE,
+    FORCE_OFF,
+    FORCE_BLINK,
+    FORCE_ON
+};
+
+enum LimelightCameraMode
+{
+    VISION_PROCESSOR,
+    DRIVER_CAMERA
+};
 
 /**
  * @class       VisionProcessing
@@ -22,12 +35,36 @@ public:
     VisionProcessing();
 
     /**
-     * @function
-     * @description Update the set of Limelight camera properties used.
+     * @function    UpdateLimelightProperties
+     * @description Update the set of Limelight camera properties used. This should be called
+     *              at a continuous rate to ensure accurate and up-to-date values.
      * @notes       The properties updated are:
      *                  tv, tx, ty, ta, ts, thor, tvert
      */
     void UpdateLimelightProperties();
+
+    /**
+     * @function    SetLedMode
+     * @description Set the led mode of the Limelight.
+     * @param       mode -- The mode to set the led to.
+     */
+    void SetLedMode(LimelightLedMode mode);
+
+    /**
+     * @function    SetCameraMode
+     * @description Set the camera mode of the Limelight.
+     * @param       mode -- The mode to set the camera.
+     */
+    void SetCameraMode(LimelightCameraMode mode);
+
+    /**
+     * @function    SetPipeline
+     * @description Set the pipeline of the camera.
+     * @param       pipeline -- The pipeline, 0-9.
+     */
+    void SetPipeline(short pipeline);
+
+
 
 private:
     std::shared_ptr<NetworkTable> networkTable;

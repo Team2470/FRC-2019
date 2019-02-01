@@ -15,3 +15,18 @@ void VisionProcessing::UpdateLimelightProperties()
     this->limelightBoundingBoxWidth_THOR = this->networkTable->GetNumber("thor", 0.0);
     this->limelightBoundingBoxHeight_TVERT = this->networkTable->GetNumber("tvert", 0.0);
 }
+
+void VisionProcessing::SetLedMode(LimelightLedMode mode)
+{
+    this->networkTable->PutNumber("ledMode", (int)mode);
+}
+
+void VisionProcessing::SetCameraMode(LimelightCameraMode mode)
+{
+    this->networkTable->PutNumber("camMode", (int)mode);
+}
+
+void VisionProcessing::SetPipeline(short pipeline)
+{
+    this->networkTable->PutNumber("pipeline", pipeline);
+}
