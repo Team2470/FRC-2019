@@ -92,14 +92,15 @@ class Robot : public frc::SampleRobot {
   const std::string kAutoNameCustom = "My Auto";
 
   //PDP
-  double inputVoltage;
-  double totalCurrent;
-  double temp;
-  double totalEnergy;
-  double totalPower;
+  double inputVoltage = -1;
+  double totalCurrent = -1;
+  double temp = -1;
+  double totalEnergy = -1;
+  double totalPower = -1;
 
   //Compressor
-  double compressorCurrent;
+  double compressorCurrent = -1;
+  bool compressorEnabled = false;
 
   //Driving
   bool halfSpeed = false;
@@ -107,4 +108,7 @@ class Robot : public frc::SampleRobot {
   double moveJoyVal = 0;
   double shiftJoyVal = 0;
   double rotateJoyVal = 0;
+  double moveMotorCurrent = -1;
+  double shiftMotorCurrent = -1;
+  double rotateMotorCurrent = -1;
 };

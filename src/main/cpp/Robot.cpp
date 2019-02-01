@@ -152,6 +152,7 @@ void Robot::OperatorControl() {
 
     //Compressor stuff
     frc::SmartDashboard::PutNumber("CompressorCurrent", compressorCurrent);
+    frc::SmartDashboard::PutBoolean("Compressor Enabled", compressorEnabled);
 
     //Drive stuff
     frc::SmartDashboard::PutBoolean("HalfSpeed", halfSpeed);
@@ -159,6 +160,9 @@ void Robot::OperatorControl() {
     frc::SmartDashboard::PutNumber("MoveJoy", moveJoyVal);
     frc::SmartDashboard::PutNumber("ShiftJoy", shiftJoyVal);
     frc::SmartDashboard::PutNumber("RotateJoy", rotateJoyVal);
+    frc::SmartDashboard::PutNumber("Move Motor Current", moveMotorCurrent);
+    frc::SmartDashboard::PutNumber("Shift Motor Current", shiftMotorCurrent);
+    frc::SmartDashboard::PutNumber("Rotate Motor Current", rotateMotorCurrent);
     frc::Wait(0.005);
   }
 }
