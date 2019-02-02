@@ -113,15 +113,15 @@ void Robot::OperatorControl() {
     shiftJoyVal = RightDriveJoystick.GetX();
     rotateJoyVal = LeftDriveJoystick.GetX();
 
-    currentFrontLeft = pdp->GetCurrent(Channel_PDP::FRONT_LEFT_MOTOR);
-    currentBackLeft = pdp->GetCurrent(Channel_PDP::BACK_LEFT_MOTOR);
-    currentFrontRight = pdp->GetCurrent(Channel_PDP::FRONT_RIGHT_MOTOR);
-    currentBackRight = pdp->GetCurrent(Channel_PDP::BACK_RIGHT_MOTOR);
-    currentIntakeLeft = pdp->GetCurrent(Channel_PDP::INTAKE_LEFT_MOTOR);
-    currentIntakeRight = pdp->GetCurrent(Channel_PDP::INTAKE_RIGHT_MOTOR);
+    currentFrontLeft = pdp->GetCurrent(Channel_PDP::PDP_FRONT_LEFT_MOTOR);
+    currentBackLeft = pdp->GetCurrent(Channel_PDP::PDP_BACK_LEFT_MOTOR);
+    currentFrontRight = pdp->GetCurrent(Channel_PDP::PDP_FRONT_RIGHT_MOTOR);
+    currentBackRight = pdp->GetCurrent(Channel_PDP::PDP_BACK_RIGHT_MOTOR);
+    currentIntakeLeft = pdp->GetCurrent(Channel_PDP::PDP_INTAKE_LEFT_MOTOR);
+    currentIntakeRight = pdp->GetCurrent(Channel_PDP::PDP_INTAKE_RIGHT_MOTOR);
 
     //Camera
-    currentLimelight = pdp->GetCurrent(Channel_PDP::LIMELIGHT_CAMERA);
+    currentLimelight = pdp->GetCurrent(Channel_PDP::PDP_LIMELIGHT_CAMERA);
 
     if (LeftButtonHub.GetRawButton(Generic_Controller_Left::SWITCH_A))
     {
