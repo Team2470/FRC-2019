@@ -7,40 +7,40 @@
 #include "mecanum_driver_helper.hpp"
 
 BjorgMecanumDrive::BjorgMecanumDrive(
-    frc::Spark* m_frontleftMotor, 
-    frc::Spark* m_backleftMotor, 
-    frc::Spark* m_frontrightMotor, 
-    frc::Spark* m_backrightMotor,
+    frc::Spark* frontLeftMotor, 
+    frc::Spark* backLeftMotor, 
+    frc::Spark* frontRightMotor, 
+    frc::Spark* backRightMotor,
     frc::Joystick* moveController, 
     frc::Joystick* shiftController, 
     frc::Joystick* rotateController
 )
 {
-    m_robotDrive = new frc::MecanumDrive 
+    robotDrive = new frc::MecanumDrive 
     { 
-        *m_frontleftMotor, 
-        *m_backleftMotor, 
-        *m_frontrightMotor, 
-        *m_backrightMotor 
+        *frontLeftMotor, 
+        *backLeftMotor, 
+        *frontRightMotor, 
+        *backRightMotor 
     };
     
     driveControllerMove = moveController;
     driveControllerShift = shiftController;
     driveControllerRotate = rotateController;
-    m_robotDrive->SetExpiration(0.1);
+    robotDrive->SetExpiration(0.1);
 }
 
 void BjorgMecanumDrive::mecanumDrive()
 {
-    m_robotDrive->SetSafetyEnabled(true);
+    robotDrive->SetSafetyEnabled(true);
     setMovement();
-    m_robotDrive->DriveCartesian(moveMultiplier * movementValue, shiftMultiplier * shiftValue, rotateMultiplier * rotateValue);
+    robotDrive->DriveCartesian(moveMultiplier * movementValue, shiftMultiplier * shiftValue, rotateMultiplier * rotateValue);
 }
 
 void BjorgMecanumDrive::mecanumDrive(double movement, double shift, double rotate)
 {
-    m_robotDrive->SetSafetyEnabled(true);
-    m_robotDrive->DriveCartesian(movement, shift, rotate);
+    robotDrive->SetSafetyEnabled(true);
+    robotDrive->DriveCartesian(movement, shift, rotate);
 }
 
 void BjorgMecanumDrive::mecanumDriveAutoAlign()
@@ -97,10 +97,12 @@ void BjorgMecanumDrive::setRotate(bool rotateEn)
 {
     if(multiRotate)
     {
-        //twoBtnRotate();
+        twoBtnRotate();
     }
     else
     {
-        //rotationValue = (rotateEn ? driveController2->GetRawAxis(rotateCtrl) : 0);
+        rotateValue = rotateEn 
+            ? driveControllerRotate->GetRawAxis(rotateCtrl) 
+            : 0;
     }
 }

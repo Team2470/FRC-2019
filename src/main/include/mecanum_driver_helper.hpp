@@ -41,19 +41,19 @@ public:
 	/**
 	 * @constructor BjorgMecanumDrive
 	 * @description Construct the BjorgMecanumDrive.
-	 * @param		m_frontleftMotor  -- The front left motor of the mecanum drive.
-	 * @param		m_backleftMotor   -- The back left motor of the mecanum drive.
-	 * @param		m_frontrightMotor -- The front right motor of mecanum drive.
-	 * @param		m_backrightMotor  -- The back right motor of the mecanum drive.
+	 * @param		frontLeftMotor  -- The front left motor of the mecanum drive.
+	 * @param		backLeftMotor   -- The back left motor of the mecanum drive.
+	 * @param		frontRightMotor -- The front right motor of mecanum drive.
+	 * @param		backRightMotor  -- The back right motor of the mecanum drive.
 	 * @param		moveController    -- The joystick controlling forward-backward translational movement.
 	 * @param 		shiftController   -- The joystick controlling left-right translational movement.
 	 * @param		rotateController  -- The joystick controlling rotational movement.
 	 */
 	BjorgMecanumDrive(
-		frc::Spark* m_frontleftMotor, 
-		frc::Spark* m_backleftMotor, 
-		frc::Spark* m_frontrightMotor, 
-		frc::Spark* m_backrightMotor,
+		frc::Spark* frontLeftMotor, 
+		frc::Spark* backLeftMotor, 
+		frc::Spark* frontRightMotor, 
+		frc::Spark* backRightMotor,
     	frc::Joystick* moveController, 
 		frc::Joystick* shiftController, 
 		frc::Joystick* rotateController
@@ -105,7 +105,7 @@ private:
 	float movementValue = 0.0;
     float shiftValue = 0.0;
 	float rotateValue = 0.0;
-    frc::MecanumDrive* m_robotDrive;
+    frc::MecanumDrive* robotDrive;
 	frc::Joystick* driveControllerMove;
 	frc::Joystick* driveControllerShift;
     frc::Joystick* driveControllerRotate;

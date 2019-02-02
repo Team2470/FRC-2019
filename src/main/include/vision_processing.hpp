@@ -36,13 +36,13 @@ enum LimelightCameraMode
 class VisionProcessing
 {
 public:
-    bool limelightTargets_TV;
-    double limelightHorizontalOffset_TX;
-    double limelightVerticalOffset_TY;
-    double limelightTargetArea_TA;
-    double limelightSkew_TS;
-    double limelightBoundingBoxWidth_THOR;
-    double limelightBoundingBoxHeight_TVERT;
+    bool limelightTargetsTV;
+    double limelightHorizontalOffsetTX;
+    double limelightVerticalOffsetTY;
+    double limelightTargetAreaTA;
+    double limelightSkewTS;
+    double limelightBoundingBoxWidthTHOR;
+    double limelightBoundingBoxHeightTVERT;
 
     /**
      * @constructor VisionProcessing

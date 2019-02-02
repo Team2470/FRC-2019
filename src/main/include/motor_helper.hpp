@@ -123,6 +123,7 @@ public:
 	void slowSpeed(double period, double changeSpeed, double multiplier = 1);
 
 private:
+    BehaviorType accelBehavior;
 	MotorType motorFamily;
 	frc::Talon* motorTalon;
 	frc::Victor* motorVictor;
@@ -130,12 +131,13 @@ private:
 	frc::Spark* motorSpark;
 	frc::PWMSpeedController* pwmMotor;
 	frc::Timer clock;
-	bool gradual_MaxSpeedReached = false;
+
+	bool gradualMaxSpeedReached = false;
 	bool firstRun;
 	int testSpeed = 1;
-	double gradual_MaxSpeed = 0;
-	double gradual_CurrentSpeed = 0;
-	double gradual_RoundedSpeed = 0;
+	double gradualMaxSpeed = 0;
+	double gradualCurrentSpeed = 0;
+	double gradualRoundedSpeed = 0;
 	double speedIncreaseRate = 0;
 	double brakeMotorSpeed = 0.15;
 	double lastTime = 0;
@@ -147,7 +149,6 @@ private:
 	double timeOn = 0;
 	double timeOff = 0;
 	bool slowStatus = false;
-	BehaviorType accelBehavior;
 	
 	/**
 	 * @function    accelerateMotor

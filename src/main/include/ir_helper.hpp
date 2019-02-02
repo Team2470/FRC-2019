@@ -4,10 +4,10 @@
 #include <frc/AnalogInput.h>
 
 /**
- * @enum	Infrared_Sensor_Type
+ * @enum	InfraredSensorType
  * @description Holds the different types of infrared sensor.
  */
-enum Infrared_Sensor_Type
+enum InfraredSensorType
 {
 	GP2Y0A710K0F, // 3 - 18 feet
 	GP2Y0A02YK0F, // 7 - 59 inches
@@ -38,7 +38,7 @@ public:
 	 * @param	irChannel -- the input channel of the sensor.
 	 * @param	irType    -- the type of sensor.
 	 */
-	Infrared(int irChannel, Infrared_Sensor_Type irType);
+	Infrared(int irChannel, InfraredSensorType irType);
 
 	/**
 	 * @function    checkColor
@@ -71,7 +71,7 @@ public:
 private:
 	double VOLTAGE_SCALING = 1.0;
 	double VOLTAGE_INTERCEPT = 1.0;
-	Infrared_Sensor_Type sensorFamily;
+	InfraredSensorType sensorFamily;
 	frc::AnalogInput* irSensor;
 
 	static constexpr double colorError = 0.1;

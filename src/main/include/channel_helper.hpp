@@ -39,7 +39,7 @@ enum ChannelPWM
  */
 enum ChannelAnalog
 {
-	ULTRASONIC_SENSOR_FRONT_LEFT = 0 // TODO: ENSURE CORRECT CHANNEL FOR ULTRASONIC SENSOR
+	ULTRASONIC_SENSOR = 0
 };
 
 /**
@@ -48,7 +48,7 @@ enum ChannelAnalog
  */
 enum ChannelDigital
 {
-	//LIMITSWITCH_ROBOT = 1
+	LIMITSWITCH_ROBOT = 1
 };
 
 /**

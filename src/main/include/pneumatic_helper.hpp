@@ -46,7 +46,7 @@ public:
 
 private:
 	bool currentState = false;
-	frc::Solenoid* m_solenoidSingle;
+	frc::Solenoid* solenoidSingle;
 };
 
 
@@ -95,9 +95,10 @@ public:
 	 * @returns     The current state of the solenoid.
 	 */
 	bool getVal();
+
 private:
-    	frc::DoubleSolenoid::Value currentState = frc::DoubleSolenoid::Value::kOff;
-	frc::DoubleSolenoid* m_solenoidDouble;
+    frc::DoubleSolenoid::Value currentState = frc::DoubleSolenoid::Value::kOff;
+	frc::DoubleSolenoid* solenoidDouble;
 };
 
 
@@ -181,7 +182,6 @@ public:
 
 private:
 	bool loopControl = false;
-
 	bool currentState = false;
 	bool currentHighFault = false;        // GetCompressorCurrentTooHighFault
 	bool currentHighFaultSticky = false;  // GetCompressorCurrentTooHighStickyFault
@@ -189,7 +189,7 @@ private:
 	bool notConnectedFaultSticky = false; // GetCompressorNotConnectedStickyFault
 	bool shortCircuitFault = false;	      // GetCompressorShortedFault
 	bool shortCircuitFaultSticky = false; // GetCompressorShortedStickyFault
-	frc::Compressor* m_compressor;
+	frc::Compressor* compressor;
 };
 
 #endif

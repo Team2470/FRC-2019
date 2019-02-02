@@ -1,16 +1,7 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+#ifndef ROBOT_H
+#define ROBOT_H
 
-#pragma once
-
-//CPP INCLUDES//
 #include <string>
-
-//FIRST INCLUDES//
 #include <frc/Joystick.h>
 #include <frc/PWMVictorSPX.h>
 #include <frc/SampleRobot.h>
@@ -20,8 +11,6 @@
 #include <frc/PowerDistributionPanel.h>
 #include <frc/Compressor.h>
 #include <frc/Preferences.h>
-
-//OUR INCLUDES//
 #include "channel_helper.hpp"
 #include "controller_helper.hpp"
 #include "mecanum_driver_helper.hpp"
@@ -66,24 +55,24 @@ class Robot : public frc::SampleRobot {
 	frc::Joystick RightButtonHub { ChannelController::RIGHT_BUTTON_HUB };
 
   //Our standalone spark motors
-	frc::Spark* m_frontleftMotor = new frc::Spark(ChannelPWM::FRONT_LEFT_MOTOR);
-	frc::Spark* m_backleftMotor = new frc::Spark(ChannelPWM::BACK_LEFT_MOTOR);
-	frc::Spark* m_frontrightMotor = new frc::Spark(ChannelPWM::FRONT_RIGHT_MOTOR);
-  frc::Spark* m_backrightMotor = new frc::Spark(ChannelPWM::BACK_RIGHT_MOTOR);
+	frc::Spark* frontLeftMotor = new frc::Spark(ChannelPWM::FRONT_LEFT_MOTOR);
+	frc::Spark* backLeftMotor = new frc::Spark(ChannelPWM::BACK_LEFT_MOTOR);
+	frc::Spark* frontRightMotor = new frc::Spark(ChannelPWM::FRONT_RIGHT_MOTOR);
+  frc::Spark* backRightMotor = new frc::Spark(ChannelPWM::BACK_RIGHT_MOTOR);
 	frc::Spark* m_intakeMotor = new frc::Spark(ChannelPWM::INTAKE_MOTOR);
-  //frc::Spark* m_leftMotor = new frc::Spark(ChannelPWM::LEFT_MOTOR);
-  //frc::Spark* m_rightMotor = new frc::Spark(ChannelPWM::RIGHT_MOTOR);
+  //frc::Spark* leftMotor = new frc::Spark(ChannelPWM::LEFT_MOTOR);
+  //frc::Spark* rightMotor = new frc::Spark(ChannelPWM::RIGHT_MOTOR);
   frc::Spark* m_placeholderNotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
 
   //Our BjorgDrive systems for driving the robot, the function takes in four motors and three joysticks from above
-  BjorgMecanumDrive* m_driveSystem = new BjorgMecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor, &XboxController, &XboxController, &XboxController);
+  BjorgMecanumDrive* m_driveSystem = new BjorgMecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor, &XboxController, &XboxController, &XboxController);
   //BjorgArcadeDrive* m_intakeSystem = new BjorgArcadeDrive(m_intakeMotor, m_placeholderNotor, &FlightJoystick, &FlightJoystick);
-  //BjorgArcadeDrive* m_arcdriveSystem = new BjorgArcadeDrive(m_leftMotor, m_rightMotor, &XboxController, &XboxController);
+  //BjorgArcadeDrive* m_arcdriveSystem = new BjorgArcadeDrive(leftMotor, rightMotor, &XboxController, &XboxController);
 
   //Our generic motors, take the PWM channel and the motor type
 	//Motor* m_otherMotor = new Motor(ChannelPWM::LIFT_MOTOR, MotorType::SPARK);
 
-  Compressor* m_compressor = new Compressor(0);
+  Compressor* compressor = new Compressor(0);
 
   //Preferences *prefs;
 
@@ -118,3 +107,5 @@ class Robot : public frc::SampleRobot {
   //Camera
   double currentLimelight = -1;
 };
+
+#endif

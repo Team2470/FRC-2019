@@ -19,7 +19,7 @@ Robot::Robot()
 {
   // Note SmartDashboard is not initialized here, wait until RobotInit() to make
   // SmartDashboard calls
-  //m_robotDrive.SetExpiration(0.1);
+  //robotDrive.SetExpiration(0.1);
 }
 
 void Robot::RobotInit()
@@ -52,7 +52,7 @@ void Robot::Autonomous()
 
   // MotorSafety improves safety when motors are updated in loops but is
   // disabled here because motor updates are not looped in this autonomous mode.
-  //m_robotDrive.SetSafetyEnabled(false);
+  //robotDrive.SetSafetyEnabled(false);
 
   if (autoSelected == kAutoNameCustom) 
   {
@@ -60,11 +60,11 @@ void Robot::Autonomous()
     std::cout << "Running custom Autonomous" << std::endl;
 
     // Spin at half speed for two seconds
-    //m_robotDrive.ArcadeDrive(0.0, 0.5);
+    //robotDrive.ArcadeDrive(0.0, 0.5);
     frc::Wait(2.0);
 
     // Stop robot
-    //m_robotDrive.ArcadeDrive(0.0, 0.0);
+    //robotDrive.ArcadeDrive(0.0, 0.0);
   } 
   else 
   {
@@ -72,11 +72,11 @@ void Robot::Autonomous()
     std::cout << "Running default Autonomous" << std::endl;
 
     // Drive forwards at half speed for two seconds
-    //m_robotDrive.ArcadeDrive(-0.5, 0.0);
+    //robotDrive.ArcadeDrive(-0.5, 0.0);
     frc::Wait(2.0);
 
     // Stop robot
-    //m_robotDrive.ArcadeDrive(0.0, 0.0);
+    //robotDrive.ArcadeDrive(0.0, 0.0);
   }
 }
 
@@ -110,8 +110,8 @@ void Robot::OperatorControl()
     totalPower = pdp->GetTotalPower();
 
     //Compressor
-    compressorCurrent = m_compressor->getCurrent();
-    compressorEnabled = m_compressor->getVal();
+    compressorCurrent = compressor->getCurrent();
+    compressorEnabled = compressor->getVal();
 
     //Drive
     moveJoyVal = RightDriveJoystick.GetY();

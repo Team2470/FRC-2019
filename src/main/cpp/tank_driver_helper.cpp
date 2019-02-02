@@ -7,23 +7,27 @@
 #include "tank_driver_helper.hpp"
 
 BjorgTankDrive::BjorgTankDrive(
-	frc::Spark* m_leftMotor, 
-	frc::Spark* m_rightMotor, 
+	frc::Spark* leftMotor, 
+	frc::Spark* rightMotor, 
 	frc::Joystick* controllerLeft, 
 	frc::Joystick* controllerRight
 )
 {
-	m_robotDrive = new frc::DifferentialDrive { *m_leftMotor, *m_rightMotor };
+	robotDrive = new frc::DifferentialDrive 
+    { 
+        *leftMotor, 
+        *rightMotor 
+    };
+
 	driveControllerLeft = controllerLeft;
 	driveControllerRight = controllerRight;
-	m_robotDrive->SetExpiration(0.1);
+	robotDrive->SetExpiration(0.1);
 }
 
 void BjorgTankDrive::tankDrive()
 {
-	m_robotDrive->SetSafetyEnabled(true);
+	robotDrive->SetSafetyEnabled(true);
 	setMovement();
-	//setRotate(rotateEnable);
 
 	if(leftValue <= 0.1f && leftValue >= -0.1f)
 	{
@@ -35,13 +39,13 @@ void BjorgTankDrive::tankDrive()
 		rightValue = 0.0f;
 	}
 
-	m_robotDrive->TankDrive(leftReverse * leftMultiplier * leftValue, rightReverse * rightMultiplier * rightValue, sqrInputs);
+	robotDrive->TankDrive(leftReverse * leftMultiplier * leftValue, rightReverse * rightMultiplier * rightValue, sqrInputs);
 }
 
 void BjorgTankDrive::tankDrive(double leftMovement, double rightMovement)
 {
-	m_robotDrive->SetSafetyEnabled(true);
-	m_robotDrive->TankDrive(leftMovement, rightMovement);
+	robotDrive->SetSafetyEnabled(true);
+	robotDrive->TankDrive(leftMovement, rightMovement);
 }
 
 void BjorgTankDrive::twoBtnLeft()
@@ -56,7 +60,7 @@ void BjorgTankDrive::twoBtnRight()
     
 void BjorgTankDrive::setMovement()
 {
-	if (multiLeft)
+	if(multiLeft)
 	{
 		twoBtnLeft();
 	}
@@ -65,7 +69,7 @@ void BjorgTankDrive::setMovement()
 		leftValue = driveControllerLeft->GetRawAxis(leftCtrl);
 	}
 
-	if (multiRight)
+	if(multiRight)
 	{
 		twoBtnRight();
 	}

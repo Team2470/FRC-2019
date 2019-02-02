@@ -33,12 +33,17 @@ public:
 	/**
 	 * @constructor BjorgArcadeDrive
 	 * @description Construct the arcade drive.
-	 * @param       m_leftMotor  	   -- A pointer to the Spark object controlling the left motor.
-	 * @param	    m_rightMotor       -- A pointer to the Spark object controlling the right motor.
+	 * @param       leftMotor  	   -- A pointer to the Spark object controlling the left motor.
+	 * @param	    rightMotor       -- A pointer to the Spark object controlling the right motor.
 	 * @param	    controllerMovement -- A pointer to the Joystick object governing movement.
 	 * @param	    controllerRotate   -- A pointer to the Joystick object governing rotation.
 	 */
-	BjorgArcadeDrive(frc::Spark* m_leftMotor, frc::Spark* m_rightMotor, frc::Joystick* controllerMovement, frc::Joystick* controllerRotate);
+	BjorgArcadeDrive(
+        frc::Spark* leftMotor, 
+        frc::Spark* rightMotor, 
+        frc::Joystick* controllerMovement, 
+        frc::Joystick* controllerRotate
+    );
 	
 	/**
 	 * @function    arcadeDrive
@@ -70,7 +75,7 @@ public:
 private:
 	float movementValue = 0.0;
 	float rotationValue = 0.0;
-	frc::DifferentialDrive* m_robotDrive;
+	frc::DifferentialDrive* robotDrive;
 	frc::Joystick* driveControllerMovement;
 	frc::Joystick* driveControllerRotate;
     

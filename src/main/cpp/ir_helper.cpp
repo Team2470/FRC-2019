@@ -2,12 +2,12 @@
 #include <frc/AnalogInput.h>
 #include "ir_helper.hpp"
 
-Infrared::Infrared(int irChannel, Infrared_Sensor_Type irType)
+Infrared::Infrared(int irChannel, InfraredSensorType irType)
 {
-    	irSensor = new frc::AnalogInput(irChannel);
-    	sensorFamily = irType;
+    irSensor = new frc::AnalogInput(irChannel);
+    sensorFamily = irType;
     
-    	switch(sensorFamily)
+    switch(sensorFamily)
 	{
 		case GP2Y0A710K0F:			//3-18 feet
 			VOLTAGE_SCALING = 137.5;
@@ -36,15 +36,15 @@ Color Infrared::checkColor()
 	double irValue = voltage();
 	Color rtnColor;
 
-	if (irValue <= (whiteValue + colorError) || irValue >= (whiteValue - colorError))
+	if(irValue <= (whiteValue + colorError) || irValue >= (whiteValue - colorError))
 	{
 		rtnColor = WHITE;
 	}
-	else if (irValue <= (blackValue + colorError) || irValue >= (blackValue - colorError))
+	else if(irValue <= (blackValue + colorError) || irValue >= (blackValue - colorError))
 	{
 		rtnColor = BLACK;
 	}
-	else if (irValue <= (grayValue + colorError) || irValue >= (grayValue - colorError))
+	else if(irValue <= (grayValue + colorError) || irValue >= (grayValue - colorError))
 	{
 		rtnColor = GRAY;
 	}
@@ -55,7 +55,7 @@ Color Infrared::checkColor()
 double Infrared::irRange()
 {
 	double rangeInches = 0.0;
-	rangeInches = 1 / ( ( irSensor->GetVoltage() - VOLTAGE_INTERCEPT ) / ( VOLTAGE_SCALING * 0.393701) );
+	rangeInches = 1 / ((irSensor->GetVoltage() - VOLTAGE_INTERCEPT) / (VOLTAGE_SCALING * 0.393701));
 	return rangeInches;
 }
 

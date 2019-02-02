@@ -34,14 +34,14 @@ public:
 	/**
 	 * @constructor BjorgTankDrive
 	 * @description Construct the BjorgTankDrive class.
-	 * @param 	    m_leftMotor     -- The tank drive left motor.
-	 * @param	    m_rightMotor    -- The tank drive right motor.
+	 * @param 	    leftMotor     -- The tank drive left motor.
+	 * @param	    rightMotor    -- The tank drive right motor.
 	 * @param	    controllerLeft  -- The joystick controlling the left motor.
 	 * @param 	    controllerRight -- The joystick controlling the right motor.
 	 */
 	BjorgTankDrive(
-		frc::Spark* m_leftMotor, 
-		frc::Spark* m_rightMotor, 
+		frc::Spark* leftMotor, 
+		frc::Spark* rightMotor, 
         frc::Joystick* controllerLeft, 
 		frc::Joystick* controllerRight
 	);
@@ -76,7 +76,7 @@ public:
 private:
 	float leftValue = 0.0;
 	float rightValue = 0.0;
-	frc::DifferentialDrive* m_robotDrive;
+	frc::DifferentialDrive* robotDrive;
 	frc::Joystick* driveControllerLeft;
 	frc::Joystick* driveControllerRight;
     

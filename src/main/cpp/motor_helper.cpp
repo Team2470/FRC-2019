@@ -18,27 +18,27 @@ Motor::Motor(int motorChannel, MotorType motorType)
 	
 	switch(motorFamily)
 	{
-		case TALON :
+		case TALON:
 			motorTalon = new frc::Talon(motorChannel);
 			pwmMotor = motorTalon;
 			break;
 
-		case VICTOR :
+		case VICTOR:
 			motorVictor = new frc::Victor(motorChannel);
 			pwmMotor = motorVictor;
 			break;
 
-		case VICTOR_SP :
+		case VICTOR_SP:
 			motorVictorSP = new frc::VictorSP(motorChannel);
 			pwmMotor = motorVictorSP;
 			break;
 
-		case SPARK :
+		case SPARK:
 			motorSpark = new frc::Spark(motorChannel);
 			pwmMotor = motorSpark;
 			break;
 
-		default :
+		default:
 			break;
 	}
 }
@@ -49,34 +49,29 @@ void Motor::gradualRotation(
 	BehaviorType newBehavior
 )
 {
-	this->gradual_MaxSpeed = motorMaxSpeed;
+	this->gradualMaxSpeed = motorMaxSpeed;
 	accelBehavior = newBehavior;
 
-	if (firstRun)
+	if(firstRun)
 	{
-		this->gradual_CurrentSpeed = this->pwmMotor->Get();
-		this->speedIncreaseRate = (gradual_MaxSpeed - gradual_CurrentSpeed) / (1000 * speedIncreaseDuration);
+		this->gradualCurrentSpeed = this->pwmMotor->Get();
+		this->speedIncreaseRate = (gradualMaxSpeed - gradualCurrentSpeed) / (1000 * speedIncreaseDuration);
 		firstRun = false;
 		lastTime = 0;
 	}
-	if (speedIncreaseRate >= 0)
-	{
-		testSpeed = 1;
-	}
-	else
-	{
-		testSpeed = -1;
-	}
 
-	if ((gradual_CurrentSpeed * testSpeed) >= fabs(gradual_MaxSpeed))
+    testSpeed = speedIncreaseRate >= 0 
+        ? 1 
+        : -1;
+
+	if((gradualCurrentSpeed * testSpeed) >= fabs(gradualMaxSpeed))
 	{
-		instantaneousRotation(accelBehavior ? gradual_MaxSpeed : 0);
+		instantaneousRotation(accelBehavior ? gradualMaxSpeed : 0);
 	}
 	else
 	{
 		accelerateMotor();
 	}
-
 }
 
 void Motor::instantaneousRotation(double motorSpeed)
@@ -103,7 +98,9 @@ void Motor::maintainSpeed()
 
 void Motor::resetAccelerate(bool forceReset)
 {
-	firstRun = ((motorState == Constant || forceReset) ? true : false);
+	firstRun = (motorState == Constant || forceReset) 
+        ? true 
+        : false;
 }
 
 void Motor::accelerateMotor()
@@ -112,12 +109,12 @@ void Motor::accelerateMotor()
 	if((currentTime - lastTime) >= 1)
 	{
 		motorState = Accelerate;
-		//this->gradual_CurrentSpeed = this->motorSpark->Get();
-		this->gradual_CurrentSpeed = this->gradual_CurrentSpeed + speedIncreaseRate;
-		//this->gradual_RoundedSpeed = (floor(gradual_CurrentSpeed * 100)/100);
+		//this->gradualCurrentSpeed = this->motorSpark->Get();
+		this->gradualCurrentSpeed = this->gradualCurrentSpeed + speedIncreaseRate;
+		//this->gradualRoundedSpeed = (floor(gradualCurrentSpeed * 100)/100);
 		//std::cout << currentTime << std::endl;
-		//SmartDashboard::PutString("DB/String 9", std::to_string(speedIncreaseRate) + " " + std::to_string(gradual_CurrentSpeed));
-		this->pwmMotor->Set(gradual_CurrentSpeed);
+		//SmartDashboard::PutString("DB/String 9", std::to_string(speedIncreaseRate) + " " + std::to_string(gradualCurrentSpeed));
+		this->pwmMotor->Set(gradualCurrentSpeed);
 		this->lastTime = this->currentTime;
 	}
 }
@@ -125,7 +122,7 @@ void Motor::accelerateMotor()
 void Motor::brake()
 {
 	brakeTimeCurrent = (clock.Get() * 1000);
-	if ((brakeTimeCurrent - brakeTimeLast) >= 5)
+	if((brakeTimeCurrent - brakeTimeLast) >= 5)
 	{
 		instantaneousRotation(brakeMotorSpeed);
 		brakeMotorSpeed = -brakeMotorSpeed;
@@ -139,12 +136,12 @@ void Motor::slowSpeed(double period, double changeSpeed, double multiplier)
 	timeOn = (period / 2);
 	slowTimeCurrent = (clock.Get() * 1000);
 
-	if ((slowTimeCurrent - slowTimeLast) >= timeOff && slowStatus)
+	if((slowTimeCurrent - slowTimeLast) >= timeOff && slowStatus)
 	{
 		instantaneousRotation(0.0);
 		slowTimeLast = slowTimeCurrent;
 	}
-	else if ((slowTimeCurrent - slowTimeLast) >= timeOn && !slowStatus)
+	else if((slowTimeCurrent - slowTimeLast) >= timeOn && !slowStatus)
 	{
 		instantaneousRotation(changeSpeed);
 		slowTimeLast = slowTimeCurrent;
