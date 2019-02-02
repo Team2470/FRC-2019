@@ -5,8 +5,6 @@
 #include <frc/smartdashboard/Smartdashboard.h>
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
-#include "channel_helper.hpp"
-#include "sonar_helper.hpp"
 
 /**
  * @enum        LimelightLedMode
@@ -83,8 +81,6 @@ public:
     void SetPipeline(short pipeline);
 
 private:
-    // TODO: ENSURE CORRECT ULTRASONIC SENSOR TYPE
-    MaxSonar sonarSensor = MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_FRONT_LEFT, UltrasonicSensorType::LV);
     std::shared_ptr<NetworkTable> networkTable;
 };
 

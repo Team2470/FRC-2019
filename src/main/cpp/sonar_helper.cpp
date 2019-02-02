@@ -11,7 +11,7 @@ MaxSonar::MaxSonar(int ultrasonicChannel, UltrasonicSensorType sonarType)
     switch(sensorFamily)
 	{
 		case HRLV:
-			VOLTAGE_SCALING = (1 / 41.0105);//0.00096063044;
+			VOLTAGE_SCALING = (1 / 41.0105);
 			break;
 		case HRUSB: 
 			VOLTAGE_SCALING = 1;

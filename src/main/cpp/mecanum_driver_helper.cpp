@@ -43,6 +43,11 @@ void BjorgMecanumDrive::mecanumDrive(double movement, double shift, double rotat
     m_robotDrive->DriveCartesian(movement, shift, rotate);
 }
 
+void BjorgMecanumDrive::mecanumDriveAutoAlign()
+{
+    
+}
+
 void BjorgMecanumDrive::twoBtnMove()
 {
     movementValue = driveControllerMove->GetRawAxis(fwdMove) - driveControllerMove->GetRawAxis(bckMove);

@@ -2,8 +2,11 @@
 #define MECANUM_DRIVER_HELPER_HPP
 
 #include <frc/drive/MecanumDrive.h>
+#include <frc/AnalogGyro.h>
 #include <frc/Joystick.h>
 #include <frc/Spark.h>
+#include "sonar_helper.hpp"
+#include "vision_processing.hpp"
 
 /**
  * @class		BjorgMecanumDrive
@@ -64,7 +67,7 @@ public:
 	void mecanumDrive();
 
 	/**
-	 * @function
+	 * @function    mecanumDrive
 	 * @description Controls the mecanum drive with explicitly supplied values; it governs
 	 * 				all movement, translational and rotational.
 	 * @param		movement -- Forward-backward translation velocity.
@@ -72,6 +75,13 @@ public:
 	 * @param		rotate   -- Rotational velocity.
 	 */
 	void mecanumDrive(double movement, double shift, double rotate);
+
+    /**
+     * @function
+     * @description Responsible for performing the auto-alignment of the robot.
+     * @notes       Utilizes the VisionProcessing class.
+     */
+    void mecanumDriveAutoAlign();
 
 	/**
 	 * @function	twoBtnMove
@@ -95,11 +105,17 @@ private:
 	float movementValue = 0.0;
     float shiftValue = 0.0;
 	float rotateValue = 0.0;
-	frc::MecanumDrive* m_robotDrive;
+    frc::MecanumDrive* m_robotDrive;
 	frc::Joystick* driveControllerMove;
 	frc::Joystick* driveControllerShift;
     frc::Joystick* driveControllerRotate;
 	
+    // TODO: ENSURE CORRECT GYRO CHANNEL
+    // TODO: ENSURE CORRECT ULTRASONIC SENSOR TYPE
+    frc::AnalogGyro gyroSensor = frc::AnalogGyro(0);
+    MaxSonar sonarSensor = MaxSonar(0, UltrasonicSensorType::LV);
+    VisionProcessing visionProcessing = VisionProcessing();
+
 	/**
 	 * @function	setMovement
 	 * @description Update the movement value, to be used by the drive.
