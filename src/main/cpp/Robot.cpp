@@ -176,7 +176,7 @@ void Robot::OperatorControl() {
     frc::SmartDashboard::PutNumber("Front Right Motor Current", currentFrontRight);
     frc::SmartDashboard::PutNumber("Back Right Motor Current", currentBackRight);
     frc::SmartDashboard::PutNumber("Intake Left Motor Current", currentIntakeLeft);
-    frc::SmartDashboard::PutNumber("Intake Right Motor Current", currentIntakeRight;
+    frc::SmartDashboard::PutNumber("Intake Right Motor Current", currentIntakeRight);
 
 
     //Camera Stuff
