@@ -8,14 +8,14 @@
 /**
  * @class 	BjorgArcadeDRive
  * @description This class operates a SpeedController group using a differential drive;
- *      	it has the ability to drive using a teleoperated arcade drive or autonomous
- *		arcade drive.
+ *      	    it has the ability to drive using a teleoperated arcade drive or autonomous
+ *		        arcade drive.
  * @notes       This should be updated for other versions as needed.
  */
 class BjorgArcadeDrive 
 {
 public:
-    	int moveCtrl = 0;
+    int moveCtrl = 0;
 	int rotateCtrl = 0;
 	int rtTurn = 0;
 	int lftTurn = 0;
@@ -34,30 +34,30 @@ public:
 	 * @constructor BjorgArcadeDrive
 	 * @description Construct the arcade drive.
 	 * @param       m_leftMotor  	   -- A pointer to the Spark object controlling the left motor.
-	 * @param	m_rightMotor       -- A pointer to the Spark object controlling the right motor.
-	 * @param	controllerMovement -- A pointer to the Joystick object governing movement.
-	 * @param	controllerRotate   -- A pointer to the Joystick object governing rotation.
+	 * @param	    m_rightMotor       -- A pointer to the Spark object controlling the right motor.
+	 * @param	    controllerMovement -- A pointer to the Joystick object governing movement.
+	 * @param	    controllerRotate   -- A pointer to the Joystick object governing rotation.
 	 */
 	BjorgArcadeDrive(frc::Spark* m_leftMotor, frc::Spark* m_rightMotor, frc::Joystick* controllerMovement, frc::Joystick* controllerRotate);
 	
 	/**
 	 * @function    arcadeDrive
 	 * @description Control the arcade drive with joystick input, governs both translational
-	 *		and rotational movement.
+	 *		        and rotational movement.
 	 */
 	void arcadeDrive();
 
 	/**
 	 * @function    arcadeDrive
 	 * @description Control the arcade drive with explicit input, governs both translation
-	 *		and rotational movement.
+	 *		        and rotational movement.
 	 */
 	void arcadeDrive(double movement, double rotate);
 
 	/**
 	 * @function	stop
 	 * @description Full-stop the arcade drive, i.e, all translational and rotational
-	 * 		velocity is set to zero.
+	 * 		        velocity is set to zero.
 	 */
 	void stop();
 

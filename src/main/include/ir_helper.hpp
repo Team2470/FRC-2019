@@ -55,18 +55,18 @@ public:
 	double irRange();
 
 	/**
-	 * @function    Voltage
+	 * @function    voltage
 	 * @description Reads the current voltage of the IR sensor.
 	 * @returns     The read voltage.
 	 */
-	double Voltage();
+	double voltage();
 	
 	/**
-	 * @function    AverageRaw
+	 * @function    averageRaw
 	 * @description Calculates the average value read by the sensor.
 	 * @returns     The calculated average value.
 	 */
-	int AverageRaw();
+	int averageRaw();
 
 private:
 	double VOLTAGE_SCALING = 1.0;

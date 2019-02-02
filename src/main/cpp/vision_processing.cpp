@@ -3,10 +3,10 @@
 VisionProcessing::VisionProcessing()
 {
     this->networkTable = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
-    this->UpdateLimelightProperties();
+    this->updateLimelightProperties();
 }
 
-void VisionProcessing::UpdateLimelightProperties()
+void VisionProcessing::updateLimelightProperties()
 {
     this->limelightTargets_TV = this->networkTable->GetNumber("tv", 0);
     this->limelightHorizontalOffset_TX = this->networkTable->GetNumber("tx", 0.0);
@@ -17,17 +17,17 @@ void VisionProcessing::UpdateLimelightProperties()
     this->limelightBoundingBoxHeight_TVERT = this->networkTable->GetNumber("tvert", 0.0);
 }
 
-void VisionProcessing::SetLedMode(LimelightLedMode mode)
+void VisionProcessing::setLedMode(LimelightLedMode mode)
 {
     this->networkTable->PutNumber("ledMode", mode);
 }
 
-void VisionProcessing::SetCameraMode(LimelightCameraMode mode)
+void VisionProcessing::setCameraMode(LimelightCameraMode mode)
 {
     this->networkTable->PutNumber("camMode", mode);
 }
 
-void VisionProcessing::SetPipeline(short pipeline)
+void VisionProcessing::setPipeline(short pipeline)
 {
     this->networkTable->PutNumber("pipeline", pipeline);
 }

@@ -51,34 +51,34 @@ public:
     VisionProcessing();
 
     /**
-     * @function    UpdateLimelightProperties
+     * @function    updateLimelightProperties
      * @description Update the set of Limelight camera properties used. This should be called
      *              at a continuous rate to ensure accurate and up-to-date values.
      * @notes       The properties updated are:
      *                  tv, tx, ty, ta, ts, thor, tvert
      */
-    void UpdateLimelightProperties();
+    void updateLimelightProperties();
 
     /**
-     * @function    SetLedMode
+     * @function    setLedMode
      * @description Set the led mode of the Limelight.
      * @param       mode -- The mode to set the led to.
      */
-    void SetLedMode(LimelightLedMode mode);
+    void setLedMode(LimelightLedMode mode);
 
     /**
-     * @function    SetCameraMode
+     * @function    setCameraMode
      * @description Set the camera mode of the Limelight.
      * @param       mode -- The mode to set the camera.
      */
-    void SetCameraMode(LimelightCameraMode mode);
+    void setCameraMode(LimelightCameraMode mode);
 
     /**
-     * @function    SetPipeline
+     * @function    setPipeline
      * @description Set the pipeline of the camera.
      * @param       pipeline -- The pipeline, 0-9.
      */
-    void SetPipeline(short pipeline);
+    void setPipeline(short pipeline);
 
 private:
     std::shared_ptr<NetworkTable> networkTable;

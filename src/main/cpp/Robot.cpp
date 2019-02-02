@@ -86,9 +86,9 @@ void Robot::Autonomous()
 void Robot::OperatorControl() 
 {
   //Drive system variables
-  m_driveSystem->moveCtrl = Axis_XBOX::XBOX_RIGHT_JOYSTICK_Y;
-  m_driveSystem->shiftCtrl = Axis_XBOX::XBOX_RIGHT_JOYSTICK_X;
-  m_driveSystem->rotateCtrl = Axis_XBOX::XBOX_LEFT_JOYSTICK_X;
+  m_driveSystem->moveCtrl = AxisXbox::XBOX_RIGHT_JOYSTICK_Y;
+  m_driveSystem->shiftCtrl = AxisXbox::XBOX_RIGHT_JOYSTICK_X;
+  m_driveSystem->rotateCtrl = AxisXbox::XBOX_LEFT_JOYSTICK_X;
   m_driveSystem->multiMove = false;
   m_driveSystem->multiShift = false;
   m_driveSystem->multiRotate = false;
@@ -128,7 +128,7 @@ void Robot::OperatorControl()
     //Camera
     currentLimelight = pdp->GetCurrent(ChannelPDP::PDP_LIMELIGHT_CAMERA);
 
-    if (LeftButtonHub.GetRawButton(Generic_Controller_Left::SWITCH_A))
+    if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_A))
     {
       m_driveSystem->moveMultiplier = 0.5;
       m_driveSystem->shiftMultiplier = 0.5;
@@ -145,7 +145,7 @@ void Robot::OperatorControl()
       halfSpeed = false;
     }
 
-    /*if (RightButtonHub.GetRawButton(Generic_Controller_Right::SWITCH_X))
+    /*if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_X))
     {
       m_intakeSystem->arcadeDrive();
     }

@@ -33,7 +33,7 @@ Infrared::Infrared(int irChannel, Infrared_Sensor_Type irType)
 
 Color Infrared::checkColor()
 {
-	double irValue = Voltage();
+	double irValue = voltage();
 	Color rtnColor;
 
 	if (irValue <= (whiteValue + colorError) || irValue >= (whiteValue - colorError))
@@ -59,14 +59,14 @@ double Infrared::irRange()
 	return rangeInches;
 }
 
-double Infrared::Voltage()
+double Infrared::voltage()
 {
 	double volt = 0;
 	volt = irSensor->GetVoltage();
 	return volt;
 }
 
-int Infrared::AverageRaw()
+int Infrared::averageRaw()
 {
 	double volt = 0;
 	volt = irSensor->GetAverageValue();

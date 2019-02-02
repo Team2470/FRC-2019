@@ -1,8 +1,8 @@
 /**
- * @enum        Axis_XBOX
+ * @enum        AxisXbox
  * @description Channels for all Xbox controller axes.
  */
-enum Axis_XBOX
+enum AxisXbox
 {
 	XBOX_LEFT_JOYSTICK_X = 0,
 	XBOX_LEFT_JOYSTICK_Y = 1,
@@ -13,10 +13,10 @@ enum Axis_XBOX
 };
 
 /**
- * @enum	Axis_LOGITECH
+ * @enum	    AxisLogitech
  * @description Channels for all Logitech controller axes.
  */
-enum Axis_LOGITECH
+enum AxisLogitech
 {
 	LOGITECH_LEFT_JOYSTICK_X = 0,
 	LOGITECH_LEFT_JOYSTICK_Y = 1,
@@ -27,10 +27,10 @@ enum Axis_LOGITECH
 };
 
 /**
- * @enum	Button_XBOX
+ * @enum	    ButtonXbox
  * @description Channels for Xbox controller buttons.
  */
-enum Button_XBOX
+enum ButtonXbox
 {
 	XBOX_A = 1,
 	XBOX_B = 2,
@@ -45,10 +45,10 @@ enum Button_XBOX
 };
 
 /**
- * @enum	Button_LOGITECH
+ * @enum	    ButtonLogitech
  * @description Channels for Logitech controller buttons.
  */
-enum Button_LOGITECH
+enum ButtonLogitech
 {
 	LOGITECH_A = 1,
 	LOGITECH_B = 2,
@@ -65,10 +65,10 @@ enum Button_LOGITECH
 };
 
 /**
- * @enum	DPad_XBOX
+ * @enum	    DPadXbox
  * @description Values for the Xbox DPAD.
  */
-enum DPad_XBOX
+enum DPadXbox
 {
 	XBOX_RELEASED = -1,
 	XBOX_TOP = 0,
@@ -84,10 +84,10 @@ enum DPad_XBOX
 };
 
 /**
- * @enum	DPad_XBOX
+ * @enum	    DPadLogitech
  * @description Values for the Logitech DPAD.
  */
-enum DPad_LOGITECH
+enum DPadLogitech
 {
 	LOGITECH_RELEASED = -1,
 	LOGITECH_TOP = 0,
@@ -103,47 +103,47 @@ enum DPad_LOGITECH
 };
 
 /**
- * @enum	Axis_Generic.
+ * @enum	    AxisGeneric.
  * @description Generic axes.
  */
-enum Axis_Generic
+enum AxisGeneric
 {
 	JOYSTICK_Y_AXIS = 0,
 	JOYSTICK_X_AXIS = 1,
 };
 
 /**
- * @enum	Generic_Controller_Left
+ * @enum	    GenericControllerLeft
  * @description Generic input channels for the left controller.
  */
-enum Generic_Controller_Left
+enum GenericControllerLeft
 {
-	BUTTON_BLUE_TOP_LEFT = 1,     //Generic Arcade Buttons
-	BUTTON_BLUE_TOP_RIGHT = 2,    //Generic Arcade Buttons
-	BUTTON_BLUE_BOTTOM_LEFT = 3,  //Generic Arcade Buttons
-	BUTTON_BLUE_BOTTOM_RIGHT = 4, //Generic Arcade Buttons
-	SWITCH_ARCADE_RIGHT = 5,      //Covered Switch
-	SWITCH_ARCADE_LEFT = 6,	      //Covered Switch
-	SWITCH_B = 7,		      //Generic Switch
-	SWITCH_A = 8,		      //Generic Switch
-	//ROTARY_SELECT		      //Probably will be used for autonomous selection, it is the knob with 10 different positions.
+	BUTTON_BLUE_TOP_LEFT = 1,     // Generic Arcade Buttons
+	BUTTON_BLUE_TOP_RIGHT = 2,    // Generic Arcade Buttons
+	BUTTON_BLUE_BOTTOM_LEFT = 3,  // Generic Arcade Buttons
+	BUTTON_BLUE_BOTTOM_RIGHT = 4, // Generic Arcade Buttons
+	SWITCH_ARCADE_RIGHT = 5,      // Covered Switch
+	SWITCH_ARCADE_LEFT = 6,	      // Covered Switch
+	SWITCH_B = 7,		          // Generic Switch
+	SWITCH_A = 8,		          // Generic Switch
+	//ROTARY_SELECT		          // Probably will be used for autonomous selection, it is the knob with 10 different positions.
 };
 
 /**
- * @enum	Generic_Controller_Right
+ * @enum	    GenericControllerRight
  * @description Generic input channels for the right controller.
  */
-enum Generic_Controller_Right
+enum GenericControllerRight
 {
-	BUTTON_RED_TOP = 1,    //Generic Arcade Buttons
-	BUTTON_RED_LEFT = 2,   //Generic Arcade Buttons
-	BUTTON_RED_RIGHT = 3,  //Generic Arcade Buttons
-	BUTTON_RED_BOTTOM = 4, //Generic Arcade Buttons
-	BUTTON_FIRE = 5,       //Elevator Style Buttons
-	BUTTON_RELEASE = 6,    //Elevator Style Buttons
-	SWITCH_SAFE1 = 7,      //Covered Switch
-	SWITCH_SAFE2 = 8,      //Covered Switch
-	SWITCH_X = 9,	       //Generic Switch
-	SWITCH_Y = 10,	       //Generic Switch
-	SWITCH_SAFE3 = 11      //Locking Switch
+	BUTTON_RED_TOP = 1,    // Generic Arcade Buttons
+	BUTTON_RED_LEFT = 2,   // Generic Arcade Buttons
+	BUTTON_RED_RIGHT = 3,  // Generic Arcade Buttons
+	BUTTON_RED_BOTTOM = 4, // Generic Arcade Buttons
+	BUTTON_FIRE = 5,       // Elevator Style Buttons
+	BUTTON_RELEASE = 6,    // Elevator Style Buttons
+	SWITCH_SAFE1 = 7,      // Covered Switch
+	SWITCH_SAFE2 = 8,      // Covered Switch
+	SWITCH_X = 9,	       // Generic Switch
+	SWITCH_Y = 10,	       // Generic Switch
+	SWITCH_SAFE3 = 11      // Locking Switch
 };

@@ -6,9 +6,9 @@
 #include <frc/Spark.h>
 
 /**
- * @class	BjorgTankDrive
+ * @class	    BjorgTankDrive
  * @description This class operates a SpeedController group to control a tank drive.
- * @notes	This class should be updated for other versions as needed.
+ * @notes	    This class should be updated for other versions as needed.
  */
 class BjorgTankDrive
 {
@@ -23,33 +23,33 @@ public:
 	int rightBck = 0;
 	int joystickInt = 0;
 	int leftReverse = -1;
-    	int rightReverse = -1;
+    int rightReverse = -1;
 	bool rotateEnable = true;
 	bool sqrInputs = false;
 	bool multiLeft = false;
-    	bool multiRight = false;
+    bool multiRight = false;
 	float leftMultiplier = 1.0;
-    	float rightMultiplier = 1.0;
+    float rightMultiplier = 1.0;
 	
 	/**
 	 * @constructor BjorgTankDrive
 	 * @description Construct the BjorgTankDrive class.
-	 * @param 	m_leftMotor     -- The tank drive left motor.
-	 * @param	m_rightMotor    -- The tank drive right motor.
-	 * @param	controllerLeft  -- The joystick controlling the left motor.
-	 * @param 	controllerRight -- The joystick controlling the right motor.
+	 * @param 	    m_leftMotor     -- The tank drive left motor.
+	 * @param	    m_rightMotor    -- The tank drive right motor.
+	 * @param	    controllerLeft  -- The joystick controlling the left motor.
+	 * @param 	    controllerRight -- The joystick controlling the right motor.
 	 */
 	BjorgTankDrive(
 		frc::Spark* m_leftMotor, 
 		frc::Spark* m_rightMotor, 
-        	frc::Joystick* controllerLeft, 
+        frc::Joystick* controllerLeft, 
 		frc::Joystick* controllerRight
 	);
 
 	/**
 	 * @function    tankDrive
 	 * @description Controls the tank drive. The left joystick controls the velocity of the
-	 *		right motor; the right joystick controls the velocity of the right motor.
+	 *		        right motor; the right joystick controls the velocity of the right motor.
 	 */ 
 	void tankDrive();
 
@@ -57,7 +57,7 @@ public:
 	 * @function    tankDrive
 	 * @description Controls the tank drive with explicit values for left and right movement.
 	 * @param       leftMovement  -- The velocity of the left motor.
-	 * @param	rightMovement -- The velocity of the right motor.
+	 * @param	    rightMovement -- The velocity of the right motor.
 	 */
 	void tankDrive(double leftMovement, double rightMovement);
 

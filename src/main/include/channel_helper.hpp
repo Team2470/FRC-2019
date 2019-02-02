@@ -2,8 +2,8 @@
  * @enum 	ChannelController
  * @description Holds the controller input channels.
  * @notes       The number correlates to the 'USB Order' number on the driver station.
- * 		XBOX_CONTROLLER and LOGITECH_CONTROLLER should only be used when the 
- *		Logitech or Xbox controllers are being used; if the 
+ *       		XBOX_CONTROLLER and LOGITECH_CONTROLLER should only be used when the 
+ *		        Logitech or Xbox controllers are being used; if the 
  */
 enum ChannelController
 {
@@ -17,9 +17,9 @@ enum ChannelController
 };
 
 /**
- * @enum	ChannelPWM
+ * @enum	    ChannelPWM
  * @description Holds the motor input channels.
- * @note	Used when the Logitech and Xbox controllers are being utilized.
+ * @note	    Used when the Logitech and Xbox controllers are being utilized.
  */
 enum ChannelPWM
 {
@@ -34,7 +34,7 @@ enum ChannelPWM
 };
 
 /**
- * @enum	ChannelAnalog
+ * @enum	    ChannelAnalog
  * @description Holds the channels for all analog sensors.
  */
 enum ChannelAnalog
@@ -43,7 +43,7 @@ enum ChannelAnalog
 };
 
 /**
- * @enum	ChannelDigital
+ * @enum	    ChannelDigital
  * @description Holds the channels for all digital sensors.
  */
 enum ChannelDigital
@@ -52,7 +52,7 @@ enum ChannelDigital
 };
 
 /**
- * @enum	ChannelSolenoid
+ * @enum	    ChannelSolenoid
  * @description Holds the channels for all solenoids.
  */
 enum ChannelSolenoid
@@ -66,7 +66,7 @@ enum ChannelSolenoid
 };
 
 /**
- * @enum	ChannelPDP
+ * @enum	    ChannelPDP
  * @description Holds the PDP channels for motors.
  */
 enum ChannelPDP

@@ -81,7 +81,7 @@ class Robot : public frc::SampleRobot {
   //BjorgArcadeDrive* m_arcdriveSystem = new BjorgArcadeDrive(m_leftMotor, m_rightMotor, &XboxController, &XboxController);
 
   //Our generic motors, take the PWM channel and the motor type
-	//Motor* m_otherMotor = new Motor(ChannelPWM::LIFT_MOTOR, Motor_Type::SPARK);
+	//Motor* m_otherMotor = new Motor(ChannelPWM::LIFT_MOTOR, MotorType::SPARK);
 
   Compressor* m_compressor = new Compressor(0);
 

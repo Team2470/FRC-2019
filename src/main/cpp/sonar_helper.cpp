@@ -35,7 +35,7 @@ double MaxSonar::sonarRange()
 	return rangeInches;
 }
 
-double MaxSonar::Voltage()
+double MaxSonar::voltage()
 {
 	double volt = 0;
 	volt = ultrasonicSensor->GetVoltage();

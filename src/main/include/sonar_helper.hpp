@@ -45,7 +45,7 @@ public:
 	 * @description Calculates the current voltage (volts) read by the sensor.
 	 * @returns     The calculated voltage.
 	 */
-	double Voltage();
+	double voltage();
 
 private:
 	double VOLTAGE_SCALING = 0.0098; // Roughly 9.8mV per inch

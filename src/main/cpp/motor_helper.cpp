@@ -8,7 +8,7 @@
 #include <frc/Talon.h>
 #include "motor_helper.hpp"
 
-Motor::Motor(int motorChannel, Motor_Type motorType)
+Motor::Motor(int motorChannel, MotorType motorType)
 {
 	firstRun = true;
 	accelBehavior = Maintain;
@@ -43,10 +43,10 @@ Motor::Motor(int motorChannel, Motor_Type motorType)
 	}
 }
 
-void Motor::GradualRotation(
+void Motor::gradualRotation(
 	double motorMaxSpeed,
 	double speedIncreaseDuration,
-	Behavior_Type newBehavior
+	BehaviorType newBehavior
 )
 {
 	this->gradual_MaxSpeed = motorMaxSpeed;
@@ -70,43 +70,43 @@ void Motor::GradualRotation(
 
 	if ((gradual_CurrentSpeed * testSpeed) >= fabs(gradual_MaxSpeed))
 	{
-		InstantaneousRotation(accelBehavior ? gradual_MaxSpeed : 0);
+		instantaneousRotation(accelBehavior ? gradual_MaxSpeed : 0);
 	}
 	else
 	{
-		AccelerateMotor();
+		accelerateMotor();
 	}
 
 }
 
-void Motor::InstantaneousRotation(double motorSpeed)
+void Motor::instantaneousRotation(double motorSpeed)
 {
 	motorState = Constant;
 	this->pwmMotor->Set(motorSpeed);
 }
 
-void Motor::InstantaneousStop()
+void Motor::instantaneousStop()
 {
 	motorState = Constant;
 	this->pwmMotor->Set(0);
 }
 
-double Motor::GetSpeed()
+double Motor::getSpeed()
 {
 	return this->pwmMotor->Get();
 }
 
-void Motor::MaintainSpeed()
+void Motor::maintainSpeed()
 {
-	InstantaneousRotation(GetSpeed());
+	instantaneousRotation(getSpeed());
 }
 
-void Motor::ResetAccelerate(bool forceReset)
+void Motor::resetAccelerate(bool forceReset)
 {
 	firstRun = ((motorState == Constant || forceReset) ? true : false);
 }
 
-void Motor::AccelerateMotor()
+void Motor::accelerateMotor()
 {
 	currentTime = (clock.Get() * 1000);
 	if((currentTime - lastTime) >= 1)
@@ -122,18 +122,18 @@ void Motor::AccelerateMotor()
 	}
 }
 
-void Motor::Brake()
+void Motor::brake()
 {
 	brakeTimeCurrent = (clock.Get() * 1000);
 	if ((brakeTimeCurrent - brakeTimeLast) >= 5)
 	{
-		InstantaneousRotation(brakeMotorSpeed);
+		instantaneousRotation(brakeMotorSpeed);
 		brakeMotorSpeed = -brakeMotorSpeed;
 		brakeTimeLast = brakeTimeCurrent;
 	}
 }
 
-void Motor::SlowSpeed(double period, double changeSpeed, double multiplier)
+void Motor::slowSpeed(double period, double changeSpeed, double multiplier)
 {
 	timeOff = ((period / 2) * multiplier);
 	timeOn = (period / 2);
@@ -141,12 +141,12 @@ void Motor::SlowSpeed(double period, double changeSpeed, double multiplier)
 
 	if ((slowTimeCurrent - slowTimeLast) >= timeOff && slowStatus)
 	{
-		InstantaneousRotation(0.0);
+		instantaneousRotation(0.0);
 		slowTimeLast = slowTimeCurrent;
 	}
 	else if ((slowTimeCurrent - slowTimeLast) >= timeOn && !slowStatus)
 	{
-		InstantaneousRotation(changeSpeed);
+		instantaneousRotation(changeSpeed);
 		slowTimeLast = slowTimeCurrent;
 	}
 }
