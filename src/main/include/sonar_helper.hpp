@@ -5,10 +5,10 @@
 #include <frc/AnalogInput.h>
 
 /**
- * @enum 	Ultrasonic_Sensor_Type
+ * @enum 	UltrasonicSensorType
  * @description Holds the four different supported ultrasonic sensor types.
  */ 
-enum Ultrasonic_Sensor_Type
+enum UltrasonicSensorType
 {
 	HRLV,
 	HRUSB,
@@ -31,7 +31,7 @@ public:
 	 * @param	ultrasonicChannel -- the analog channel for the ultrasonic sensor.
 	 * @param	sonarType	  -- the category of ultrasonic sensor.
 	 */
-    	MaxSonar(int ultrasonicChannel, Ultrasonic_Sensor_Type sonarType);
+    MaxSonar(int ultrasonicChannel, UltrasonicSensorType sonarType);
 
     	/**
  	* @function    sonarRange
@@ -49,7 +49,7 @@ public:
 
 private:
 	double VOLTAGE_SCALING = 0.0098; // Roughly 9.8mV per inch
-	Ultrasonic_Sensor_Type sensorFamily;
+	UltrasonicSensorType sensorFamily;
 	frc::AnalogInput* ultrasonicSensor;
 };
 

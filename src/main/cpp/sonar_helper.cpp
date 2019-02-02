@@ -3,12 +3,12 @@
 #include <frc/Ultrasonic.h>
 #include "sonar_helper.hpp"
 
-MaxSonar::MaxSonar(int ultrasonicChannel, Ultrasonic_Sensor_Type sonarType)
+MaxSonar::MaxSonar(int ultrasonicChannel, UltrasonicSensorType sonarType)
 {
-    	ultrasonicSensor = new frc::AnalogInput(ultrasonicChannel);
-    	sensorFamily = sonarType;
+    ultrasonicSensor = new frc::AnalogInput(ultrasonicChannel);
+    sensorFamily = sonarType;
     
-    	switch(sensorFamily)
+    switch(sensorFamily)
 	{
 		case HRLV:
 			VOLTAGE_SCALING = (1 / 41.0105);//0.00096063044;

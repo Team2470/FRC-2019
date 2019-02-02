@@ -43,7 +43,8 @@ void Robot::RobotInit()
  * if-else structure below with additional strings. If using the SendableChooser
  * make sure to add them to the chooser code above as well.
  */
-void Robot::Autonomous() {
+void Robot::Autonomous() 
+{
   std::string autoSelected = m_chooser.GetSelected();
   // std::string autoSelected = frc::SmartDashboard::GetString(
   // "Auto Selector", kAutoNameDefault);
@@ -53,7 +54,8 @@ void Robot::Autonomous() {
   // disabled here because motor updates are not looped in this autonomous mode.
   //m_robotDrive.SetSafetyEnabled(false);
 
-  if (autoSelected == kAutoNameCustom) {
+  if (autoSelected == kAutoNameCustom) 
+  {
     // Custom Auto goes here
     std::cout << "Running custom Autonomous" << std::endl;
 
@@ -63,7 +65,9 @@ void Robot::Autonomous() {
 
     // Stop robot
     //m_robotDrive.ArcadeDrive(0.0, 0.0);
-  } else {
+  } 
+  else 
+  {
     // Default Auto goes here
     std::cout << "Running default Autonomous" << std::endl;
 
@@ -79,7 +83,8 @@ void Robot::Autonomous() {
 /**
  * Runs the motors with arcade steering.
  */
-void Robot::OperatorControl() {
+void Robot::OperatorControl() 
+{
   //Drive system variables
   m_driveSystem->moveCtrl = Axis_XBOX::XBOX_RIGHT_JOYSTICK_Y;
   m_driveSystem->shiftCtrl = Axis_XBOX::XBOX_RIGHT_JOYSTICK_X;
@@ -113,15 +118,15 @@ void Robot::OperatorControl() {
     shiftJoyVal = RightDriveJoystick.GetX();
     rotateJoyVal = LeftDriveJoystick.GetX();
 
-    currentFrontLeft = pdp->GetCurrent(Channel_PDP::PDP_FRONT_LEFT_MOTOR);
-    currentBackLeft = pdp->GetCurrent(Channel_PDP::PDP_BACK_LEFT_MOTOR);
-    currentFrontRight = pdp->GetCurrent(Channel_PDP::PDP_FRONT_RIGHT_MOTOR);
-    currentBackRight = pdp->GetCurrent(Channel_PDP::PDP_BACK_RIGHT_MOTOR);
-    currentIntakeLeft = pdp->GetCurrent(Channel_PDP::PDP_INTAKE_LEFT_MOTOR);
-    currentIntakeRight = pdp->GetCurrent(Channel_PDP::PDP_INTAKE_RIGHT_MOTOR);
+    currentFrontLeft = pdp->GetCurrent(ChannelPDP::PDP_FRONT_LEFT_MOTOR);
+    currentBackLeft = pdp->GetCurrent(ChannelPDP::PDP_BACK_LEFT_MOTOR);
+    currentFrontRight = pdp->GetCurrent(ChannelPDP::PDP_FRONT_RIGHT_MOTOR);
+    currentBackRight = pdp->GetCurrent(ChannelPDP::PDP_BACK_RIGHT_MOTOR);
+    currentIntakeLeft = pdp->GetCurrent(ChannelPDP::PDP_INTAKE_LEFT_MOTOR);
+    currentIntakeRight = pdp->GetCurrent(ChannelPDP::PDP_INTAKE_RIGHT_MOTOR);
 
     //Camera
-    currentLimelight = pdp->GetCurrent(Channel_PDP::PDP_LIMELIGHT_CAMERA);
+    currentLimelight = pdp->GetCurrent(ChannelPDP::PDP_LIMELIGHT_CAMERA);
 
     if (LeftButtonHub.GetRawButton(Generic_Controller_Left::SWITCH_A))
     {
@@ -188,7 +193,7 @@ void Robot::OperatorControl() {
 /**
  * Runs during test mode
  */
-void Robot::Test() {}
+void Robot::Test() { }
 
 #ifndef RUNNING_FRC_TESTS
 int main() { return frc::StartRobot<Robot>(); }

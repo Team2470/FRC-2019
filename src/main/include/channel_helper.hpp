@@ -1,11 +1,11 @@
 /**
- * @enum 	Channel_Controller
+ * @enum 	ChannelController
  * @description Holds the controller input channels.
  * @notes       The number correlates to the 'USB Order' number on the driver station.
  * 		XBOX_CONTROLLER and LOGITECH_CONTROLLER should only be used when the 
  *		Logitech or Xbox controllers are being used; if the 
  */
-enum Channel_Controller
+enum ChannelController
 {
 	XBOX_CONTROLLER = 0,				//When we are using the logitech and xbox controllers
 	LOGITECH_CONTROLLER = 1,			//When we are using the logitech and xbox controllers
@@ -17,11 +17,11 @@ enum Channel_Controller
 };
 
 /**
- * @enum	Channel_PWM
+ * @enum	ChannelPWM
  * @description Holds the motor input channels.
  * @note	Used when the Logitech and Xbox controllers are being utilized.
  */
-enum Channel_PWM
+enum ChannelPWM
 {
 	//LEFT_MOTOR = 0,
 	//RIGHT_MOTOR = 1,
@@ -34,28 +34,28 @@ enum Channel_PWM
 };
 
 /**
- * @enum	Channel_Analog
+ * @enum	ChannelAnalog
  * @description Holds the channels for all analog sensors.
  */
-enum Channel_Analog
+enum ChannelAnalog
 {
-	//ULTRASONIC_SENSOR_FRONT_LEFT = 0
+	ULTRASONIC_SENSOR_FRONT_LEFT = 0 // TODO: ENSURE CORRECT CHANNEL FOR ULTRASONIC SENSOR
 };
 
 /**
- * @enum	Channel_Digital
+ * @enum	ChannelDigital
  * @description Holds the channels for all digital sensors.
  */
-enum Channel_Digital
+enum ChannelDigital
 {
 	//LIMITSWITCH_ROBOT = 1
 };
 
 /**
- * @enum	Channel_Solenoid
+ * @enum	ChannelSolenoid
  * @description Holds the channels for all solenoids.
  */
-enum Channel_Solenoid
+enum ChannelSolenoid
 {
 	FRONT_LEFT_SOLENOID = 0,
 	BACK_LEFT_SOLENOID = 1,
@@ -66,10 +66,10 @@ enum Channel_Solenoid
 };
 
 /**
- * @enum	Channel_PDP
+ * @enum	ChannelPDP
  * @description Holds the PDP channels for motors.
  */
-enum Channel_PDP
+enum ChannelPDP
 {
 	PDP_FRONT_LEFT_MOTOR = 0,
 	PDP_BACK_LEFT_MOTOR = 1,

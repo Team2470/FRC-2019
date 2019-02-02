@@ -5,7 +5,13 @@
 #include <frc/smartdashboard/Smartdashboard.h>
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
+#include "channel_helper.hpp"
+#include "sonar_helper.hpp"
 
+/**
+ * @enum        LimelightLedMode
+ * @description Holds the four different Limelight led modes.
+ */
 enum LimelightLedMode
 {
     CURRENT_PIPELINE,
@@ -14,6 +20,10 @@ enum LimelightLedMode
     FORCE_ON
 };
 
+/**
+ * @enum        LimelightCameraMode
+ * @description Holds the two different Limelight camera modes.
+ */
 enum LimelightCameraMode
 {
     VISION_PROCESSOR,
@@ -28,6 +38,14 @@ enum LimelightCameraMode
 class VisionProcessing
 {
 public:
+    bool limelightTargets_TV;
+    double limelightHorizontalOffset_TX;
+    double limelightVerticalOffset_TY;
+    double limelightTargetArea_TA;
+    double limelightSkew_TS;
+    double limelightBoundingBoxWidth_THOR;
+    double limelightBoundingBoxHeight_TVERT;
+
     /**
      * @constructor VisionProcessing
      * @description Create an instance of the VisionProcessing class.
@@ -64,17 +82,10 @@ public:
      */
     void SetPipeline(short pipeline);
 
-
-
 private:
+    // TODO: ENSURE CORRECT ULTRASONIC SENSOR TYPE
+    MaxSonar sonarSensor = MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_FRONT_LEFT, UltrasonicSensorType::LV);
     std::shared_ptr<NetworkTable> networkTable;
-    bool limelightTargets_TV;
-    double limelightHorizontalOffset_TX;
-    double limelightVerticalOffset_TY;
-    double limelightTargetArea_TA;
-    double limelightSkew_TS;
-    double limelightBoundingBoxWidth_THOR;
-    double limelightBoundingBoxHeight_TVERT;
 };
 
 #endif
