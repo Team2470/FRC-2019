@@ -156,6 +156,10 @@ void Robot::OperatorControl()
 
     m_driveSystem->mecanumDrive();
 
+    if(XboxController.GetRawButton(ButtonXbox::XBOX_X))
+    {
+        compressor->toggleCompressor();
+    }
 
     //Driver Station//
     //PDP stuff
