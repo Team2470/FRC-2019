@@ -69,15 +69,16 @@ public:
 	int averageRaw();
 
 private:
-	double VOLTAGE_SCALING = 1.0;
-	double VOLTAGE_INTERCEPT = 1.0;
-	InfraredSensorType sensorFamily;
+    InfraredSensorType sensorFamily;
 	frc::AnalogInput* irSensor;
 
-	static constexpr double colorError = 0.1;
-	static constexpr double whiteValue = 0.0;
-	static constexpr double blackValue = 1.0;
-	static constexpr double grayValue = 2.0;
+	double voltageScaling = 1.0;
+	double voltageIntercept = 1.0;
+
+	static constexpr double COLOR_ERROR = 0.1;
+	static constexpr double WHITE_VALUE = 0.0;
+	static constexpr double BLACK_VALUE = 1.0;
+	static constexpr double GRAY_VALUE = 2.0;
 };
 
 #endif

@@ -10,32 +10,32 @@
 
 Motor::Motor(int motorChannel, MotorType motorType)
 {
-	firstRun = true;
-	accelBehavior = Maintain;
-	motorState = Constant;
-	motorFamily = motorType;
-	clock.Start();
+	this->firstRun = true;
+	this->accelBehavior = BehaviorType::MAINTAIN;
+	this->motorState = VelocityState::CONSTANT;
+	this->motorFamily = motorType;
+	this->clock.Start();
 	
-	switch(motorFamily)
+	switch(this->motorFamily)
 	{
-		case TALON:
-			motorTalon = new frc::Talon(motorChannel);
-			pwmMotor = motorTalon;
+		case MotorType::TALON:
+			this->motorTalon = new frc::Talon(motorChannel);
+			this->pwmMotor = this->motorTalon;
 			break;
 
-		case VICTOR:
-			motorVictor = new frc::Victor(motorChannel);
-			pwmMotor = motorVictor;
+		case MotorType::VICTOR:
+			this->motorVictor = new frc::Victor(motorChannel);
+			this->pwmMotor = this->motorVictor;
 			break;
 
-		case VICTOR_SP:
-			motorVictorSP = new frc::VictorSP(motorChannel);
-			pwmMotor = motorVictorSP;
+		case MotorType::VICTOR_SP:
+			this->motorVictorSP = new frc::VictorSP(motorChannel);
+			this->pwmMotor = this->motorVictorSP;
 			break;
 
-		case SPARK:
-			motorSpark = new frc::Spark(motorChannel);
-			pwmMotor = motorSpark;
+		case MotorType::SPARK:
+			this->motorSpark = new frc::Spark(motorChannel);
+			this->pwmMotor = this->motorSpark;
 			break;
 
 		default:
@@ -50,39 +50,43 @@ void Motor::gradualRotation(
 )
 {
 	this->gradualMaxSpeed = motorMaxSpeed;
-	accelBehavior = newBehavior;
+	this->accelBehavior = newBehavior;
 
-	if(firstRun)
+	if(this->firstRun)
 	{
 		this->gradualCurrentSpeed = this->pwmMotor->Get();
-		this->speedIncreaseRate = (gradualMaxSpeed - gradualCurrentSpeed) / (1000 * speedIncreaseDuration);
-		firstRun = false;
-		lastTime = 0;
+		this->speedIncreaseRate = (this->gradualMaxSpeed - this->gradualCurrentSpeed) / (1000 * speedIncreaseDuration);
+		this->firstRun = false;
+		this->lastTime = 0;
 	}
 
-    testSpeed = speedIncreaseRate >= 0 
+    this->testSpeed = this->speedIncreaseRate >= 0 
         ? 1 
         : -1;
 
-	if((gradualCurrentSpeed * testSpeed) >= fabs(gradualMaxSpeed))
+	if((this->gradualCurrentSpeed * this->testSpeed) >= fabs(this->gradualMaxSpeed))
 	{
-		instantaneousRotation(accelBehavior ? gradualMaxSpeed : 0);
+		this->instantaneousRotation(
+            this->accelBehavior 
+                ? this->gradualMaxSpeed 
+                : 0
+        );
 	}
 	else
 	{
-		accelerateMotor();
+		this->accelerateMotor();
 	}
 }
 
 void Motor::instantaneousRotation(double motorSpeed)
 {
-	motorState = Constant;
+	this->motorState = VelocityState::CONSTANT;
 	this->pwmMotor->Set(motorSpeed);
 }
 
 void Motor::instantaneousStop()
 {
-	motorState = Constant;
+	this->motorState = VelocityState::CONSTANT;
 	this->pwmMotor->Set(0);
 }
 
@@ -93,57 +97,51 @@ double Motor::getSpeed()
 
 void Motor::maintainSpeed()
 {
-	instantaneousRotation(getSpeed());
+	this->instantaneousRotation(this->getSpeed());
 }
 
 void Motor::resetAccelerate(bool forceReset)
 {
-	firstRun = (motorState == Constant || forceReset) 
-        ? true 
-        : false;
+	this->firstRun = this->motorState == VelocityState::CONSTANT || forceReset;
 }
 
 void Motor::accelerateMotor()
 {
-	currentTime = (clock.Get() * 1000);
-	if((currentTime - lastTime) >= 1)
+	this->currentTime = this->clock.Get() * 1000;
+	if((this->currentTime - this->lastTime) >= 1)
 	{
-		motorState = Accelerate;
-		//this->gradualCurrentSpeed = this->motorSpark->Get();
-		this->gradualCurrentSpeed = this->gradualCurrentSpeed + speedIncreaseRate;
-		//this->gradualRoundedSpeed = (floor(gradualCurrentSpeed * 100)/100);
-		//std::cout << currentTime << std::endl;
-		//SmartDashboard::PutString("DB/String 9", std::to_string(speedIncreaseRate) + " " + std::to_string(gradualCurrentSpeed));
-		this->pwmMotor->Set(gradualCurrentSpeed);
+		this->motorState = VelocityState::ACCELERATE;
+		this->gradualCurrentSpeed = this->gradualCurrentSpeed + this->speedIncreaseRate;
+		this->pwmMotor->Set(this->gradualCurrentSpeed);
 		this->lastTime = this->currentTime;
 	}
 }
 
 void Motor::brake()
 {
-	brakeTimeCurrent = (clock.Get() * 1000);
-	if((brakeTimeCurrent - brakeTimeLast) >= 5)
+	this->brakeTimeCurrent = this->clock.Get() * 1000;
+	if((this->brakeTimeCurrent - this->brakeTimeLast) >= 5)
 	{
-		instantaneousRotation(brakeMotorSpeed);
-		brakeMotorSpeed = -brakeMotorSpeed;
-		brakeTimeLast = brakeTimeCurrent;
+		this->instantaneousRotation(this->brakeMotorSpeed);
+		this->brakeMotorSpeed = -this->brakeMotorSpeed;
+		this->brakeTimeLast = this->brakeTimeCurrent;
 	}
 }
 
 void Motor::slowSpeed(double period, double changeSpeed, double multiplier)
 {
-	timeOff = ((period / 2) * multiplier);
-	timeOn = (period / 2);
-	slowTimeCurrent = (clock.Get() * 1000);
+	this->timeOff = (period / 2) * multiplier;
+	this->timeOn = period / 2;
+	this->slowTimeCurrent = this->clock.Get() * 1000;
 
-	if((slowTimeCurrent - slowTimeLast) >= timeOff && slowStatus)
+	if((this->slowTimeCurrent - this->slowTimeLast) >= this->timeOff && this->slowStatus)
 	{
-		instantaneousRotation(0.0);
-		slowTimeLast = slowTimeCurrent;
+		this->instantaneousRotation(0.0);
+		this->slowTimeLast = this->slowTimeCurrent;
 	}
-	else if((slowTimeCurrent - slowTimeLast) >= timeOn && !slowStatus)
+	else if((this->slowTimeCurrent - this->slowTimeLast) >= this->timeOn && !this->slowStatus)
 	{
-		instantaneousRotation(changeSpeed);
-		slowTimeLast = slowTimeCurrent;
+		this->instantaneousRotation(changeSpeed);
+		this->slowTimeLast = this->slowTimeCurrent;
 	}
 }

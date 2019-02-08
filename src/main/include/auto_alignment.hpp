@@ -49,10 +49,14 @@ public:
     double calculateResolutionAngle();
 
 private:
-    const double IDEAL_RECTANGLE_WIDTH = 10.76;
-    const double IDEAL_RECTANGLE_HEIGHT = 5.325;
+    // TODO: ENSURE CORRECT GYRO CHANNEL
+    // TODO: ENSURE CORRECT ULTRASONIC SENSOR TYPE
+    frc::AnalogGyro gyroSensor = frc::AnalogGyro(0);
+    MaxSonar sonarSensor = MaxSonar(0, UltrasonicSensorType::LV);
+    VisionProcessing visionProcessing = VisionProcessing();
 
-    VisionProcessing visionProcessing;
+    static constexpr double IDEAL_RECTANGLE_WIDTH = 10.76;
+    static constexpr double IDEAL_RECTANGLE_HEIGHT = 5.325;
 };
 
 #endif

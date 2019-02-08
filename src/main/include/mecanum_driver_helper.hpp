@@ -19,8 +19,6 @@ public:
 	int moveCtrl = 0;
     int shiftCtrl = 0;
 	int rotateCtrl = 0;
-	//int rtTurn = 0;
-	//int lftTurn = 0;
 	int fwdMove = 0;
 	int bckMove = 0;
     int fwdShift = 0;
@@ -29,8 +27,6 @@ public:
 	int bckRotate = 0;
 	int joystickInt = 0;
 	int reverseDrive = -1;
-	//bool rotateEnable = true;
-	//bool sqrInput = false;
 	bool multiMove = false;
 	bool multiShift = false;
 	bool multiRotate = false;
@@ -105,16 +101,11 @@ private:
 	float movementValue = 0.0;
     float shiftValue = 0.0;
 	float rotateValue = 0.0;
+
     frc::MecanumDrive* robotDrive;
 	frc::Joystick* driveControllerMove;
 	frc::Joystick* driveControllerShift;
     frc::Joystick* driveControllerRotate;
-	
-    // TODO: ENSURE CORRECT GYRO CHANNEL
-    // TODO: ENSURE CORRECT ULTRASONIC SENSOR TYPE
-    frc::AnalogGyro gyroSensor = frc::AnalogGyro(0);
-    MaxSonar sonarSensor = MaxSonar(0, UltrasonicSensorType::LV);
-    VisionProcessing visionProcessing = VisionProcessing();
 
 	/**
 	 * @function	setMovement

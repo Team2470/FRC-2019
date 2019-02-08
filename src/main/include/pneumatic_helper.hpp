@@ -45,8 +45,8 @@ public:
 	bool getVal();
 
 private:
+    frc::Solenoid* solenoidSingle;
 	bool currentState = false;
-	frc::Solenoid* solenoidSingle;
 };
 
 
@@ -181,6 +181,7 @@ public:
 	void clearStickyFaults();
 
 private:
+    frc::Compressor* compressor;
 	bool loopControl = false;
 	bool currentState = false;
 	bool currentHighFault = false;        // GetCompressorCurrentTooHighFault
@@ -189,7 +190,6 @@ private:
 	bool notConnectedFaultSticky = false; // GetCompressorNotConnectedStickyFault
 	bool shortCircuitFault = false;	      // GetCompressorShortedFault
 	bool shortCircuitFaultSticky = false; // GetCompressorShortedStickyFault
-	frc::Compressor* compressor;
 };
 
 #endif

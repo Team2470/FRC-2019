@@ -13,68 +13,76 @@ BjorgTankDrive::BjorgTankDrive(
 	frc::Joystick* controllerRight
 )
 {
-	robotDrive = new frc::DifferentialDrive 
+	this->robotDrive = new frc::DifferentialDrive 
     { 
         *leftMotor, 
         *rightMotor 
     };
 
-	driveControllerLeft = controllerLeft;
-	driveControllerRight = controllerRight;
-	robotDrive->SetExpiration(0.1);
+	this->driveControllerLeft = controllerLeft;
+	this->driveControllerRight = controllerRight;
+	this->robotDrive->SetExpiration(0.1);
 }
 
 void BjorgTankDrive::tankDrive()
 {
-	robotDrive->SetSafetyEnabled(true);
-	setMovement();
+	this->robotDrive->SetSafetyEnabled(true);
+	this->setMovement();
 
-	if(leftValue <= 0.1f && leftValue >= -0.1f)
+	if(this->leftValue <= 0.1f && this->leftValue >= -0.1f)
 	{
-		leftValue = 0.0f;
+		this->leftValue = 0.0f;
 	}
 
-	if(rightValue <= 0.1f && rightValue >= -0.1f)
+	if(this->rightValue <= 0.1f && this->rightValue >= -0.1f)
 	{
-		rightValue = 0.0f;
+		this->rightValue = 0.0f;
 	}
 
-	robotDrive->TankDrive(leftReverse * leftMultiplier * leftValue, rightReverse * rightMultiplier * rightValue, sqrInputs);
+	this->robotDrive->TankDrive(
+        this->leftReverse * this->leftMultiplier * this->leftValue, 
+        this->rightReverse * this->rightMultiplier * this->rightValue, 
+        this->sqrInputs
+    );
 }
 
 void BjorgTankDrive::tankDrive(double leftMovement, double rightMovement)
 {
-	robotDrive->SetSafetyEnabled(true);
-	robotDrive->TankDrive(leftMovement, rightMovement);
+	this->robotDrive->SetSafetyEnabled(true);
+	this->robotDrive->TankDrive(leftMovement, rightMovement);
 }
 
 void BjorgTankDrive::twoBtnLeft()
 {
-	leftValue = driveControllerLeft->GetRawAxis(leftFwd) - driveControllerLeft->GetRawAxis(leftBck);
+	this->leftValue = 
+        this->driveControllerLeft->GetRawAxis(this->leftFwd) - 
+        this->driveControllerLeft->GetRawAxis(this->leftBck);
 }
 	
 void BjorgTankDrive::twoBtnRight()
 {
-	rightValue = driveControllerRight->GetRawAxis(rightFwd) - driveControllerRight->GetRawAxis(rightBck);
+	this->rightValue = 
+        this->driveControllerRight->GetRawAxis(this->rightFwd) - 
+        this->driveControllerRight->GetRawAxis(this->rightBck);
 }
     
 void BjorgTankDrive::setMovement()
 {
-	if(multiLeft)
+	if(this->multiLeft)
 	{
-		twoBtnLeft();
+		this->twoBtnLeft();
 	}
 	else
 	{
-		leftValue = driveControllerLeft->GetRawAxis(leftCtrl);
+		this->leftValue = this->driveControllerLeft->GetRawAxis(this->leftCtrl);
 	}
 
-	if(multiRight)
+	if(this->multiRight)
 	{
-		twoBtnRight();
+		this->twoBtnRight();
 	}
 	else
 	{
-		rightValue = driveControllerRight->GetRawAxis(rightCtrl);
+		this->rightValue = this->driveControllerRight->GetRawAxis(this->rightCtrl);
 	}
 }

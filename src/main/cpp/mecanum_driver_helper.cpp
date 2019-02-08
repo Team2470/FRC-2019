@@ -16,7 +16,7 @@ BjorgMecanumDrive::BjorgMecanumDrive(
     frc::Joystick* rotateController
 )
 {
-    robotDrive = new frc::MecanumDrive 
+    this->robotDrive = new frc::MecanumDrive 
     { 
         *frontLeftMotor, 
         *backLeftMotor, 
@@ -24,85 +24,91 @@ BjorgMecanumDrive::BjorgMecanumDrive(
         *backRightMotor 
     };
     
-    driveControllerMove = moveController;
-    driveControllerShift = shiftController;
-    driveControllerRotate = rotateController;
-    robotDrive->SetExpiration(0.1);
+    this->driveControllerMove = moveController;
+    this->driveControllerShift = shiftController;
+    this->driveControllerRotate = rotateController;
+    this->robotDrive->SetExpiration(0.1);
 }
 
 void BjorgMecanumDrive::mecanumDrive()
 {
-    robotDrive->SetSafetyEnabled(true);
-    setMovement();
-    robotDrive->DriveCartesian(moveMultiplier * movementValue, shiftMultiplier * shiftValue, rotateMultiplier * rotateValue);
+    this->robotDrive->SetSafetyEnabled(true);
+    this->setMovement();
+    this->robotDrive->DriveCartesian(moveMultiplier * movementValue, shiftMultiplier * shiftValue, rotateMultiplier * rotateValue);
 }
 
 void BjorgMecanumDrive::mecanumDrive(double movement, double shift, double rotate)
 {
-    robotDrive->SetSafetyEnabled(true);
-    robotDrive->DriveCartesian(movement, shift, rotate);
+    this->robotDrive->SetSafetyEnabled(true);
+    this->robotDrive->DriveCartesian(movement, shift, rotate);
 }
 
 void BjorgMecanumDrive::mecanumDriveAutoAlign()
 {
-    
+    // TODO: IMPLEMENT
 }
 
 void BjorgMecanumDrive::twoBtnMove()
 {
-    movementValue = driveControllerMove->GetRawAxis(fwdMove) - driveControllerMove->GetRawAxis(bckMove);
+    this->movementValue = 
+        this->driveControllerMove->GetRawAxis(this->fwdMove) - 
+        this->driveControllerMove->GetRawAxis(this->bckMove);
 }
 
 void BjorgMecanumDrive::twoBtnShift()
 {
-    shiftValue = driveControllerShift->GetRawAxis(fwdShift) - driveControllerShift->GetRawAxis(bckShift);
+    this->shiftValue = 
+        this->driveControllerShift->GetRawAxis(this->fwdShift) - 
+        this->driveControllerShift->GetRawAxis(this->bckShift);
 }
 
 void BjorgMecanumDrive::twoBtnRotate()
 {
-    rotateValue = driveControllerRotate->GetRawAxis(fwdRotate) - driveControllerRotate->GetRawAxis(bckRotate);
+    this->rotateValue = 
+        this->driveControllerRotate->GetRawAxis(this->fwdRotate) - 
+        this->driveControllerRotate->GetRawAxis(this->bckRotate);
 }
     
 void BjorgMecanumDrive::setMovement()
 {
-    if(multiMove)
+    if(this->multiMove)
     {
-        twoBtnMove();
+        this->twoBtnMove();
     }
     else
     {
-        movementValue = driveControllerMove->GetRawAxis(moveCtrl);
+        this->movementValue = this->driveControllerMove->GetRawAxis(this->moveCtrl);
     }
 
-    if(multiShift)
+    if(this->multiShift)
     {
-        twoBtnShift();
+        this->twoBtnShift();
     }
     else
     {
-        shiftValue = driveControllerShift->GetRawAxis(shiftCtrl);
+        this->shiftValue = this->driveControllerShift->GetRawAxis(this->shiftCtrl);
     }
 
-    if(multiRotate)
+    if(this->multiRotate)
     {
-        twoBtnRotate();
+        this->twoBtnRotate();
     }
     else
     {
-        rotateValue = driveControllerRotate->GetRawAxis(rotateCtrl);
+        this->rotateValue = this->driveControllerRotate->GetRawAxis(this->rotateCtrl);
     }
 }
 
 void BjorgMecanumDrive::setRotate(bool rotateEn)
 {
-    if(multiRotate)
+    if(this->multiRotate)
     {
-        twoBtnRotate();
+        this->twoBtnRotate();
     }
     else
     {
-        rotateValue = rotateEn 
-            ? driveControllerRotate->GetRawAxis(rotateCtrl) 
+        this->rotateValue = rotateEn 
+            ? this->driveControllerRotate->GetRawAxis(this->rotateCtrl) 
             : 0;
     }
 }

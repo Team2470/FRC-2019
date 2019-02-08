@@ -15,8 +15,6 @@ class BjorgTankDrive
 public:
 	int leftCtrl = 0;
 	int rightCtrl = 0;
-	//int rtTurn = 0;
-	//int lftTurn = 0;
 	int leftFwd = 0;
 	int leftBck = 0;
 	int rightFwd = 0;
@@ -74,11 +72,12 @@ public:
 	void twoBtnRight();
 	
 private:
-	float leftValue = 0.0;
-	float rightValue = 0.0;
-	frc::DifferentialDrive* robotDrive;
+    frc::DifferentialDrive* robotDrive;
 	frc::Joystick* driveControllerLeft;
 	frc::Joystick* driveControllerRight;
+
+	float leftValue = 0.0;
+	float rightValue = 0.0;
     
 	/**
 	 * @function    setMovement

@@ -27,8 +27,8 @@ enum MotorType
  */
 enum BehaviorType
 {
-	Maintain = true,
-	Stop = false
+	MAINTAIN = true,
+	STOP = false
 };
 
 /**
@@ -37,8 +37,8 @@ enum BehaviorType
  */
 enum VelocityState
 {
-	Constant = 1,
-	Accelerate = 2
+	CONSTANT = 1,
+	ACCELERATE = 2
 };
 
 /**
@@ -71,7 +71,7 @@ public:
 	void gradualRotation(
 		double motorMaxSpeed,
 		double speedIncreaseDuration,
-		BehaviorType newBehavior = Maintain
+		BehaviorType newBehavior = BehaviorType::MAINTAIN
 	);
 	
 	/**
@@ -116,22 +116,13 @@ public:
 	/**
 	 * @function    slowSpeed
 	 * @description Accelerate or decelerate the motor over a specific period.
-	 * @param	period 	    -- The period over which to perform the speed change.
-	 * @param	changeSpeed -- The change in speed to perform.
-	 * @param	multiplier  -- Increases or decreases the period.
+	 * @param	    period 	    -- The period over which to perform the speed change.
+	 * @param	    changeSpeed -- The change in speed to perform.
+	 * @param	    multiplier  -- Increases or decreases the period.
 	 */
 	void slowSpeed(double period, double changeSpeed, double multiplier = 1);
 
 private:
-    BehaviorType accelBehavior;
-	MotorType motorFamily;
-	frc::Talon* motorTalon;
-	frc::Victor* motorVictor;
-	frc::VictorSP* motorVictorSP;
-	frc::Spark* motorSpark;
-	frc::PWMSpeedController* pwmMotor;
-	frc::Timer clock;
-
 	bool gradualMaxSpeedReached = false;
 	bool firstRun;
 	int testSpeed = 1;
@@ -150,12 +141,20 @@ private:
 	double timeOff = 0;
 	bool slowStatus = false;
 	
+    BehaviorType accelBehavior;
+	MotorType motorFamily;
+	frc::Talon* motorTalon;
+	frc::Victor* motorVictor;
+	frc::VictorSP* motorVictorSP;
+	frc::Spark* motorSpark;
+	frc::PWMSpeedController* pwmMotor;
+	frc::Timer clock;
+
 	/**
 	 * @function    accelerateMotor
 	 * @description Accelerate the motor at a constant rate.
 	 */
 	void accelerateMotor();
-
 };
 
 #endif

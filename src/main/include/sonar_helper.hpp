@@ -48,9 +48,9 @@ public:
 	double voltage();
 
 private:
-	double VOLTAGE_SCALING = 0.0098; // Roughly 9.8mV per inch
 	UltrasonicSensorType sensorFamily;
 	frc::AnalogInput* ultrasonicSensor;
+	double voltageScaling = 0.0098; // Roughly 9.8mV per inch
 };
 
 #endif
