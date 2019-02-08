@@ -86,12 +86,12 @@ void Robot::Autonomous()
 void Robot::OperatorControl() 
 {
   //Drive system variables
-  m_driveSystem->moveCtrl = AxisXbox::XBOX_RIGHT_JOYSTICK_Y;
-  m_driveSystem->shiftCtrl = AxisXbox::XBOX_RIGHT_JOYSTICK_X;
-  m_driveSystem->rotateCtrl = AxisXbox::XBOX_LEFT_JOYSTICK_X;
-  m_driveSystem->multiMove = false;
-  m_driveSystem->multiShift = false;
-  m_driveSystem->multiRotate = false;
+  driveSystem->moveCtrl = AxisXbox::XBOX_RIGHT_JOYSTICK_Y;
+  driveSystem->shiftCtrl = AxisXbox::XBOX_RIGHT_JOYSTICK_X;
+  driveSystem->rotateCtrl = AxisXbox::XBOX_LEFT_JOYSTICK_X;
+  driveSystem->multiMove = false;
+  driveSystem->multiShift = false;
+  driveSystem->multiRotate = false;
 
   //Intake system variables
   //m_intakeSystem->moveCtrl = FlightJoystick.GetYChannel();
@@ -130,17 +130,17 @@ void Robot::OperatorControl()
 
     if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_A))
     {
-      m_driveSystem->moveMultiplier = 0.5;
-      m_driveSystem->shiftMultiplier = 0.5;
-      m_driveSystem->rotateMultiplier = 0.5;
+      driveSystem->moveMultiplier = 0.5;
+      driveSystem->shiftMultiplier = 0.5;
+      driveSystem->rotateMultiplier = 0.5;
 
       halfSpeed = true;
     }
     else
     {
-      m_driveSystem->moveMultiplier = 1.0;
-      m_driveSystem->shiftMultiplier = 1.0;
-      m_driveSystem->rotateMultiplier = 1.0;
+      driveSystem->moveMultiplier = 1.0;
+      driveSystem->shiftMultiplier = 1.0;
+      driveSystem->rotateMultiplier = 1.0;
 
       halfSpeed = false;
     }
@@ -154,7 +154,7 @@ void Robot::OperatorControl()
       m_intakeSystem->stop();
     }*/
 
-    m_driveSystem->mecanumDrive();
+    driveSystem->mecanumDrive();
 
     if(XboxController.GetRawButton(ButtonXbox::XBOX_X))
     {
