@@ -33,6 +33,12 @@ public:
     void updateVisionProcessing();
 
     /**
+     * @function    resolvePositionAndRotation
+     * @description Resolve the position and rotation of the robot, siquid requiratur.
+     */
+    void resolvePositionAndRotation();
+
+    /**
      * @function    calculateResolutionDistance
      * @description Calculates the distance of the robot relative to the vision target:
      *              i.e, the distance the robot needs to resolve.
