@@ -13,6 +13,7 @@ Drive
 3. DS will display "field" angle	
 
 ## Alternate Flow
+- None
 
 ## Design Notes:
 - Plan is to use a mecanum drive - cartesian?
@@ -47,6 +48,7 @@ Release Hatch
 ## Design Notes
 - The "final" release of the hatch may be done autonomously (step 5)
 
+
 Climb Podium
 ======
 ## Basic Flow
@@ -74,7 +76,8 @@ Climb Podium
 1. Driver can abort
   - Bot will stop anything autonomous that it's doing
  
-
+## Design Notes
+- None
 
 Autonomous vs Teleoperated
 ======
