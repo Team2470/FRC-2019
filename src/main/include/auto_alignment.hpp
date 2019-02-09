@@ -53,7 +53,7 @@ private:
     static constexpr double IDEAL_RECTANGLE_HEIGHT = 5.325;
     static constexpr double PI = 3.14159265;
 
-    // TODO: ENSURE CORRECT GYRO CHANNEL
+    // TODO: ENSURE CORRECT CHANNELS
     // TODO: ENSURE CORRECT ULTRASONIC SENSOR TYPE
     frc::AnalogGyro gyroSensor = frc::AnalogGyro(0);
     MaxSonar sonarSensor = MaxSonar(0, UltrasonicSensorType::LV);

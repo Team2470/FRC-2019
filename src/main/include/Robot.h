@@ -35,27 +35,52 @@
 class Robot : public frc::SampleRobot 
 {
 public:
+    /**
+     * @constructor Robot
+     * @description Construct an instance of the Robot class.
+     */
     Robot();
 
+    /**
+     * @function    RobotInit
+     * @description Initialize the robot.
+     */
     void RobotInit() override;
+
+    /**
+     * @function    Autonomous
+     * @description Run the robot in autonomous mode.
+     */
     void Autonomous() override;
+    
+    /**
+     * @function    OperatorControl
+     * @description Run the robot in operator mode.
+     */
     void OperatorControl() override;
+    
+    /**
+     * @function    Test
+     * @description Run the robot in test mode.
+     */
     void Test() override;
 
-private:
-    frc::PowerDistributionPanel* pdp = new frc::PowerDistributionPanel();
+private:    
     frc::Joystick XboxController { ChannelController::XBOX_CONTROLLER };
 	frc::Joystick LogitechController { ChannelController::LOGITECH_CONTROLLER };
     frc::Joystick LeftDriveJoystick { ChannelController::LEFT_DRIVE_JOYSTICK };
     frc::Joystick RightDriveJoystick { ChannelController::RIGHT_DRIVE_JOYSTICK };
 	frc::Joystick LeftButtonHub { ChannelController::LEFT_BUTTON_HUB };
 	frc::Joystick RightButtonHub { ChannelController::RIGHT_BUTTON_HUB };
+
 	frc::Spark* frontLeftMotor = new frc::Spark(ChannelPWM::FRONT_LEFT_MOTOR);
 	frc::Spark* backLeftMotor = new frc::Spark(ChannelPWM::BACK_LEFT_MOTOR);
 	frc::Spark* frontRightMotor = new frc::Spark(ChannelPWM::FRONT_RIGHT_MOTOR);
     frc::Spark* backRightMotor = new frc::Spark(ChannelPWM::BACK_RIGHT_MOTOR);
 	frc::Spark* intakeMotor = new frc::Spark(ChannelPWM::INTAKE_MOTOR);
     frc::Spark* placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
+
+    frc::PowerDistributionPanel* pdp = new frc::PowerDistributionPanel();    
     BjorgMecanumDrive* driveSystem = new BjorgMecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor, &XboxController, &XboxController, &XboxController);
     Compressor* compressor = new Compressor(0);
 
