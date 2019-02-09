@@ -1,6 +1,7 @@
 #ifndef AUTO_ALIGNMENT_HPP
 #define AUTO_ALIGNMENT_HPP
 
+#include <math.h>
 #include "robot.h"
 #include "vision_processing.hpp"
 
@@ -16,6 +17,8 @@ public:
     double adjustedTargetWidth;
     double adjustedTargetHeight;
     double distanceToResolve;
+    double distanceToResolveParallel;
+    double distanceToResolvePerpendicular;
     double angleToResolve;
     bool resolutionNeeded;
 
@@ -39,6 +42,24 @@ public:
     void resolvePositionAndRotation();
 
     /**
+     * @function
+     * @description Wrapper function for AutoAlignment::calculateResolutionDistance and
+     *              AutoAlignment::calculateResolution; calls them in the correct order.
+     */
+    void calculateResolution();
+
+private:
+    static constexpr double IDEAL_RECTANGLE_WIDTH = 10.76;
+    static constexpr double IDEAL_RECTANGLE_HEIGHT = 5.325;
+    static constexpr double PI = 3.14159265;
+
+    // TODO: ENSURE CORRECT GYRO CHANNEL
+    // TODO: ENSURE CORRECT ULTRASONIC SENSOR TYPE
+    frc::AnalogGyro gyroSensor = frc::AnalogGyro(0);
+    MaxSonar sonarSensor = MaxSonar(0, UltrasonicSensorType::LV);
+    VisionProcessing visionProcessing = VisionProcessing();
+
+    /**
      * @function    calculateResolutionDistance
      * @description Calculates the distance of the robot relative to the vision target:
      *              i.e, the distance the robot needs to resolve.
@@ -53,16 +74,6 @@ public:
      * @returns     The angle of resultion in degrees.
      */
     double calculateResolutionAngle();
-
-private:
-    // TODO: ENSURE CORRECT GYRO CHANNEL
-    // TODO: ENSURE CORRECT ULTRASONIC SENSOR TYPE
-    frc::AnalogGyro gyroSensor = frc::AnalogGyro(0);
-    MaxSonar sonarSensor = MaxSonar(0, UltrasonicSensorType::LV);
-    VisionProcessing visionProcessing = VisionProcessing();
-
-    static constexpr double IDEAL_RECTANGLE_WIDTH = 10.76;
-    static constexpr double IDEAL_RECTANGLE_HEIGHT = 5.325;
 };
 
 #endif

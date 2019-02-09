@@ -75,6 +75,7 @@ public:
 private:
 	float movementValue = 0.0;
 	float rotationValue = 0.0;
+    
 	frc::DifferentialDrive* robotDrive;
 	frc::Joystick* driveControllerMovement;
 	frc::Joystick* driveControllerRotate;
