@@ -82,6 +82,7 @@ private:
     frc::SendableChooser<std::string> m_chooser;
     const std::string kAutoNameDefault = "Default";
     const std::string kAutoNameCustom = "My Auto";
+    
     static constexpr int HATCH_DISTANCE = 24;
 
     double inputVoltage = -1;
