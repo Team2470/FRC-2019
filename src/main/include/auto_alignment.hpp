@@ -2,7 +2,8 @@
 #define AUTO_ALIGNMENT_HPP
 
 #include <math.h>
-#include "robot.h"
+#include <AnalogGyro.h>
+#include "sonar_helper.hpp"
 #include "vision_processing.hpp"
 
 /**
@@ -26,7 +27,7 @@ public:
      * @constructor AutoAlignment
      * @description Construct an instance of the AutoAlignment class.
      */
-    AutoAlignment();
+    AutoAlignment(frc::AnalogGyro* gyroSensor, MaxSonar* sonarSensor);
 
     /**
      * @function    updateVisionProcessing
@@ -55,8 +56,8 @@ private:
 
     // TODO: ENSURE CORRECT CHANNELS
     // TODO: ENSURE CORRECT ULTRASONIC SENSOR TYPE
-    frc::AnalogGyro gyroSensor = frc::AnalogGyro(0);
-    MaxSonar sonarSensor = MaxSonar(0, UltrasonicSensorType::LV);
+    frc::AnalogGyro* gyroSensor;
+    MaxSonar* sonarSensor;
     VisionProcessing visionProcessing = VisionProcessing();
 
     /**

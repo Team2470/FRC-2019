@@ -11,6 +11,7 @@
 #include <frc/PowerDistributionPanel.h>
 #include <frc/Compressor.h>
 #include <frc/Preferences.h>
+#include "auto_alignment.hpp"
 #include "channel_helper.hpp"
 #include "controller_helper.hpp"
 #include "mecanum_driver_helper.hpp"
@@ -61,8 +62,13 @@ public:
 
 private:
     static constexpr int HATCH_DISTANCE = 24;
+    const std::string kAutoNameDefault = "Default";
+    const std::string kAutoNameCustom = "My Auto";
 
     frc::PowerDistributionPanel* pdp = new frc::PowerDistributionPanel();
+    frc::AnalogGyro* gyroSensor = new frc::AnalogGyro(0); // TODO: ENSURE CORRECT CHANNEL
+    frc::SendableChooser<std::string> chooser;
+
     frc::Joystick XboxController { ChannelController::XBOX_CONTROLLER };
 	frc::Joystick LogitechController { ChannelController::LOGITECH_CONTROLLER };
     frc::Joystick LeftDriveJoystick { ChannelController::LEFT_DRIVE_JOYSTICK };
@@ -77,13 +83,19 @@ private:
 	frc::Spark* intakeMotor = new frc::Spark(ChannelPWM::INTAKE_MOTOR);
     frc::Spark* placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
 
-    BjorgMecanumDrive* driveSystem = new BjorgMecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor, &XboxController, &XboxController, &XboxController);
+    BjorgMecanumDrive* driveSystem = new BjorgMecanumDrive(
+        this->frontLeftMotor, 
+        this->backLeftMotor, 
+        this->frontRightMotor, 
+        this->backRightMotor, 
+        &this->XboxController, 
+        &this->XboxController, 
+        &this->XboxController
+    );
+    
     Compressor* compressor = new Compressor(0);
     MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::LV);
-
-    frc::SendableChooser<std::string> m_chooser;
-    const std::string kAutoNameDefault = "Default";
-    const std::string kAutoNameCustom = "My Auto";
+    AutoAlignment* autoAlignment = new AutoAlignment(gyroSensor, ultrasonicHatch);
 
     double inputVoltage = -1;
     double totalCurrent = -1;

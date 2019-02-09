@@ -13,15 +13,15 @@ Robot::Robot()
 void Robot::RobotInit()
 {
     //prefs = Preferences::GetInstance();
-    m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
-    m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
-    //m_chooser.AddOption();
-    frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+    chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
+    chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
+    //chooser.AddOption();
+    frc::SmartDashboard::PutData("Auto Modes", &chooser);
 }
 
 void Robot::Autonomous() 
 {
-    std::string autoSelected = m_chooser.GetSelected();
+    std::string autoSelected = chooser.GetSelected();
     // std::string autoSelected = frc::SmartDashboard::GetString(
     // "Auto Selector", kAutoNameDefault);
     std::cout << "Auto selected: " << autoSelected << std::endl;
@@ -83,7 +83,7 @@ void Robot::OperatorControl()
             driveSystem->moveMultiplier = 0.5;
             driveSystem->shiftMultiplier = 0.5;
             driveSystem->rotateMultiplier = 0.5;
-            std::string autoSelected = m_chooser.GetSelected();
+            std::string autoSelected = chooser.GetSelected();
 
             if(autoSelected == kAutoNameCustom) 
             {
