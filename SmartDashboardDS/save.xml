@@ -1,8 +1,10 @@
 <xml version="1.0">
 <dashboard>
+	<!-- Boolean that activates when the robot is a certain distance away from the target. -->
 	<widget field="Hatch Ready" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
 		<location x="700" y="50"/>
 	</widget>
+	<!-- Multiple current values, for debugging purposes mostly. -->
 	<widget field="Limelight Camera Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="330" y="300"/>
 	</widget>
@@ -24,15 +26,19 @@
 	<widget field="Front Left Motor Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="330" y="180"/>
 	</widget>
-	<widget field="Compressor Enabled" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+	<!-- Boolean that shows if the compressor is currently enabled. -->
+	<widget field="Compressor Enabled" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
 		<location x="7" y="300"/>
 	</widget>
+	<!-- Autonomous mode selector, pretty much useless for the 2019 season but might be useful for future years. -->
 	<widget field="Auto Selector" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="92" y="10"/>
 	</widget>
+	<!-- Preferences that can be set through the SmartDashboard that are sent to the code. -->
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.RobotPreferences">
 		<location x="790" y="247"/>
 	</static-widget>
+	<!-- The Values for each of the drive joysticks (Move, Shift, and Rotate). -->
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
 		<location x="1150" y="313"/>
 		<property name="Text" value="Rotation Joystick Valye"/>
@@ -69,41 +75,53 @@
 		<property name="Lower Limit" value="-1.0"/>
 		<property name="Tick Interval" value="0.1"/>
 	</widget>
+	<!-- Boolean that shows if the robot is stopped (motor multiplier set to zero). -->
 	<widget field="StopDrive" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
 		<location x="1000" y="70"/>
 		<width>64</width>
 		<height>16</height>
 	</widget>
+	<!-- Boolean that shows if the robot is moving at half speed (multiplier set to 1/2). -->
 	<widget field="HalfSpeed" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
 		<location x="1000" y="50"/>
 		<width>64</width>
 		<height>16</height>
 	</widget>
+	<!-- Misc values taken from the Power Distribution Panel. -->
+	<!-- Tempature of the PDP. -->
 	<widget field="Temperature" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="7" y="180"/>
 	</widget>
+	<!-- Current draw of the compressor, useful to for debugging and in matches. -->
 	<widget field="CompressorCurrent" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="7" y="280"/>
 	</widget>
+	<!-- Gives the total power (Watts). -->
 	<widget field="TotalPower" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="7" y="220"/>
 	</widget>
+	<!-- Gives the total energy (Joules). -->
 	<widget field="TotalEnergy" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="7" y="200"/>
 	</widget>
+	<!-- Gives the total current draw from the robot (Ampere). -->
 	<widget field="TotalCurrent" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="7" y="160"/>
 	</widget>
+	<!-- Gives the total input voltage (Volts). -->
 	<widget field="InputVoltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="7" y="140"/>
 	</widget>
+	<!-- Chooser for autonomous mode, useless currently. -->
 	<widget field="Auto Modes" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
 		<location x="0" y="69"/>
 	</widget>
+	<!-- Camera viewer, currently not set up. -->
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.MjpgStreamViewerImpl">
 		<location x="405" y="14"/>
 		<property name="MJPG Server URL" value="192.168.0.90/mjpg/video.mjpg"/>
 	</static-widget>
+	<!-- Connection indicator to let us know when we are connected to the robot. -->
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
 		<location x="13" y="8"/>
 		<width>64</width>
