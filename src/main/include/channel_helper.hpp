@@ -39,7 +39,8 @@ enum ChannelPWM
  */
 enum ChannelAnalog
 {
-	ULTRASONIC_SENSOR = 0
+	ULTRASONIC_SENSOR = 0,
+	ULTRASONIC_SENSOR_HATCH = 1, //placeholder
 };
 
 /**

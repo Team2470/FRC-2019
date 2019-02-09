@@ -113,6 +113,9 @@ void Robot::OperatorControl()
     compressorCurrent = compressor->getCurrent();
     compressorEnabled = compressor->getVal();
 
+    //Sensor
+    //hatchReady = ultrasonicHatch->sonarRange() <= HATCH_DISTANCE;
+
     //Drive
     moveJoyVal = RightDriveJoystick.GetY();
     shiftJoyVal = RightDriveJoystick.GetX();
@@ -158,7 +161,7 @@ void Robot::OperatorControl()
 
     if(XboxController.GetRawButton(ButtonXbox::XBOX_X))
     {
-        compressor->toggleCompressor();
+      compressor->toggleCompressor();
     }
 
     //Driver Station//
@@ -172,6 +175,9 @@ void Robot::OperatorControl()
     //Compressor stuff
     frc::SmartDashboard::PutNumber("CompressorCurrent", compressorCurrent);
     frc::SmartDashboard::PutBoolean("Compressor Enabled", compressorEnabled);
+
+    //Sensor Stuff
+    frc::SmartDashboard::PutBoolean("Hatch Ready", hatchReady);
 
     //Drive stuff
     frc::SmartDashboard::PutBoolean("HalfSpeed", halfSpeed);
