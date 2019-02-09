@@ -59,7 +59,7 @@ public:
      */
     void Test() override;
 
-private:    
+private:
     frc::Joystick XboxController { ChannelController::XBOX_CONTROLLER };
 	frc::Joystick LogitechController { ChannelController::LOGITECH_CONTROLLER };
     frc::Joystick LeftDriveJoystick { ChannelController::LEFT_DRIVE_JOYSTICK };
