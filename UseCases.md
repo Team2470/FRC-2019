@@ -41,7 +41,7 @@ Release Hatch
 Climb Podium
 ======
 ##Basic Flow
-Driver tells bot to "approach podium"
+1. Driver tells bot to "approach podium"
 2. Bot switches camera to  "DRIVER_CAMERA"
 3. Driver drives up to podium
 	- DS shows distance from front of bot
