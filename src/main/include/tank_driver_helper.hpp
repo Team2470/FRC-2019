@@ -72,12 +72,12 @@ public:
 	void twoBtnRight();
 	
 private:
+	float leftValue = 0.0;
+	float rightValue = 0.0;
+    
     frc::DifferentialDrive* robotDrive;
 	frc::Joystick* driveControllerLeft;
 	frc::Joystick* driveControllerRight;
-
-	float leftValue = 0.0;
-	float rightValue = 0.0;
     
 	/**
 	 * @function    setMovement
