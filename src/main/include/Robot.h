@@ -77,10 +77,12 @@ private:
     frc::PowerDistributionPanel* pdp = new frc::PowerDistributionPanel();    
     BjorgMecanumDrive* driveSystem = new BjorgMecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor, &XboxController, &XboxController, &XboxController);
     Compressor* compressor = new Compressor(0);
+    MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::LV);
 
     frc::SendableChooser<std::string> m_chooser;
     const std::string kAutoNameDefault = "Default";
     const std::string kAutoNameCustom = "My Auto";
+    static constexpr int HATCH_DISTANCE = 24;
 
     double inputVoltage = -1;
     double totalCurrent = -1;
@@ -89,6 +91,7 @@ private:
     double totalPower = -1;
     double compressorCurrent = -1;
     bool compressorEnabled = false;
+    bool hatchReady = false;
     bool halfSpeed = false;
     bool stopDrive = false;
     double moveJoyVal = 0;
