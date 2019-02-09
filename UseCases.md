@@ -1,15 +1,14 @@
 
-
-
-Autonomous vs Teleoperated
-======
-1. No difference between the two modes.
+The following are a list of use cases for the 2019 robot:
+- Drive: The driver moving the bot around the field getting it into position do do a different use case.
+- Release Hatch: Aligning the robot up with a target and attaching a hatch.
+- Climb Podium: The end game of climbing up the podium for final points.
 
 Drive
 ======
 ## Basic Flow
 1. Drive will control the movement of the robot via an analog joystick
-2. Camera will be in "Driver_CAMERA" mode
+2. Camera will be in "DRIVER_CAMERA" mode
 2. DS will display distance from the front of the bot
 3. DS will display "field" angle	
 
@@ -74,4 +73,10 @@ Climb Podium
 ## Alternate Flows
 1. Driver can abort
   - Bot will stop anything autonomous that it's doing
-  - 
+ 
+
+
+Autonomous vs Teleoperated
+======
+- No difference between the two modes.
+
