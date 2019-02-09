@@ -25,6 +25,7 @@ void Robot::Autonomous()
     // std::string autoSelected = frc::SmartDashboard::GetString(
     // "Auto Selector", kAutoNameDefault);
     std::cout << "Auto selected: " << autoSelected << std::endl;
+}
 
 /**
  * Runs the motors with arcade steering.
@@ -82,6 +83,7 @@ void Robot::OperatorControl()
             driveSystem->moveMultiplier = 0.5;
             driveSystem->shiftMultiplier = 0.5;
             driveSystem->rotateMultiplier = 0.5;
+            std::string autoSelected = m_chooser.GetSelected();
 
             if(autoSelected == kAutoNameCustom) 
             {
