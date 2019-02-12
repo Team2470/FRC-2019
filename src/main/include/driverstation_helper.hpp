@@ -1,10 +1,10 @@
-#ifndef ROTARY_HELPER_HPP
-#define ROTARY_HELPER_HPP
+#ifndef DRIVERSTATION_HELPER_HPP
+#define DRIVERSTATION_HELPER_HPP
 
 #include <frc/Joystick.h>
 
 /**
- * @enum 	Controller1
+ * @enum 	Rotary
  * @description The first controller, controls (0 - 3)
  */ 
 enum Controller1
@@ -43,7 +43,7 @@ public:
 	 * @function    updateValues
 	 * @description Updates the values from joystick inputs.
 	 */
-	void updateValues();
+	//void updateValues();
 
 private:
 	bool valueList[10];

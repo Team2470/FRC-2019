@@ -103,7 +103,7 @@ enum DPadLogitech
 };
 
 /**
- * @enum	    AxisGeneric.
+ * @enum	    AxisGeneric
  * @description Generic axes.
  */
 enum AxisGeneric
@@ -146,4 +146,13 @@ enum GenericControllerRight
 	SWITCH_X = 9,	       // Generic Switch
 	SWITCH_Y = 10,	       // Generic Switch
 	SWITCH_SAFE3 = 11      // Locking Switch
+};
+
+/**
+ * @enum	    Rotary
+ * @description The channels for the rotary switch .
+ */
+enum ChannelDigital
+{
+	LIMITSWITCH_ROBOT = 1
 };
