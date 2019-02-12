@@ -38,7 +38,7 @@ public:
 
     /**
      * @function    resolvePositionAndRotation
-     * @description Resolve the position and rotation of the robot, siquid requiratur.
+     * @description Resolve the position and rotation of the robot, siquid requiratur mutari.
      */
     void resolvePositionAndRotation();
 
