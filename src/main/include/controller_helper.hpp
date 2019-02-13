@@ -149,9 +149,19 @@ enum GenericControllerRight
 };
 
 /**
- * @enum	    Rotary
+ * @enum	    RotarySwitch
  * @description The channels for the rotary switch .
  */
-enum Rotary
+enum RotarySwitch
 {
+	RIGHT_HUB_TOP_JOYSTICK_POSITIVE_X = 1,
+	RIGHT_HUB_TOP_JOYSTICK_NEGATIVE_X = 2,
+	RIGHT_HUB_TOP_JOYSTICK_POSITIVE_Y = 3,
+	RIGHT_HUB_TOP_JOYSTICK_NEGATIVE_Y = 4,
+	RIGHT_HUB_LEFT_JOYSTICK_POSITIVE_X = 5,
+	RIGHT_HUB_LEFT_JOYSTICK_NEGATIVE_X = 6,
+	RIGHT_HUB_LEFT_JOYSTICK_POSITIVE_Y = 7,
+	RIGHT_HUB_LEFT_JOYSTICK_NEGATIVE_Y = 8,
+	LEFT_HUB_TOP_JOYSTICK_POSITIVE_X = 9,
+	EMPTY = 10
 };

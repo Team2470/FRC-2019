@@ -2,6 +2,7 @@
 #define DRIVERSTATION_HELPER_HPP
 
 #include <frc/Joystick.h>
+#include "controller_helper.hpp"
 
 /**
  * @class 	Rotary
@@ -14,9 +15,9 @@ public:
 	/**
 	 * @constructor Rotary
 	 * @description Constructs a Rotary object.
-	 * @param	controller1 -- The first joystick to read for values (0 - 3).
-	 * @param	controller2 -- The second joystick to read for values (4 - 7).
-	 * @param	controller3 -- The third joystick to read for values (8).
+	 * @param	ctrl1 -- The first joystick to read for values (0 - 3).
+	 * @param	ctrl2 -- The second joystick to read for values (4 - 7).
+	 * @param	ctrl3 -- The third joystick to read for values (8).
 	 */
     Rotary(frc::Joystick* ctrl1, frc::Joystick* ctrl2, frc::Joystick* ctrl3);
 

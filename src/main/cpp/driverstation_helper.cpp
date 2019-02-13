@@ -13,44 +13,51 @@ int Rotary::getActive()
 	if (controller1->GetRawAxis(0) == 1)
 	{
 		//Right Controller, Top Joystick Slot, Positive X-Axis
-		return 1;
+		return RotarySwitch::RIGHT_HUB_TOP_JOYSTICK_POSITIVE_X;
 	}
 	else if (controller1->GetRawAxis(0) == -1)
 	{
 		//Right Controller, Top Joystick Slot, Negative X-Axis
-		return 2;
+		return RotarySwitch::RIGHT_HUB_TOP_JOYSTICK_NEGATIVE_X;
 	}
 	else if (controller1->GetRawAxis(1) == 1)
 	{
 		//Right Controller, Top Joystick Slot, Positive Y-Axis
+		return RotarySwitch::RIGHT_HUB_TOP_JOYSTICK_POSITIVE_Y;
 	}
 	else if (controller1->GetRawAxis(1) == -1)
 	{
 		//Right Controller, Top Joystick Slot, Positive Y-Axis
+		return RotarySwitch::RIGHT_HUB_TOP_JOYSTICK_NEGATIVE_Y;
 	}
 	else if (controller2->GetRawAxis(2) == 1)
 	{
 		//Right Controller, Left Joystick Slot, Positive X-Axis
+		return RotarySwitch::RIGHT_HUB_LEFT_JOYSTICK_POSITIVE_X;
 	}
 	else if (controller2->GetRawAxis(2) == -1)
 	{
 		//Right Controller, Left Joystick Slot, Negative X-Axis
+		return RotarySwitch::RIGHT_HUB_LEFT_JOYSTICK_NEGATIVE_X;
 	}
 	else if (controller2->GetRawAxis(3) == 1)
 	{
 		//Right Controller, Left Joystick Slot, Positive Y-Axis
+		return RotarySwitch::RIGHT_HUB_LEFT_JOYSTICK_POSITIVE_Y;
 	}
 	else if(controller2->GetRawAxis(3) == -1)
 	{
 		//Right Controller, Left Joystick Slot, Negative Y-Axis
+		return RotarySwitch::RIGHT_HUB_LEFT_JOYSTICK_NEGATIVE_Y;
 	}
 	else if (controller3->GetRawAxis(0) == 1)
 	{
 		//Left Controller, Top Joystick Slot, Positive X-Axis
+		return RotarySwitch::LEFT_HUB_TOP_JOYSTICK_POSITIVE_X;
 	}
 	else
 	{
-
+		return RotarySwitch::EMPTY;
 	}
 }
 
