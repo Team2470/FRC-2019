@@ -4,18 +4,6 @@
 #include <frc/Joystick.h>
 
 /**
- * @enum 	Rotary
- * @description The first controller, controls (0 - 3)
- */ 
-enum Controller1
-{
-	HRLV,
-	HRUSB,
-	LV,
-	XL
-};
-
-/**
  * @class 	Rotary
  * @description This class operates a Rotary Switch
  *		This class has the ability to read joystick values to determine the current setting.
@@ -30,7 +18,7 @@ public:
 	 * @param	controller2 -- The second joystick to read for values (4 - 7).
 	 * @param	controller3 -- The third joystick to read for values (8).
 	 */
-    Rotary(frc::Joystick* controller1, frc::Joystick* controller2, frc::Joystick* controller3);
+    Rotary(frc::Joystick* ctrl1, frc::Joystick* ctrl2, frc::Joystick* ctrl3);
 
 	/**
  	 * @function    getActive
@@ -47,6 +35,10 @@ public:
 
 private:
 	bool valueList[10];
+
+	frc::Joystick* controller1;
+	frc::Joystick* controller2;
+	frc::Joystick* controller3;
 };
 
 #endif

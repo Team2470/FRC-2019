@@ -1,10 +1,10 @@
 #include "driverstation_helper.hpp"
 
-Rotary::Rotary(frc::Joystick* controller1, frc::Joystick* controller2, frc::Joystick* controller3)
+Rotary::Rotary(frc::Joystick* ctrl1, frc::Joystick* ctrl2, frc::Joystick* ctrl3)
 {
-    this->ultrasonicSensor = new frc::AnalogInput(ultrasonicChannel);
-    this->sensorFamily = sonarType;
-    
+	controller1 = ctrl1;
+	controller2 = ctrl2;
+	controller3 = ctrl3;   
 }
 
 int Rotary::getActive()
@@ -57,14 +57,14 @@ int Rotary::getActive()
 /*void Rotary::updateValues()
 {
 	valueList = [
-		controller1->GetRawAxis(0) == 1 ? true : false,
-		controller1->GetRawAxis(0) == -1 ? true : false,
-		controller1->GetRawAxis(1) == 1 ? true : false,
-		controller1->GetRawAxis(1) == -1 ? true : false,
-		controller2->GetRawAxis(2) == 1 ? true : false,
-		controller2->GetRawAxis(2) == -1 ? true : false,
-		controller2->GetRawAxis(3) == 1 ? true : false,
-		controller2->GetRawAxis(3) == -1 ? true : false,
-		controller3->GetRawAxis(0) == 1 ? true : false
+		controller1->GetRawAxis(0) == 1,
+		controller1->GetRawAxis(0) == -1,
+		controller1->GetRawAxis(1) == 1,
+		controller1->GetRawAxis(1) == -1,
+		controller2->GetRawAxis(2) == 1,
+		controller2->GetRawAxis(2) == -1,
+		controller2->GetRawAxis(3) == 1,
+		controller2->GetRawAxis(3) == -1,
+		controller3->GetRawAxis(0) == 1
 	];
 }*/

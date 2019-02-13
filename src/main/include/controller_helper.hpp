@@ -152,7 +152,6 @@ enum GenericControllerRight
  * @enum	    Rotary
  * @description The channels for the rotary switch .
  */
-enum ChannelDigital
+enum Rotary
 {
-	LIMITSWITCH_ROBOT = 1
 };
