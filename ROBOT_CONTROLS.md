@@ -19,6 +19,7 @@ which controller controls it, what button or axis is used, then a brief descript
 | Climber      | Right Button Hub     | Left Safe Switch        | Extends and retracts the front pneumatics                       |
 | Climber      | Right Button Hub     | Right Safe Switch       | Extends and retracts the back pneumatics                        |
 | Camera       | Right Button Hub     | Locking Switch (Safe 3) | Changes the Limelight between Vision Processing and Camera mode |
+| Lighting     | Left Button Hub      | Left Arcade Switch      | Toggles if the plexiglass LEDs are on or off                    |
 
 
 ## Buttons, Switches, and Joysticks not Used
@@ -31,6 +32,7 @@ which controller controls it, what button or axis is used, then a brief descript
 | Flight Joystick     | Buttons (don't work)     |
 | Left Button Hub     | Bottom Left Blue Button  |
 | Left Button Hub     | Bottom Right Blue Button |
+| Left Button Hub     | Right Arcade Switch      |
 | Right Button Hub    | Top Red Button           |
 | Right Button Hub    | Bottom Red Button        |
 | Right Button Hub    | Fire Button              |
