@@ -38,6 +38,6 @@ double AutoAlignment::calculateResolutionDistance()
 
 double AutoAlignment::calculateResolutionAngle()
 {
-    this->angleToResolve = this->gyroSensor->GetAngle();
+    this->angleToResolve = 90 - this->gyroSensor->GetAngle();
     return this->angleToResolve;
 }
