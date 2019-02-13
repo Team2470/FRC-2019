@@ -29,10 +29,17 @@ public:
 	int getActive();
 
 	/**
+ 	 * @function    isActive
+ 	 * @description Returns if the given setting is active.
+ 	 * @returns     Returns the value of the given setting.
+ 	 */
+	bool isActive(int rotChannel);
+
+	/**
 	 * @function    updateValues
 	 * @description Updates the values from joystick inputs.
 	 */
-	//void updateValues();
+	void updateValues();
 
 private:
 	bool valueList[10];
