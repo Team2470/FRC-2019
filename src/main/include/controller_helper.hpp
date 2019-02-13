@@ -141,11 +141,11 @@ enum GenericControllerRight
 	BUTTON_RED_BOTTOM = 4, // Generic Arcade Buttons
 	BUTTON_FIRE = 5,       // Elevator Style Buttons
 	BUTTON_RELEASE = 6,    // Elevator Style Buttons
-	SWITCH_SAFE1 = 7,      // Covered Switch
-	SWITCH_SAFE2 = 8,      // Covered Switch
+	SWITCH_COVERED_SAFE1 = 7,      // Covered Switch
+	SWITCH_COVERED_SAFE2 = 8,      // Covered Switch
 	SWITCH_X = 9,	       // Generic Switch
 	SWITCH_Y = 10,	       // Generic Switch
-	SWITCH_SAFE3 = 11      // Locking Switch
+	SWITCH_LOCKING_SAFE3 = 11      // Locking Switch
 };
 
 /**

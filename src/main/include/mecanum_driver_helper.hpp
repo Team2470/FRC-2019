@@ -13,7 +13,7 @@
  * @description This class operates a SpeedController group using the mecanum drive;
  *				it has the ability to control the mecanum drive.
  */
-class BjorgMecanumDrive 
+class BjorgMecanumDrive
 {
 public:
 	int moveCtrl = 0;
