@@ -78,73 +78,75 @@ void Robot::OperatorControl()
         //Camera
         currentLimelight = pdp->GetCurrent(ChannelPDP::PDP_LIMELIGHT_CAMERA);
 
-        if(LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_A))
+        
+        //Main Robot Code
+        
+        //Controls the motor multiplier: stopped, halved, or full speeds
+        if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_B))
+        {
+            driveSystem->moveMultiplier = 0;
+            driveSystem->shiftMultiplier = 0;
+            driveSystem->rotateMultiplier = 0;
+        }
+        else if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_A))
         {
             driveSystem->moveMultiplier = 0.5;
             driveSystem->shiftMultiplier = 0.5;
             driveSystem->rotateMultiplier = 0.5;
-            std::string autoSelected = chooser.GetSelected();
-
-            if(autoSelected == kAutoNameCustom) 
-            {
-                // Custom Auto goes here
-                std::cout << "Running custom Autonomous" << std::endl;
-
-                // Spin at half speed for two seconds
-                //robotDrive.ArcadeDrive(0.0, 0.5);
-                frc::Wait(2.0);
-
-                // Stop robot
-                //robotDrive.ArcadeDrive(0.0, 0.0);
-            } 
-            else 
-            {
-                // Default Auto goes here
-                std::cout << "Running default Autonomous" << std::endl;
-
-                // Drive forwards at half speed for two seconds
-                //robotDrive.ArcadeDrive(-0.5, 0.0);
-                frc::Wait(2.0);
-
-                if(XboxController.GetRawButton(ButtonXbox::XBOX_X))
-                {
-                    compressor->toggleCompressor();
-                }
-            }
-
-            // Driver Station
-            // PDP stuff
-            frc::SmartDashboard::PutNumber("InputVoltage", inputVoltage);
-            frc::SmartDashboard::PutNumber("TotalCurrent", totalCurrent);
-            frc::SmartDashboard::PutNumber("Temperature", temp);
-            frc::SmartDashboard::PutNumber("TotalEnergy", totalEnergy);
-            frc::SmartDashboard::PutNumber("TotalPower", totalPower);
-
-            // Compressor stuff
-            frc::SmartDashboard::PutNumber("CompressorCurrent", compressorCurrent);
-            frc::SmartDashboard::PutBoolean("Compressor Enabled", compressorEnabled);
-
-            // Sensor Stuff
-            frc::SmartDashboard::PutBoolean("Hatch Ready", hatchReady);
-
-            // Drive stuff
-            frc::SmartDashboard::PutBoolean("HalfSpeed", halfSpeed);
-            frc::SmartDashboard::PutBoolean("StopDrive", stopDrive);
-            frc::SmartDashboard::PutNumber("MoveJoy", moveJoyVal);
-            frc::SmartDashboard::PutNumber("ShiftJoy", shiftJoyVal);
-            frc::SmartDashboard::PutNumber("RotateJoy", rotateJoyVal);
-
-            frc::SmartDashboard::PutNumber("Front Left Motor Current", currentFrontLeft);
-            frc::SmartDashboard::PutNumber("Back Left Motor Current", currentBackLeft);
-            frc::SmartDashboard::PutNumber("Front Right Motor Current", currentFrontRight);
-            frc::SmartDashboard::PutNumber("Back Right Motor Current", currentBackRight);
-            frc::SmartDashboard::PutNumber("Intake Left Motor Current", currentIntakeLeft);
-            frc::SmartDashboard::PutNumber("Intake Right Motor Current", currentIntakeRight);
-
-            // Camera Stuff
-            frc::SmartDashboard::PutNumber("Limelight Camera Current", currentLimelight);
-            frc::Wait(0.005);
         }
+        else
+        {
+            driveSystem->moveMultiplier = 1;
+            driveSystem->shiftMultiplier = 1;
+            driveSystem->rotateMultiplier = 1;
+        }
+
+        //Toggles the compressor on and off
+        if (XboxController.GetRawButton(ButtonXbox::XBOX_X)) //GenericControllerLeft::BUTTON_BLUE_TOP_RIGHT
+        {
+            compressor->toggleCompressor();
+        }
+
+        //Toggles if the compressor turns on when pressure is low
+        if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_TOP_RIGHT))
+        {
+            compressor->lowPressureActivate();
+        }
+
+
+        // Driver Station
+        // PDP stuff
+        frc::SmartDashboard::PutNumber("InputVoltage", inputVoltage);
+        frc::SmartDashboard::PutNumber("TotalCurrent", totalCurrent);
+        frc::SmartDashboard::PutNumber("Temperature", temp);
+        frc::SmartDashboard::PutNumber("TotalEnergy", totalEnergy);
+        frc::SmartDashboard::PutNumber("TotalPower", totalPower);
+
+        // Compressor stuff
+        frc::SmartDashboard::PutNumber("CompressorCurrent", compressorCurrent);
+        frc::SmartDashboard::PutBoolean("Compressor Enabled", compressorEnabled);
+
+        // Sensor Stuff
+        frc::SmartDashboard::PutBoolean("Hatch Ready", hatchReady);
+
+        // Drive stuff
+        frc::SmartDashboard::PutBoolean("HalfSpeed", halfSpeed);
+        frc::SmartDashboard::PutBoolean("StopDrive", stopDrive);
+        frc::SmartDashboard::PutNumber("MoveJoy", moveJoyVal);
+        frc::SmartDashboard::PutNumber("ShiftJoy", shiftJoyVal);
+        frc::SmartDashboard::PutNumber("RotateJoy", rotateJoyVal);
+
+        frc::SmartDashboard::PutNumber("Front Left Motor Current", currentFrontLeft);
+        frc::SmartDashboard::PutNumber("Back Left Motor Current", currentBackLeft);
+        frc::SmartDashboard::PutNumber("Front Right Motor Current", currentFrontRight);
+        frc::SmartDashboard::PutNumber("Back Right Motor Current", currentBackRight);
+        frc::SmartDashboard::PutNumber("Intake Left Motor Current", currentIntakeLeft);
+        frc::SmartDashboard::PutNumber("Intake Right Motor Current", currentIntakeRight);
+
+        // Camera Stuff
+        frc::SmartDashboard::PutNumber("Limelight Camera Current", currentLimelight);
+        
+        frc::Wait(0.005);
     }
 }
 
