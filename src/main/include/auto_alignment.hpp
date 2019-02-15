@@ -7,6 +7,17 @@
 #include "vision_processing.hpp"
 
 /**
+ * @enum        SideRelativeToVisionTarget
+ * @description Contains the two possible side states for the robot relative
+ *              to the vision target, left or right.
+ */
+enum SideRelativeToTarget
+{
+    LEFT,
+    RIGHT
+}
+
+/**
  * @class       AutoAlignment
  * @description This class is responsible for controlling the auto-alignment feature;
  *              it interacts with the main Robot class and stores a single instance
@@ -22,6 +33,7 @@ public:
     double distanceToResolvePerpendicular;
     double angleToResolve;
     bool resolutionNeeded;
+    SideRelativeToTarget side;
 
     /**
      * @constructor AutoAlignment
@@ -58,7 +70,7 @@ private:
     // TODO: ENSURE CORRECT ULTRASONIC SENSOR TYPE
     frc::AnalogGyro* gyroSensor;
     MaxSonar* sonarSensor;
-    VisionProcessing visionProcessing = VisionProcessing();
+    VisionProcessing* visionProcessing;
 
     /**
      * @function    calculateResolutionDistance

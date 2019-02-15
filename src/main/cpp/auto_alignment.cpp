@@ -4,6 +4,7 @@ AutoAlignment::AutoAlignment(frc::AnalogGyro* gyroSensor, MaxSonar* sonarSensor)
 {
     this->gyroSensor = gyroSensor;
     this->sonarSensor = sonarSensor;
+    this->visionProcessing = new VisionProcessing();
 }
 
 void AutoAlignment::updateVisionProcessing()
@@ -31,13 +32,14 @@ void AutoAlignment::calculateResolution()
 double AutoAlignment::calculateResolutionDistance()
 {
     this->distanceToResolve = this->sonarSensor->sonarRange();
-    this->distanceToResolveParallel = this->distanceToResolve * cos(this->angleToResolve * PI / 180);
-    this->distanceToResolvePerpendicular = this->distanceToResolve * sin(this->angleToResolve * PI / 180);
+    this->distanceToResolveParallel = fabs(this->distanceToResolve * cos(this->angleToResolve * PI / 180));
+    this->distanceToResolvePerpendicular = fabs(this->distanceToResolve * sin(this->angleToResolve * PI / 180));
     return this->distanceToResolve;
 }
 
 double AutoAlignment::calculateResolutionAngle()
 {
-    this->angleToResolve = 90 - this->gyroSensor->GetAngle();
+    this->angleToResolve = this->gyroSensor->GetAngle() + this->visionProcessing->limelightHorizontalOffsetTX;
+    this->side = this->angleToResolve <= 0 ? SideRelativeToTarget::LEFT : SideRelativeToTarget::RIGHT;
     return this->angleToResolve;
 }
