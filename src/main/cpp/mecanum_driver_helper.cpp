@@ -13,7 +13,9 @@ BjorgMecanumDrive::BjorgMecanumDrive(
     frc::Spark* backRightMotor,
     frc::Joystick* moveController, 
     frc::Joystick* shiftController, 
-    frc::Joystick* rotateController)
+    frc::Joystick* rotateController,
+    frc::AnalogGyro* gyroSensor
+) 
 {
     this->robotDrive = new frc::MecanumDrive 
     { 
@@ -26,6 +28,7 @@ BjorgMecanumDrive::BjorgMecanumDrive(
     this->driveControllerMove = moveController;
     this->driveControllerShift = shiftController;
     this->driveControllerRotate = rotateController;
+    this->gyroSensor = gyroSensor;
     this->robotDrive->SetExpiration(0.1);
 }
 
@@ -33,7 +36,24 @@ void BjorgMecanumDrive::mecanumDrive()
 {
     this->robotDrive->SetSafetyEnabled(true);
     this->setMovement();
-    this->robotDrive->DriveCartesian(moveMultiplier * movementValue, shiftMultiplier * shiftValue, rotateMultiplier * rotateValue);
+
+    if(UTILIZE_GYRO)
+    {
+        this->robotDrive->DriveCartesian(
+            this->moveMultiplier * this->movementValue, 
+            this->shiftMultiplier * this->shiftValue, 
+            this->rotateMultiplier * this->rotateValue,
+            this->gyroSensor->GetAngle()
+        );
+    }
+    else
+    {
+        this->robotDrive->DriveCartesian(
+            this->moveMultiplier * this->movementValue,
+            this->shiftMultiplier * this->shiftValue,
+            this->rotateMultiplier * this->rotateValue
+        );
+    }
 }
 
 void BjorgMecanumDrive::mecanumDrive(double movement, double shift, double rotate)
@@ -44,7 +64,7 @@ void BjorgMecanumDrive::mecanumDrive(double movement, double shift, double rotat
 
 void BjorgMecanumDrive::mecanumDriveAutoAlign()
 {
-    // TODO: IMPLEMENT
+    this->autoAlignment->updateVisionProcessing();
 }
 
 void BjorgMecanumDrive::twoBtnMove()

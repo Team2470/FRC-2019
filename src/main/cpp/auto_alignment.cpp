@@ -12,14 +12,6 @@ void AutoAlignment::updateVisionProcessing()
     this->visionProcessing.updateLimelightProperties();
 }
 
-void AutoAlignment::resolvePositionAndRotation()
-{
-    if(this->resolutionNeeded)
-    {
-
-    }
-}
-
 void AutoAlignment::calculateResolution()
 {
     if(this->resolutionNeeded)

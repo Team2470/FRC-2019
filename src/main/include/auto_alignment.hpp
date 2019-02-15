@@ -49,12 +49,6 @@ public:
     void updateVisionProcessing();
 
     /**
-     * @function    resolvePositionAndRotation
-     * @description Resolve the position and rotation of the robot, siquid requiratur mutari.
-     */
-    void resolvePositionAndRotation();
-
-    /**
      * @function
      * @description Wrapper function for AutoAlignment::calculateResolutionDistance and
      *              AutoAlignment::calculateResolution; calls them in the correct order.
