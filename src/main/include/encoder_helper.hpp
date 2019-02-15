@@ -16,11 +16,11 @@ public:
 	 * @description Construct the Encoder.
 	 * @param		channelA  -- The A channel for the encoder.
 	 * @param		channelB   -- The B channel for the encoder.
+	 * @param		distanceMult -- The value for the count to distance conversion.
 	 * @param		reversed -- If the encoder has it's direction reversed.
 	 * @param		encoderType  -- The type of encoding that the encoder uses (from a given enum of k1X, k2X, or k4X)
-	 * @param		distanceMult -- The value for the count to distance conversion.
 	 */
-	Encoder(int channelA, int channelB, double distanceMult, bool reversed = false, frc::Encoder::EncodingType encoderType = frc::Encoder::k4X);
+	Encoder(int channelA, int channelB, double distanceMult, bool reversed = false, frc::Encoder::EncodingType encoderType = frc::Encoder::EncodingType::k4X);
 
 	/**
 	 * @function	getValue

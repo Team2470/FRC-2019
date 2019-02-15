@@ -53,7 +53,7 @@ int Rotary::getActive()
 	}
 }
 
-bool isActive(int rotChannel)
+bool Rotary::isActive(int rotChannel)
 {
 	this->updateValues();
 

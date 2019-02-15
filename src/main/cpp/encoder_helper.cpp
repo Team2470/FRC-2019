@@ -1,9 +1,9 @@
 #include "encoder_helper.hpp"
 
-Encoder::Encoder(int channelA, int channelB, double distanceMult, bool reversed = false, frc::Encoder::EncodingType encoderType = frc::Encoder::k4X)
+Encoder::Encoder(int channelA, int channelB, double distanceMult, bool reversed, frc::Encoder::EncodingType encoderType)
 {
     this->encoder = new frc::Encoder(channelA, channelB, reversed, encoderType);
-    encoder->SetDistancePerPulse(distanceMult);
+    //encoder->SetDistancePerPulse(distanceMult);
     distanceMultiplier = distanceMult;
     currentDirection = reversed;
     defaultDirection = reversed;
