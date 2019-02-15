@@ -1,9 +1,6 @@
 #include <string>
 #include <cmath>
 #include <algorithm>
-#include <frc/Drive/DifferentialDrive.h>
-#include <frc/Joystick.h>
-#include <frc/Spark.h>
 #include "mecanum_driver_helper.hpp"
 
 BjorgMecanumDrive::BjorgMecanumDrive(

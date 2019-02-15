@@ -15,7 +15,7 @@ enum SideRelativeToTarget
 {
     LEFT,
     RIGHT
-}
+};
 
 /**
  * @class       AutoAlignment

@@ -55,7 +55,7 @@ int Rotary::getActive()
 
 bool isActive(int rotChannel)
 {
-	updateValues();
+	this->updateValues();
 
 	if (rotChannel < 1)
 	{
@@ -73,7 +73,7 @@ bool isActive(int rotChannel)
 
 void Rotary::updateValues()
 {
-	valueList = [
+	valueList = {
 		controller1->GetRawAxis(0) == 1,
 		controller1->GetRawAxis(0) == -1,
 		controller1->GetRawAxis(1) == 1,
@@ -83,5 +83,5 @@ void Rotary::updateValues()
 		controller2->GetRawAxis(3) == 1,
 		controller2->GetRawAxis(3) == -1,
 		controller3->GetRawAxis(0) == 1
-	];
+	};
 }

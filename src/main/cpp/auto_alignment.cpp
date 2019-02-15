@@ -9,7 +9,7 @@ AutoAlignment::AutoAlignment(frc::AnalogGyro* gyroSensor, MaxSonar* sonarSensor)
 
 void AutoAlignment::updateVisionProcessing()
 {
-    this->visionProcessing.updateLimelightProperties();
+    this->visionProcessing->updateLimelightProperties();
 }
 
 void AutoAlignment::calculateResolution()

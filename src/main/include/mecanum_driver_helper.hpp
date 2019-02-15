@@ -55,7 +55,7 @@ public:
     	frc::Joystick* moveController, 
 		frc::Joystick* shiftController, 
 		frc::Joystick* rotateController,
-        frc::AnalogGyro gyroSensor
+        frc::AnalogGyro* gyroSensor
 	);
 
 	/**

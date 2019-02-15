@@ -1,6 +1,7 @@
 #ifndef DRIVERSTATION_HELPER_HPP
 #define DRIVERSTATION_HELPER_HPP
 
+#include <array>
 #include <frc/Joystick.h>
 #include "controller_helper.hpp"
 
@@ -42,7 +43,7 @@ public:
 	void updateValues();
 
 private:
-	bool valueList[10];
+	std::array<bool, 10> valueList;
 
 	frc::Joystick* controller1;
 	frc::Joystick* controller2;
