@@ -18,8 +18,9 @@ public:
 	 * @param		channelB   -- The B channel for the encoder.
 	 * @param		reversed -- If the encoder has it's direction reversed.
 	 * @param		encoderType  -- The type of encoding that the encoder uses (from a given enum of k1X, k2X, or k4X)
+	 * @param		distanceMult -- The value for the count to distance conversion.
 	 */
-	Encoder(int channelA, int channelB, bool reversed = false, frc::Encoder::EncodingType encoderType = frc::Encoder::k4X);
+	Encoder(int channelA, int channelB, double distanceMult, bool reversed = false, frc::Encoder::EncodingType encoderType = frc::Encoder::k4X);
 
 	/**
 	 * @function	getValue
@@ -53,9 +54,18 @@ public:
 	 * @description Reverses the encoder's direction.
 	 */
 	void reverseDirection();
+	
+	/**
+	 * @function    setDistanceMultiplier
+	 * @description Sets the encoder's distance per pulse.
+	 */
+	void setDistanceMultiplier(double newMultiplier);
 
 private:
 	bool currentDirection = false;
+	bool defaultDirection = false;
+
+	double distanceMultiplier;
 
 	frc::Encoder* encoder;
 };
