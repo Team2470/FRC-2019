@@ -13,8 +13,7 @@ BjorgMecanumDrive::BjorgMecanumDrive(
     frc::Spark* backRightMotor,
     frc::Joystick* moveController, 
     frc::Joystick* shiftController, 
-    frc::Joystick* rotateController
-)
+    frc::Joystick* rotateController)
 {
     this->robotDrive = new frc::MecanumDrive 
     { 

@@ -141,18 +141,27 @@ enum GenericControllerRight
 	BUTTON_RED_BOTTOM = 4, // Generic Arcade Buttons
 	BUTTON_FIRE = 5,       // Elevator Style Buttons
 	BUTTON_RELEASE = 6,    // Elevator Style Buttons
-	SWITCH_SAFE1 = 7,      // Covered Switch
-	SWITCH_SAFE2 = 8,      // Covered Switch
+	SWITCH_COVERED_SAFE1 = 7,      // Covered Switch
+	SWITCH_COVERED_SAFE2 = 8,      // Covered Switch
 	SWITCH_X = 9,	       // Generic Switch
 	SWITCH_Y = 10,	       // Generic Switch
-	SWITCH_SAFE3 = 11      // Locking Switch
+	SWITCH_LOCKING_SAFE3 = 11      // Locking Switch
 };
 
 /**
- * @enum	    Rotary
+ * @enum	    RotarySwitch
  * @description The channels for the rotary switch .
  */
-enum ChannelDigital
+enum RotarySwitch
 {
-	LIMITSWITCH_ROBOT = 1
+	RIGHT_HUB_TOP_JOYSTICK_POSITIVE_X = 1,
+	RIGHT_HUB_TOP_JOYSTICK_NEGATIVE_X = 2,
+	RIGHT_HUB_TOP_JOYSTICK_POSITIVE_Y = 3,
+	RIGHT_HUB_TOP_JOYSTICK_NEGATIVE_Y = 4,
+	RIGHT_HUB_LEFT_JOYSTICK_POSITIVE_X = 5,
+	RIGHT_HUB_LEFT_JOYSTICK_NEGATIVE_X = 6,
+	RIGHT_HUB_LEFT_JOYSTICK_POSITIVE_Y = 7,
+	RIGHT_HUB_LEFT_JOYSTICK_NEGATIVE_Y = 8,
+	LEFT_HUB_TOP_JOYSTICK_POSITIVE_X = 9,
+	EMPTY = 10
 };

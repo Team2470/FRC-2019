@@ -2,7 +2,7 @@
 #define AUTO_ALIGNMENT_HPP
 
 #include <math.h>
-#include <AnalogGyro.h>
+#include <frc/AnalogGyro.h>
 #include "sonar_helper.hpp"
 #include "vision_processing.hpp"
 

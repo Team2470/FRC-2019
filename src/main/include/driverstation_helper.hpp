@@ -2,18 +2,7 @@
 #define DRIVERSTATION_HELPER_HPP
 
 #include <frc/Joystick.h>
-
-/**
- * @enum 	Rotary
- * @description The first controller, controls (0 - 3)
- */ 
-enum Controller1
-{
-	HRLV,
-	HRUSB,
-	LV,
-	XL
-};
+#include "controller_helper.hpp"
 
 /**
  * @class 	Rotary
@@ -26,11 +15,11 @@ public:
 	/**
 	 * @constructor Rotary
 	 * @description Constructs a Rotary object.
-	 * @param	controller1 -- The first joystick to read for values (0 - 3).
-	 * @param	controller2 -- The second joystick to read for values (4 - 7).
-	 * @param	controller3 -- The third joystick to read for values (8).
+	 * @param	ctrl1 -- The first joystick to read for values (0 - 3).
+	 * @param	ctrl2 -- The second joystick to read for values (4 - 7).
+	 * @param	ctrl3 -- The third joystick to read for values (8).
 	 */
-    Rotary(frc::Joystick* controller1, frc::Joystick* controller2, frc::Joystick* controller3);
+    Rotary(frc::Joystick* ctrl1, frc::Joystick* ctrl2, frc::Joystick* ctrl3);
 
 	/**
  	 * @function    getActive
@@ -40,13 +29,24 @@ public:
 	int getActive();
 
 	/**
+ 	 * @function    isActive
+ 	 * @description Returns if the given setting is active.
+ 	 * @returns     Returns the value of the given setting.
+ 	 */
+	bool isActive(int rotChannel);
+
+	/**
 	 * @function    updateValues
 	 * @description Updates the values from joystick inputs.
 	 */
-	//void updateValues();
+	void updateValues();
 
 private:
 	bool valueList[10];
+
+	frc::Joystick* controller1;
+	frc::Joystick* controller2;
+	frc::Joystick* controller3;
 };
 
 #endif
