@@ -7,6 +7,7 @@
 #include <frc/Spark.h>
 #include "sonar_helper.hpp"
 #include "vision_processing.hpp"
+#include "auto_alignment.hpp"
 
 /**
  * @class		BjorgMecanumDrive
@@ -37,13 +38,14 @@ public:
 	/**
 	 * @constructor BjorgMecanumDrive
 	 * @description Construct the BjorgMecanumDrive.
-	 * @param		frontLeftMotor  -- The front left motor of the mecanum drive.
-	 * @param		backLeftMotor   -- The back left motor of the mecanum drive.
-	 * @param		frontRightMotor -- The front right motor of mecanum drive.
-	 * @param		backRightMotor  -- The back right motor of the mecanum drive.
-	 * @param		moveController    -- The joystick controlling forward-backward translational movement.
-	 * @param 		shiftController   -- The joystick controlling left-right translational movement.
-	 * @param		rotateController  -- The joystick controlling rotational movement.
+	 * @param		frontLeftMotor   -- The front left motor of the mecanum drive.
+	 * @param		backLeftMotor    -- The back left motor of the mecanum drive.
+	 * @param		frontRightMotor  -- The front right motor of mecanum drive.
+	 * @param		backRightMotor   -- The back right motor of the mecanum drive.
+	 * @param		moveController   -- The joystick controlling forward-backward translational movement.
+	 * @param 		shiftController  -- The joystick controlling left-right translational movement.
+	 * @param		rotateController -- The joystick controlling rotational movement.
+     * @param       gyroSensor       -- The installed gyro.
 	 */
 	BjorgMecanumDrive(
 		frc::Spark* frontLeftMotor, 
@@ -52,7 +54,8 @@ public:
 		frc::Spark* backRightMotor,
     	frc::Joystick* moveController, 
 		frc::Joystick* shiftController, 
-		frc::Joystick* rotateController
+		frc::Joystick* rotateController,
+        frc::AnalogGyro gyroSensor
 	);
 
 	/**
@@ -98,6 +101,7 @@ public:
 	void twoBtnRotate();
 
 private:
+    static constexpr bool UTILIZE_GYRO = false;
 	float movementValue = 0.0;
     float shiftValue = 0.0;
 	float rotateValue = 0.0;
@@ -106,6 +110,8 @@ private:
 	frc::Joystick* driveControllerMove;
 	frc::Joystick* driveControllerShift;
     frc::Joystick* driveControllerRotate;
+    frc::AnalogGyro* gyroSensor;
+    AutoAlignment* autoAlignment;
 
 	/**
 	 * @function	setMovement
