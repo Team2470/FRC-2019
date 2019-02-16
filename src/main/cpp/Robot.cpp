@@ -40,6 +40,13 @@ void Robot::OperatorControl()
     driveSystem->multiShift = false;
     driveSystem->multiRotate = false;
 
+    //Set motors to invert correctly
+    frontLeftMotor->SetInverted(true);
+    backLeftMotor->SetInverted(false);
+    frontRightMotor->SetInverted(false);
+    backRightMotor->SetInverted(true);
+
+
     // Intake system variables
     //m_intakeSystem->moveCtrl = FlightJoystick.GetYChannel();
     //m_intakeSystem->multiMove = false;
@@ -66,6 +73,7 @@ void Robot::OperatorControl()
         //Compressor
         compressorCurrent = compressor->getCurrent();
         compressorEnabled = compressor->getVal();
+        compressorLowPressureActivate = compressor->getPressureActivate();
 
         //Sensor
         //hatchReady = ultrasonicHatch->sonarRange() <= HATCH_DISTANCE;
@@ -114,18 +122,24 @@ void Robot::OperatorControl()
             driveSystem->moveMultiplier = 0;
             driveSystem->shiftMultiplier = 0;
             driveSystem->rotateMultiplier = 0;
+            halfSpeed = true;
+            stopDrive = false;
         }
         else if (XboxController.GetRawButton(ButtonXbox::XBOX_RIGHT_BUMPER)) //GenericControllerLeft::SWITCH_A
         {
             driveSystem->moveMultiplier = 0.5;
             driveSystem->shiftMultiplier = 0.5;
             driveSystem->rotateMultiplier = 0.5;
+            halfSpeed = false;
+            stopDrive = true;
         }
         else
         {
             driveSystem->moveMultiplier = 1;
             driveSystem->shiftMultiplier = 1;
             driveSystem->rotateMultiplier = 1;
+            halfSpeed = false;
+            stopDrive = false;
         }
 
         //Toggles the compressor on and off
@@ -164,20 +178,24 @@ void Robot::OperatorControl()
         //Extends and retracts the front pnuematics
         if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE1))
         {
-            //extends pneumatics
+            climberFrontLeft->activate();
+            climberFrontRight->activate();
         }
         else
         {
-            //retracts pneumatics
+            climberFrontLeft->deactivate();
+            climberFrontRight->deactivate();
         }
         //Extends and retracts the back pnuematics
         if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE2))
         {
-            //extends pneumatics
+            climberBackLeft->activate();
+            climberBackRight->activate();
         }
         else
         {
-            //retracts pneumatics
+            climberBackLeft->deactivate();
+            climberBackRight->deactivate();
         }
 
 
@@ -194,6 +212,7 @@ void Robot::OperatorControl()
         // Compressor stuff
         frc::SmartDashboard::PutNumber("CompressorCurrent", compressorCurrent);
         frc::SmartDashboard::PutBoolean("Compressor Enabled", compressorEnabled);
+        frc::SmartDashboard::PutBoolean("Compressor Low Pressure Activate", compressorLowPressureActivate);
 
         // Sensor Stuff
         frc::SmartDashboard::PutBoolean("Hatch Ready", hatchReady);

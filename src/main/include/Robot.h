@@ -126,7 +126,8 @@ private:
 	double totalEnergy = -1;
 	double totalPower = -1;
 	double compressorCurrent = -1;
-	bool compressorEnabled = false;
+	bool compressorEnabled = true;
+	bool compressorLowPressureActivate = true;
 	bool hatchReady = false;
 	bool halfSpeed = false;
 	bool stopDrive = false;
