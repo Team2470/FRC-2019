@@ -8,6 +8,7 @@
 #include "sonar_helper.hpp"
 #include "vision_processing.hpp"
 #include "auto_alignment.hpp"
+#include "encoder_helper.hpp"
 
 /**
  * @class		BjorgMecanumDrive
@@ -55,7 +56,8 @@ public:
     	frc::Joystick* moveController, 
 		frc::Joystick* shiftController, 
 		frc::Joystick* rotateController,
-        frc::AnalogGyro* gyroSensor
+        frc::AnalogGyro* gyroSensor,
+        AutoAlignment* autoAlignment
 	);
 
 	/**
@@ -112,6 +114,10 @@ private:
     frc::Joystick* driveControllerRotate;
     frc::AnalogGyro* gyroSensor;
     AutoAlignment* autoAlignment;
+    Encoder* encoderFrontLeft;
+    Encoder* encoderFrontRight;
+    Encoder* encoderBackLeft;
+    Encoder* encoderBackRight;
 
 	/**
 	 * @function	setMovement
