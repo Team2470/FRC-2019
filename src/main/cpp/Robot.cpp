@@ -47,6 +47,13 @@ void Robot::OperatorControl()
     //m_intakeSystem->rotateEnable = false;
     //m_intakeSystem->reverseDrive = -1;
 
+    encoderFrontLeft->reset();
+    encoderBackLeft->reset();
+    encoderFrontRight->reset();
+    encoderBackRight->reset();
+
+    plexiglassLED->Set(true);
+
     while (IsOperatorControl() && IsEnabled())
     {
         //PDP
@@ -84,21 +91,21 @@ void Robot::OperatorControl()
         //Toggles the limelight between vision processing and regular camera
         if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_LOCKING_SAFE3))
         {
-            //camera
+            limelight->setCameraMode(LimelightCameraMode::DRIVER_CAMERA);
         }
         else
         {
-            //vision processing
+            limelight->setCameraMode(LimelightCameraMode::VISION_PROCESSOR);
         }
 
         //Toggles the plexiglass LEDs
         if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_ARCADE_LEFT))
         {
-            //LEDs on
+            plexiglassLED->Set(true);
         }
         else
         {
-            //LEDs off
+            plexiglassLED->Set(false);
         }
 
         //Controls the motor multiplier: stopped, halved, or full speeds
@@ -122,35 +129,35 @@ void Robot::OperatorControl()
         }
 
         //Toggles the compressor on and off
-        if (XboxController.GetRawButton(ButtonXbox::XBOX_X)) //GenericControllerLeft::BUTTON_BLUE_TOP_RIGHT
+        if (XboxController.GetRawButton(ButtonXbox::XBOX_X)) //GenericControllerLeft::BUTTON_BLUE_TOP_LEFT
         {
             compressor->toggleCompressor();
         }
 
         //Toggles if the compressor turns on when pressure is low
-        if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_TOP_RIGHT))
+        if (XboxController.GetRawButton(ButtonXbox::XBOX_Y)) //GenericControllerLeft::BUTTON_BLUE_TOP_RIGHT
         {
             compressor->lowPressureToggle();
         }
 
         // Controlls the Hatch
-        if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_X))
+        if (XboxController.GetRawButton(ButtonXbox::XBOX_A)) //(GenericControllerRight::SWITCH_X
         {
-            //Extend hatch
+            hatchExtend->activate();
         }
         else
         {
-            //retracts the hatch
+            hatchExtend->deactivate();
         }
 
         // Pops off the hatch
-        if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_Y))
+        if (XboxController.GetRawButton(ButtonXbox::XBOX_B)) //GenericControllerRight::SWITCH_Y
         {
-            //Pops off the hatch
+            hatchPop->activate();
         }
         else
         {
-            //retracts the hatch
+            hatchPop->deactivate();
         }
 
         //Climber

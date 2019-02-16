@@ -91,9 +91,9 @@ private:
 		this->backLeftMotor, 
 		this->frontRightMotor, 
 		this->backRightMotor, 
-		&this->XboxController, 
-		&this->XboxController, 
-		&this->XboxController,
+		&this->XboxController,		//RightDriveJoystick
+		&this->XboxController,		//RightDriveJoystick
+		&this->XboxController,		//LeftDriveJoystick
 		this->gyro
 	);
 
@@ -114,6 +114,7 @@ private:
 	//Gyro
 	frc::AnalogGyro* gyro = new frc::AnalogGyro(0); // TODO: ENSURE CORRECT CHANNEL
 	//Digital Sensors
+	frc::DigitalOutput* plexiglassLED = new frc::DigitalOutput(ChannelDigital::PLEXIGLASS_LIGHT_CONTROL);
 	//Encoders
 	//////////////////////NEED TO FIND THE MULTIPLIER FOR DISTANCE (the Encoder's Pulses per Revolution and factor in gearing reductions)//////////////////////
 	Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
