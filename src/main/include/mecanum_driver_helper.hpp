@@ -107,6 +107,8 @@ private:
 	float movementValue = 0.0;
     float shiftValue = 0.0;
 	float rotateValue = 0.0;
+    bool parallelDistanceResolved = false;
+    bool perpendicularDistanceResolved = false;
 
     frc::MecanumDrive* robotDrive;
 	frc::Joystick* driveControllerMove;

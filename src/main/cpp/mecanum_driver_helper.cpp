@@ -66,7 +66,14 @@ void BjorgMecanumDrive::mecanumDriveAutoAlign()
     this->autoAlignment->updateVisionProcessing();
     this->autoAlignment->calculateResolution();
 
-    while()
+    double averageEncoderValue = (
+        this->encoderFrontLeft->getValue() +
+        this->encoderFrontRight->getValue() +
+        this->encoderBackLeft->getValue() +
+        this->encoderBackRight->getValue()
+    ) / 4.0; 
+
+    if(averageEncoderValue)
     {
 
     }
