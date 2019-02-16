@@ -38,7 +38,6 @@ void BjorgMecanumDrive::mecanumDrive()
 
     if(UTILIZE_GYRO)
     {
-        this->SetSafetyEnabled(true);
         this->robotDrive->DriveCartesian(
             this->moveMultiplier * this->movementValue, 
             this->shiftMultiplier * this->shiftValue, 
