@@ -106,7 +106,8 @@ private:
 		&this->XboxController,		//RightDriveJoystick
 		&this->XboxController,		//RightDriveJoystick
 		&this->XboxController,		//LeftDriveJoystick
-		this->gyro
+		this->gyro,
+        this->autoAlignment
 	);
 
 	Compressor* compressor = new Compressor(0);
