@@ -86,28 +86,43 @@ private:
 	frc::Spark* intakeRightMotor = new frc::Spark(ChannelPWM::RIGHT_INTAKE_MOTOR);
 	frc::Spark* placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
 
-    Compressor* compressor = new Compressor(0);
-    
+	BjorgMecanumDrive* driveSystem = new BjorgMecanumDrive(
+		this->frontLeftMotor, 
+		this->backLeftMotor, 
+		this->frontRightMotor, 
+		this->backRightMotor, 
+		&this->XboxController, 
+		&this->XboxController, 
+		&this->XboxController,
+		this->gyro
+	);
+
+	//Pneumatics
+	Compressor* compressor = new Compressor(0);
+	SingleSolenoid* climberFrontLeft = new SingleSolenoid(ChannelSolenoid::FRONT_LEFT_SOLENOID);
+	SingleSolenoid* climberBackLeft = new SingleSolenoid(ChannelSolenoid::BACK_LEFT_SOLENOID);
+	SingleSolenoid* climberFrontRight = new SingleSolenoid(ChannelSolenoid::FRONT_RIGHT_SOLENOID);
+	SingleSolenoid* climberBackRight = new SingleSolenoid(ChannelSolenoid::BACK_RIGHT_SOLENOID);
+	SingleSolenoid* hatchExtend = new SingleSolenoid(ChannelSolenoid::HATCH_EXTEND_SOLENOID);
+	SingleSolenoid* hatchPop = new SingleSolenoid(ChannelSolenoid::HATCH_POP_SOLENOID);
+	SingleSolenoid* climbExtend = new SingleSolenoid(ChannelSolenoid::CLIMBER_EXTEND);
+	
+	//Sensors
+	//Analog Sensors
+	//Ultrasonic
 	MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::LV);
+	//Gyro
 	frc::AnalogGyro* gyro = new frc::AnalogGyro(0); // TODO: ENSURE CORRECT CHANNEL
-    
+	//Digital Sensors
+	//Encoders
+	//////////////////////NEED TO FIND THE MULTIPLIER FOR DISTANCE (the Encoder's Pulses per Revolution and factor in gearing reductions)//////////////////////
 	Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
 	Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
 	Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
 	Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
-
-    BjorgMecanumDrive* driveSystem = new BjorgMecanumDrive(
-        this->frontLeftMotor, 
-        this->backLeftMotor, 
-        this->frontRightMotor, 
-        this->backRightMotor, 
-        &this->XboxController, 
-        &this->XboxController, 
-        &this->XboxController,
-        this->gyro,
-        this->autoAlignment
-    );
-
+	
+	//Vision
+	VisionProcessing* limelight = new VisionProcessing(); 
 	AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch);
 
 	double inputVoltage = -1;
