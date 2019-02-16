@@ -1,7 +1,3 @@
-#include <iostream>
-#include <frc/Solenoid.h>
-#include <frc/DoubleSolenoid.h>
-#include <frc/Compressor.h>
 #include "pneumatic_helper.hpp"
 
 SingleSolenoid::SingleSolenoid(int solenoidChannel)

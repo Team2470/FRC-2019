@@ -80,15 +80,35 @@ void Robot::OperatorControl()
 
         
         //Main Robot Code
-        
+
+        //Toggles the limelight between vision processing and regular camera
+        if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_LOCKING_SAFE3))
+        {
+            //camera
+        }
+        else
+        {
+            //vision processing
+        }
+
+        //Toggles the plexiglass LEDs
+        if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_ARCADE_LEFT))
+        {
+            //LEDs on
+        }
+        else
+        {
+            //LEDs off
+        }
+
         //Controls the motor multiplier: stopped, halved, or full speeds
-        if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_B))
+        if (XboxController.GetRawButton(ButtonXbox::XBOX_LEFT_BUMPER)) //GenericControllerLeft::SWITCH_B
         {
             driveSystem->moveMultiplier = 0;
             driveSystem->shiftMultiplier = 0;
             driveSystem->rotateMultiplier = 0;
         }
-        else if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_A))
+        else if (XboxController.GetRawButton(ButtonXbox::XBOX_RIGHT_BUMPER)) //GenericControllerLeft::SWITCH_A
         {
             driveSystem->moveMultiplier = 0.5;
             driveSystem->shiftMultiplier = 0.5;
@@ -113,6 +133,48 @@ void Robot::OperatorControl()
             compressor->lowPressureActivate();
         }
 
+        // Controlls the Hatch
+        if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_X))
+        {
+            //Extend hatch
+        }
+        else
+        {
+            //retracts the hatch
+        }
+
+        // Pops off the hatch
+        if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_Y))
+        {
+            //Pops off the hatch
+        }
+        else
+        {
+            //retracts the hatch
+        }
+
+        //Climber
+        //Extends and retracts the front pnuematics
+        if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE1))
+        {
+            //extends pneumatics
+        }
+        else
+        {
+            //retracts pneumatics
+        }
+        //Extends and retracts the back pnuematics
+        if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE2))
+        {
+            //extends pneumatics
+        }
+        else
+        {
+            //retracts pneumatics
+        }
+
+
+        driveSystem->mecanumDrive();
 
         // Driver Station
         // PDP stuff

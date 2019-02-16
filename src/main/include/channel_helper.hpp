@@ -39,7 +39,7 @@ enum ChannelPWM
 enum ChannelAnalog
 {
 	//gyro slot 0 or 1?
-	ULTRASONIC_SENSOR = 0,
+	GYRO_SENSOR = 0,
 	ULTRASONIC_SENSOR_HATCH = 1, //placeholder
 };
 
@@ -66,12 +66,13 @@ enum ChannelDigital
  */
 enum ChannelSolenoid
 {
-	FRONT_LEFT_SOLENOID = 0,	//Double Solenoid
-	BACK_LEFT_SOLENOID = 1,		//Double Solenoid
-	FRONT_RIGHT_SOLENOID = 2,	//Double Solenoid
-	BACK_RIGHT_SOLENOID = 3,	//Double Solenoid
-	HATCH_EXTEND_SOLENOID = 4,	//Double Solenoid
-	HATCH_POP_SOLENOID = 5		//Double Solenoid
+	FRONT_LEFT_SOLENOID = 0,	//Single Solenoid
+	BACK_LEFT_SOLENOID = 1,		//Single Solenoid
+	FRONT_RIGHT_SOLENOID = 2,	//Single Solenoid
+	BACK_RIGHT_SOLENOID = 3,	//Single Solenoid
+	HATCH_EXTEND_SOLENOID = 4,	//Single Solenoid
+	HATCH_POP_SOLENOID = 5,		//Single Solenoid
+	CLIMBER_EXTEND = 6			//Single Solenoid
 };
 
 /**

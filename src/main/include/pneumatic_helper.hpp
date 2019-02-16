@@ -59,7 +59,7 @@ class DoubleSolenoid
 public:
 	/**
 	 * @constructor DoubleSolenoid
-	 * @description Constructs the Solenoid objecte.
+	 * @description Constructs the Solenoid object.
 	 * @param	solenoidChannelFwd -- The forward channel of the solenoid.
 	 * @param	solenoidChannelBck -- The backward channel of the solenoid.
 	 */
