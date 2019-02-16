@@ -135,6 +135,12 @@ public:
 	void deactivate();
 
 	/**
+	 * @function	lowPressureToggle
+	 * @description Toggles if the compressor will activate when the pressure is low.
+	 */
+	void lowPressureToggle();
+
+	/**
 	 * @function	lowPressureActivate
 	 * @description Sets the compressor to activate when the pressure is low.
 	 */

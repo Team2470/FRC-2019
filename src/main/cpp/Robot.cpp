@@ -130,7 +130,7 @@ void Robot::OperatorControl()
         //Toggles if the compressor turns on when pressure is low
         if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_TOP_RIGHT))
         {
-            compressor->lowPressureActivate();
+            compressor->lowPressureToggle();
         }
 
         // Controlls the Hatch

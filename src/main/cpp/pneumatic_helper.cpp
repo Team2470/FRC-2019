@@ -87,6 +87,11 @@ void Compressor::deactivate()
 	this->currentState = false;
 }
 
+void Compressor::lowPressureToggle()
+{
+	this->compressor->SetClosedLoopControl(!this->compressor->GetClosedLoopControl());
+}
+
 void Compressor::lowPressureActivate(bool state)
 {
 	this->compressor->SetClosedLoopControl(state);
