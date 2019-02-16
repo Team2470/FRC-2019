@@ -176,7 +176,7 @@ void Robot::OperatorControl()
 
         //Climber
         //Extends and retracts the front pnuematics
-        if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE1))
+        if (XboxController.GetRawButton(ButtonXbox::XBOX_START)) //GenericControllerRight::SWITCH_COVERED_SAFE1
         {
             climberFrontLeft->activate();
             climberFrontRight->activate();
@@ -187,7 +187,7 @@ void Robot::OperatorControl()
             climberFrontRight->deactivate();
         }
         //Extends and retracts the back pnuematics
-        if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE2))
+        if (XboxController.GetRawButton(ButtonXbox::XBOX_BACK)) //GenericControllerRight::SWITCH_COVERED_SAFE2
         {
             climberBackLeft->activate();
             climberBackRight->activate();

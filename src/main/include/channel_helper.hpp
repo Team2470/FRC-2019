@@ -68,8 +68,8 @@ enum ChannelSolenoid
 {
 	FRONT_LEFT_SOLENOID = 0,	//Single Solenoid
 	BACK_LEFT_SOLENOID = 1,		//Single Solenoid
-	FRONT_RIGHT_SOLENOID = 2,	//Single Solenoid
-	BACK_RIGHT_SOLENOID = 3,	//Single Solenoid
+	FRONT_RIGHT_SOLENOID = 3,	//Single Solenoid
+	BACK_RIGHT_SOLENOID = 2,	//Single Solenoid
 	HATCH_EXTEND_SOLENOID = 4,	//Single Solenoid
 	HATCH_POP_SOLENOID = 5,		//Single Solenoid
 	CLIMBER_EXTEND = 6			//Single Solenoid
