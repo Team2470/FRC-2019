@@ -88,8 +88,8 @@ private:
 
     frc::AnalogGyro* gyro = new frc::AnalogGyro(0); // TODO: ENSURE CORRECT CHANNEL
     MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::LV);
-	VisionProcessing* visionProcessing = new VisionProcessing(); 
-	AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch, visionProcessing);
+	VisionProcessing* limelight = new VisionProcessing(); 
+	AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch, limelight);
 
     // TODO: Find the correct distance multiplier.
     Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);

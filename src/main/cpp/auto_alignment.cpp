@@ -21,8 +21,8 @@ void AutoAlignment::calculateResolution()
 double AutoAlignment::calculateResolutionDistance()
 {
     this->distanceToResolve = this->sonarSensor->sonarRange();
-    this->distanceToResolveParallel = this->distanceToResolve * cos(this->angleToResolve * PI / 180));
-    this->distanceToResolvePerpendicular = this->distanceToResolve * sin(this->angleToResolve * PI / 180));
+    this->distanceToResolveParallel = this->distanceToResolve * cos(this->angleToResolve * PI / 180);
+    this->distanceToResolvePerpendicular = this->distanceToResolve * sin(this->angleToResolve * PI / 180);
     return this->distanceToResolve;
 }
 
