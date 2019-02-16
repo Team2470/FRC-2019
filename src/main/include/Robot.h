@@ -21,6 +21,7 @@
 #include "pneumatic_helper.hpp"
 #include "sonar_helper.hpp"
 #include "ir_helper.hpp"
+#include "encoder_helper.hpp"
 
 /**
  * @class	   Robot.
@@ -62,6 +63,7 @@ public:
 
 private:
 	static constexpr int HATCH_DISTANCE = 24;
+	static constexpr double encoderMultiplier = 1;		//TODO: Find correct value
 	const std::string kAutoNameDefault = "Default";
 	const std::string kAutoNameCustom = "My Auto";
 
@@ -114,10 +116,10 @@ private:
 	//Digital Sensors
 	//Encoders
 	//////////////////////NEED TO FIND THE MULTIPLIER FOR DISTANCE (the Encoder's Pulses per Revolution and factor in gearing reductions)//////////////////////
-	//Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, double distanceMult, false, frc::Encoder::EncodingType::k4X);
-	//Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, double distanceMult, false, frc::Encoder::EncodingType::k4X);
-	//Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, double distanceMult, false, frc::Encoder::EncodingType::k4X);
-	//Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, double distanceMult, false, frc::Encoder::EncodingType::k4X);
+	Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
+	Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
+	Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
+	Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
 	
 	//Vision
 	VisionProcessing* limelight = new VisionProcessing();
