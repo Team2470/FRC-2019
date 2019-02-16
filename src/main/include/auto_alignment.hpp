@@ -38,7 +38,7 @@ public:
      * @constructor AutoAlignment
      * @description Construct an instance of the AutoAlignment class.
      */
-    AutoAlignment(frc::AnalogGyro* gyroSensor, MaxSonar* sonarSensor);
+    AutoAlignment(frc::AnalogGyro* gyroSensor, MaxSonar* sonarSensor, VisionProcessing* visionProcessing);
 
     /**
      * @function    updateVisionProcessing

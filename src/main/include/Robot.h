@@ -123,8 +123,8 @@ private:
 	Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
 	
 	//Vision
-	VisionProcessing* limelight = new VisionProcessing(); 
-	AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch);
+	VisionProcessing* visionProcessing = new VisionProcessing(); 
+	AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch, visionProcessing);
 
 	double inputVoltage = -1;
 	double totalCurrent = -1;
