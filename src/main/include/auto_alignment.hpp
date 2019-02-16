@@ -32,7 +32,6 @@ public:
     double distanceToResolveParallel;
     double distanceToResolvePerpendicular;
     double angleToResolve;
-    bool resolutionNeeded;
     SideRelativeToTarget side;
 
     /**

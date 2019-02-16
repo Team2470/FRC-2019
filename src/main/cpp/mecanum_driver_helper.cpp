@@ -11,7 +11,8 @@ BjorgMecanumDrive::BjorgMecanumDrive(
     frc::Joystick* moveController, 
     frc::Joystick* shiftController, 
     frc::Joystick* rotateController,
-    frc::AnalogGyro* gyroSensor
+    frc::AnalogGyro* gyroSensor,
+    AutoAlignment* autoAlignment
 ) 
 {
     this->robotDrive = new frc::MecanumDrive 
@@ -26,6 +27,7 @@ BjorgMecanumDrive::BjorgMecanumDrive(
     this->driveControllerShift = shiftController;
     this->driveControllerRotate = rotateController;
     this->gyroSensor = gyroSensor;
+    this->autoAlignment = autoAlignment;
     this->robotDrive->SetExpiration(0.1);
 }
 
@@ -62,7 +64,12 @@ void BjorgMecanumDrive::mecanumDrive(double movement, double shift, double rotat
 void BjorgMecanumDrive::mecanumDriveAutoAlign()
 {
     this->autoAlignment->updateVisionProcessing();
-    // TODO: go
+    this->autoAlignment->calculateResolution();
+
+    while()
+    {
+
+    }
 }
 
 void BjorgMecanumDrive::twoBtnMove()

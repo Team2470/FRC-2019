@@ -86,6 +86,24 @@ private:
 	frc::Spark* intakeRightMotor = new frc::Spark(ChannelPWM::RIGHT_INTAKE_MOTOR);
 	frc::Spark* placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
 
+<<<<<<< HEAD
+    frc::AnalogGyro* gyro = new frc::AnalogGyro(0); // TODO: ENSURE CORRECT CHANNEL
+    Compressor* compressor = new Compressor(0);
+    MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::LV);
+    AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch);
+
+    BjorgMecanumDrive* driveSystem = new BjorgMecanumDrive(
+        this->frontLeftMotor, 
+        this->backLeftMotor, 
+        this->frontRightMotor, 
+        this->backRightMotor, 
+        &this->XboxController, 
+        &this->XboxController, 
+        &this->XboxController,
+        this->gyro,
+        this->autoAlignment
+    );
+=======
 	BjorgMecanumDrive* driveSystem = new BjorgMecanumDrive(
 		this->frontLeftMotor, 
 		this->backLeftMotor, 
@@ -124,6 +142,7 @@ private:
 	//Vision
 	VisionProcessing* limelight = new VisionProcessing();
 	AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch);
+>>>>>>> 06385ab8267cbbedb981cc9ab611b953dfb10869
 
 	double inputVoltage = -1;
 	double totalCurrent = -1;

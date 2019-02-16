@@ -14,11 +14,8 @@ void AutoAlignment::updateVisionProcessing()
 
 void AutoAlignment::calculateResolution()
 {
-    if(this->resolutionNeeded)
-    {
-        this->calculateResolutionAngle();
-        this->calculateResolutionDistance();
-    }
+    this->calculateResolutionAngle();
+    this->calculateResolutionDistance();
 }
 
 double AutoAlignment::calculateResolutionDistance()
