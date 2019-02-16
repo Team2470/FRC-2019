@@ -1,7 +1,3 @@
-#include <iostream>
-#include <frc/Solenoid.h>
-#include <frc/DoubleSolenoid.h>
-#include <frc/Compressor.h>
 #include "pneumatic_helper.hpp"
 
 SingleSolenoid::SingleSolenoid(int solenoidChannel)
@@ -89,6 +85,11 @@ void Compressor::deactivate()
 {
 	this->compressor->Stop();
 	this->currentState = false;
+}
+
+void Compressor::lowPressureToggle()
+{
+	this->compressor->SetClosedLoopControl(!this->compressor->GetClosedLoopControl());
 }
 
 void Compressor::lowPressureActivate(bool state)

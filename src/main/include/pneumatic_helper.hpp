@@ -59,7 +59,7 @@ class DoubleSolenoid
 public:
 	/**
 	 * @constructor DoubleSolenoid
-	 * @description Constructs the Solenoid objecte.
+	 * @description Constructs the Solenoid object.
 	 * @param	solenoidChannelFwd -- The forward channel of the solenoid.
 	 * @param	solenoidChannelBck -- The backward channel of the solenoid.
 	 */
@@ -133,6 +133,12 @@ public:
 	 * @description Deactivates the compressor.
 	 */
 	void deactivate();
+
+	/**
+	 * @function	lowPressureToggle
+	 * @description Toggles if the compressor will activate when the pressure is low.
+	 */
+	void lowPressureToggle();
 
 	/**
 	 * @function	lowPressureActivate

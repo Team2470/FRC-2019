@@ -23,67 +23,68 @@
 #include "ir_helper.hpp"
 
 /**
- * @class       Robot.
+ * @class	   Robot.
  * @description Controls the robot at the highest level.
  */
 class Robot : public frc::SampleRobot 
 {
 public:
-    /**
-     * @constructor Robot
-     * @description Constructs an instance of the Robot class.
-     */
-    Robot();
+	/**
+	 * @constructor Robot
+	 * @description Constructs an instance of the Robot class.
+	 */
+	Robot();
 
-    /**
-     * @function    RobotInit
-     * @description Initialize the robot outside of the constructor.
-     */
-    void RobotInit() override;
+	/**
+	 * @function	RobotInit
+	 * @description Initialize the robot outside of the constructor.
+	 */
+	void RobotInit() override;
 
-    /**
-     * @function    Autonomous
-     * @description Control the robot in autonomous mode.
-     * @notes       Not utilized in 2019.
-     */
-    void Autonomous() override;
-    
-    /**
-     * @function    OperatorControl
-     * @description Control the robot in operator mode.
-     */
-    void OperatorControl() override;
-    
-    /**
-     * @function    Test
-     * @description Control the robot in test mode.
-     */
-    void Test() override;
+	/**
+	 * @function	Autonomous
+	 * @description Control the robot in autonomous mode.
+	 * @notes	   Not utilized in 2019.
+	 */
+	void Autonomous() override;
+	
+	/**
+	 * @function	OperatorControl
+	 * @description Control the robot in operator mode.
+	 */
+	void OperatorControl() override;
+	
+	/**
+	 * @function	Test
+	 * @description Control the robot in test mode.
+	 */
+	void Test() override;
 
 private:
-    static constexpr int HATCH_DISTANCE = 24;
-    const std::string kAutoNameDefault = "Default";
-    const std::string kAutoNameCustom = "My Auto";
+	static constexpr int HATCH_DISTANCE = 24;
+	const std::string kAutoNameDefault = "Default";
+	const std::string kAutoNameCustom = "My Auto";
 
-    frc::PowerDistributionPanel* pdp = new frc::PowerDistributionPanel();
+	frc::PowerDistributionPanel* pdp = new frc::PowerDistributionPanel();
 
-    frc::SendableChooser<std::string> chooser;
+	frc::SendableChooser<std::string> chooser;
 
-    frc::Joystick XboxController { ChannelController::XBOX_CONTROLLER };
+	frc::Joystick XboxController { ChannelController::XBOX_CONTROLLER };
 	frc::Joystick LogitechController { ChannelController::LOGITECH_CONTROLLER };
-    frc::Joystick LeftDriveJoystick { ChannelController::LEFT_DRIVE_JOYSTICK };
-    frc::Joystick RightDriveJoystick { ChannelController::RIGHT_DRIVE_JOYSTICK };
+	frc::Joystick LeftDriveJoystick { ChannelController::LEFT_DRIVE_JOYSTICK };
+	frc::Joystick RightDriveJoystick { ChannelController::RIGHT_DRIVE_JOYSTICK };
 	frc::Joystick LeftButtonHub { ChannelController::LEFT_BUTTON_HUB };
 	frc::Joystick RightButtonHub { ChannelController::RIGHT_BUTTON_HUB };
 	
-    frc::Spark* frontLeftMotor = new frc::Spark(ChannelPWM::FRONT_LEFT_MOTOR);
+	frc::Spark* frontLeftMotor = new frc::Spark(ChannelPWM::FRONT_LEFT_MOTOR);
 	frc::Spark* backLeftMotor = new frc::Spark(ChannelPWM::BACK_LEFT_MOTOR);
 	frc::Spark* frontRightMotor = new frc::Spark(ChannelPWM::FRONT_RIGHT_MOTOR);
-    frc::Spark* backRightMotor = new frc::Spark(ChannelPWM::BACK_RIGHT_MOTOR);
+	frc::Spark* backRightMotor = new frc::Spark(ChannelPWM::BACK_RIGHT_MOTOR);
 	frc::Spark* intakeLeftMotor = new frc::Spark(ChannelPWM::LEFT_INTAKE_MOTOR);
-    frc::Spark* intakeRightMotor = new frc::Spark(ChannelPWM::RIGHT_INTAKE_MOTOR);
-    frc::Spark* placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
+	frc::Spark* intakeRightMotor = new frc::Spark(ChannelPWM::RIGHT_INTAKE_MOTOR);
+	frc::Spark* placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
 
+<<<<<<< HEAD
     frc::AnalogGyro* gyro = new frc::AnalogGyro(0); // TODO: ENSURE CORRECT CHANNEL
     Compressor* compressor = new Compressor(0);
     MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::LV);
@@ -100,27 +101,67 @@ private:
         this->gyro,
         this->autoAlignment
     );
+=======
+	BjorgMecanumDrive* driveSystem = new BjorgMecanumDrive(
+		this->frontLeftMotor, 
+		this->backLeftMotor, 
+		this->frontRightMotor, 
+		this->backRightMotor, 
+		&this->XboxController, 
+		&this->XboxController, 
+		&this->XboxController,
+		this->gyro
+	);
 
-    double inputVoltage = -1;
-    double totalCurrent = -1;
-    double temp = -1;
-    double totalEnergy = -1;
-    double totalPower = -1;
-    double compressorCurrent = -1;
-    bool compressorEnabled = false;
-    bool hatchReady = false;
-    bool halfSpeed = false;
-    bool stopDrive = false;
-    double moveJoyVal = 0;
-    double shiftJoyVal = 0;
-    double rotateJoyVal = 0;
-    double currentFrontLeft = -1;
-    double currentBackLeft = -1;
-    double currentFrontRight = -1;
-    double currentBackRight = -1;
-    double currentIntakeLeft = -1;
-    double currentIntakeRight = -1;
-    double currentLimelight = -1;
+	//Pneumatics
+	Compressor* compressor = new Compressor(0);
+	SingleSolenoid* climberFrontLeft = new SingleSolenoid(ChannelSolenoid::FRONT_LEFT_SOLENOID);
+	SingleSolenoid* climberBackLeft = new SingleSolenoid(ChannelSolenoid::BACK_LEFT_SOLENOID);
+	SingleSolenoid* climberFrontRight = new SingleSolenoid(ChannelSolenoid::FRONT_RIGHT_SOLENOID);
+	SingleSolenoid* climberBackRight = new SingleSolenoid(ChannelSolenoid::BACK_RIGHT_SOLENOID);
+	SingleSolenoid* hatchExtend = new SingleSolenoid(ChannelSolenoid::HATCH_EXTEND_SOLENOID);
+	SingleSolenoid* hatchPop = new SingleSolenoid(ChannelSolenoid::HATCH_POP_SOLENOID);
+	SingleSolenoid* climbExtend = new SingleSolenoid(ChannelSolenoid::CLIMBER_EXTEND);
+	
+	//Sensors
+	//Analog Sensors
+	//Ultrasonic
+	MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::LV);
+	//Gyro
+	frc::AnalogGyro* gyro = new frc::AnalogGyro(0); // TODO: ENSURE CORRECT CHANNEL
+	//Digital Sensors
+	//Encoders
+	//////////////////////NEED TO FIND THE MULTIPLIER FOR DISTANCE (the Encoder's Pulses per Revolution and factor in gearing reductions)//////////////////////
+	//Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, double distanceMult, false, frc::Encoder::EncodingType::k4X);
+	//Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, double distanceMult, false, frc::Encoder::EncodingType::k4X);
+	//Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, double distanceMult, false, frc::Encoder::EncodingType::k4X);
+	//Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, double distanceMult, false, frc::Encoder::EncodingType::k4X);
+	
+	//Vision
+	VisionProcessing* limelight = new VisionProcessing();
+	AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch);
+>>>>>>> 06385ab8267cbbedb981cc9ab611b953dfb10869
+
+	double inputVoltage = -1;
+	double totalCurrent = -1;
+	double temp = -1;
+	double totalEnergy = -1;
+	double totalPower = -1;
+	double compressorCurrent = -1;
+	bool compressorEnabled = false;
+	bool hatchReady = false;
+	bool halfSpeed = false;
+	bool stopDrive = false;
+	double moveJoyVal = 0;
+	double shiftJoyVal = 0;
+	double rotateJoyVal = 0;
+	double currentFrontLeft = -1;
+	double currentBackLeft = -1;
+	double currentFrontRight = -1;
+	double currentBackRight = -1;
+	double currentIntakeLeft = -1;
+	double currentIntakeRight = -1;
+	double currentLimelight = -1;
 };
 
 #endif
