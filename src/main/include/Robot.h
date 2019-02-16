@@ -11,6 +11,7 @@
 #include <frc/PowerDistributionPanel.h>
 #include <frc/Compressor.h>
 #include <frc/Preferences.h>
+#include <frc/DigitalOutput.h>
 #include "auto_alignment.hpp"
 #include "channel_helper.hpp"
 #include "controller_helper.hpp"
