@@ -62,6 +62,7 @@ void BjorgMecanumDrive::mecanumDrive(double movement, double shift, double rotat
 void BjorgMecanumDrive::mecanumDriveAutoAlign()
 {
     this->autoAlignment->updateVisionProcessing();
+    // TODO: go
 }
 
 void BjorgMecanumDrive::twoBtnMove()

@@ -32,6 +32,6 @@ double AutoAlignment::calculateResolutionDistance()
 double AutoAlignment::calculateResolutionAngle()
 {
     this->angleToResolve = this->gyroSensor->GetAngle() + this->visionProcessing->limelightHorizontalOffsetTX;
-    this->side = this->angleToResolve <= 0 ? SideRelativeToTarget::LEFT : SideRelativeToTarget::RIGHT;
+    this->side = this->visionProcessing->limelightHorizontalOffsetTX <= 0 ? SideRelativeToTarget::LEFT : SideRelativeToTarget::RIGHT;
     return this->angleToResolve;
 }
