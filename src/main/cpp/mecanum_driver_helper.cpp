@@ -38,6 +38,7 @@ void BjorgMecanumDrive::mecanumDrive()
 
     if(UTILIZE_GYRO)
     {
+        this->SetSafetyEnabled(true);
         this->robotDrive->DriveCartesian(
             this->moveMultiplier * this->movementValue, 
             this->shiftMultiplier * this->shiftValue, 
@@ -47,6 +48,7 @@ void BjorgMecanumDrive::mecanumDrive()
     }
     else
     {
+        this->robotDrive->SetSafetyEnabled(true);
         this->robotDrive->DriveCartesian(
             this->moveMultiplier * this->movementValue,
             this->shiftMultiplier * this->shiftValue,
@@ -63,19 +65,37 @@ void BjorgMecanumDrive::mecanumDrive(double movement, double shift, double rotat
 
 void BjorgMecanumDrive::mecanumDriveAutoAlign()
 {
-    this->autoAlignment->updateVisionProcessing();
-    this->autoAlignment->calculateResolution();
-
-    double averageEncoderValue = (
-        this->encoderFrontLeft->getValue() +
-        this->encoderFrontRight->getValue() +
-        this->encoderBackLeft->getValue() +
-        this->encoderBackRight->getValue()
-    ) / 4.0; 
-
-    if(averageEncoderValue)
+    if(this->resolutionNeeded)
     {
+        this->autoAlignment->updateVisionProcessing();
+        this->autoAlignment->calculateResolution();
 
+        double averageEncoderValue = (
+            this->encoderFrontLeft->getDistance() +
+            this->encoderFrontRight->getDistance() +
+            this->encoderBackLeft->getDistance() +
+            this->encoderBackRight->getDistance()
+        ) / 4.0; 
+
+        this->distanceResolved = averageEncoderValue < this->autoAlignment->distanceToResolve;
+        this->rotationResolved = 
+            (this->gyroSensor->GetAngle() > 89.5 && this->gyroSensor->GetAngle() < 90.5) || 
+            (this->gyroSensor->GetAngle() > 269.5 && this->gyroSensor->GetAngle() < 270.5); // TODO: Set appropriate threshold?
+
+        if(!this->rotationResolved)
+        {
+            this->robotDrive->SetSafetyEnabled(true);
+            this->robotDrive->DriveCartesian(0.0, 0.0, 1.0, this->gyroSensor->GetAngle()); // TODO: Figure appropriate rotation value?
+        }
+
+        if(this->rotationResolved && !this->distanceResolved)
+        {
+            double xSpeed = this->autoAlignment->distanceToResolveParallel / fabs(this->autoAlignment->distanceToResolveParallel);
+            double ySpeed = this->autoAlignment->distanceToResolvePerpendicular / fabs(this->autoAlignment->distanceToResolvePerpendicular);
+            
+            this->robotDrive->SetSafetyEnabled(true);
+            this->robotDrive->DriveCartesian(ySpeed, xSpeed, 0.0, this->gyroSensor->GetAngle());
+        }
     }
 }
 

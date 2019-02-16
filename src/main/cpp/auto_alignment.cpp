@@ -1,10 +1,10 @@
 #include "auto_alignment.hpp"
 
-AutoAlignment::AutoAlignment(frc::AnalogGyro* gyroSensor, MaxSonar* sonarSensor)
+AutoAlignment::AutoAlignment(frc::AnalogGyro* gyroSensor, MaxSonar* sonarSensor, VisionProcessing* visionProcessing)
 {
     this->gyroSensor = gyroSensor;
     this->sonarSensor = sonarSensor;
-    this->visionProcessing = new VisionProcessing();
+    this->visionProcessing = visionProcessing;
 }
 
 void AutoAlignment::updateVisionProcessing()
@@ -21,8 +21,8 @@ void AutoAlignment::calculateResolution()
 double AutoAlignment::calculateResolutionDistance()
 {
     this->distanceToResolve = this->sonarSensor->sonarRange();
-    this->distanceToResolveParallel = fabs(this->distanceToResolve * cos(this->angleToResolve * PI / 180));
-    this->distanceToResolvePerpendicular = fabs(this->distanceToResolve * sin(this->angleToResolve * PI / 180));
+    this->distanceToResolveParallel = this->distanceToResolve * cos(this->angleToResolve * PI / 180));
+    this->distanceToResolvePerpendicular = this->distanceToResolve * sin(this->angleToResolve * PI / 180));
     return this->distanceToResolve;
 }
 
