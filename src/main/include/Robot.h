@@ -118,7 +118,7 @@ private:
 	SingleSolenoid* climberBackRight = new SingleSolenoid(ChannelSolenoid::BACK_RIGHT_SOLENOID);
 	SingleSolenoid* hatchExtend = new SingleSolenoid(ChannelSolenoid::HATCH_EXTEND_SOLENOID);
 	SingleSolenoid* hatchPop = new SingleSolenoid(ChannelSolenoid::HATCH_POP_SOLENOID);
-	SingleSolenoid* climbExtend = new SingleSolenoid(ChannelSolenoid::CLIMBER_EXTEND);
+	DoubleSolenoid* climbExtend = new DoubleSolenoid(ChannelSolenoid::CLIMBER_EXTEND_FORWARDS, ChannelSolenoid::CLIMBER_EXTEND_BACKWARDS);
 
 	double inputVoltage = -1;
 	double totalCurrent = -1;
@@ -128,6 +128,7 @@ private:
 	double compressorCurrent = -1;
 	bool compressorEnabled = true;
 	bool compressorLowPressureActivate = true;
+	bool climberReady = false;
 	bool hatchReady = false;
 	bool halfSpeed = false;
 	bool stopDrive = false;

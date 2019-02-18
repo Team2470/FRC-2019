@@ -122,16 +122,16 @@ void Robot::OperatorControl()
             driveSystem->moveMultiplier = 0;
             driveSystem->shiftMultiplier = 0;
             driveSystem->rotateMultiplier = 0;
-            halfSpeed = true;
-            stopDrive = false;
+            halfSpeed = false;
+            stopDrive = true;
         }
         else if (XboxController.GetRawButton(ButtonXbox::XBOX_RIGHT_BUMPER)) //GenericControllerLeft::SWITCH_A
         {
             driveSystem->moveMultiplier = 0.5;
             driveSystem->shiftMultiplier = 0.5;
             driveSystem->rotateMultiplier = 0.5;
-            halfSpeed = false;
-            stopDrive = true;
+            halfSpeed = true;
+            stopDrive = false;
         }
         else
         {
@@ -175,6 +175,22 @@ void Robot::OperatorControl()
         }
 
         //Climber
+        //Extends the climbing pneumatics
+        if (XboxController.GetRawButton(ButtonXbox::XBOX_LEFT_JOYSTICK_PRESS)) //GenericControllerLeft::SWITCH_ARCADE_RIGHT
+        {
+            climbExtend->forwards();
+            climberReady = true;
+        }
+        else if (XboxController.GetRawButton(ButtonXbox::XBOX_RIGHT_JOYSTICK_PRESS))
+        {
+            climbExtend->reverse();
+            climberReady = false;
+        }
+        else
+        {
+            climbExtend->deactivate();
+            climberReady = false;
+        }
         //Extends and retracts the front pnuematics
         if (XboxController.GetRawButton(ButtonXbox::XBOX_START)) //GenericControllerRight::SWITCH_COVERED_SAFE1
         {
@@ -213,6 +229,9 @@ void Robot::OperatorControl()
         frc::SmartDashboard::PutNumber("CompressorCurrent", compressorCurrent);
         frc::SmartDashboard::PutBoolean("Compressor Enabled", compressorEnabled);
         frc::SmartDashboard::PutBoolean("Compressor Low Pressure Activate", compressorLowPressureActivate);
+
+        //Pneumatic Stuff
+        frc::SmartDashboard::PutBoolean("Climber Ready", climberReady);
 
         // Sensor Stuff
         frc::SmartDashboard::PutBoolean("Hatch Ready", hatchReady);
