@@ -220,7 +220,7 @@ void Robot::OperatorControl()
 		}*/
 
         // Activate the auto-alignment function.
-        if(this->RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_FIRE))
+        if(this->RightButtonHub.GetRawButtonPressed(GenericControllerRight::BUTTON_FIRE))
         {
             this->currentlyResolving = true;
             this->driveSystem->resolutionNeeded = true;
@@ -228,7 +228,7 @@ void Robot::OperatorControl()
 
         // Check for potential emergency abort BEFORE the function
         // responsible for resolution is called.
-        if(this->RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RELEASE))
+        if(this->RightButtonHub.GetRawButtonPressed(GenericControllerRight::BUTTON_RELEASE))
         {
             this->currentlyResolving = false;
         }
