@@ -33,27 +33,28 @@ BjorgMecanumDrive::BjorgMecanumDrive(
 
 void BjorgMecanumDrive::mecanumDrive()
 {
-    this->robotDrive->SetSafetyEnabled(true);
-    this->setMovement();
+    if(!this->resolutionNeeded)
+    {
+        this->robotDrive->SetSafetyEnabled(true);
+        this->setMovement();
 
-    if(UTILIZE_GYRO)
-    {
-        this->robotDrive->SetSafetyEnabled(true);
-        this->robotDrive->DriveCartesian(
-            this->moveMultiplier * this->movementValue, 
-            this->shiftMultiplier * this->shiftValue, 
-            this->rotateMultiplier * this->rotateValue,
-            this->gyroSensor->GetAngle()
-        );
-    }
-    else
-    {
-        this->robotDrive->SetSafetyEnabled(true);
-        this->robotDrive->DriveCartesian(
-            this->moveMultiplier * this->movementValue,
-            -1* this->shiftMultiplier * this->shiftValue,
-            this->rotateMultiplier * this->rotateValue
-        );
+        if(UTILIZE_GYRO)
+        {
+            this->robotDrive->DriveCartesian(
+                this->moveMultiplier * this->movementValue, 
+                this->shiftMultiplier * this->shiftValue, 
+                this->rotateMultiplier * this->rotateValue,
+                this->gyroSensor->GetAngle()
+            );
+        }
+        else
+        {
+            this->robotDrive->DriveCartesian(
+                this->moveMultiplier * this->movementValue,
+                -1 * this->shiftMultiplier * this->shiftValue,
+                this->rotateMultiplier * this->rotateValue
+            );
+        }
     }
 }
 
@@ -96,6 +97,8 @@ void BjorgMecanumDrive::mecanumDriveAutoAlign()
             this->robotDrive->SetSafetyEnabled(true);
             this->robotDrive->DriveCartesian(ySpeed, xSpeed, 0.0, this->gyroSensor->GetAngle());
         }
+
+        this->resolutionNeeded = !(this->distanceResolved && this->rotationResolved);
     }
 }
 

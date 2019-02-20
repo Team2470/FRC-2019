@@ -120,6 +120,7 @@ private:
 	SingleSolenoid* hatchPop = new SingleSolenoid(ChannelSolenoid::HATCH_POP_SOLENOID);
 	DoubleSolenoid* climbExtend = new DoubleSolenoid(ChannelSolenoid::CLIMBER_EXTEND_FORWARDS, ChannelSolenoid::CLIMBER_EXTEND_BACKWARDS);
 
+    bool currentlyResolving = false;
 	double inputVoltage = -1;
 	double totalCurrent = -1;
 	double temp = -1;

@@ -219,8 +219,32 @@ void Robot::OperatorControl()
 			climberBackRight->deactivate();
 		}*/
 
+        // Activate the auto-alignment function.
+        if(this->RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_FIRE))
+        {
+            this->currentlyResolving = true;
+            this->driveSystem->resolutionNeeded = true;
+        }
 
-		driveSystem->mecanumDrive();
+        // Check for potential emergency abort BEFORE the function
+        // responsible for resolution is called.
+        if(this->RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RELEASE))
+        {
+            this->currentlyResolving = false;
+        }
+
+        // Assuming that resolution is indeed still required, call
+        // the resolution function.
+        if(this->currentlyResolving)
+        {
+            this->driveSystem->mecanumDriveAutoAlign();
+            this->currentlyResolving = this->driveSystem->resolutionNeeded;
+        }
+
+        if(!this->currentlyResolving)
+        {
+            driveSystem->mecanumDrive();
+        }
 
 		// Driver Station
 		// PDP stuff
