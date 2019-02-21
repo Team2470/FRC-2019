@@ -35,7 +35,8 @@ public:
 	float moveMultiplier = 1.0;
  	float shiftMultiplier = 1.0;
 	float rotateMultiplier = 1.0;
-	
+    bool resolutionNeeded = false;
+
 	/**
 	 * @constructor BjorgMecanumDrive
 	 * @description Construct the BjorgMecanumDrive.
@@ -107,7 +108,6 @@ private:
 	float movementValue = 0.0;
     float shiftValue = 0.0;
 	float rotateValue = 0.0;
-    bool resolutionNeeded = false;
     bool rotationResolved = false;
     bool distanceResolved = false;
 
