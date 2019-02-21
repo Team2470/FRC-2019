@@ -1,5 +1,8 @@
 <xml version="1.0">
 <dashboard>
+	<widget field="Climber Ready" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="700" y="70"/>
+	</widget>
 	<widget field="Compressor Low Pressure Activate" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
 		<location x="7" y="320"/>
 	</widget>

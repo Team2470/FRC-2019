@@ -108,17 +108,17 @@ void Robot::OperatorControl()
 		}
 
 		//Toggles the plexiglass LEDs
-		if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_ARCADE_LEFT))
+		/*if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_ARCADE_LEFT))
 		{
 			plexiglassLED->Set(true);
 		}
 		else
 		{
 			plexiglassLED->Set(false);
-		}
+		}*/
 
 		//Controls the motor multiplier: stopped, halved, or full speeds
-		if (XboxController.GetRawButton(ButtonXbox::XBOX_LEFT_BUMPER)) //GenericControllerLeft::SWITCH_B
+		if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_B)) //ButtonXbox::XBOX_LEFT_BUMPER
 		{
 			driveSystem->moveMultiplier = 0;
 			driveSystem->shiftMultiplier = 0;
@@ -126,7 +126,7 @@ void Robot::OperatorControl()
 			halfSpeed = false;
 			stopDrive = true;
 		}
-		else if (XboxController.GetRawButton(ButtonXbox::XBOX_RIGHT_BUMPER)) //GenericControllerLeft::SWITCH_A
+		else if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_A)) //ButtonXbox::XBOX_RIGHT_BUMPER
 		{
 			driveSystem->moveMultiplier = 0.5;
 			driveSystem->shiftMultiplier = 0.5;
@@ -144,19 +144,19 @@ void Robot::OperatorControl()
 		}
 
 		//Toggles the compressor on and off
-		if (XboxController.GetRawButton(ButtonXbox::XBOX_X)) //GenericControllerLeft::BUTTON_BLUE_TOP_LEFT
+		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_TOP_LEFT)) //ButtonXbox::XBOX_X
 		{
 			compressor->toggleCompressor();
 		}
 
 		//Toggles if the compressor turns on when pressure is low
-		if (XboxController.GetRawButton(ButtonXbox::XBOX_Y)) //GenericControllerLeft::BUTTON_BLUE_TOP_RIGHT
+		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_TOP_RIGHT)) //ButtonXbox::XBOX_Y
 		{
 			compressor->lowPressureToggle();
 		}
 
 		// Controlls the Hatch
-		if (XboxController.GetRawButton(ButtonXbox::XBOX_A)) //(GenericControllerRight::SWITCH_X
+		if (RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_FIRE)) //ButtonXbox::XBOX_A
 		{
 			hatchExtend->activate();
 		}
@@ -166,7 +166,7 @@ void Robot::OperatorControl()
 		}
 
 		// Pops off the hatch
-		if (XboxController.GetRawButton(ButtonXbox::XBOX_B)) //GenericControllerRight::SWITCH_Y
+		if (RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RELEASE)) //ButtonXbox::XBOX_B
 		{
 			hatchPop->activate();
 		}
@@ -177,12 +177,12 @@ void Robot::OperatorControl()
 
 		//Climber
 		//Extends the climbing pneumatics
-		if (XboxController.GetRawButton(ButtonXbox::XBOX_LEFT_JOYSTICK_PRESS)) //GenericControllerLeft::SWITCH_ARCADE_RIGHT
+		if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_ARCADE_RIGHT)) //ButtonXbox::XBOX_LEFT_JOYSTICK_PRESS
 		{
 			climbExtend->forwards();
 			climberReady = true;
 		}
-		else if (XboxController.GetRawButton(ButtonXbox::XBOX_RIGHT_JOYSTICK_PRESS))
+		else if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_ARCADE_LEFT))
 		{
 			climbExtend->reverse();
 			climberReady = false;
@@ -193,22 +193,22 @@ void Robot::OperatorControl()
 			climberReady = false;
 		}
 		//Extends and retracts the front pnuematics
-		if (XboxController.GetRawButton(ButtonXbox::XBOX_START)) //GenericControllerRight::SWITCH_COVERED_SAFE1
+		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE1)) //ButtonXbox::XBOX_START
 		{
 			climberFrontLeft->activate();
 			climberFrontRight->activate();
-			climberBackLeft->activate();
-			climberBackRight->activate();
+			//climberBackLeft->activate();
+			//climberBackRight->activate();
 		}
-		else
+		else// if (XboxController.GetRawButton(ButtonXbox::XBOX_BACK)) //if is just here before ds is updated
 		{
 			climberFrontLeft->deactivate();
 			climberFrontRight->deactivate();
-			climberBackLeft->deactivate();
-			climberBackRight->deactivate();
+			//climberBackLeft->deactivate();
+			//climberBackRight->deactivate();
 		}
 		//Extends and retracts the back pnuematics
-		/*if (XboxController.GetRawButton(ButtonXbox::XBOX_BACK)) //GenericControllerRight::SWITCH_COVERED_SAFE2
+		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE2)) //ButtonXbox::XBOX_BACK
 		{
 			climberBackLeft->activate();
 			climberBackRight->activate();
@@ -217,7 +217,7 @@ void Robot::OperatorControl()
 		{
 			climberBackLeft->deactivate();
 			climberBackRight->deactivate();
-		}*/
+		}
 
 
 		driveSystem->mecanumDrive();

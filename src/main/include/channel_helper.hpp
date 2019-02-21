@@ -72,8 +72,8 @@ enum ChannelSolenoid
 	BACK_RIGHT_SOLENOID = 2,		//Single Solenoid
 	HATCH_EXTEND_SOLENOID = 4,		//Single Solenoid
 	HATCH_POP_SOLENOID = 5,			//Single Solenoid
-	CLIMBER_EXTEND_FORWARDS = 6,	//Single Solenoid
-	CLIMBER_EXTEND_BACKWARDS = 7	//Single Solenoid
+	CLIMBER_EXTEND_FORWARDS = 6,	//Double Solenoid
+	CLIMBER_EXTEND_BACKWARDS = 7	//Double Solenoid
 };
 
 /**
