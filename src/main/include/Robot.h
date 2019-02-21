@@ -73,7 +73,8 @@ private:
 	frc::SendableChooser<std::string> chooser;
 
 	frc::Joystick XboxController { ChannelController::XBOX_CONTROLLER };
-	frc::Joystick LogitechController { ChannelController::LOGITECH_CONTROLLER };
+	//frc::Joystick LogitechController { ChannelController::LOGITECH_CONTROLLER };
+	frc::Joystick FlightJoystick { ChannelController::FLIGHT_JOYSTICK };
 	frc::Joystick LeftDriveJoystick { ChannelController::LEFT_DRIVE_JOYSTICK };
 	frc::Joystick RightDriveJoystick { ChannelController::RIGHT_DRIVE_JOYSTICK };
 	frc::Joystick LeftButtonHub { ChannelController::LEFT_BUTTON_HUB };
@@ -87,17 +88,19 @@ private:
 	frc::Spark* intakeRightMotor = new frc::Spark(ChannelPWM::RIGHT_INTAKE_MOTOR);
 	frc::Spark* placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
 
-    frc::AnalogGyro* gyro = new frc::AnalogGyro(0); // TODO: ENSURE CORRECT CHANNEL
-    MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::LV);
+	frc::AnalogGyro* gyro = new frc::AnalogGyro(0); // TODO: ENSURE CORRECT CHANNEL
+	MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::LV);
 	VisionProcessing* limelight = new VisionProcessing(); 
 	AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch, limelight);
 
-    // TODO: Find the correct distance multiplier.
-    Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
+	// TODO: Find the correct distance multiplier.
+	Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
 	Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
 	Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
 	Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
-    frc::DigitalOutput* plexiglassLED = new frc::DigitalOutput(ChannelDigital::PLEXIGLASS_LIGHT_CONTROL);
+	frc::DigitalOutput* plexiglassLED = new frc::DigitalOutput(ChannelDigital::PLEXIGLASS_LIGHT_CONTROL);
+
+	BjorgArcadeDrive* intakeSystem = new BjorgArcadeDrive(intakeLeftMotor, intakeRightMotor, &FlightJoystick, &FlightJoystick);
 
 	BjorgMecanumDrive* driveSystem = new BjorgMecanumDrive(
 		this->frontLeftMotor, 
@@ -108,7 +111,7 @@ private:
 		&this->XboxController,		//RightDriveJoystick
 		&this->XboxController,		//LeftDriveJoystick
 		this->gyro,
-        this->autoAlignment
+		this->autoAlignment
 	);
 
 	Compressor* compressor = new Compressor(0);
@@ -120,7 +123,7 @@ private:
 	SingleSolenoid* hatchPop = new SingleSolenoid(ChannelSolenoid::HATCH_POP_SOLENOID);
 	DoubleSolenoid* climbExtend = new DoubleSolenoid(ChannelSolenoid::CLIMBER_EXTEND_FORWARDS, ChannelSolenoid::CLIMBER_EXTEND_BACKWARDS);
 
-    bool currentlyResolving = false;
+	bool currentlyResolving = false;
 	double inputVoltage = -1;
 	double totalCurrent = -1;
 	double temp = -1;

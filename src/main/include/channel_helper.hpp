@@ -8,8 +8,8 @@
 enum ChannelController
 {
 	XBOX_CONTROLLER = 0,				//When we are using the logitech and xbox controllers
-	LOGITECH_CONTROLLER = 1,			//When we are using the logitech and xbox controllers
-	//FLIGHT_JOYSTICK = 1,				//When we are using the driver station
+	//LOGITECH_CONTROLLER = 1,			//When we are using the logitech and xbox controllers
+	FLIGHT_JOYSTICK = 1,				//When we are using the driver station
 	LEFT_DRIVE_JOYSTICK = 2,			//When we are using the driver station
 	LEFT_BUTTON_HUB = 3,				//When we are using the driver station
 	RIGHT_DRIVE_JOYSTICK = 4,			//When we are using the driver station

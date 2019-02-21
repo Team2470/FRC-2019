@@ -33,9 +33,9 @@ void Robot::Autonomous()
 void Robot::OperatorControl() 
 {
 	// Drive system variables
-	driveSystem->moveCtrl = AxisXbox::XBOX_RIGHT_JOYSTICK_X;
-	driveSystem->shiftCtrl = AxisXbox::XBOX_RIGHT_JOYSTICK_Y;
-	driveSystem->rotateCtrl = AxisXbox::XBOX_LEFT_JOYSTICK_X;
+	driveSystem->moveCtrl = AxisXbox::XBOX_RIGHT_JOYSTICK_X;	//AxisGeneric::JOYSTICK_X_AXIS
+	driveSystem->shiftCtrl = AxisXbox::XBOX_RIGHT_JOYSTICK_Y;	//AxisGeneric::JOYSTICK_Y_AXIS
+	driveSystem->rotateCtrl = AxisXbox::XBOX_LEFT_JOYSTICK_X;	//AxisGeneric::JOYSTICK_X_AXIS
 	driveSystem->multiMove = false;
 	driveSystem->multiShift = false;
 	driveSystem->multiRotate = false;
@@ -49,11 +49,11 @@ void Robot::OperatorControl()
 
 
 	// Intake system variables
-	//m_intakeSystem->moveCtrl = FlightJoystick.GetYChannel();
-	//m_intakeSystem->multiMove = false;
-	//m_intakeSystem->multiRotate = false;
-	//m_intakeSystem->rotateEnable = false;
-	//m_intakeSystem->reverseDrive = -1;
+	intakeSystem->moveCtrl = AxisGeneric::JOYSTICK_Y_AXIS; //FlightJoystick.GetYChannel()
+	intakeSystem->multiMove = false;
+	intakeSystem->multiRotate = false;
+	intakeSystem->rotateEnable = false;
+	intakeSystem->reverseDrive = 1;
 
 	encoderFrontLeft->reset();
 	encoderBackLeft->reset();
@@ -77,7 +77,7 @@ void Robot::OperatorControl()
 		compressorLowPressureActivate = compressor->getPressureActivate();
 
 		//Sensor
-		//hatchReady = ultrasonicHatch->sonarRange() <= HATCH_DISTANCE;
+		hatchReady = ultrasonicHatch->sonarRange() <= HATCH_DISTANCE;
 
 		//Drive
 		moveJoyVal = RightDriveJoystick.GetY();
@@ -156,7 +156,7 @@ void Robot::OperatorControl()
 		}
 
 		// Controlls the Hatch
-		if (RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_FIRE)) //ButtonXbox::XBOX_A
+		if (RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_FIRE)) //ButtonXbox::XBOX_A or GenericControllerRight::BUTTON_FIRE
 		{
 			hatchExtend->activate();
 		}
@@ -166,7 +166,7 @@ void Robot::OperatorControl()
 		}
 
 		// Pops off the hatch
-		if (RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RELEASE)) //ButtonXbox::XBOX_B
+		if (RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RELEASE)) //ButtonXbox::XBOX_B or GenericControllerRight::BUTTON_RELEASE
 		{
 			hatchPop->activate();
 		}
@@ -245,6 +245,8 @@ void Robot::OperatorControl()
         {
             driveSystem->mecanumDrive();
         }
+
+		intakeSystem->arcadeDrive();
 
 		// Driver Station
 		// PDP stuff
