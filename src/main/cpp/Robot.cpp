@@ -33,15 +33,14 @@ void Robot::Autonomous()
 void Robot::OperatorControl() 
 {
 	// Drive system variables
-	driveSystem->moveCtrl = AxisXbox::XBOX_RIGHT_JOYSTICK_X;	//AxisGeneric::JOYSTICK_X_AXIS
-	driveSystem->shiftCtrl = AxisXbox::XBOX_RIGHT_JOYSTICK_Y;	//AxisGeneric::JOYSTICK_Y_AXIS
-	driveSystem->rotateCtrl = AxisXbox::XBOX_LEFT_JOYSTICK_X;	//AxisGeneric::JOYSTICK_X_AXIS
+	driveSystem->moveCtrl = AxisGeneric::JOYSTICK_X_AXIS;	//AxisXbox::XBOX_RIGHT_JOYSTICK_X
+	driveSystem->shiftCtrl = AxisGeneric::JOYSTICK_Y_AXIS;	//AxisXbox::XBOX_RIGHT_JOYSTICK_Y
+	driveSystem->rotateCtrl = AxisGeneric::JOYSTICK_X_AXIS;	//AxisXbox::XBOX_LEFT_JOYSTICK_X
 	driveSystem->multiMove = false;
 	driveSystem->multiShift = false;
 	driveSystem->multiRotate = false;
 
 	//Set motors to invert correctly
-	//should be true, false, false, true
 	frontLeftMotor->SetInverted(false);
 	backLeftMotor->SetInverted(false);
 	frontRightMotor->SetInverted(false);
@@ -117,7 +116,7 @@ void Robot::OperatorControl()
 			plexiglassLED->Set(false);
 		}*/
 
-		//Controls the motor multiplier: stopped, halved, or full speeds
+		//Controls the motor multiplier: stopped, halved, or full speed
 		if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_B)) //ButtonXbox::XBOX_LEFT_BUMPER
 		{
 			driveSystem->moveMultiplier = 0;

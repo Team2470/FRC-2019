@@ -107,9 +107,9 @@ private:
 		this->backLeftMotor, 
 		this->frontRightMotor, 
 		this->backRightMotor, 
-		&this->XboxController,		//RightDriveJoystick
-		&this->XboxController,		//RightDriveJoystick
-		&this->XboxController,		//LeftDriveJoystick
+		&this->RightDriveJoystick,		//XboxController
+		&this->RightDriveJoystick,		//XboxController
+		&this->LeftDriveJoystick,		//XboxController
 		this->gyro,
 		this->autoAlignment
 	);
