@@ -145,13 +145,23 @@ void Robot::OperatorControl()
 		//Toggles the compressor on and off
 		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_TOP_LEFT)) //ButtonXbox::XBOX_X
 		{
-			compressor->toggleCompressor();
+			//compressor->toggleCompressor();
+			compressor->activate();
+		}
+		else if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_TOP_RIGHT))
+		{
+			compressor->deactivate();
 		}
 
 		//Toggles if the compressor turns on when pressure is low
-		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_TOP_RIGHT)) //ButtonXbox::XBOX_Y
+		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_LEFT)) //ButtonXbox::XBOX_Y
 		{
-			compressor->lowPressureToggle();
+			//compressor->lowPressureToggle();
+			compressor->lowPressureActivate(true);
+		}
+		else if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_RIGHT))
+		{
+			compressor->lowPressureActivate(false);
 		}
 
 		// Controlls the Hatch
