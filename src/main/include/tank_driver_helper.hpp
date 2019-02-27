@@ -38,8 +38,8 @@ public:
 	 * @param 	    controllerRight -- The joystick controlling the right motor.
 	 */
 	BjorgTankDrive(
-		frc::Spark* leftMotor, 
-		frc::Spark* rightMotor, 
+		frc::SpeedController* leftMotor, 
+		frc::SpeedController* rightMotor, 
         frc::Joystick* controllerLeft, 
 		frc::Joystick* controllerRight
 	);

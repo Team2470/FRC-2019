@@ -4,10 +4,10 @@
 #include "mecanum_driver_helper.hpp"
 
 BjorgMecanumDrive::BjorgMecanumDrive(
-    frc::Spark* frontLeftMotor, 
-    frc::Spark* backLeftMotor, 
-    frc::Spark* frontRightMotor, 
-    frc::Spark* backRightMotor,
+    frc::SpeedController* frontLeftMotor, 
+    frc::SpeedController* backLeftMotor, 
+    frc::SpeedController* frontRightMotor, 
+    frc::SpeedController* backRightMotor,
     frc::Joystick* moveController, 
     frc::Joystick* shiftController, 
     frc::Joystick* rotateController,
