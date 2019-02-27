@@ -84,8 +84,8 @@ private:
 	frc::Spark* backLeftMotor = new frc::Spark(ChannelPWM::BACK_LEFT_MOTOR);
 	frc::Spark* frontRightMotor = new frc::Spark(ChannelPWM::FRONT_RIGHT_MOTOR);
 	frc::Spark* backRightMotor = new frc::Spark(ChannelPWM::BACK_RIGHT_MOTOR);
-	frc::Spark* intakeLeftMotor = new frc::Spark(ChannelPWM::LEFT_INTAKE_MOTOR);
-	frc::Spark* intakeRightMotor = new frc::Spark(ChannelPWM::RIGHT_INTAKE_MOTOR);
+	frc::VictorSP* intakeLeftMotor = new frc::VictorSP(ChannelPWM::LEFT_INTAKE_MOTOR);
+	frc::VictorSP* intakeRightMotor = new frc::VictorSP(ChannelPWM::RIGHT_INTAKE_MOTOR);
 	frc::Spark* placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
 
 	frc::AnalogGyro* gyro = new frc::AnalogGyro(0); // TODO: ENSURE CORRECT CHANNEL

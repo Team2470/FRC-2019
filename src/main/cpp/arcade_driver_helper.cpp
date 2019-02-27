@@ -7,8 +7,8 @@
 #include "arcade_driver_helper.hpp"
 
 BjorgArcadeDrive::BjorgArcadeDrive(
-	frc::Spark* leftMotor, 
-	frc::Spark* rightMotor, 
+	frc::SpeedController* leftMotor, 
+	frc::SpeedController* rightMotor, 
     frc::Joystick* controllerMovement,
 	frc::Joystick* controllerRotate
 )
