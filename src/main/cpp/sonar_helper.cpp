@@ -1,4 +1,3 @@
-#include <iostream>
 #include <frc/AnalogInput.h>
 #include <frc/Ultrasonic.h>
 #include "sonar_helper.hpp"
