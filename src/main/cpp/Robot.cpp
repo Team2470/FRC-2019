@@ -107,14 +107,14 @@ void Robot::OperatorControl()
 		}
 
 		//Toggles the plexiglass LEDs
-		/*if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_ARCADE_LEFT))
+		if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_ARCADE_LEFT))
 		{
 			plexiglassLED->Set(true);
 		}
 		else
 		{
 			plexiglassLED->Set(false);
-		}*/
+		}
 
 		//Controls the motor multiplier: stopped, halved, or full speed
 		if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_B)) //ButtonXbox::XBOX_LEFT_BUMPER
@@ -191,16 +191,17 @@ void Robot::OperatorControl()
 			climbExtend->forwards();
 			climberReady = true;
 		}
-		else if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_ARCADE_LEFT))
+		//else if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_ARCADE_LEFT))
+		else
 		{
 			climbExtend->reverse();
 			climberReady = false;
 		}
-		else
+		/*else
 		{
 			climbExtend->deactivate();
 			climberReady = false;
-		}
+		}*/
 		//Extends and retracts the front pnuematics
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE1)) //ButtonXbox::XBOX_START
 		{
