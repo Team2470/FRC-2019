@@ -114,12 +114,22 @@ enum DPadLogitech
 
 /**
  * @enum	    AxisGeneric
- * @description Generic axes.
+ * @description Generic axis.
  */
 enum AxisGeneric
 {
 	JOYSTICK_Y_AXIS = 0,
-	JOYSTICK_X_AXIS = 1,
+	JOYSTICK_X_AXIS = 1
+};
+
+/**
+ * @enum	    AxisFlight
+ * @description Flight Joystick axis.
+ */
+enum AxisFlight
+{
+	FLIGHT_X_AXIS = 0,
+	FLIGHT_Y_AXIS = 1
 };
 
 /**

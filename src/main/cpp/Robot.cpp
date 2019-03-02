@@ -48,7 +48,7 @@ void Robot::OperatorControl()
 
 
 	// Intake system variables
-	intakeSystem->moveCtrl = AxisGeneric::JOYSTICK_Y_AXIS; //FlightJoystick.GetYChannel()
+	intakeSystem->moveCtrl = AxisFlight::FLIGHT_Y_AXIS; //FlightJoystick.GetYChannel()
 	intakeSystem->multiMove = false;
 	intakeSystem->multiRotate = false;
 	intakeSystem->rotateEnable = false;
