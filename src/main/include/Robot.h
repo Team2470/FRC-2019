@@ -84,16 +84,18 @@ private:
 	frc::Spark* backLeftMotor = new frc::Spark(ChannelPWM::BACK_LEFT_MOTOR);
 	frc::Spark* frontRightMotor = new frc::Spark(ChannelPWM::FRONT_RIGHT_MOTOR);
 	frc::Spark* backRightMotor = new frc::Spark(ChannelPWM::BACK_RIGHT_MOTOR);
-	frc::Spark* intakeLeftMotor = new frc::Spark(ChannelPWM::LEFT_INTAKE_MOTOR);
-	frc::Spark* intakeRightMotor = new frc::Spark(ChannelPWM::RIGHT_INTAKE_MOTOR);
+	frc::VictorSP* intakeLeftMotor = new frc::VictorSP(ChannelPWM::LEFT_INTAKE_MOTOR);
+	frc::VictorSP* intakeRightMotor = new frc::VictorSP(ChannelPWM::RIGHT_INTAKE_MOTOR);
 	frc::Spark* placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
 
 	frc::AnalogGyro* gyro = new frc::AnalogGyro(0); // TODO: ENSURE CORRECT CHANNEL
-	MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::LV);
+	MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::HRLV);
 	VisionProcessing* limelight = new VisionProcessing(); 
 	AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch, limelight);
 
 	// TODO: Find the correct distance multiplier.
+	//hi-res cim encoder has 256 pulses per channel per revolution (either 256 or 512 depending on if we multiply by number of channles)
+	//still need the factor in gearing reductions
 	Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
 	Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
 	Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);

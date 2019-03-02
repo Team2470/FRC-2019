@@ -12,5 +12,8 @@
     ".project": true
   },
   "wpilib.online": true,
-  "C_Cpp.intelliSenseEngineFallback": "Enabled"
+  "C_Cpp.intelliSenseEngineFallback": "Enabled",
+  "files.associations": {
+    "*.inc": "cpp"
+  }
 }

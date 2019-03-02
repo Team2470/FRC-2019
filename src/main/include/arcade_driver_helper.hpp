@@ -39,8 +39,8 @@ public:
 	 * @param	    controllerRotate   -- A pointer to the Joystick object governing rotation.
 	 */
 	BjorgArcadeDrive(
-        frc::Spark* leftMotor, 
-        frc::Spark* rightMotor, 
+        frc::SpeedController* leftMotor, 
+        frc::SpeedController* rightMotor, 
         frc::Joystick* controllerMovement, 
         frc::Joystick* controllerRotate
     );

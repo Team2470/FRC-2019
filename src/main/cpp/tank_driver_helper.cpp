@@ -7,8 +7,8 @@
 #include "tank_driver_helper.hpp"
 
 BjorgTankDrive::BjorgTankDrive(
-	frc::Spark* leftMotor, 
-	frc::Spark* rightMotor, 
+	frc::SpeedController* leftMotor, 
+	frc::SpeedController* rightMotor, 
 	frc::Joystick* controllerLeft, 
 	frc::Joystick* controllerRight
 )
