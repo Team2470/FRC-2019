@@ -175,7 +175,7 @@ void Robot::OperatorControl()
 		}
 
 		// Pops off the hatch
-		if (RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RELEASE)) //ButtonXbox::XBOX_B or GenericControllerRight::BUTTON_RELEASE
+		if (RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RELEASE) || RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RED_LEFT)) //ButtonXbox::XBOX_B or GenericControllerRight::BUTTON_RELEASE
 		{
 			hatchPop->activate();
 		}
@@ -256,7 +256,18 @@ void Robot::OperatorControl()
             driveSystem->mecanumDrive();
         }
 
-		intakeSystem->arcadeDrive();
+		//Intake Drive
+		if (FlightJoystick.GetRawButton(ButtonFlight::FLIGHT_TRIGGER))
+		{
+			intakeActive = true;
+			intakeSystem->arcadeDrive();
+		}
+		else
+		{
+			intakeActive = false;
+			intakeSystem->stop();
+		}
+		//intakeSystem->arcadeDrive();
 
 		// Driver Station
 		// PDP stuff
@@ -280,6 +291,7 @@ void Robot::OperatorControl()
 		// Drive stuff
 		frc::SmartDashboard::PutBoolean("HalfSpeed", halfSpeed);
 		frc::SmartDashboard::PutBoolean("StopDrive", stopDrive);
+		frc::SmartDashboard::PutBoolean("Intake Active", intakeActive);
 		frc::SmartDashboard::PutNumber("MoveJoy", moveJoyVal);
 		frc::SmartDashboard::PutNumber("ShiftJoy", shiftJoyVal);
 		frc::SmartDashboard::PutNumber("RotateJoy", rotateJoyVal);

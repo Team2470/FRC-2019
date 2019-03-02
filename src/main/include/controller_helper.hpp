@@ -65,6 +65,16 @@ enum ButtonLogitech
 };
 
 /**
+ * @enum	    ButtonFlight
+ * @description Channels for Flight Joystick buttons.
+ */
+enum ButtonFlight
+{
+	FLIGHT_TRIGGER = 1,
+	FLIGHT_BALL = 2
+};
+
+/**
  * @enum	    DPadXbox
  * @description Values for the Xbox DPAD.
  */

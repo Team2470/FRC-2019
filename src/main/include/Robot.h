@@ -138,6 +138,7 @@ private:
 	bool hatchReady = false;
 	bool halfSpeed = false;
 	bool stopDrive = false;
+	bool intakeActive = false;
 	double moveJoyVal = 0;
 	double shiftJoyVal = 0;
 	double rotateJoyVal = 0;
