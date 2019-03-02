@@ -38,6 +38,18 @@ void BjorgMecanumDrive::mecanumDrive()
         this->robotDrive->SetSafetyEnabled(true);
         this->setMovement();
 
+        this->movementValue = this->movementValue <= 0.1 && this->movementValue >= -0.1
+            ? 0.0
+            : this->movementValue;
+
+        this->shiftValue = this->shiftValue <= 0.1 && this->shiftValue >= -0.1
+            ? 0.0
+            : this->shiftValue;
+
+        this->rotateValue = this->rotateValue <= 0.1 && this->rotateValue >= -0.1
+            ? 0.0
+            : this->rotateValue;
+
         if(UTILIZE_GYRO)
         {
             this->robotDrive->DriveCartesian(
