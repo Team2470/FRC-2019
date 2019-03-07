@@ -178,10 +178,12 @@ void Robot::OperatorControl()
 		if (RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RELEASE) || RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RED_LEFT)) //ButtonXbox::XBOX_B or GenericControllerRight::BUTTON_RELEASE
 		{
 			hatchPop->activate();
+			hatchPopping = true;
 		}
 		else
 		{
 			hatchPop->deactivate();
+			hatchPopping = false;
 		}
 
 		//Climber
@@ -287,6 +289,7 @@ void Robot::OperatorControl()
 
 		// Sensor Stuff
 		frc::SmartDashboard::PutBoolean("Hatch Ready", hatchReady);
+		frc::SmartDashboard::PutBoolean("Hatch Popping", hatchPopping);
 
 		// Drive stuff
 		frc::SmartDashboard::PutBoolean("HalfSpeed", halfSpeed);

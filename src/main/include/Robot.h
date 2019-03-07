@@ -136,6 +136,7 @@ private:
 	bool compressorLowPressureActivate = true;
 	bool climberReady = false;
 	bool hatchReady = false;
+	bool hatchPopping = false;
 	bool halfSpeed = false;
 	bool stopDrive = false;
 	bool intakeActive = false;
