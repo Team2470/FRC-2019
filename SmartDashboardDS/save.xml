@@ -1,5 +1,8 @@
 <xml version="1.0">
 <dashboard>
+	<widget field="Intake Active" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="21" y="69"/>
+	</widget>
 	<widget field="Climber Ready" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
 		<location x="700" y="70"/>
 	</widget>
