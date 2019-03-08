@@ -99,11 +99,11 @@ void Robot::OperatorControl()
 		//Toggles the limelight between vision processing and regular camera
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_LOCKING_SAFE3))
 		{
-			limelight->setCameraMode(LimelightCameraMode::DRIVER_CAMERA);
+			limelight->setPipeline(1);
 		}
 		else
 		{
-			limelight->setCameraMode(LimelightCameraMode::VISION_PROCESSOR);
+			limelight->setPipeline(0);
 		}
 
 		//Toggles the plexiglass LEDs
@@ -154,14 +154,19 @@ void Robot::OperatorControl()
 		}
 
 		//Toggles if the compressor turns on when pressure is low
-		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_LEFT)) //ButtonXbox::XBOX_Y
+		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_RIGHT)) //ButtonXbox::XBOX_Y
 		{
 			//compressor->lowPressureToggle();
-			compressor->lowPressureActivate(true);
+			compressor->lowPressureToggle();
 		}
-		else if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_RIGHT))
+
+		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_LEFT))
 		{
-			compressor->lowPressureActivate(false);
+			driveSystem->disableMove = false;
+		}
+		else
+		{
+			driveSystem->disableMove = true;
 		}
 
 		// Controlls the Hatch
