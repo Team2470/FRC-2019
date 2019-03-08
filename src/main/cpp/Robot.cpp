@@ -215,28 +215,28 @@ void Robot::BasicControl(ControlMode mode)
 		//Extends and retracts the front pnuematics
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE1)) //ButtonXbox::XBOX_START
 		{
-			climberFrontLeft->activate();
-			climberFrontRight->activate();
-			//climberBackLeft->activate();
-			//climberBackRight->activate();
+			//climberFrontLeft->activate();
+			//climberFrontRight->activate();
+			frontClimbers->Set(true);
 		}
-		else// if (XboxController.GetRawButton(ButtonXbox::XBOX_BACK)) //if is just here before ds is updated
+		else
 		{
-			climberFrontLeft->deactivate();
-			climberFrontRight->deactivate();
-			//climberBackLeft->deactivate();
-			//climberBackRight->deactivate();
+			//climberFrontLeft->deactivate();
+			//climberFrontRight->deactivate();
+			frontClimbers->Set(false);
 		}
 		//Extends and retracts the back pnuematics
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE2)) //ButtonXbox::XBOX_BACK
 		{
-			climberBackLeft->activate();
-			climberBackRight->activate();
+			//climberBackLeft->activate();
+			//climberBackRight->activate();
+			backClimbers->Set(true);
 		}
 		else
 		{
-			climberBackLeft->deactivate();
-			climberBackRight->deactivate();
+			//climberBackLeft->deactivate();
+			//climberBackRight->deactivate();
+			backClimbers->Set(false);
 		}
 
         // Activate the auto-alignment function.
