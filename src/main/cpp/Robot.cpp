@@ -12,25 +12,22 @@ Robot::Robot()
 
 void Robot::RobotInit()
 {
-	//prefs = Preferences::GetInstance();
 	chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
 	chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
-	//chooser.AddOption();
 	frc::SmartDashboard::PutData("Auto Modes", &chooser);
 }
 
 void Robot::Autonomous() 
 {
-	std::string autoSelected = chooser.GetSelected();
-	// std::string autoSelected = frc::SmartDashboard::GetString(
-	// "Auto Selector", kAutoNameDefault);
-	std::cout << "Auto selected: " << autoSelected << std::endl;
+	this->BasicControl(ControlMode::AUTO);
 }
 
-/**
- * Runs the motors with arcade steering.
- */
 void Robot::OperatorControl() 
+{
+	this->BasicControl(ControlMode::TELEOP);
+}
+
+void Robot::BasicControl(ControlMode mode)
 {
 	// Drive system variables
 	driveSystem->moveCtrl = AxisGeneric::JOYSTICK_X_AXIS;	//AxisXbox::XBOX_RIGHT_JOYSTICK_X
@@ -46,7 +43,6 @@ void Robot::OperatorControl()
 	frontRightMotor->SetInverted(false);
 	backRightMotor->SetInverted(false);
 
-
 	// Intake system variables
 	intakeSystem->moveCtrl = AxisFlight::FLIGHT_Y_AXIS; //FlightJoystick.GetYChannel()
 	intakeSystem->multiMove = false;
@@ -61,8 +57,18 @@ void Robot::OperatorControl()
 
 	plexiglassLED->Set(true);
 
-	while (IsOperatorControl() && IsEnabled())
+	bool continueLoop = true;
+	while(continueLoop)
 	{
+		if(mode == ControlMode::AUTO)
+		{
+			continueLoop = this->IsAutonomous() && this->IsEnabled();
+		}
+		else if(mode == ControlMode::TELEOP)
+		{
+			continueLoop = this->IsOperatorControl() && this->IsEnabled();
+		}
+
 		//PDP
 		inputVoltage = pdp->GetVoltage();
 		totalCurrent = pdp->GetTotalCurrent();
@@ -92,9 +98,6 @@ void Robot::OperatorControl()
 
 		//Camera
 		currentLimelight = pdp->GetCurrent(ChannelPDP::PDP_LIMELIGHT_CAMERA);
-
-		
-		//Main Robot Code
 
 		//Toggles the limelight between vision processing and regular camera
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_LOCKING_SAFE3))

@@ -38,15 +38,15 @@ void BjorgMecanumDrive::mecanumDrive()
         this->robotDrive->SetSafetyEnabled(true);
         this->setMovement();
 
-        this->movementValue = this->movementValue <= 0.1 && this->movementValue >= -0.1
+        this->movementValue = this->movementValue <= 0.15 && this->movementValue >= -0.15
             ? 0.0
             : this->movementValue;
 
-        this->shiftValue = this->shiftValue <= 0.1 && this->shiftValue >= -0.1
+        this->shiftValue = this->shiftValue <= 0.15 && this->shiftValue >= -0.15
             ? 0.0
             : this->shiftValue;
 
-        this->rotateValue = this->rotateValue <= 0.1 && this->rotateValue >= -0.1
+        this->rotateValue = this->rotateValue <= 0.15 && this->rotateValue >= -0.15
             ? 0.0
             : this->rotateValue;
 
@@ -62,8 +62,8 @@ void BjorgMecanumDrive::mecanumDrive()
         else
         {
             this->robotDrive->DriveCartesian(
-                -1 * disableMove * this->moveMultiplier * this->movementValue,
-                -1 * this->shiftMultiplier * this->shiftValue,
+                this->moveMultiplier * this->movementValue,
+                disableMove * this->shiftMultiplier * this->shiftValue,
                 this->rotateMultiplier * this->rotateValue
             );
         }

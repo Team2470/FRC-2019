@@ -24,6 +24,12 @@
 #include "ir_helper.hpp"
 #include "encoder_helper.hpp"
 
+enum ControlMode
+{
+	AUTO,
+	TELEOP
+};
+
 /**
  * @class	   Robot.
  * @description Controls the robot at the highest level.
@@ -61,6 +67,13 @@ public:
 	 * @description Control the robot in test mode.
 	 */
 	void Test() override;
+
+	/**
+	 * @function    BasicControl
+	 * @description Basic robot control. Used in auto and teleop.
+	 * @param       mode -- The control mode.
+	 */
+	void BasicControl(ControlMode mode);
 
 private:
 	static constexpr int HATCH_DISTANCE = 24;
