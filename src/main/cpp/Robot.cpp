@@ -50,10 +50,10 @@ void Robot::BasicControl(ControlMode mode)
 	intakeSystem->rotateEnable = false;
 	intakeSystem->reverseDrive = 1;
 
-	encoderFrontLeft->reset();
-	encoderBackLeft->reset();
-	encoderFrontRight->reset();
-	encoderBackRight->reset();
+	//encoderFrontLeft->reset();
+	//encoderBackLeft->reset();
+	//encoderFrontRight->reset();
+	//encoderBackRight->reset();
 
 	plexiglassLED->Set(true);
 
@@ -215,28 +215,28 @@ void Robot::BasicControl(ControlMode mode)
 		//Extends and retracts the front pnuematics
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE1)) //ButtonXbox::XBOX_START
 		{
-			//climberFrontLeft->activate();
-			//climberFrontRight->activate();
-			frontClimbers->Set(true);
+			climberFrontLeft->activate();
+			climberFrontRight->activate();
+			//frontClimbers->Set(true);
 		}
 		else
 		{
-			//climberFrontLeft->deactivate();
-			//climberFrontRight->deactivate();
-			frontClimbers->Set(false);
+			climberFrontLeft->deactivate();
+			climberFrontRight->deactivate();
+			//frontClimbers->Set(false);
 		}
 		//Extends and retracts the back pnuematics
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE2)) //ButtonXbox::XBOX_BACK
 		{
-			//climberBackLeft->activate();
-			//climberBackRight->activate();
-			backClimbers->Set(true);
+			climberBackLeft->activate();
+			climberBackRight->activate();
+			//backClimbers->Set(true);
 		}
 		else
 		{
-			//climberBackLeft->deactivate();
-			//climberBackRight->deactivate();
-			backClimbers->Set(false);
+			climberBackLeft->deactivate();
+			climberBackRight->deactivate();
+			//backClimbers->Set(false);
 		}
 
         // Activate the auto-alignment function.
