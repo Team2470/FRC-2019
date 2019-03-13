@@ -106,6 +106,7 @@ public:
 
 private:
     static constexpr bool UTILIZE_GYRO = false;
+    static constexpr float DEADZONE = 0.15;
 	float movementValue = 0.0;
     float shiftValue = 0.0;
 	float rotateValue = 0.0;
