@@ -77,6 +77,10 @@ public:
 
 private:
 	static constexpr int HATCH_DISTANCE = 24;
+	//256 * 2 = 512 for pulses per rev
+	//??? is diameter
+	//value for encoder mult = 512 * pi * diameter
+	//could just have it be 1 and rotate once to see what the approx value is
 	static constexpr double encoderMultiplier = 1;		//TODO: Find correct value
 	const std::string kAutoNameDefault = "Default";
 	const std::string kAutoNameCustom = "My Auto";
