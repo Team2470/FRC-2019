@@ -42,4 +42,5 @@ void Encoder::reverseDirection()
 void Encoder::setDistanceMultiplier(double newMultiplier)
 {
     distanceMultiplier = newMultiplier;
+    //encoder->SetDistancePerPulse(newMultiplier);
 }

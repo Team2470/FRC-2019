@@ -57,6 +57,9 @@ void Robot::BasicControl(ControlMode mode)
 
 	plexiglassLED->Set(true);
 
+	frontClimbers->Set(true);
+	backClimbers->Set(true);
+
 	bool continueLoop = true;
 	while(continueLoop)
 	{
@@ -215,28 +218,28 @@ void Robot::BasicControl(ControlMode mode)
 		//Extends and retracts the front pnuematics
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE1)) //ButtonXbox::XBOX_START
 		{
-			climberFrontLeft->activate();
-			climberFrontRight->activate();
-			//frontClimbers->Set(true);
+			//climberFrontLeft->activate();
+			//climberFrontRight->activate();
+			frontClimbers->Set(false);
 		}
 		else
 		{
-			climberFrontLeft->deactivate();
-			climberFrontRight->deactivate();
-			//frontClimbers->Set(false);
+			//climberFrontLeft->deactivate();
+			//climberFrontRight->deactivate();
+			frontClimbers->Set(true);
 		}
 		//Extends and retracts the back pnuematics
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE2)) //ButtonXbox::XBOX_BACK
 		{
-			climberBackLeft->activate();
-			climberBackRight->activate();
-			//backClimbers->Set(true);
+			//climberBackLeft->activate();
+			//climberBackRight->activate();
+			backClimbers->Set(false);
 		}
 		else
 		{
-			climberBackLeft->deactivate();
-			climberBackRight->deactivate();
-			//backClimbers->Set(false);
+			//climberBackLeft->deactivate();
+			//climberBackRight->deactivate();
+			backClimbers->Set(true);
 		}
 
         // Activate the auto-alignment function.
