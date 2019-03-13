@@ -53,7 +53,7 @@ void BjorgMecanumDrive::mecanumDrive()
         if(UTILIZE_GYRO)
         {
             this->robotDrive->DriveCartesian(
-                this->moveMultiplier * this->movementValue, 
+                this->moveMultiplier * this->movementValue,
                 this->shiftMultiplier * this->shiftValue, 
                 this->rotateMultiplier * this->rotateValue,
                 this->gyroSensor->GetAngle()
