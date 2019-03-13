@@ -12,25 +12,22 @@ Robot::Robot()
 
 void Robot::RobotInit()
 {
-	//prefs = Preferences::GetInstance();
 	chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
 	chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
-	//chooser.AddOption();
 	frc::SmartDashboard::PutData("Auto Modes", &chooser);
 }
 
 void Robot::Autonomous() 
 {
-	std::string autoSelected = chooser.GetSelected();
-	// std::string autoSelected = frc::SmartDashboard::GetString(
-	// "Auto Selector", kAutoNameDefault);
-	std::cout << "Auto selected: " << autoSelected << std::endl;
+	this->BasicControl(ControlMode::AUTO);
 }
 
-/**
- * Runs the motors with arcade steering.
- */
 void Robot::OperatorControl() 
+{
+	this->BasicControl(ControlMode::TELEOP);
+}
+
+void Robot::BasicControl(ControlMode mode)
 {
 	// Drive system variables
 	driveSystem->moveCtrl = AxisGeneric::JOYSTICK_X_AXIS;	//AxisXbox::XBOX_RIGHT_JOYSTICK_X
@@ -46,23 +43,35 @@ void Robot::OperatorControl()
 	frontRightMotor->SetInverted(false);
 	backRightMotor->SetInverted(false);
 
-
 	// Intake system variables
-	intakeSystem->moveCtrl = AxisGeneric::JOYSTICK_Y_AXIS; //FlightJoystick.GetYChannel()
+	intakeSystem->moveCtrl = AxisFlight::FLIGHT_Y_AXIS; //FlightJoystick.GetYChannel()
 	intakeSystem->multiMove = false;
 	intakeSystem->multiRotate = false;
 	intakeSystem->rotateEnable = false;
 	intakeSystem->reverseDrive = 1;
 
-	encoderFrontLeft->reset();
-	encoderBackLeft->reset();
-	encoderFrontRight->reset();
-	encoderBackRight->reset();
+	//encoderFrontLeft->reset();
+	//encoderBackLeft->reset();
+	//encoderFrontRight->reset();
+	//encoderBackRight->reset();
 
 	plexiglassLED->Set(true);
 
-	while (IsOperatorControl() && IsEnabled())
+	frontClimbers->Set(true);
+	backClimbers->Set(true);
+
+	bool continueLoop = true;
+	while(continueLoop)
 	{
+		if(mode == ControlMode::AUTO)
+		{
+			continueLoop = this->IsAutonomous() && this->IsEnabled();
+		}
+		else if(mode == ControlMode::TELEOP)
+		{
+			continueLoop = this->IsOperatorControl() && this->IsEnabled();
+		}
+
 		//PDP
 		inputVoltage = pdp->GetVoltage();
 		totalCurrent = pdp->GetTotalCurrent();
@@ -93,17 +102,14 @@ void Robot::OperatorControl()
 		//Camera
 		currentLimelight = pdp->GetCurrent(ChannelPDP::PDP_LIMELIGHT_CAMERA);
 
-		
-		//Main Robot Code
-
 		//Toggles the limelight between vision processing and regular camera
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_LOCKING_SAFE3))
 		{
-			limelight->setCameraMode(LimelightCameraMode::DRIVER_CAMERA);
+			limelight->setPipeline(1);
 		}
 		else
 		{
-			limelight->setCameraMode(LimelightCameraMode::VISION_PROCESSOR);
+			limelight->setPipeline(0);
 		}
 
 		//Toggles the plexiglass LEDs
@@ -154,14 +160,19 @@ void Robot::OperatorControl()
 		}
 
 		//Toggles if the compressor turns on when pressure is low
-		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_LEFT)) //ButtonXbox::XBOX_Y
+		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_RIGHT)) //ButtonXbox::XBOX_Y
 		{
 			//compressor->lowPressureToggle();
-			compressor->lowPressureActivate(true);
+			compressor->lowPressureToggle();
 		}
-		else if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_RIGHT))
+
+		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_LEFT))
 		{
-			compressor->lowPressureActivate(false);
+			driveSystem->disableMove = false;
+		}
+		else
+		{
+			driveSystem->disableMove = true;
 		}
 
 		// Controlls the Hatch
@@ -175,13 +186,15 @@ void Robot::OperatorControl()
 		}
 
 		// Pops off the hatch
-		if (RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RELEASE)) //ButtonXbox::XBOX_B or GenericControllerRight::BUTTON_RELEASE
+		if (RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RELEASE) || RightButtonHub.GetRawButton(GenericControllerRight::BUTTON_RED_LEFT)) //ButtonXbox::XBOX_B or GenericControllerRight::BUTTON_RELEASE
 		{
 			hatchPop->activate();
+			hatchPopping = true;
 		}
 		else
 		{
 			hatchPop->deactivate();
+			hatchPopping = false;
 		}
 
 		//Climber
@@ -205,28 +218,28 @@ void Robot::OperatorControl()
 		//Extends and retracts the front pnuematics
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE1)) //ButtonXbox::XBOX_START
 		{
-			climberFrontLeft->activate();
-			climberFrontRight->activate();
-			//climberBackLeft->activate();
-			//climberBackRight->activate();
+			//climberFrontLeft->activate();
+			//climberFrontRight->activate();
+			frontClimbers->Set(false);
 		}
-		else// if (XboxController.GetRawButton(ButtonXbox::XBOX_BACK)) //if is just here before ds is updated
+		else
 		{
-			climberFrontLeft->deactivate();
-			climberFrontRight->deactivate();
-			//climberBackLeft->deactivate();
-			//climberBackRight->deactivate();
+			//climberFrontLeft->deactivate();
+			//climberFrontRight->deactivate();
+			frontClimbers->Set(true);
 		}
 		//Extends and retracts the back pnuematics
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE2)) //ButtonXbox::XBOX_BACK
 		{
-			climberBackLeft->activate();
-			climberBackRight->activate();
+			//climberBackLeft->activate();
+			//climberBackRight->activate();
+			backClimbers->Set(false);
 		}
 		else
 		{
-			climberBackLeft->deactivate();
-			climberBackRight->deactivate();
+			//climberBackLeft->deactivate();
+			//climberBackRight->deactivate();
+			backClimbers->Set(true);
 		}
 
         // Activate the auto-alignment function.
@@ -256,7 +269,18 @@ void Robot::OperatorControl()
             driveSystem->mecanumDrive();
         }
 
-		intakeSystem->arcadeDrive();
+		//Intake Drive
+		if (FlightJoystick.GetRawButton(ButtonFlight::FLIGHT_TRIGGER))
+		{
+			intakeActive = true;
+			intakeSystem->arcadeDrive();
+		}
+		else
+		{
+			intakeActive = false;
+			intakeSystem->stop();
+		}
+		//intakeSystem->arcadeDrive();
 
 		// Driver Station
 		// PDP stuff
@@ -276,10 +300,12 @@ void Robot::OperatorControl()
 
 		// Sensor Stuff
 		frc::SmartDashboard::PutBoolean("Hatch Ready", hatchReady);
+		frc::SmartDashboard::PutBoolean("Hatch Popping", hatchPopping);
 
 		// Drive stuff
 		frc::SmartDashboard::PutBoolean("HalfSpeed", halfSpeed);
 		frc::SmartDashboard::PutBoolean("StopDrive", stopDrive);
+		frc::SmartDashboard::PutBoolean("Intake Active", intakeActive);
 		frc::SmartDashboard::PutNumber("MoveJoy", moveJoyVal);
 		frc::SmartDashboard::PutNumber("ShiftJoy", shiftJoyVal);
 		frc::SmartDashboard::PutNumber("RotateJoy", rotateJoyVal);

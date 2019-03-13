@@ -24,6 +24,12 @@
 #include "ir_helper.hpp"
 #include "encoder_helper.hpp"
 
+enum ControlMode
+{
+	AUTO,
+	TELEOP
+};
+
 /**
  * @class	   Robot.
  * @description Controls the robot at the highest level.
@@ -62,6 +68,13 @@ public:
 	 */
 	void Test() override;
 
+	/**
+	 * @function    BasicControl
+	 * @description Basic robot control. Used in auto and teleop.
+	 * @param       mode -- The control mode.
+	 */
+	void BasicControl(ControlMode mode);
+
 private:
 	static constexpr int HATCH_DISTANCE = 24;
 	static constexpr double encoderMultiplier = 1;		//TODO: Find correct value
@@ -96,11 +109,13 @@ private:
 	// TODO: Find the correct distance multiplier.
 	//hi-res cim encoder has 256 pulses per channel per revolution (either 256 or 512 depending on if we multiply by number of channles)
 	//still need the factor in gearing reductions
-	Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
-	Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
-	Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
-	Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
+	//Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
+	//Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
+	//Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
+	//Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
 	frc::DigitalOutput* plexiglassLED = new frc::DigitalOutput(ChannelDigital::PLEXIGLASS_LIGHT_CONTROL);
+	frc::DigitalOutput* frontClimbers = new frc::DigitalOutput(ChannelDigital::FRONT_PNEUMATICS);
+	frc::DigitalOutput* backClimbers = new frc::DigitalOutput(ChannelDigital::BACK_PNEUMATICS);
 
 	BjorgArcadeDrive* intakeSystem = new BjorgArcadeDrive(intakeLeftMotor, intakeRightMotor, &FlightJoystick, &FlightJoystick);
 
@@ -136,8 +151,10 @@ private:
 	bool compressorLowPressureActivate = true;
 	bool climberReady = false;
 	bool hatchReady = false;
+	bool hatchPopping = false;
 	bool halfSpeed = false;
 	bool stopDrive = false;
+	bool intakeActive = false;
 	double moveJoyVal = 0;
 	double shiftJoyVal = 0;
 	double rotateJoyVal = 0;
