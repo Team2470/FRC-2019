@@ -1,3 +1,5 @@
+#define M_PI 3.14159265358979323846  /* pi */
+
 #ifndef ROBOT_H
 #define ROBOT_H
 
@@ -77,11 +79,13 @@ public:
 
 private:
 	static constexpr int HATCH_DISTANCE = 24;
-	//256 * 2 = 512 for pulses per rev
-	//??? is diameter
-	//value for encoder mult = 512 * pi * diameter
+	//256 * 2 = 512 for pulses per rev (Hi-Res CIM encoder)
+	//diameter for the mecanum wheels is 6 inches
+	//value for encoder mult = (1 / 512) * M_PI * 6 ~= 0.0369
 	//could just have it be 1 and rotate once to see what the approx value is
-	static constexpr double encoderMultiplier = 1;		//TODO: Find correct value
+	static constexpr int PULSES_PER_REVOLUTION = 512;
+	static constexpr int WHEEL_DIAMETER = 6;
+	static constexpr double ENCODER_MULTIPLIER = ((1 / PULSES_PER_REVOLUTION) * WHEEL_DIAMETER * M_PI);		//TODO: Find correct value
 	const std::string kAutoNameDefault = "Default";
 	const std::string kAutoNameCustom = "My Auto";
 
@@ -111,12 +115,12 @@ private:
 	AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch, limelight);
 
 	// TODO: Find the correct distance multiplier.
-	//hi-res cim encoder has 256 pulses per channel per revolution (either 256 or 512 depending on if we multiply by number of channles)
+	//hi-res cim encoder has 256 pulses per channel per revolution (either 256 or 512 depending on if we multiply by number of channels)
 	//still need the factor in gearing reductions
-	//Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
-	//Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
-	//Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
-	//Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, encoderMultiplier, false, frc::Encoder::EncodingType::k4X);
+	//Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
+	//Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
+	//Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
+	//Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
 	frc::DigitalOutput* plexiglassLED = new frc::DigitalOutput(ChannelDigital::PLEXIGLASS_LIGHT_CONTROL);
 	frc::DigitalOutput* frontClimbers = new frc::DigitalOutput(ChannelDigital::FRONT_PNEUMATICS);
 	frc::DigitalOutput* backClimbers = new frc::DigitalOutput(ChannelDigital::BACK_PNEUMATICS);
