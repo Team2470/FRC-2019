@@ -122,8 +122,8 @@ private:
 	//Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
 	//Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
 	frc::DigitalOutput* plexiglassLED = new frc::DigitalOutput(ChannelDigital::PLEXIGLASS_LIGHT_CONTROL);
-	frc::DigitalOutput* frontClimbers = new frc::DigitalOutput(ChannelDigital::FRONT_PNEUMATICS);
-	frc::DigitalOutput* backClimbers = new frc::DigitalOutput(ChannelDigital::BACK_PNEUMATICS);
+	frc::DigitalOutput* frontClimbers = new frc::DigitalOutput(ChannelDigital::FRONT_PNEUMATICS_SPIKE);
+	frc::DigitalOutput* backClimbers = new frc::DigitalOutput(ChannelDigital::BACK_PNEUMATICS_SPIKE);
 
 	BjorgArcadeDrive* intakeSystem = new BjorgArcadeDrive(intakeLeftMotor, intakeRightMotor, &FlightJoystick, &FlightJoystick);
 
