@@ -62,7 +62,7 @@ void BjorgMecanumDrive::mecanumDrive()
         else
         {
             this->robotDrive->DriveCartesian(
-                this->moveMultiplier * this->movementValue,
+                disableShift * this->moveMultiplier * this->movementValue,
                 disableMove * this->shiftMultiplier * this->shiftValue,
                 this->rotateMultiplier * this->rotateValue
             );

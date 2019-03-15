@@ -117,10 +117,10 @@ private:
 	// TODO: Find the correct distance multiplier.
 	//hi-res cim encoder has 256 pulses per channel per revolution (either 256 or 512 depending on if we multiply by number of channels)
 	//still need the factor in gearing reductions
-	//Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
-	//Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
-	//Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
-	//Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
+	Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
+	Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
+	Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
+	Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
 	frc::DigitalOutput* plexiglassLED = new frc::DigitalOutput(ChannelDigital::PLEXIGLASS_LIGHT_CONTROL);
 	frc::DigitalOutput* frontClimbers = new frc::DigitalOutput(ChannelDigital::FRONT_PNEUMATICS_SPIKE);
 	frc::DigitalOutput* backClimbers = new frc::DigitalOutput(ChannelDigital::BACK_PNEUMATICS_SPIKE);
@@ -166,6 +166,12 @@ private:
 	double moveJoyVal = 0;
 	double shiftJoyVal = 0;
 	double rotateJoyVal = 0;
+	bool shiftDisabled = false;
+	bool moveDisabled = false;
+	int encoderCountFrontLeft = 0;
+	int encoderCountBackLeft = 0;
+	int encoderCountFrontRight = 0;
+	int encoderCountBackRight = 0;
 	double currentFrontLeft = -1;
 	double currentBackLeft = -1;
 	double currentFrontRight = -1;

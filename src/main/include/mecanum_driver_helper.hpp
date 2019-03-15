@@ -37,6 +37,7 @@ public:
 	float rotateMultiplier = 1.0;
     bool resolutionNeeded = false;
 	bool disableMove = false;
+	bool disableShift = false;
 
 	/**
 	 * @constructor BjorgMecanumDrive

@@ -50,10 +50,10 @@ void Robot::BasicControl(ControlMode mode)
 	intakeSystem->rotateEnable = false;
 	intakeSystem->reverseDrive = 1;
 
-	//encoderFrontLeft->reset();
-	//encoderBackLeft->reset();
-	//encoderFrontRight->reset();
-	//encoderBackRight->reset();
+	encoderFrontLeft->reset();
+	encoderBackLeft->reset();
+	encoderFrontRight->reset();
+	encoderBackRight->reset();
 
 	plexiglassLED->Set(true);
 
@@ -91,6 +91,12 @@ void Robot::BasicControl(ControlMode mode)
 		moveJoyVal = RightDriveJoystick.GetY();
 		shiftJoyVal = RightDriveJoystick.GetX();
 		rotateJoyVal = LeftDriveJoystick.GetX();
+		
+		//Encoders
+		encoderCountFrontLeft = encoderFrontLeft->getValue();
+		encoderCountBackLeft = encoderBackLeft->getValue();
+		encoderCountFrontRight = encoderFrontRight->getValue();
+		encoderCountBackRight = encoderBackRight->getValue();
 
 		currentFrontLeft = pdp->GetCurrent(ChannelPDP::PDP_FRONT_LEFT_MOTOR);
 		currentBackLeft = pdp->GetCurrent(ChannelPDP::PDP_BACK_LEFT_MOTOR);
@@ -159,13 +165,26 @@ void Robot::BasicControl(ControlMode mode)
 			compressor->deactivate();
 		}
 
+		/*
 		//Toggles if the compressor turns on when pressure is low
 		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_RIGHT)) //ButtonXbox::XBOX_Y
 		{
 			//compressor->lowPressureToggle();
 			compressor->lowPressureToggle();
 		}
+		*/
 
+		//Toggles if the robot only moves forwards or backwards
+		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_RIGHT))
+		{
+			driveSystem->disableShift = false;
+		}
+		else
+		{
+			driveSystem->disableShift = true;
+		}
+
+		//Toggles if the robot only moves left or right
 		if (LeftButtonHub.GetRawButton(GenericControllerLeft::BUTTON_BLUE_BOTTOM_LEFT))
 		{
 			driveSystem->disableMove = false;
@@ -310,6 +329,13 @@ void Robot::BasicControl(ControlMode mode)
 		frc::SmartDashboard::PutNumber("ShiftJoy", shiftJoyVal);
 		frc::SmartDashboard::PutNumber("RotateJoy", rotateJoyVal);
 
+		//Encoder Counts
+		frc::SmartDashboard::PutNumber("Front Left Encoder Count", encoderCountFrontLeft);
+		frc::SmartDashboard::PutNumber("Back Left Encoder Count", encoderCountBackLeft);
+		frc::SmartDashboard::PutNumber("Front Right Encoder Count", encoderCountFrontRight);
+		frc::SmartDashboard::PutNumber("Back Right Encoder Count", encoderCountBackRight);
+
+		//Current Values
 		frc::SmartDashboard::PutNumber("Front Left Motor Current", currentFrontLeft);
 		frc::SmartDashboard::PutNumber("Back Left Motor Current", currentBackLeft);
 		frc::SmartDashboard::PutNumber("Front Right Motor Current", currentFrontRight);
