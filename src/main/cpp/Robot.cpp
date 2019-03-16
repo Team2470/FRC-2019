@@ -305,10 +305,10 @@ void Robot::BasicControl(ControlMode mode)
         //       to rotation and the like in the InputVoltage field (perhaps others
         //       as well). 
 		// frc::SmartDashboard::PutNumber("InputVoltage", inputVoltage); 
-        frc::SmartDashboard::PutNumber("InputVoltage", autoAlignment->getDirectionCorrection());   //TODO: remove and uncomment above
+        frc::SmartDashboard::PutNumber("InputVoltage", (int)autoAlignment->getDirectionFace(gyro->GetAngle()));   //TODO: remove and uncomment above
 		
         //frc::SmartDashboard::PutNumber("TotalCurrent", totalCurrent);
-		frc::SmartDashboard::PutNumber("TotalCurrent", gyro->GetAngle());
+		frc::SmartDashboard::PutNumber("TotalCurrent", (int)gyro->GetAngle() % 360);
         
         frc::SmartDashboard::PutNumber("Temperature", temp);
 		frc::SmartDashboard::PutNumber("TotalEnergy", totalEnergy);
