@@ -1,6 +1,6 @@
 #include "auto_alignment.hpp"
 
-AutoAlignment::AutoAlignment(frc::AnalogGyro* gyroSensor, MaxSonar* sonarSensor, VisionProcessing* visionProcessing)
+AutoAlignment::AutoAlignment(frc::ADXRS450_Gyro* gyroSensor, MaxSonar* sonarSensor, VisionProcessing* visionProcessing)
 {
     this->gyroSensor = gyroSensor;
     this->sonarSensor = sonarSensor;

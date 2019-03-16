@@ -2,7 +2,7 @@
 #define MECANUM_DRIVER_HELPER_HPP
 
 #include <frc/drive/MecanumDrive.h>
-#include <frc/AnalogGyro.h>
+#include <frc/ADXRS450_Gyro.h>
 #include <frc/Joystick.h>
 #include <frc/Spark.h>
 #include "sonar_helper.hpp"
@@ -59,7 +59,7 @@ public:
     	frc::Joystick* moveController, 
 		frc::Joystick* shiftController, 
 		frc::Joystick* rotateController,
-        frc::AnalogGyro* gyroSensor,
+        frc::ADXRS450_Gyro* gyroSensor,
         AutoAlignment* autoAlignment
 	);
 
@@ -118,7 +118,7 @@ private:
 	frc::Joystick* driveControllerMove;
 	frc::Joystick* driveControllerShift;
     frc::Joystick* driveControllerRotate;
-    frc::AnalogGyro* gyroSensor;
+    frc::ADXRS450_Gyro* gyroSensor;
     AutoAlignment* autoAlignment;
     Encoder* encoderFrontLeft;
     Encoder* encoderFrontRight;

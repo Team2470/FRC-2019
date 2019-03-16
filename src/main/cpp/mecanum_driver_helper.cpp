@@ -11,7 +11,7 @@ BjorgMecanumDrive::BjorgMecanumDrive(
     frc::Joystick* moveController, 
     frc::Joystick* shiftController, 
     frc::Joystick* rotateController,
-    frc::AnalogGyro* gyroSensor,
+    frc::ADXRS450_Gyro* gyroSensor,
     AutoAlignment* autoAlignment
 ) 
 {

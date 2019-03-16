@@ -14,6 +14,7 @@
 #include <frc/Compressor.h>
 #include <frc/Preferences.h>
 #include <frc/DigitalOutput.h>
+#include <frc/ADXRS450_Gyro.h>
 #include "auto_alignment.hpp"
 #include "channel_helper.hpp"
 #include "controller_helper.hpp"
@@ -109,7 +110,7 @@ private:
 	frc::VictorSP* intakeRightMotor = new frc::VictorSP(ChannelPWM::RIGHT_INTAKE_MOTOR);
 	frc::Spark* placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
 
-	frc::AnalogGyro* gyro = new frc::AnalogGyro(0); // TODO: ENSURE CORRECT CHANNEL
+	frc::ADXRS450_Gyro* gyro = new frc::ADXRS450_Gyro(); // TODO: ENSURE CORRECT CHANNEL
 	MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::HRLV);
 	VisionProcessing* limelight = new VisionProcessing(); 
 	AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch, limelight);
