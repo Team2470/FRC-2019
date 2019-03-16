@@ -12,23 +12,32 @@ void AutoAlignment::updateVisionProcessing()
     this->visionProcessing->updateLimelightProperties();
 }
 
-void AutoAlignment::calculateResolution()
+RobotFace AutoAlignment::getDirectionCorrection()
 {
-    this->calculateResolutionAngle();
-    this->calculateResolutionDistance();
+    double absoluteAngle = (int)gyroSensor->GetAngle() % 360;
+    
+    if(inRange(absoluteAngle, 0, 45) || inRange(absoluteAngle, 315, 360))
+    {
+        return RobotFace::NORTH;
+    }
+
+    if(inRange(absoluteAngle, 45, 135))
+    {
+        return RobotFace::EAST;
+    }
+
+    if(inRange(absoluteAngle, 135, 225))
+    {
+        return RobotFace::SOUTH;
+    }
+
+    if(inRange(absoluteAngle, 225, 315))
+    {
+        return RobotFace::WEST;
+    }
 }
 
-double AutoAlignment::calculateResolutionDistance()
+bool AutoAlignment::inRange(double value, double low, double high)
 {
-    this->distanceToResolve = this->sonarSensor->sonarRange();
-    this->distanceToResolveParallel = this->distanceToResolve * cos(this->angleToResolve * PI / 180);
-    this->distanceToResolvePerpendicular = this->distanceToResolve * sin(this->angleToResolve * PI / 180);
-    return this->distanceToResolve;
-}
-
-double AutoAlignment::calculateResolutionAngle()
-{
-    this->angleToResolve = this->gyroSensor->GetAngle() + this->visionProcessing->limelightHorizontalOffsetTX;
-    this->side = this->visionProcessing->limelightHorizontalOffsetTX <= 0 ? SideRelativeToTarget::LEFT : SideRelativeToTarget::RIGHT;
-    return this->angleToResolve;
+    return value >= low && value < high;
 }

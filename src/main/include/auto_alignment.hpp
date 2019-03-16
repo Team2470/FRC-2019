@@ -7,14 +7,19 @@
 #include "vision_processing.hpp"
 
 /**
- * @enum        SideRelativeToVisionTarget
- * @description Contains the two possible side states for the robot relative
- *              to the vision target, left or right.
+ * @enum        RobotFace
+ * @description Contains the possible face directions for the robot.
+ * @notes       NORTH => [-45 ->  45]
+ *              SOUTH => [135 -> 225]
+ *              EAST  => [45  -> 135]
+ *              WEST  => [225 -> 315]
  */
-enum SideRelativeToTarget
+enum RobotFace
 {
-    LEFT,
-    RIGHT
+    NORTH,
+    SOUTH,
+    EAST,
+    WEST
 };
 
 /**
@@ -26,14 +31,6 @@ enum SideRelativeToTarget
 class AutoAlignment
 {
 public:
-    double adjustedTargetWidth;
-    double adjustedTargetHeight;
-    double distanceToResolve;
-    double distanceToResolveParallel;
-    double distanceToResolvePerpendicular;
-    double angleToResolve;
-    SideRelativeToTarget side;
-
     /**
      * @constructor AutoAlignment
      * @description Construct an instance of the AutoAlignment class.
@@ -47,17 +44,20 @@ public:
      */
     void updateVisionProcessing();
 
-    /**
-     * @function
-     * @description Wrapper function for AutoAlignment::calculateResolutionDistance and
-     *              AutoAlignment::calculateResolution; calls them in the correct order.
-     */
-    void calculateResolution();
+    RobotFace getDirectionCorrection();
 
 private:
     static constexpr double IDEAL_RECTANGLE_WIDTH = 10.76;
     static constexpr double IDEAL_RECTANGLE_HEIGHT = 5.325;
     static constexpr double PI = 3.14159265;
+
+    double adjustedTargetWidth;
+    double adjustedTargetHeight;
+    double distanceToResolve;
+    double distanceToResolveParallel;
+    double distanceToResolvePerpendicular;
+    double angleToResolve;
+    RobotFace face;
 
     // TODO: ENSURE CORRECT CHANNELS
     // TODO: ENSURE CORRECT ULTRASONIC SENSOR TYPE
@@ -66,20 +66,10 @@ private:
     VisionProcessing* visionProcessing;
 
     /**
-     * @function    calculateResolutionDistance
-     * @description Calculates the distance of the robot relative to the vision target:
-     *              i.e, the distance the robot needs to resolve.
-     * @returns     The distance of resultion in inches. (?)
+     * @function    inRange
+     * @description Determine whether a specific value is within a range.
      */
-    double calculateResolutionDistance();
-
-    /**
-     * @function    calculateResolutionAngle
-     * @description Calculate the angle of the robot relative to the vision target: i.e,
-     *              the angle the robot will need to resolve.
-     * @returns     The angle of resultion in degrees.
-     */
-    double calculateResolutionAngle();
+    bool inRange(double value, double low, double high);
 };
 
 #endif
