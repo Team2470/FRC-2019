@@ -18,14 +18,29 @@ void Robot::RobotInit()
     gyro->Calibrate();
 }
 
-void Robot::Autonomous() 
+void Robot::RobotPeriodic()
+{
+	return;
+}
+
+void Robot::AutonomousInit()
+{
+	return;
+}
+
+void Robot::AutonomousPeriodic() 
 {
 	this->BasicControl(ControlMode::AUTO);
 }
 
-void Robot::OperatorControl() 
+void Robot::TeleopInit()
 {
-	this->BasicControl(ControlMode::TELEOP);
+	return;
+}
+
+void Robot::TeleopPeriodic() 
+{
+	BasicControl(ControlMode::TELEOP);
 }
 
 void Robot::BasicControl(ControlMode mode)
@@ -355,10 +370,10 @@ void Robot::BasicControl(ControlMode mode)
 	}
 }
 
-/**
- * Runs during test mode
- */
-void Robot::Test() { }
+void Robot::TestPeriodic()
+{
+	return;
+}
 
 #ifndef RUNNING_FRC_TESTS
 int main() { return frc::StartRobot<Robot>(); }

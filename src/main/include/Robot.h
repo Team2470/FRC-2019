@@ -6,7 +6,8 @@
 #include <string>
 #include <frc/Joystick.h>
 #include <frc/PWMVictorSPX.h>
-#include <frc/SampleRobot.h>
+// #include <frc/SampleRobot.h>
+#include <frc/TimedRobot.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/SmartDashboard/SmartDashboard.h>
@@ -18,7 +19,7 @@
 #include "auto_alignment.hpp"
 #include "channel_helper.hpp"
 #include "controller_helper.hpp"
-#include "mecanum_driver_helper.hpp"
+#include "BjorgMecanumDrive.hpp"
 #include "arcade_driver_helper.hpp"
 #include "tank_driver_helper.hpp"
 #include "motor_helper.hpp"
@@ -37,7 +38,7 @@ enum ControlMode
  * @class	   Robot.
  * @description Controls the robot at the highest level.
  */
-class Robot : public frc::SampleRobot 
+class Robot : public frc::TimedRobot 
 {
 public:
 	/**
@@ -51,25 +52,35 @@ public:
 	 * @description Initialize the robot outside of the constructor.
 	 */
 	void RobotInit() override;
+  
+  
+  void RobotPeriodic() override;
+  
+  
 
 	/**
 	 * @function	Autonomous
 	 * @description Control the robot in autonomous mode.
 	 * @notes	   Not utilized in 2019.
 	 */
-	void Autonomous() override;
-	
+	// void Autonomous() override;
+    void AutonomousInit() override;
+    void AutonomousPeriodic() override;
+
+
 	/**
 	 * @function	OperatorControl
 	 * @description Control the robot in operator mode.
 	 */
-	void OperatorControl() override;
-	
+	// void OperatorControl() override;
+    void TeleopInit() override;
+    void TeleopPeriodic() override;
+
 	/**
-	 * @function	Test
+	 * @function	TestPeriodic
 	 * @description Control the robot in test mode.
 	 */
-	void Test() override;
+    void TestPeriodic() override;
 
 	/**
 	 * @function    BasicControl
