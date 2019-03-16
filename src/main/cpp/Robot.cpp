@@ -261,32 +261,27 @@ void Robot::BasicControl(ControlMode mode)
 			backClimbers->Set(true);
 		}
 
-        // Activate the auto-alignment function.
-        if(this->RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_X))
-        {
-            this->currentlyResolving = true;
-            this->driveSystem->resolutionNeeded = true;
-        }
 
-        // Check for potential emergency abort BEFORE the function
-        // responsible for resolution is called.
-        if(this->RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_Y))
-        {
-            this->currentlyResolving = false;
-        }
-
-        // Assuming that resolution is indeed still required, call
-        // the resolution function.
-        if(this->currentlyResolving)
-        {
-            this->driveSystem->mecanumDriveAutoAlign();
-            this->currentlyResolving = this->driveSystem->resolutionNeeded;
-        }
-
-        if(!this->currentlyResolving)
-        {
-            driveSystem->mecanumDrive();
-        }
+		// Auto-aligment?
+		if(this->RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_X))
+		{
+			// Auto-Align robot to closest target
+			// Check safety switch
+			if (this->RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_Y))
+			{
+				driveSystem->mecanumDrive();
+			}
+			else
+			{
+				// Operator Control while safety is on
+				this->driveSystem->mecanumDriveAutoAlign();
+			}
+		} 
+		else
+		{
+			// Operator Control
+			driveSystem->mecanumDrive();
+		}
 
 		//Intake Drive
 		if (FlightJoystick.GetRawButton(ButtonFlight::FLIGHT_TRIGGER))
