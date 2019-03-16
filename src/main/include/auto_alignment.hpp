@@ -31,6 +31,13 @@ enum RobotFace
 class AutoAlignment
 {
 public:
+    static constexpr double TARGET_ANGLE_NORTH_LEFT = 360;
+    static constexpr double TARGET_ANGLE_NORTH_RIGHT = 0;
+    static constexpr double TARGET_ANGLE_SOUTH = 180;
+    static constexpr double TARGET_ANGLE_EAST = 90;
+    static constexpr double TARGET_ANGLE_WEST = 270;
+    static constexpr double TARGET_ANGLE_RANGE = 0.1;
+
     /**
      * @constructor AutoAlignment
      * @description Construct an instance of the AutoAlignment class.
@@ -44,20 +51,38 @@ public:
      */
     void updateVisionProcessing();
 
-    RobotFace getDirectionCorrection();
+    /**
+     * @function    getDirectionFace
+     * @description Get the direction the robot is facing as an enum.
+     * @returns     Direction enum.
+     */
+    RobotFace getDirectionFace(double angle);
+
+    /**
+     * @function    getDirectionCorrection
+     * @description Get the delta angle to correct for.
+     * @returns     Delta angle.
+     */ 
+    double getDirectionCorrection();
+    
+    /**
+     * @function    getStrafeCorrection
+     * @description Get the delta strafe to correct for.
+     * @returns     Delta strafe.
+     */
+    double getStrafeCorrection();
+    
+    /**
+     * @function    getDistanceCorrection
+     * @description Get the delta distance to correct for.
+     * @returns     Delta distance.
+     */
+    double getDistanceCorrection();
 
 private:
     static constexpr double IDEAL_RECTANGLE_WIDTH = 10.76;
     static constexpr double IDEAL_RECTANGLE_HEIGHT = 5.325;
     static constexpr double PI = 3.14159265;
-
-    double adjustedTargetWidth;
-    double adjustedTargetHeight;
-    double distanceToResolve;
-    double distanceToResolveParallel;
-    double distanceToResolvePerpendicular;
-    double angleToResolve;
-    RobotFace face;
 
     // TODO: ENSURE CORRECT CHANNELS
     // TODO: ENSURE CORRECT ULTRASONIC SENSOR TYPE
