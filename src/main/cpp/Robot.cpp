@@ -298,7 +298,10 @@ void Robot::BasicControl(ControlMode mode)
 
 		// Driver Station
 		// PDP stuff
-		frc::SmartDashboard::PutNumber("InputVoltage", inputVoltage);
+		frc::SmartDashboard::PutNumber("InputVoltage", inputVoltage); // TODO: i am too lazy to make changes to the smart dashboard; for the time
+                                                                      //       being (for testing purposes) i am going to place values pertaining
+                                                                      //       to rotation and the like in the InputVoltage field (perhaps others
+                                                                      //       as well). 
 		frc::SmartDashboard::PutNumber("TotalCurrent", totalCurrent);
 		frc::SmartDashboard::PutNumber("Temperature", temp);
 		frc::SmartDashboard::PutNumber("TotalEnergy", totalEnergy);
