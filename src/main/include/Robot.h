@@ -1,4 +1,4 @@
-#define M_PI 3.14159265358979323846  /* pi */
+#define M_PI 3.14159265358979323846 /* pi */
 
 #ifndef ROBOT_H
 #define ROBOT_H
@@ -6,7 +6,6 @@
 #include <string>
 #include <frc/Joystick.h>
 #include <frc/PWMVictorSPX.h>
-// #include <frc/SampleRobot.h>
 #include <frc/TimedRobot.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/smartdashboard/SendableChooser.h>
@@ -16,7 +15,8 @@
 #include <frc/Preferences.h>
 #include <frc/DigitalOutput.h>
 #include <frc/ADXRS450_Gyro.h>
-#include "auto_alignment.hpp"
+
+#include "AutoAlignment.hpp"
 #include "channel_helper.hpp"
 #include "controller_helper.hpp"
 #include "BjorgMecanumDrive.hpp"
@@ -38,49 +38,43 @@ enum ControlMode
  * @class	   Robot.
  * @description Controls the robot at the highest level.
  */
-class Robot : public frc::TimedRobot 
+class Robot : public frc::TimedRobot
 {
-public:
+  public:
 	/**
-	 * @constructor Robot
-	 * @description Constructs an instance of the Robot class.
-	 */
+	* @constructor Robot
+	* @description Constructs an instance of the Robot class.
+	*/
 	Robot();
 
 	/**
-	 * @function	RobotInit
-	 * @description Initialize the robot outside of the constructor.
-	 */
+	* @function	RobotInit
+	* @description Initialize the robot outside of the constructor.
+	*/
 	void RobotInit() override;
-  
-  
-  void RobotPeriodic() override;
-  
-  
+	void RobotPeriodic() override;
 
 	/**
 	 * @function	Autonomous
 	 * @description Control the robot in autonomous mode.
 	 * @notes	   Not utilized in 2019.
 	 */
-	// void Autonomous() override;
-    void AutonomousInit() override;
-    void AutonomousPeriodic() override;
-
+	void AutonomousInit() override;
+	void AutonomousPeriodic() override;
 
 	/**
 	 * @function	OperatorControl
 	 * @description Control the robot in operator mode.
 	 */
 	// void OperatorControl() override;
-    void TeleopInit() override;
-    void TeleopPeriodic() override;
+	void TeleopInit() override;
+	void TeleopPeriodic() override;
 
 	/**
 	 * @function	TestPeriodic
 	 * @description Control the robot in test mode.
 	 */
-    void TestPeriodic() override;
+	void TestPeriodic() override;
 
 	/**
 	 * @function    BasicControl
@@ -89,7 +83,7 @@ public:
 	 */
 	void BasicControl(ControlMode mode);
 
-private:
+  private:
 	static constexpr int HATCH_DISTANCE = 24;
 	//256 * 2 = 512 for pulses per rev (Hi-Res CIM encoder)
 	//diameter for the mecanum wheels is 6 inches
@@ -97,70 +91,70 @@ private:
 	//could just have it be 1 and rotate once to see what the approx value is
 	static constexpr int PULSES_PER_REVOLUTION = 512;
 	static constexpr int WHEEL_DIAMETER = 6;
-	static constexpr double ENCODER_MULTIPLIER = ((1 / PULSES_PER_REVOLUTION) * WHEEL_DIAMETER * M_PI);		//TODO: Find correct value
+	static constexpr double ENCODER_MULTIPLIER = ((1 / PULSES_PER_REVOLUTION) * WHEEL_DIAMETER * M_PI); //TODO: Find correct value
+	
 	const std::string kAutoNameDefault = "Default";
 	const std::string kAutoNameCustom = "My Auto";
 
-	frc::PowerDistributionPanel* pdp = new frc::PowerDistributionPanel();
+	frc::PowerDistributionPanel *pdp = new frc::PowerDistributionPanel();
 
 	frc::SendableChooser<std::string> chooser;
 
-	frc::Joystick XboxController { ChannelController::XBOX_CONTROLLER };
+	frc::Joystick XboxController{ChannelController::XBOX_CONTROLLER};
 	//frc::Joystick LogitechController { ChannelController::LOGITECH_CONTROLLER };
-	frc::Joystick FlightJoystick { ChannelController::FLIGHT_JOYSTICK };
-	frc::Joystick LeftDriveJoystick { ChannelController::LEFT_DRIVE_JOYSTICK };
-	frc::Joystick RightDriveJoystick { ChannelController::RIGHT_DRIVE_JOYSTICK };
-	frc::Joystick LeftButtonHub { ChannelController::LEFT_BUTTON_HUB };
-	frc::Joystick RightButtonHub { ChannelController::RIGHT_BUTTON_HUB };
-	
-	frc::Spark* frontLeftMotor = new frc::Spark(ChannelPWM::FRONT_LEFT_MOTOR);
-	frc::Spark* backLeftMotor = new frc::Spark(ChannelPWM::BACK_LEFT_MOTOR);
-	frc::Spark* frontRightMotor = new frc::Spark(ChannelPWM::FRONT_RIGHT_MOTOR);
-	frc::Spark* backRightMotor = new frc::Spark(ChannelPWM::BACK_RIGHT_MOTOR);
-	frc::VictorSP* intakeLeftMotor = new frc::VictorSP(ChannelPWM::LEFT_INTAKE_MOTOR);
-	frc::VictorSP* intakeRightMotor = new frc::VictorSP(ChannelPWM::RIGHT_INTAKE_MOTOR);
-	frc::Spark* placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
+	frc::Joystick FlightJoystick{ChannelController::FLIGHT_JOYSTICK};
+	frc::Joystick LeftDriveJoystick{ChannelController::LEFT_DRIVE_JOYSTICK};
+	frc::Joystick RightDriveJoystick{ChannelController::RIGHT_DRIVE_JOYSTICK};
+	frc::Joystick LeftButtonHub{ChannelController::LEFT_BUTTON_HUB};
+	frc::Joystick RightButtonHub{ChannelController::RIGHT_BUTTON_HUB};
 
-	frc::ADXRS450_Gyro* gyro = new frc::ADXRS450_Gyro(); // TODO: ENSURE CORRECT CHANNEL
-	MaxSonar* ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::HRLV);
-	VisionProcessing* limelight = new VisionProcessing(); 
-	AutoAlignment* autoAlignment = new AutoAlignment(gyro, ultrasonicHatch, limelight);
+	frc::Spark *frontLeftMotor = new frc::Spark(ChannelPWM::FRONT_LEFT_MOTOR);
+	frc::Spark *backLeftMotor = new frc::Spark(ChannelPWM::BACK_LEFT_MOTOR);
+	frc::Spark *frontRightMotor = new frc::Spark(ChannelPWM::FRONT_RIGHT_MOTOR);
+	frc::Spark *backRightMotor = new frc::Spark(ChannelPWM::BACK_RIGHT_MOTOR);
+	frc::VictorSP *intakeLeftMotor = new frc::VictorSP(ChannelPWM::LEFT_INTAKE_MOTOR);
+	frc::VictorSP *intakeRightMotor = new frc::VictorSP(ChannelPWM::RIGHT_INTAKE_MOTOR);
+	frc::Spark *placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
+
+	frc::ADXRS450_Gyro *gyro = new frc::ADXRS450_Gyro(); // TODO: ENSURE CORRECT CHANNEL
+	MaxSonar *ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::HRLV);
+	VisionProcessing *limelight = new VisionProcessing();
+	AutoAlignment *autoAlignment = new AutoAlignment(gyro, ultrasonicHatch, limelight);
 
 	// TODO: Find the correct distance multiplier.
 	//hi-res cim encoder has 256 pulses per channel per revolution (either 256 or 512 depending on if we multiply by number of channels)
 	//still need the factor in gearing reductions
-	Encoder* encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
-	Encoder* encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
-	Encoder* encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
-	Encoder* encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
-	frc::DigitalOutput* plexiglassLED = new frc::DigitalOutput(ChannelDigital::PLEXIGLASS_LIGHT_CONTROL);
-	frc::DigitalOutput* frontClimbers = new frc::DigitalOutput(ChannelDigital::FRONT_PNEUMATICS_SPIKE);
-	frc::DigitalOutput* backClimbers = new frc::DigitalOutput(ChannelDigital::BACK_PNEUMATICS_SPIKE);
+	Encoder *encoderFrontLeft = new Encoder(ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_LEFT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
+	Encoder *encoderBackLeft = new Encoder(ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_A, ChannelDigital::BACK_LEFT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
+	Encoder *encoderFrontRight = new Encoder(ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::FRONT_RIGHT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
+	Encoder *encoderBackRight = new Encoder(ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_A, ChannelDigital::BACK_RIGHT_ENCODER_CHANNEL_B, ENCODER_MULTIPLIER, false, frc::Encoder::EncodingType::k4X);
+	frc::DigitalOutput *plexiglassLED = new frc::DigitalOutput(ChannelDigital::PLEXIGLASS_LIGHT_CONTROL);
+	frc::DigitalOutput *frontClimbers = new frc::DigitalOutput(ChannelDigital::FRONT_PNEUMATICS_SPIKE);
+	frc::DigitalOutput *backClimbers = new frc::DigitalOutput(ChannelDigital::BACK_PNEUMATICS_SPIKE);
 
-	BjorgArcadeDrive* intakeSystem = new BjorgArcadeDrive(intakeLeftMotor, intakeRightMotor, &FlightJoystick, &FlightJoystick);
+	BjorgArcadeDrive *intakeSystem = new BjorgArcadeDrive(intakeLeftMotor, intakeRightMotor, &FlightJoystick, &FlightJoystick);
 
-	BjorgMecanumDrive* driveSystem = new BjorgMecanumDrive(
-		this->frontLeftMotor, 
-		this->backLeftMotor, 
-		this->frontRightMotor, 
-		this->backRightMotor, 
-		&this->RightDriveJoystick,		//XboxController
-		&this->RightDriveJoystick,		//XboxController
-		&this->LeftDriveJoystick,		//XboxController
+	BjorgMecanumDrive *driveSystem = new BjorgMecanumDrive(
+		this->frontLeftMotor,
+		this->backLeftMotor,
+		this->frontRightMotor,
+		this->backRightMotor,
+		&this->RightDriveJoystick, //XboxController
+		&this->RightDriveJoystick, //XboxController
+		&this->LeftDriveJoystick,  //XboxController
 		this->gyro,
-		this->autoAlignment
-	);
+		this->autoAlignment);
 
-	Compressor* compressor = new Compressor(0);
-	SingleSolenoid* climberFrontLeft = new SingleSolenoid(ChannelSolenoid::FRONT_LEFT_SOLENOID);
-	SingleSolenoid* climberBackLeft = new SingleSolenoid(ChannelSolenoid::BACK_LEFT_SOLENOID);
-	SingleSolenoid* climberFrontRight = new SingleSolenoid(ChannelSolenoid::FRONT_RIGHT_SOLENOID);
-	SingleSolenoid* climberBackRight = new SingleSolenoid(ChannelSolenoid::BACK_RIGHT_SOLENOID);
-	SingleSolenoid* hatchExtend = new SingleSolenoid(ChannelSolenoid::HATCH_EXTEND_SOLENOID);
-	SingleSolenoid* hatchPop = new SingleSolenoid(ChannelSolenoid::HATCH_POP_SOLENOID);
-	DoubleSolenoid* climbExtend = new DoubleSolenoid(ChannelSolenoid::CLIMBER_EXTEND_FORWARDS, ChannelSolenoid::CLIMBER_EXTEND_BACKWARDS);
+	Compressor *compressor = new Compressor(0);
+	SingleSolenoid *climberFrontLeft = new SingleSolenoid(ChannelSolenoid::FRONT_LEFT_SOLENOID);
+	SingleSolenoid *climberBackLeft = new SingleSolenoid(ChannelSolenoid::BACK_LEFT_SOLENOID);
+	SingleSolenoid *climberFrontRight = new SingleSolenoid(ChannelSolenoid::FRONT_RIGHT_SOLENOID);
+	SingleSolenoid *climberBackRight = new SingleSolenoid(ChannelSolenoid::BACK_RIGHT_SOLENOID);
+	SingleSolenoid *hatchExtend = new SingleSolenoid(ChannelSolenoid::HATCH_EXTEND_SOLENOID);
+	SingleSolenoid *hatchPop = new SingleSolenoid(ChannelSolenoid::HATCH_POP_SOLENOID);
+	DoubleSolenoid *climbExtend = new DoubleSolenoid(ChannelSolenoid::CLIMBER_EXTEND_FORWARDS, ChannelSolenoid::CLIMBER_EXTEND_BACKWARDS);
 
-	bool currentlyResolving = false;
+	// bool currentlyResolving = false;
 	double inputVoltage = -1;
 	double totalCurrent = -1;
 	double temp = -1;
@@ -180,10 +174,10 @@ private:
 	double rotateJoyVal = 0;
 	bool shiftDisabled = false;
 	bool moveDisabled = false;
-	int encoderCountFrontLeft = 0;
-	int encoderCountBackLeft = 0;
-	int encoderCountFrontRight = 0;
-	int encoderCountBackRight = 0;
+	// int encoderCountFrontLeft = 0;
+	// int encoderCountBackLeft = 0;
+	// int encoderCountFrontRight = 0;
+	// int encoderCountBackRight = 0;
 	double currentFrontLeft = -1;
 	double currentBackLeft = -1;
 	double currentFrontRight = -1;

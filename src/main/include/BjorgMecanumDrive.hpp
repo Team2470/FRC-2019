@@ -5,9 +5,9 @@
 #include <frc/ADXRS450_Gyro.h>
 #include <frc/Joystick.h>
 #include <frc/Spark.h>
+
 #include "sonar_helper.hpp"
-#include "vision_processing.hpp"
-#include "auto_alignment.hpp"
+#include "AutoAlignment.hpp"
 #include "encoder_helper.hpp"
 
 /**
@@ -59,7 +59,7 @@ public:
     	frc::Joystick* moveController, 
 		frc::Joystick* shiftController, 
 		frc::Joystick* rotateController,
-        frc::ADXRS450_Gyro* gyroSensor,
+        frc::ADXRS450_Gyro* m_gyroSensor,
         AutoAlignment* autoAlignment
 	);
 
@@ -108,22 +108,23 @@ public:
 private:
     static constexpr bool UTILIZE_GYRO = false;
     static constexpr float DEADZONE = 0.15;
+	
 	float movementValue = 0.0;
     float shiftValue = 0.0;
 	float rotateValue = 0.0;
     bool rotationResolved = false;
     bool distanceResolved = false;
 
-    frc::MecanumDrive* robotDrive;
+    frc::MecanumDrive* m_robotDrive;
 	frc::Joystick* driveControllerMove;
 	frc::Joystick* driveControllerShift;
     frc::Joystick* driveControllerRotate;
-    frc::ADXRS450_Gyro* gyroSensor;
-    AutoAlignment* autoAlignment;
-    Encoder* encoderFrontLeft;
-    Encoder* encoderFrontRight;
-    Encoder* encoderBackLeft;
-    Encoder* encoderBackRight;
+    frc::ADXRS450_Gyro* m_gyroSensor;
+    AutoAlignment* m_autoAlignment;
+    // Encoder* encoderFrontLeft;
+    // Encoder* encoderFrontRight;
+    // Encoder* encoderBackLeft;
+    // Encoder* encoderBackRight;
 
 	/**
 	 * @function	setMovement

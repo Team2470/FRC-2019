@@ -15,10 +15,11 @@ void Robot::RobotInit()
 	chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
 	chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
 	frc::SmartDashboard::PutData("Auto Modes", &chooser);
+
     gyro->Calibrate();
 }
 
-void Robot::RobotPeriodic()
+void Robot::TeleopInit()
 {
 	return;
 }
@@ -28,12 +29,7 @@ void Robot::AutonomousInit()
 	return;
 }
 
-void Robot::AutonomousPeriodic() 
-{
-	this->BasicControl(ControlMode::AUTO);
-}
-
-void Robot::TeleopInit()
+void Robot::RobotPeriodic()
 {
 	return;
 }
@@ -42,6 +38,17 @@ void Robot::TeleopPeriodic()
 {
 	BasicControl(ControlMode::TELEOP);
 }
+
+void Robot::AutonomousPeriodic() 
+{
+	this->BasicControl(ControlMode::AUTO);
+}
+
+void Robot::TestPeriodic()
+{
+	return;
+}
+
 
 void Robot::BasicControl(ControlMode mode)
 {
@@ -66,10 +73,10 @@ void Robot::BasicControl(ControlMode mode)
 	intakeSystem->rotateEnable = false;
 	intakeSystem->reverseDrive = 1;
 
-	encoderFrontLeft->reset();
-	encoderBackLeft->reset();
-	encoderFrontRight->reset();
-	encoderBackRight->reset();
+	// encoderFrontLeft->reset();
+	// encoderBackLeft->reset();
+	// encoderFrontRight->reset();
+	// encoderBackRight->reset();
 
 	plexiglassLED->Set(true);
 
@@ -109,10 +116,10 @@ void Robot::BasicControl(ControlMode mode)
 		rotateJoyVal = LeftDriveJoystick.GetX();
 		
 		//Encoders
-		encoderCountFrontLeft = encoderFrontLeft->getValue();
-		encoderCountBackLeft = encoderBackLeft->getValue();
-		encoderCountFrontRight = encoderFrontRight->getValue();
-		encoderCountBackRight = encoderBackRight->getValue();
+		// encoderCountFrontLeft = encoderFrontLeft->getValue();
+		// encoderCountBackLeft = encoderBackLeft->getValue();
+		// encoderCountFrontRight = encoderFrontRight->getValue();
+		// encoderCountBackRight = encoderBackRight->getValue();
 
 		currentFrontLeft = pdp->GetCurrent(ChannelPDP::PDP_FRONT_LEFT_MOTOR);
 		currentBackLeft = pdp->GetCurrent(ChannelPDP::PDP_BACK_LEFT_MOTOR);
@@ -279,18 +286,18 @@ void Robot::BasicControl(ControlMode mode)
 
 
 		// Auto-aligment?
-		if(this->RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_X))
+		if(RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_X))
 		{
 			// Auto-Align robot to closest target
 			// Check safety switch
-			if (this->RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_Y))
+			if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_Y))
 			{
+				// Operator can control robot while safety is on....
 				driveSystem->mecanumDrive();
 			}
 			else
 			{
-				// Operator Control while safety is on
-				this->driveSystem->mecanumDriveAutoAlign();
+				driveSystem->mecanumDriveAutoAlign();
 			}
 		} 
 		else
@@ -319,19 +326,20 @@ void Robot::BasicControl(ControlMode mode)
         //       being (for testing purposes) i am going to place values pertaining
         //       to rotation and the like in the InputVoltage field (perhaps others
         //       as well). 
-		// frc::SmartDashboard::PutNumber("InputVoltage", inputVoltage); 
-        frc::SmartDashboard::PutNumber("InputVoltage", (int)autoAlignment->getDirectionFace(gyro->GetAngle()));   //TODO: remove and uncomment above
-		
+		frc::SmartDashboard::PutNumber("InputVoltage", inputVoltage); 
         //frc::SmartDashboard::PutNumber("TotalCurrent", totalCurrent);
-		frc::SmartDashboard::PutNumber("TotalCurrent", (int)gyro->GetAngle() % 360);
+		frc::SmartDashboard::PutNumber("TotalCurrent", (int)gyro->GetAngle() % 360);   //TODO: remove and uncomment above
         
         frc::SmartDashboard::PutNumber("Temperature", temp);
+
+
 		frc::SmartDashboard::PutNumber("TotalEnergy", totalEnergy);
 		frc::SmartDashboard::PutNumber("TotalPower", totalPower);
 
 		// Compressor stuff
 		frc::SmartDashboard::PutNumber("CompressorCurrent", compressorCurrent);
-		frc::SmartDashboard::PutBoolean("Compressor Enabled", compressorEnabled);
+		// frc::SmartDashboard::PutBoolean("Compressor Enabled", compressorEnabled);
+		frc::SmartDashboard::PutBoolean("Compressor Enabled", limelight->hasTarget());  //TODO: remove and uncomment above, and add to driver station
 		frc::SmartDashboard::PutBoolean("Compressor Low Pressure Activate", compressorLowPressureActivate);
 
 		//Pneumatic Stuff
@@ -350,10 +358,10 @@ void Robot::BasicControl(ControlMode mode)
 		frc::SmartDashboard::PutNumber("RotateJoy", rotateJoyVal);
 
 		//Encoder Counts
-		frc::SmartDashboard::PutNumber("Front Left Encoder Count", encoderCountFrontLeft);
-		frc::SmartDashboard::PutNumber("Back Left Encoder Count", encoderCountBackLeft);
-		frc::SmartDashboard::PutNumber("Front Right Encoder Count", encoderCountFrontRight);
-		frc::SmartDashboard::PutNumber("Back Right Encoder Count", encoderCountBackRight);
+		// frc::SmartDashboard::PutNumber("Front Left Encoder Count", encoderCountFrontLeft);
+		// frc::SmartDashboard::PutNumber("Back Left Encoder Count", encoderCountBackLeft);
+		// frc::SmartDashboard::PutNumber("Front Right Encoder Count", encoderCountFrontRight);
+		// frc::SmartDashboard::PutNumber("Back Right Encoder Count", encoderCountBackRight);
 
 		//Current Values
 		frc::SmartDashboard::PutNumber("Front Left Motor Current", currentFrontLeft);
@@ -363,16 +371,15 @@ void Robot::BasicControl(ControlMode mode)
 		frc::SmartDashboard::PutNumber("Intake Left Motor Current", currentIntakeLeft);
 		frc::SmartDashboard::PutNumber("Intake Right Motor Current", currentIntakeRight);
 
-		// Camera Stuff
+		// Sensor Stuff
 		frc::SmartDashboard::PutNumber("Limelight Camera Current", currentLimelight);
+		//TODO : add the following to DriverStation...
+		// frc::SmartDashboard::PutBoolean("HasTargets", limelight->hasTarget());
+		// frc::SmartDashboard::PutBoolean("X Offset", limelight->X_Offset());
+		// frc::SmartDashboard::PutBoolean("Y Offset", limelight->Y_Offset());
 		
 		frc::Wait(0.005);
 	}
-}
-
-void Robot::TestPeriodic()
-{
-	return;
 }
 
 #ifndef RUNNING_FRC_TESTS
