@@ -52,40 +52,42 @@ double AutoAlignment::getMoveCorrection()
 
 double AutoAlignment::getRotateCorrection()
 {
+    // return [-1,1]
+
     double rotationCorrection = 0.0;
     double angleError = 0.0;
-    double kp = 0.5;
-
-    // determine the -45..45 degree correction from closest compass point    
+    double kp = -0.2;
+    
+    // Determine the [-45,45] degree correction from closest compass point
     double gyroAngle = m_gyroSensor->GetAngle();
-    std::cout << "gyroAngle: " << gyroAngle;
+    std::cout << "in(" << gyroAngle << ")\t";
 
     angleError = relativeAngleCorrection(gyroAngle);
-    std::cout << " angleError: " << angleError;
 
-    // take the -45..45 degree value and tranform it into -1..1 
-    rotationCorrection = angleError / 45.0;
+    // Deadband code...
+    if ( abs(angleError) > 5 )
+    {
+        // take the [-45,45] degree value and tranform it into [-1,1]
+        rotationCorrection = angleError / 45.0;
+    }
+    else
+    {
+        // if within our deadband return 0.0
+        rotationCorrection = 0.0;
+    }
 
     // only using a proportional constant - switch to a PID later??
-    // rotationCorrection = kp * rotationCorrection;
-    std::cout << " rotationCorrection: " << rotationCorrection << "\n";
+    rotationCorrection = kp * rotationCorrection;
+    std::cout << "out(" << rotationCorrection << ")\t";
 
     return rotationCorrection;
 }
 
 RobotFace AutoAlignment::closestCompassPoint(double angle)
 {
-    // make sure the value is constrained to [0,360)
-    if ( angle <= -360.0 || angle >= 360.0 )
-    {
-        angle = constrainToCircle(angle);
-    }
-
-    // direction closest to where the robot is currently facing
     RobotFace closestCompassPoint = RobotFace::UNKNOWN;
 
-    // walk around the cirlce...
-    if(inRange(angle, 0, 45))
+    if (inRange(angle, 0, 45))
     {
         closestCompassPoint = RobotFace::NORTH;
     }
@@ -93,17 +95,17 @@ RobotFace AutoAlignment::closestCompassPoint(double angle)
     {
         closestCompassPoint = RobotFace::EAST;
     }
-    else if(inRange(angle, 135, 225))
+    else if (inRange(angle, 135, 225))
     {
         closestCompassPoint = RobotFace::SOUTH;
     }
-    else if(inRange(angle, 225, 315))
+    else if (inRange(angle, 225, 315))
     {
         closestCompassPoint = RobotFace::WEST;
     }
-    else if(inRange(angle, 316,360))
+    else if (inRange(angle, 316,360))
     {
-        closestCompassPoint = RobotFace::NORTH;
+        closestCompassPoint = RobotFace::NORTH2;
     }
     
     return closestCompassPoint;
@@ -111,49 +113,47 @@ RobotFace AutoAlignment::closestCompassPoint(double angle)
 
 double AutoAlignment::relativeAngleCorrection(double angle)
 {
-    // based on the closest face determine the relative angle    
+    // Determine the angle relative to the closest compass direction
+    // angle [0,359); returns [-45,45]
 
-    double relativeCorrection = 0.0;
+    double relativeAngle = 0.0;
+    int northCorrection = 0;
     RobotFace face = RobotFace::UNKNOWN;
 
-    // std::cout << "angle: " << angle;
+    relativeAngle = constrainToCircle(angle);
+    face = closestCompassPoint(relativeAngle);
 
-    angle = constrainToCircle(angle);
-    face = closestCompassPoint(angle);
-
-    // std::cout << " angle2: " << angle << " face: " << face << "\n";
-
-    // rotate the compass 45 degrees to make the math easier
-    relativeCorrection = angle + 45.0;  
     switch(face)
     {
         case RobotFace::NORTH:
-            std::cout << " NORTH ";
-            relativeCorrection -= RobotFace::NORTH;
+            std::cout << "N\t";
+            relativeAngle -= RobotFace::NORTH;
             break;
 
         case RobotFace::SOUTH:
-            std::cout << " SOUTH ";
-            relativeCorrection -= RobotFace::SOUTH;
+            std::cout << "S\t";
+            relativeAngle -= RobotFace::SOUTH;
             break;
 
         case RobotFace::EAST:
-            std::cout << " EAST ";
-            relativeCorrection -= RobotFace::EAST;
+            std::cout << "E\t";
+            relativeAngle -= RobotFace::EAST;
             break;
 
         case RobotFace::WEST:
-            std::cout << " WEST ";
-            relativeCorrection -= RobotFace::WEST;
+            std::cout << "W\t";
+            relativeAngle -= RobotFace::WEST;
             break;
+        case RobotFace::NORTH2:
+            std::cout << "N\t";
+            relativeAngle -= RobotFace::NORTH2;
+            break;
+    default:
+            std::cout << "UNKNOWN\t";
+            relativeAngle = 0.0;
     }
 
-    // rotate our compass back - the value should now be [-45,45] relative to compass point
-    relativeCorrection -= 45.0;  
-
-    std::cout << " INSIDE: " << relativeCorrection;
-
-    return relativeCorrection;
+    return relativeAngle;
 }
 
 
@@ -164,6 +164,8 @@ bool AutoAlignment::inRange(double value, double low, double high)
 
 double AutoAlignment::constrainToCircle(double angle)
 {
+    // angle: (-inf,inf); returns [0,360)
+
     // this algorithm will only be using the whole part of
     // the provided angle, so we'll pull the decimal portion
     // off and add it back in at the end

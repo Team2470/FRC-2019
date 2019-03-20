@@ -77,15 +77,11 @@ void BjorgMecanumDrive::mecanumDriveAutoAlign()
 {
     double xSpeed = 0.0;
     double ySpeed =  0.0;
-    double rotation =  0.0;
-
-    std::cout << "mecanumDrive: ";
+    double rotation = 0.0;
 
     // ySpeed =  m_autoAlignment->getMoveCorrection();
     // xSpeed = m_autoAlignment->getShiftCorrection();
     rotation =  m_autoAlignment->getRotateCorrection();
-
-    std::cout << rotation << "\n\n";
 
     m_robotDrive->SetSafetyEnabled(true);
     // m_robotDrive->DriveCartesian( ySpeed, xSpeed, rotation);

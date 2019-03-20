@@ -17,6 +17,7 @@ enum RobotFace
     EAST  = 90,
     SOUTH = 180,
     WEST  = 270,
+    NORTH2 = 360,
     UNKNOWN = 999
 };
 
