@@ -286,7 +286,7 @@ void Robot::BasicControl(ControlMode mode)
 			backClimbers->Set(true);
 		}
 
-
+        /*
 		// Auto-aligment?
 		if(RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_X))
 		{
@@ -307,6 +307,7 @@ void Robot::BasicControl(ControlMode mode)
 			// Operator Control
 			driveSystem->mecanumDrive();
 		}
+        */
 
 		//Intake Drive
 		if (FlightJoystick.GetRawButton(ButtonFlight::FLIGHT_TRIGGER))
