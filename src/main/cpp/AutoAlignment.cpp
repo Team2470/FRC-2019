@@ -10,8 +10,9 @@ AutoAlignment::AutoAlignment(frc::ADXRS450_Gyro* gyroSensor, MaxSonar* sonarSens
 
 double AutoAlignment::getShiftCorrection()
 {
-    double kp = -0.1;  // if we are moving the wrong way we need to make this positive
+
     double strafeCorrection = 0.0;
+    double kp = -0.1;  // if we are moving the wrong way we need to make this positive
 
     m_visionProcessing->updateLimelightProperties();
 
@@ -41,19 +42,9 @@ double AutoAlignment::getShiftCorrection()
 double AutoAlignment::getMoveCorrection()
 {
     double distanceCorrection = 0.0;
-    double kp = 0.1;
 
-    m_visionProcessing->updateLimelightProperties();
-
-    if (m_visionProcessing->hasTarget())
-    {
-        double verticalError = m_visionProcessing->Y_Offset();
-    
-        // the error is between -20.5 and 20.5 degrees - need -1 to 1
-        verticalError /= 27.0;
-
-        distanceCorrection = kp * verticalError; 
-    }
+    distanceCorrection = moveCorrectionViaVision();
+    // distanceCorrection = moveCorrectionViaPing();
 
     // validate output
     if ( distanceCorrection < -1.0 || distanceCorrection > 1.0 )
@@ -266,4 +257,37 @@ double AutoAlignment::constrainToCircle(double angle)
     }
 
     return angle;
+}
+
+double AutoAlignment::moveCorrectionViaVision()
+{
+    double distanceCorrection = 0.0;
+    double kp = 0.1;
+
+    m_visionProcessing->updateLimelightProperties();
+
+    if (m_visionProcessing->hasTarget())
+    {
+        double verticalError = m_visionProcessing->Y_Offset();
+    
+        // the error is between -20.5 and 20.5 degrees - need -1 to 1
+        verticalError /= 27.0;
+
+        distanceCorrection = kp * verticalError; 
+    }
+
+    // validate output
+    if ( distanceCorrection < -1 || distanceCorrection > 1 )
+    {
+        std::cout << "AutoAlignment::moveCorrectionViaVision() : ERROR on output : distanceCorrection = " << distanceCorrection << std::endl;
+        distanceCorrection = 0.0;
+    }
+
+    return distanceCorrection;
+}
+
+double AutoAlignment::moveCorrectionViaPing()
+{
+
+    
 }

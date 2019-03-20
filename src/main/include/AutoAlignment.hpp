@@ -107,6 +107,20 @@ private:
      * @description Determines the relative [-45,45] degree change relative to the closest compass point
      */
     double relativeAngleCorrection( double angle);
+
+    /**
+     * @function moveCorrectionViaVision
+     * @description Determine the corrective speed [-1,1] relative to the 
+     * distance based on the camera's perspective
+     */
+    double moveCorrectionViaVision();
+
+    /**
+     * @function relativeAngleCorrection
+     * @description Determines the corrective speed [-1,1] relative to the 
+     * distance based on an ultrasonic or Lidar
+     */
+    double moveCorrectionViaPing();
 };
 
 #endif
