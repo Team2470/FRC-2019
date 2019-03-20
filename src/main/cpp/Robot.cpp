@@ -78,7 +78,7 @@ void Robot::BasicControl(ControlMode mode)
 	// encoderFrontRight->reset();
 	// encoderBackRight->reset();
 
-	plexiglassLED->Set(true);
+	//plexiglassLED->Set(true);
 
 	frontClimbers->Set(true);
 	backClimbers->Set(true);
@@ -141,6 +141,7 @@ void Robot::BasicControl(ControlMode mode)
 			limelight->setPipeline(0);
 		}
 
+		/*
 		//Toggles the plexiglass LEDs
 		if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_ARCADE_LEFT))
 		{
@@ -150,6 +151,7 @@ void Robot::BasicControl(ControlMode mode)
 		{
 			plexiglassLED->Set(false);
 		}
+		*/
 
 		//Controls the motor multiplier: stopped, halved, or full speed
 		if (LeftButtonHub.GetRawButton(GenericControllerLeft::SWITCH_B)) //ButtonXbox::XBOX_LEFT_BUMPER

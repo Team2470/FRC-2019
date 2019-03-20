@@ -12,16 +12,16 @@ MaxSonar::MaxSonar(int ultrasonicChannel, UltrasonicSensorType sonarType)
 		case UltrasonicSensorType::HRLV:
 			this->voltageScaling = 1 / 41.0105;
 			break;
-		case UltrasonicSensorType::HRUSB: 
+		case UltrasonicSensorType::HRUSB:
 			this->voltageScaling = 1;
 			break;
-		case UltrasonicSensorType::LV: 
+		case UltrasonicSensorType::LV:
 			this->voltageScaling = 0.0098;
 			break;
 		case UltrasonicSensorType::XL: 
 			this->voltageScaling = 1;
 			break;
-		default: 
+		default:
 			this->voltageScaling = 1;
 			break;
 	}
