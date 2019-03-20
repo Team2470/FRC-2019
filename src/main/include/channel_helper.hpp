@@ -41,6 +41,7 @@ enum ChannelAnalog
 	//gyro slot 0 or 1?
 	GYRO_SENSOR = 0,
 	ULTRASONIC_SENSOR_HATCH = 1, //placeholder
+	PRESSURE_SENSOR = 2
 };
 
 /**

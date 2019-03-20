@@ -286,15 +286,18 @@ void Robot::BasicControl(ControlMode mode)
 			backClimbers->Set(true);
 		}
 
-        /*
 		// Auto-aligment?
+		// std::cout << "adsum\n";
 		if(RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_X))
 		{
+			// std::cout << "SWITCH_X\n";
+
 			// Auto-Align robot to closest target
 			// Check safety switch
-			if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_Y))
+			if(RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_Y))
 			{
 				// Operator can control robot while safety is on....
+				// std::cout << "mecanumDrive SWITCH_Y\n";
 				driveSystem->mecanumDrive();
 			}
 			else
@@ -305,9 +308,9 @@ void Robot::BasicControl(ControlMode mode)
 		else
 		{
 			// Operator Control
+			// std::cout << "mecanumDrive\n";
 			driveSystem->mecanumDrive();
 		}
-        */
 
 		//Intake Drive
 		if (FlightJoystick.GetRawButton(ButtonFlight::FLIGHT_TRIGGER))

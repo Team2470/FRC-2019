@@ -1,3 +1,4 @@
+#include <iostream>
 #include "AutoAlignment.hpp"
 
 AutoAlignment::AutoAlignment(frc::ADXRS450_Gyro* gyroSensor, MaxSonar* sonarSensor, VisionProcessing* visionProcessing)
@@ -53,16 +54,21 @@ double AutoAlignment::getRotateCorrection()
 {
     double rotationCorrection = 0.0;
     double angleError = 0.0;
-    double kp = 0.1;
+    double kp = 0.5;
 
     // determine the -45..45 degree correction from closest compass point    
-    angleError = relativeAngleCorrection(m_gyroSensor->GetAngle());
+    double gyroAngle = m_gyroSensor->GetAngle();
+    std::cout << "gyroAngle: " << gyroAngle;
+
+    angleError = relativeAngleCorrection(gyroAngle);
+    std::cout << " angleError: " << angleError;
 
     // take the -45..45 degree value and tranform it into -1..1 
     rotationCorrection = angleError / 45.0;
 
     // only using a proportional constant - switch to a PID later??
-    rotationCorrection = kp * rotationCorrection;
+    // rotationCorrection = kp * rotationCorrection;
+    std::cout << " rotationCorrection: " << rotationCorrection << "\n";
 
     return rotationCorrection;
 }
@@ -110,31 +116,42 @@ double AutoAlignment::relativeAngleCorrection(double angle)
     double relativeCorrection = 0.0;
     RobotFace face = RobotFace::UNKNOWN;
 
+    // std::cout << "angle: " << angle;
+
     angle = constrainToCircle(angle);
     face = closestCompassPoint(angle);
+
+    // std::cout << " angle2: " << angle << " face: " << face << "\n";
 
     // rotate the compass 45 degrees to make the math easier
     relativeCorrection = angle + 45.0;  
     switch(face)
     {
         case RobotFace::NORTH:
+            std::cout << " NORTH ";
             relativeCorrection -= RobotFace::NORTH;
+            break;
 
         case RobotFace::SOUTH:
+            std::cout << " SOUTH ";
             relativeCorrection -= RobotFace::SOUTH;
+            break;
 
         case RobotFace::EAST:
+            std::cout << " EAST ";
             relativeCorrection -= RobotFace::EAST;
+            break;
 
         case RobotFace::WEST:
+            std::cout << " WEST ";
             relativeCorrection -= RobotFace::WEST;
-
-        default:
-            return 0.0;
+            break;
     }
 
     // rotate our compass back - the value should now be [-45,45] relative to compass point
     relativeCorrection -= 45.0;  
+
+    std::cout << " INSIDE: " << relativeCorrection;
 
     return relativeCorrection;
 }
