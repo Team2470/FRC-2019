@@ -27,6 +27,14 @@ double AutoAlignment::getShiftCorrection()
         // TODO: we may have to adjust this because of friction in the robot - see http://docs.limelightvision.io/en/latest/cs_aiming.html
     }
 
+    // validate output
+    if ( strafeCorrection < -1.0 || strafeCorrection > 1.0 )
+    {
+        std::cout << "AutoAlignment::getShiftCorrection() : ERROR on output : strafeCorrection = " << strafeCorrection << std::endl;
+        strafeCorrection = 0.0;
+    }
+
+
     return strafeCorrection;
 }
 
@@ -45,6 +53,13 @@ double AutoAlignment::getMoveCorrection()
         verticalError /= 27.0;
 
         distanceCorrection = kp * verticalError; 
+    }
+
+    // validate output
+    if ( distanceCorrection < -1.0 || distanceCorrection > 1.0 )
+    {
+        std::cout << "AutoAlignment::getMoveCorrection() : ERROR on output : distanceCorrection = " << distanceCorrection << std::endl;
+        distanceCorrection = 0.0;
     }
 
     return distanceCorrection;
@@ -80,6 +95,13 @@ double AutoAlignment::getRotateCorrection()
     rotationCorrection = kp * rotationCorrection;
     std::cout << "out(" << rotationCorrection << ")\t";
 
+    // validate output
+    if ( rotationCorrection > 1.0 || rotationCorrection < -1.0 )
+    {
+        std::cout << "AutoAlignment::getRotateCorrection() : ERROR on output : rotationCorrection = " << rotationCorrection << std::endl;
+        rotationCorrection = 0.0;
+    }
+
     return rotationCorrection;
 }
 
@@ -87,25 +109,39 @@ RobotFace AutoAlignment::closestCompassPoint(double angle)
 {
     RobotFace closestCompassPoint = RobotFace::UNKNOWN;
 
-    if (inRange(angle, 0, 45))
+    // validate input
+    if ( angle >=0 && angle < 360 )
     {
-        closestCompassPoint = RobotFace::NORTH;
+        if (inRange(angle, 0, 45))
+        {
+            closestCompassPoint = RobotFace::NORTH;
+        }
+        else if (inRange(angle, 45, 135))
+        {
+            closestCompassPoint = RobotFace::EAST;
+        }
+        else if (inRange(angle, 135, 225))
+        {
+            closestCompassPoint = RobotFace::SOUTH;
+        }
+        else if (inRange(angle, 225, 315))
+        {
+            closestCompassPoint = RobotFace::WEST;
+        }
+        else if (inRange(angle, 316,360))
+        {
+            closestCompassPoint = RobotFace::NORTH2;
+        }
     }
-    else if (inRange(angle, 45, 135))
+    else
     {
-        closestCompassPoint = RobotFace::EAST;
+        std::cout << "AutoAlignment::closestCompassPoint() : ERROR on input : angle = " << angle << std::endl;
     }
-    else if (inRange(angle, 135, 225))
+
+    // validate output
+    if ( closestCompassPoint == RobotFace::UNKNOWN )
     {
-        closestCompassPoint = RobotFace::SOUTH;
-    }
-    else if (inRange(angle, 225, 315))
-    {
-        closestCompassPoint = RobotFace::WEST;
-    }
-    else if (inRange(angle, 316,360))
-    {
-        closestCompassPoint = RobotFace::NORTH2;
+        std::cout << "AutoAlignment::closestCompassPoint() : ERROR on output : closestCompassPoint == UNKNOWN" << std::endl;
     }
     
     return closestCompassPoint;
@@ -114,43 +150,58 @@ RobotFace AutoAlignment::closestCompassPoint(double angle)
 double AutoAlignment::relativeAngleCorrection(double angle)
 {
     // Determine the angle relative to the closest compass direction
-    // angle [0,359); returns [-45,45]
+    // angle [0,360); returns [-45,45]
 
     double relativeAngle = 0.0;
     int northCorrection = 0;
     RobotFace face = RobotFace::UNKNOWN;
 
-    relativeAngle = constrainToCircle(angle);
-    face = closestCompassPoint(relativeAngle);
-
-    switch(face)
+    // validate input
+    if ( angle >= 0 && angle < 360 )
     {
-        case RobotFace::NORTH:
-            std::cout << "N\t";
-            relativeAngle -= RobotFace::NORTH;
-            break;
+        relativeAngle = constrainToCircle(angle);
+        face = closestCompassPoint(relativeAngle);
 
-        case RobotFace::SOUTH:
-            std::cout << "S\t";
-            relativeAngle -= RobotFace::SOUTH;
-            break;
+        switch(face)
+        {
+            case RobotFace::NORTH:
+                std::cout << "N\t";
+                relativeAngle -= RobotFace::NORTH;
+                break;
 
-        case RobotFace::EAST:
-            std::cout << "E\t";
-            relativeAngle -= RobotFace::EAST;
-            break;
+            case RobotFace::SOUTH:
+                std::cout << "S\t";
+                relativeAngle -= RobotFace::SOUTH;
+                break;
 
-        case RobotFace::WEST:
-            std::cout << "W\t";
-            relativeAngle -= RobotFace::WEST;
-            break;
-        case RobotFace::NORTH2:
-            std::cout << "N\t";
-            relativeAngle -= RobotFace::NORTH2;
-            break;
-    default:
-            std::cout << "UNKNOWN\t";
-            relativeAngle = 0.0;
+            case RobotFace::EAST:
+                std::cout << "E\t";
+                relativeAngle -= RobotFace::EAST;
+                break;
+
+            case RobotFace::WEST:
+                std::cout << "W\t";
+                relativeAngle -= RobotFace::WEST;
+                break;
+            case RobotFace::NORTH2:
+                std::cout << "N\t";
+                relativeAngle -= RobotFace::NORTH2;
+                break;
+        default:
+                std::cout << "UNKNOWN\t";
+                relativeAngle = 0.0;
+        }
+    }
+    else
+    {
+        std::cout << "AutoAlignment::relativeAngleCorrection() : ERROR on input : angle = " << angle << std::endl;
+    }
+
+    // validate output
+    if ( relativeAngle < -45.0 || relativeAngle > 45.0 )
+    {
+        std::cout << "AutoAlignment::relativeAngleCorrection() : ERROR on output: relativeAngle = " << relativeAngle << std::endl;
+        relativeAngle = 0.0;
     }
 
     return relativeAngle;
@@ -173,7 +224,7 @@ double AutoAlignment::constrainToCircle(double angle)
     double angleDecimalPart = abs(angle) - abs(static_cast<int>(angle));
     int angleWholePart = static_cast<int>(angle - angleDecimalPart);
 
-    // transpose large numbers into the range [-360 and +360] inclusive
+    // transpose large numbers into the range [-360,360]
     if ( abs(angleWholePart) >= 360 )
     {
         // grab the sign (modulus will always turn it into a positive)
@@ -206,6 +257,13 @@ double AutoAlignment::constrainToCircle(double angle)
    
     // add the deimcal portion of the original angle
     angle = angleWholePart + angleDecimalPart;
+
+    // validate the output
+    if ( angle >=360 || angle < 0 )  
+    {
+        std::cout << "AutoAlignment::constrainToCircle() : ERROR on output : angle = " << angle << std::endl;
+        angle = 0.0;
+    }
 
     return angle;
 }
