@@ -30,40 +30,41 @@ BjorgMecanumDrive::BjorgMecanumDrive(
 
 void BjorgMecanumDrive::mecanumDrive()
 {
-    if(!this->resolutionNeeded)
+    m_robotDrive->SetSafetyEnabled(true);
+    setMovement();
+
+    this->movementValue = this->movementValue <= DEADZONE && this->movementValue >= -DEADZONE
+        ? 0.0
+        : this->movementValue;
+
+    this->shiftValue = this->shiftValue <= DEADZONE && this->shiftValue >= -DEADZONE
+        ? 0.0
+        : this->shiftValue;
+
+    this->rotateValue = this->rotateValue <= DEADZONE && this->rotateValue >= -DEADZONE
+        ? 0.0
+        : this->rotateValue;
+
+    if(UTILIZE_GYRO)
     {
-        m_robotDrive->SetSafetyEnabled(true);
-        setMovement();
+        m_robotDrive->DriveCartesian(
+            moveMultiplier * movementValue,
+            shiftMultiplier * shiftValue, 
+            rotateMultiplier * rotateValue,
+            m_gyroSensor->GetAngle()
+        );
+    }
+    else
+    {
+        std::cout << disableShift * moveMultiplier * movementValue << " : " \
+                  <<  disableMove * shiftMultiplier * shiftValue << " : " \
+                  << rotateMultiplier * rotateValue << std::endl;
 
-        this->movementValue = this->movementValue <= DEADZONE && this->movementValue >= -DEADZONE
-            ? 0.0
-            : this->movementValue;
-
-        this->shiftValue = this->shiftValue <= DEADZONE && this->shiftValue >= -DEADZONE
-            ? 0.0
-            : this->shiftValue;
-
-        this->rotateValue = this->rotateValue <= DEADZONE && this->rotateValue >= -DEADZONE
-            ? 0.0
-            : this->rotateValue;
-
-        if(UTILIZE_GYRO)
-        {
-            m_robotDrive->DriveCartesian(
-                moveMultiplier * movementValue,
-                shiftMultiplier * shiftValue, 
-                rotateMultiplier * rotateValue,
-                m_gyroSensor->GetAngle()
-            );
-        }
-        else
-        {
-            m_robotDrive->DriveCartesian(
-                disableShift * moveMultiplier * movementValue,
-                disableMove * shiftMultiplier * shiftValue,
-                rotateMultiplier * rotateValue
-            );
-        }
+        m_robotDrive->DriveCartesian(
+            disableShift * moveMultiplier * movementValue,
+            disableMove * shiftMultiplier * shiftValue,
+            rotateMultiplier * rotateValue
+        );
     }
 }
 
@@ -83,8 +84,14 @@ void BjorgMecanumDrive::mecanumDriveAutoAlign()
     // xSpeed = m_autoAlignment->getShiftCorrection();
     rotation =  m_autoAlignment->getRotateCorrection();
 
+    // rotation = 0.23;
+    // rotation = 0.0;
+
     m_robotDrive->SetSafetyEnabled(true);
-    // m_robotDrive->DriveCartesian( ySpeed, xSpeed, rotation);
+    // m_robotDrive->SetSafetyEnabled(false);
+    m_robotDrive->DriveCartesian( ySpeed, xSpeed, rotation);
+    // m_robotDrive->DriveCartesian( 0, 0, 0);
+    std::cout << std::endl;
 }
 
 void BjorgMecanumDrive::twoBtnMove()

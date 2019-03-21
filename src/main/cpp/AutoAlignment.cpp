@@ -62,7 +62,7 @@ double AutoAlignment::getRotateCorrection()
 
     double rotationCorrection = 0.0;
     double angleError = 0.0;
-    double kp = -0.2;
+    double kp = -0.6;
     
     // Determine the [-45,45] degree correction from closest compass point
     double gyroAngle = m_gyroSensor->GetAngle();
@@ -141,51 +141,44 @@ RobotFace AutoAlignment::closestCompassPoint(double angle)
 double AutoAlignment::relativeAngleCorrection(double angle)
 {
     // Determine the angle relative to the closest compass direction
-    // angle [0,360); returns [-45,45]
+    // angle (-inf,inf); returns [-45,45]
 
     double relativeAngle = 0.0;
     int northCorrection = 0;
     RobotFace face = RobotFace::UNKNOWN;
 
     // validate input
-    if ( angle >= 0 && angle < 360 )
+    relativeAngle = constrainToCircle(angle);
+    face = closestCompassPoint(relativeAngle);
+
+    switch(face)
     {
-        relativeAngle = constrainToCircle(angle);
-        face = closestCompassPoint(relativeAngle);
+        case RobotFace::NORTH:
+            std::cout << "N\t";
+            relativeAngle -= RobotFace::NORTH;
+            break;
 
-        switch(face)
-        {
-            case RobotFace::NORTH:
-                std::cout << "N\t";
-                relativeAngle -= RobotFace::NORTH;
-                break;
+        case RobotFace::SOUTH:
+            std::cout << "S\t";
+            relativeAngle -= RobotFace::SOUTH;
+            break;
 
-            case RobotFace::SOUTH:
-                std::cout << "S\t";
-                relativeAngle -= RobotFace::SOUTH;
-                break;
+        case RobotFace::EAST:
+            std::cout << "E\t";
+            relativeAngle -= RobotFace::EAST;
+            break;
 
-            case RobotFace::EAST:
-                std::cout << "E\t";
-                relativeAngle -= RobotFace::EAST;
-                break;
-
-            case RobotFace::WEST:
-                std::cout << "W\t";
-                relativeAngle -= RobotFace::WEST;
-                break;
-            case RobotFace::NORTH2:
-                std::cout << "N\t";
-                relativeAngle -= RobotFace::NORTH2;
-                break;
-        default:
-                std::cout << "UNKNOWN\t";
-                relativeAngle = 0.0;
-        }
-    }
-    else
-    {
-        std::cout << "AutoAlignment::relativeAngleCorrection() : ERROR on input : angle = " << angle << std::endl;
+        case RobotFace::WEST:
+            std::cout << "W\t";
+            relativeAngle -= RobotFace::WEST;
+            break;
+        case RobotFace::NORTH2:
+            std::cout << "N\t";
+            relativeAngle -= RobotFace::NORTH2;
+            break;
+    default:
+            std::cout << "UNKNOWN\t";
+            relativeAngle = 0.0;
     }
 
     // validate output
