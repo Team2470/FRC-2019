@@ -80,9 +80,9 @@ void BjorgMecanumDrive::mecanumDriveAutoAlign()
     double ySpeed =  0.0;
     double rotation = 0.0;
 
-    // ySpeed =  m_autoAlignment->getMoveCorrection();
-    // xSpeed = m_autoAlignment->getShiftCorrection();
-    rotation =  m_autoAlignment->getRotateCorrection();
+    // ySpeed =  speedLimiter(m_autoAlignment->getMoveCorrection());
+    // xSpeed = speedLimiter(m_autoAlignment->getShiftCorrection());
+    rotation =  speedLimiter(m_autoAlignment->getRotateCorrection());
 
     // rotation = 0.23;
     // rotation = 0.0;
@@ -157,4 +157,26 @@ void BjorgMecanumDrive::setRotate(bool rotateEn)
             ? this->driveControllerRotate->GetRawAxis(this->rotateCtrl) 
             : 0;
     }
+}
+
+
+double BjorgMecanumDrive::speedLimiter( double speed )
+{
+    return speedLimiter( speed, MAX_SPEED );
+}
+
+
+double BjorgMecanumDrive::speedLimiter( double speed, double max )
+{
+    int sign = 1;
+    if ( speed < 0 )
+    {
+        sign = -1;
+    }
+
+    if ( abs(speed) > max )
+    {    
+        speed = max;
+    }
+    return speed * sign;
 }

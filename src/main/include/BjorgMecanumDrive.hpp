@@ -108,6 +108,7 @@ public:
 private:
     static constexpr bool UTILIZE_GYRO = false;
     static constexpr float DEADZONE = 0.15;
+	static constexpr double MAX_SPEED = 1.0;
 	
 	float movementValue = 0.0;
     float shiftValue = 0.0;
@@ -137,6 +138,13 @@ private:
 	 * @description Update the rotation value, to be used by the drive.
 	 */
 	void setRotate(bool rotateEn = true);
+
+	/**
+	 * @function    speedLimiter
+	 * @description Given any input it will return a max value
+	 */
+	double speedLimiter( double speed );
+	double speedLimiter( double speed, double max );
 };
 
 #endif
