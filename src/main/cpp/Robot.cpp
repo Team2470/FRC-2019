@@ -7,7 +7,7 @@ Robot::Robot()
 {
 	// Note SmartDashboard is not initialized here, wait until RobotInit() to make
 	// SmartDashboard calls
-	//robotDrive.SetExpiration(0.1);
+	// robotDrive.SetExpiration(0.1);
 }
 
 void Robot::RobotInit()
@@ -16,21 +16,50 @@ void Robot::RobotInit()
 	chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
 	frc::SmartDashboard::PutData("Auto Modes", &chooser);
 
+	frontLeftMotor->Feed();
+	frontRightMotor->Feed();
+	backLeftMotor->Feed();
+	backRightMotor->Feed();
+
+	intakeLeftMotor->Feed();
+	intakeRightMotor->Feed();
+
     gyro->Calibrate();
 }
 
 void Robot::TeleopInit()
 {
+	// do nothing...
+
+
 	return;
 }
 
 void Robot::AutonomousInit()
 {
+	// do nothing...
+
+	return;
+}
+
+void Robot::TestInit()
+{
+	// do nothing...
+
+	return;
+}
+
+void Robot::DisabledInit()
+{
+	// do nothing...
+
 	return;
 }
 
 void Robot::RobotPeriodic()
 {
+	// do nothing...
+
 	return;
 }
 
@@ -46,6 +75,16 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TestPeriodic()
 {
+	// do nothing...
+
+	return;
+}
+
+	
+void  Robot::DisabledPeriodic()
+{
+	// do nothing...
+
 	return;
 }
 
@@ -380,9 +419,9 @@ void Robot::BasicControl(ControlMode mode)
 		// Sensor Stuff
 		frc::SmartDashboard::PutNumber("Limelight Camera Current", currentLimelight);
 		//TODO : add the following to DriverStation...
-		// frc::SmartDashboard::PutBoolean("HasTargets", limelight->hasTarget());
-		// frc::SmartDashboard::PutBoolean("X Offset", limelight->X_Offset());
-		// frc::SmartDashboard::PutBoolean("Y Offset", limelight->Y_Offset());
+		frc::SmartDashboard::PutBoolean("HasTargets", limelight->hasTarget());
+		frc::SmartDashboard::PutBoolean("X Offset", limelight->X_Offset());
+		frc::SmartDashboard::PutBoolean("Y Offset", limelight->Y_Offset());
 		
 		frc::Wait(0.005);
 	}

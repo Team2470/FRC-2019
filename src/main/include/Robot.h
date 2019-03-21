@@ -74,7 +74,11 @@ class Robot : public frc::TimedRobot
 	 * @function	TestPeriodic
 	 * @description Control the robot in test mode.
 	 */
+	void TestInit() override;
 	void TestPeriodic() override;
+
+	void DisabledInit() override;
+	void DisabledPeriodic() override;
 
 	/**
 	 * @function    BasicControl
