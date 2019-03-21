@@ -17,7 +17,7 @@ BjorgMecanumDrive::BjorgMecanumDrive(
     AutoAlignment* autoAlignment
 ) 
 {
-    m_robotDrive = new frc::MecanumDrive(*frontLeftMotor, *backLeftMotor, *frontRightMotor, *backRightMotor );
+    m_robotDrive = new frc::MecanumDrive(*frontLeftMotor, *backLeftMotor, *frontRightMotor, *backRightMotor);
     
     this->driveControllerMove = moveController;
     this->driveControllerShift = shiftController;
@@ -56,10 +56,6 @@ void BjorgMecanumDrive::mecanumDrive()
     }
     else
     {
-        std::cout << disableShift * moveMultiplier * movementValue << " : " \
-                  <<  disableMove * shiftMultiplier * shiftValue << " : " \
-                  << rotateMultiplier * rotateValue << std::endl;
-
         m_robotDrive->DriveCartesian(
             disableShift * moveMultiplier * movementValue,
             disableMove * shiftMultiplier * shiftValue,
@@ -178,5 +174,6 @@ double BjorgMecanumDrive::speedLimiter( double speed, double max )
     {    
         speed = max;
     }
+
     return speed * sign;
 }
