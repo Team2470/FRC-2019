@@ -118,7 +118,7 @@ class Robot : public frc::TimedRobot
 	frc::Spark *backRightMotor = new frc::Spark(ChannelPWM::BACK_RIGHT_MOTOR);
 	frc::VictorSP *intakeLeftMotor = new frc::VictorSP(ChannelPWM::LEFT_INTAKE_MOTOR);
 	frc::VictorSP *intakeRightMotor = new frc::VictorSP(ChannelPWM::RIGHT_INTAKE_MOTOR);
-	frc::Spark *placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
+	// frc::Spark *placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
 
 	frc::ADXRS450_Gyro *gyro = new frc::ADXRS450_Gyro(); // TODO: ENSURE CORRECT CHANNEL
 	MaxSonar *ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::HRLV);
