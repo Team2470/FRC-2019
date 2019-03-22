@@ -1,5 +1,7 @@
 #include "VisionProcessing.hpp"
 
+#include <iostream>
+
 using namespace nt;
 
 VisionProcessing::VisionProcessing()
@@ -7,6 +9,9 @@ VisionProcessing::VisionProcessing()
     m_networkTable = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
     updateLimelightProperties();
 }
+
+// TODO: I was just trying things in this file in an attempt to see something happen with the robot
+// not sure if this is the correct approach, but I couldn't see anything happening....
 
 void VisionProcessing::updateLimelightProperties()
 {
@@ -22,55 +27,66 @@ void VisionProcessing::updateLimelightProperties()
 
 void VisionProcessing::setLedMode(LimelightLedMode mode)
 {
-    m_networkTable->PutNumber("ledMode", mode);
+    nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("ledMode", mode);
+    // m_networkTable->PutNumber("ledMode", mode);
 }
 
 void VisionProcessing::setCameraMode(LimelightCameraMode mode)
 {
-    m_networkTable->PutNumber("camMode", mode);
+    nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("camMode", mode);
+    // m_networkTable->PutNumber("camMode", mode);
 }
 
 void VisionProcessing::setPipeline(short pipeline)
 {
-    m_networkTable->PutNumber("pipeline", pipeline);
+    nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("pipeline", pipeline);
+    // m_networkTable->PutNumber("pipeline", pipeline);
 }
 
 bool VisionProcessing::hasTarget()
 {
-    return m_limelightTargetsTV;
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tv", 0);
+    // return m_limelightTargetsTV;
 }
 
 double VisionProcessing::X_Offset()
 {
-    return m_limelightHorizontalOffsetTX;
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0);
+    // return m_limelightHorizontalOffsetTX;
 }
 
 double VisionProcessing::Y_Offset()
 {
-    return m_limelightVerticalOffsetTY;
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0);
+    // return m_limelightVerticalOffsetTY;
 }
 
 double VisionProcessing::targetArea()
 {
-    return m_limelightTargetAreaTA;
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0);
+    // return m_limelightTargetAreaTA;
 }
 
 double VisionProcessing::scew()
 {
-    return m_limelightSkewTS;
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ts", 0);
+    // return m_limelightSkewTS;
 }
 
 double VisionProcessing::pipelineLantency()
 {
-    return m_pipelineLatencyTL;
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tl", 0);
+    // return m_pipelineLatencyTL;
 }
 
 double VisionProcessing::lengthHorizontalSideBoundingBox()
 {
-    return m_limelightBoundingBoxWidthTHOR;
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("thor", 0);
+    // return m_limelightBoundingBoxWidthTHOR;
 }
 
 double VisionProcessing::lengthVerticalSideBoundingBox()    
 {
-    return m_limelightBoundingBoxHeightTVERT;
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tvert", 0);
+    // return m_limelightBoundingBoxHeightTVERT;
 }

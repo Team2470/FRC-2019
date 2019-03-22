@@ -76,18 +76,22 @@ void BjorgMecanumDrive::mecanumDriveAutoAlign()
     double ySpeed =  0.0;
     double rotation = 0.0;
 
+    // TODO: add these in as we figure them out
     // ySpeed =  m_autoAlignment->getMoveCorrection();
-    // xSpeed = m_autoAlignment->getShiftCorrection();
+    xSpeed = m_autoAlignment->getShiftCorrection();
     rotation =  m_autoAlignment->getRotateCorrection();
 
-    // rotation = 0.23;
-    // rotation = 0.0;
+    // set back to zero until we figure out what's up....
+    xSpeed = 0.0;
 
     m_robotDrive->SetSafetyEnabled(true);
-    // m_robotDrive->SetSafetyEnabled(false);
+    
+    // TODO:  The code here should probably be a bit fancier...
+    // get the rotation close, then get the shift close, then move towards the 
+    // target... or something like that
     m_robotDrive->DriveCartesian( ySpeed, xSpeed, rotation);
-    // m_robotDrive->DriveCartesian( 0, 0, 0);
-    std::cout << std::endl;
+    
+    // std::cout << std::endl;
 }
 
 void BjorgMecanumDrive::twoBtnMove()
