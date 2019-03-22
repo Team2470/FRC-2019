@@ -76,9 +76,9 @@ void BjorgMecanumDrive::mecanumDriveAutoAlign()
     double ySpeed =  0.0;
     double rotation = 0.0;
 
-    // ySpeed =  speedLimiter(m_autoAlignment->getMoveCorrection());
-    // xSpeed = speedLimiter(m_autoAlignment->getShiftCorrection());
-    rotation =  speedLimiter(m_autoAlignment->getRotateCorrection());
+    // ySpeed =  m_autoAlignment->getMoveCorrection();
+    // xSpeed = m_autoAlignment->getShiftCorrection();
+    rotation =  m_autoAlignment->getRotateCorrection();
 
     // rotation = 0.23;
     // rotation = 0.0;

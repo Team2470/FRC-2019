@@ -62,16 +62,16 @@ double AutoAlignment::getRotateCorrection()
 
     double rotationCorrection = 0.0;
     double angleError = 0.0;
-    double kp = -0.6;
+    double kp = -1.0;
     
     // Determine the [-45,45] degree correction from closest compass point
     double gyroAngle = m_gyroSensor->GetAngle();
-    std::cout << "in(" << gyroAngle << ")\t";
+    // std::cout << "in(" << gyroAngle << ")\t";
 
     angleError = relativeAngleCorrection(gyroAngle);
 
     // Deadband code...
-    if ( abs(angleError) > 5 )
+    if ( abs(angleError) > 1 )
     {
         // take the [-45,45] degree value and tranform it into [-1,1]
         rotationCorrection = angleError / 45.0;
@@ -84,7 +84,18 @@ double AutoAlignment::getRotateCorrection()
 
     // only using a proportional constant - switch to a PID later??
     rotationCorrection = kp * rotationCorrection;
-    std::cout << "out(" << rotationCorrection << ")\t";
+    // std::cout << "out(" << rotationCorrection << ")\t";
+
+    // have a minimum amount of speed...
+    if (rotationCorrection > 0.05 && rotationCorrection < 0.3 )
+    {
+        rotationCorrection = 0.3;
+    }
+
+    if (rotationCorrection < -0.05 && rotationCorrection > -0.3)
+    {
+        rotationCorrection = -0.3;
+    }
 
     // validate output
     if ( rotationCorrection > 1.0 || rotationCorrection < -1.0 )
@@ -154,30 +165,30 @@ double AutoAlignment::relativeAngleCorrection(double angle)
     switch(face)
     {
         case RobotFace::NORTH:
-            std::cout << "N\t";
+            // std::cout << "N\t";
             relativeAngle -= RobotFace::NORTH;
             break;
 
         case RobotFace::SOUTH:
-            std::cout << "S\t";
+            // std::cout << "S\t";
             relativeAngle -= RobotFace::SOUTH;
             break;
 
         case RobotFace::EAST:
-            std::cout << "E\t";
+            // std::cout << "E\t";
             relativeAngle -= RobotFace::EAST;
             break;
 
         case RobotFace::WEST:
-            std::cout << "W\t";
+            // std::cout << "W\t";
             relativeAngle -= RobotFace::WEST;
             break;
         case RobotFace::NORTH2:
-            std::cout << "N\t";
+            // std::cout << "N\t";
             relativeAngle -= RobotFace::NORTH2;
             break;
     default:
-            std::cout << "UNKNOWN\t";
+            // std::cout << "UNKNOWN\t";
             relativeAngle = 0.0;
     }
 
