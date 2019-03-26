@@ -149,6 +149,8 @@ class Robot : public frc::TimedRobot
 		this->gyro,
 		this->autoAlignment);
 
+	//Need to input a known pressure and measured voltage output to use normalized at construction
+	PressureSensor *pressureSensor = new PressureSensor(ChannelAnalog::PRESSURE_SENSOR);
 	Compressor *compressor = new Compressor(0);
 	SingleSolenoid *climberFrontLeft = new SingleSolenoid(ChannelSolenoid::FRONT_LEFT_SOLENOID);
 	SingleSolenoid *climberBackLeft = new SingleSolenoid(ChannelSolenoid::BACK_LEFT_SOLENOID);

@@ -4,6 +4,7 @@
 #include <frc/Solenoid.h>
 #include <frc/DoubleSolenoid.h>
 #include <frc/Compressor.h>
+#include <frc/AnalogInput.h>
 
 /**
  * @class	SingleSolenoid
@@ -196,6 +197,57 @@ private:
 	bool shortCircuitFault = false;	      // GetCompressorShortedFault
 	bool shortCircuitFaultSticky = false; // GetCompressorShortedStickyFault
     frc::Compressor* compressor;
+};
+
+/**
+ * @class	    PressureSensor
+ * @description Operates a pressure sensor.
+ */
+class PressureSensor
+{
+public:
+	/**
+	 * @constructor PressureSensor
+	 * @description Construct the PressureSensor object.
+	 * @param 	    analogChannel -- The channel of pressure switch.
+	 * @param       knownPressureValue -- known pressure value to be used to set the normalized voltage
+	 * @param       knownPressureValue -- known voltage output value to be used to set the normalized voltage
+	 */
+	PressureSensor(int analogChannel, int knownPressureValue = -1, double outputVoltageValue = -1);
+	
+	/**
+	 * @function    setNormalizedVoltage
+	 * @description Sets the normalized voltage supply for the pressure sensor.
+	 */
+	void setNormalizedVoltage(int knownPressure, double outputVoltage);
+	
+	/**
+	 * @function	 getVoltage
+	 * @description Gets the raw voltage output from the pressure sensor.
+	 * @returns     Voltage value from 0.5V to 4.5V (maybe 0V to 5V idk)
+	 */
+	double getVoltage();
+	
+	/**
+	 * @function	getVoltageOutput
+	 * @description Gets the voltage output from the pressure sensor, using the "ideal" supply voltage or given voltage and given pressure.
+	 * @returns     Voltage value from 0.5V to 4.5V
+	 */
+	double getVoltageOutput(double pressureValue, bool isNormalized);
+	
+	/**
+	 * @function	getPressure
+	 * @description Finds the pressure value from the default input voltage or normalized input voltage, then the current sensor output or the optional output voltage value.
+	 * @returns     The pressure value up to 200 psi
+	 */
+	double getPressure(double optionalVoltage, bool isNormalized);
+
+private:
+	frc::AnalogInput* pressureSensor;
+	
+	double normalizedVoltageInput = -1;
+	
+	static constexpr double defaultVoltageInput = 5;
 };
 
 #endif
