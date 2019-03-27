@@ -170,7 +170,7 @@ double PressureSensor::getVoltageOutput(double pressureValue, bool isNormalized 
 	}
 }
 
-double PressureSensor::getPressure(double optionalVoltage = -1, bool isNormalized = false)
+double PressureSensor::getPressure(bool isNormalized = false, double optionalVoltage = -1)
 {
 	if (isNormalized)
 	{

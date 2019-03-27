@@ -141,6 +141,12 @@ void Robot::BasicControl(ControlMode mode)
 		totalEnergy = pdp->GetTotalEnergy();
 		totalPower = pdp->GetTotalPower();
 
+		//Pneumatics
+
+		//Pressure Sensor
+		pressureSensorVoltage = pressureSensor->getVoltage();
+		robotPressure = pressureSensor->getPressure(true, -1);
+
 		//Compressor
 		compressorCurrent = compressor->getCurrent();
 		compressorEnabled = compressor->getVal();
@@ -422,7 +428,11 @@ void Robot::BasicControl(ControlMode mode)
 		frc::SmartDashboard::PutBoolean("HasTargets", limelight->hasTarget());
 		frc::SmartDashboard::PutBoolean("X Offset", limelight->X_Offset());
 		frc::SmartDashboard::PutBoolean("Y Offset", limelight->Y_Offset());
-		
+
+
+		//pressure sensor readings for test
+		std::cout << "pressure sensor voltage: " << pressureSensorVoltage << std::endl;
+		std::cout << "pressure reading: " << robotPressure << std::endl;
 		frc::Wait(0.005);
 	}
 }

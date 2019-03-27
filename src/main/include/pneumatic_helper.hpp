@@ -240,7 +240,7 @@ public:
 	 * @description Finds the pressure value from the default input voltage or normalized input voltage, then the current sensor output or the optional output voltage value.
 	 * @returns     The pressure value up to 200 psi
 	 */
-	double getPressure(double optionalVoltage, bool isNormalized);
+	double getPressure(bool isNormalized, double optionalVoltage);
 
 private:
 	frc::AnalogInput* pressureSensor;

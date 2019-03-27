@@ -88,6 +88,8 @@ class Robot : public frc::TimedRobot
 	void BasicControl(ControlMode mode);
 
   private:
+	static constexpr int KNOWN_PRESSURE = 60;
+	static constexpr double EXPERIMENTAL_VOLTAGE_OUTPUT = 1.5;
 	static constexpr int HATCH_DISTANCE = 24;
 	//256 * 2 = 512 for pulses per rev (Hi-Res CIM encoder)
 	//diameter for the mecanum wheels is 6 inches
@@ -150,7 +152,7 @@ class Robot : public frc::TimedRobot
 		this->autoAlignment);
 
 	//Need to input a known pressure and measured voltage output to use normalized at construction
-	PressureSensor *pressureSensor = new PressureSensor(ChannelAnalog::PRESSURE_SENSOR);
+	PressureSensor *pressureSensor = new PressureSensor(ChannelAnalog::PRESSURE_SENSOR, KNOWN_PRESSURE, EXPERIMENTAL_VOLTAGE_OUTPUT);
 	Compressor *compressor = new Compressor(0);
 	SingleSolenoid *climberFrontLeft = new SingleSolenoid(ChannelSolenoid::FRONT_LEFT_SOLENOID);
 	SingleSolenoid *climberBackLeft = new SingleSolenoid(ChannelSolenoid::BACK_LEFT_SOLENOID);
@@ -167,6 +169,8 @@ class Robot : public frc::TimedRobot
 	double totalEnergy = -1;
 	double totalPower = -1;
 	double compressorCurrent = -1;
+	double pressureSensorVoltage = -1;
+	double robotPressure = -1;
 	bool compressorEnabled = true;
 	bool compressorLowPressureActivate = true;
 	bool climberReady = false;
