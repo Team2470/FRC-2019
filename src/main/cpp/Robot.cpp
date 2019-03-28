@@ -395,6 +395,8 @@ void Robot::BasicControl(ControlMode mode)
 
 		//Pneumatic Stuff
 		frc::SmartDashboard::PutBoolean("Climber Ready", climberReady);
+		frc::SmartDashboard::PutNumber("Pressure Value", robotPressure);
+		frc::SmartDashboard::PutBoolean("Climber Ready (Full Pressure)", (robotPressure >= 59));
 
 		// Sensor Stuff
 		frc::SmartDashboard::PutBoolean("Hatch Ready", hatchReady);
@@ -431,8 +433,8 @@ void Robot::BasicControl(ControlMode mode)
 
 
 		//pressure sensor readings for test
-		std::cout << "pressure sensor voltage: " << pressureSensorVoltage << std::endl;
-		std::cout << "pressure reading: " << robotPressure << std::endl;
+		//std::cout << "pressure sensor voltage: " << pressureSensorVoltage << std::endl;
+		//std::cout << "pressure reading: " << robotPressure << std::endl;
 		frc::Wait(0.005);
 	}
 }
