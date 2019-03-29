@@ -330,9 +330,14 @@ void Robot::BasicControl(ControlMode mode)
 		{
 			//climberBackLeft->activate();
 			//climberBackRight->activate();
-			climberDelayCount++;
-			if (climberDelayCount == climberDelay)
-			backClimbers->Set(true);
+			if (climberDelayCount < climberDelay)
+			{
+				climberDelayCount++;
+			}
+			else if (climberDelayCount >= climberDelay)
+			{
+				backClimbers->Set(true);
+			}
 		}
 		else
 		{
@@ -347,11 +352,6 @@ void Robot::BasicControl(ControlMode mode)
 		if(RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_X))
 		{
 			// std::cout << "SWITCH_X\n";
-
-
-			//////////////////Maybe change this idk
-
-
 
 			// Auto-Align robot to closest target
 			// Check safety switch
