@@ -16,7 +16,7 @@ void Robot::RobotInit()
 	chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
 	frc::SmartDashboard::PutData("Auto Modes", &chooser);
 
-	prefs = Preferences::GetInstance();
+	prefs = frc::Preferences::GetInstance();
 	climberDelay = prefs->GetInt("pneumaticDelay", 0);
 
 	frontLeftMotor->Feed();
@@ -352,6 +352,10 @@ void Robot::BasicControl(ControlMode mode)
 		if(RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_X))
 		{
 			// std::cout << "SWITCH_X\n";
+
+
+			//////remove switch y and change it to a gyro reset: [gyro->Reset();]
+
 
 			// Auto-Align robot to closest target
 			// Check safety switch
