@@ -84,7 +84,7 @@ void BjorgMecanumDrive::mecanumDriveAutoAlign()
     std::cout << "ySpeed: " << ySpeed << std::endl;
     std::cout << "xSpeed: " << xSpeed << std::endl;
     std::cout << "rotation: " << rotation << std::endl;
-    
+
     // set back to zero until we figure out what's up....
     //testing the xSpeed
     //xSpeed = 0.0;
@@ -100,7 +100,8 @@ void BjorgMecanumDrive::mecanumDriveAutoAlign()
     // TODO:  The code here should probably be a bit fancier...
     // get the rotation close, then get the shift close, then move towards the 
     // target... or something like that
-    m_robotDrive->DriveCartesian( ySpeed, xSpeed, rotation);
+    //switched x and y because of how our drivetrain is
+    m_robotDrive->DriveCartesian( xSpeed, ySpeed, rotation);
     
     // std::cout << std::endl;
 }

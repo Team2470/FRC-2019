@@ -12,7 +12,7 @@ double AutoAlignment::getShiftCorrection()
 {
 
 	double strafeCorrection = 0.0;
-	double kp = -0.1;  // if we are moving the wrong way we need to make this positive
+	double kp = 0.6;  // if we are moving the wrong way we need to make this positive
 
 	// TODO: Something is up with the camera/network tables.  I'm not sure why we aren't
 	// seeing the robot being able to control the camera....  
@@ -33,7 +33,7 @@ double AutoAlignment::getShiftCorrection()
 		double headingError = m_visionProcessing->X_Offset();
 	
 		// the error is between -27 and 27 degrees - we need to translate to -1 to 1 (speed controller speak)
-		headingError /= 27.0;
+		headingError /= 27;
 
 		strafeCorrection = kp * headingError; 
 

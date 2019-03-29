@@ -16,8 +16,9 @@ void Robot::RobotInit()
 	chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
 	frc::SmartDashboard::PutData("Auto Modes", &chooser);
 
-	prefs = frc::Preferences::GetInstance();
-	climberDelay = prefs->GetInt("pneumaticDelay", 0);
+// Don't know if these should go here or teleop init
+//	prefs = frc::Preferences::GetInstance();
+//	climberDelay = prefs->GetInt("pneumaticDelay", 0);
 
 	frontLeftMotor->Feed();
 	frontRightMotor->Feed();
@@ -33,7 +34,9 @@ void Robot::RobotInit()
 void Robot::TeleopInit()
 {
 	// do nothing...
-
+	//trying these out here
+	prefs = frc::Preferences::GetInstance();
+	climberDelay = prefs->GetInt("pneumaticDelay", 0);
 
 	return;
 }
