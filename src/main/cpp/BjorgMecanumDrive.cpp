@@ -77,12 +77,23 @@ void BjorgMecanumDrive::mecanumDriveAutoAlign()
     double rotation = 0.0;
 
     // TODO: add these in as we figure them out
-    // ySpeed =  m_autoAlignment->getMoveCorrection();
+    ySpeed =  m_autoAlignment->getMoveCorrection();
     xSpeed = m_autoAlignment->getShiftCorrection();
     rotation =  m_autoAlignment->getRotateCorrection();
 
+    std::cout << "ySpeed: " << ySpeed << std::endl;
+    std::cout << "xSpeed: " << xSpeed << std::endl;
+    std::cout << "rotation: " << rotation << std::endl;
+    
     // set back to zero until we figure out what's up....
-    xSpeed = 0.0;
+    //testing the xSpeed
+    //xSpeed = 0.0;
+
+    //gyro should work so its disabled for now
+    rotation = 0;
+
+    //set ySpeed to 0 so we can test the vision only, then will test ultrasonic sensor
+    ySpeed = 0;
 
     m_robotDrive->SetSafetyEnabled(true);
     

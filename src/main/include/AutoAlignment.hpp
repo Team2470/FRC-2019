@@ -66,6 +66,9 @@ public:
 
 
 private:
+    static constexpr double MAX_SONAR_RANGE = 36;       //36 inches (or more) gives full power
+    static constexpr double IDEAL_SONAR_RANGE = 12;     //12 inches away from the target
+    static constexpr double SONAR_DEADZONE = 2;         //2 inch deadzone
     // static constexpr double IDEAL_RECTANGLE_WIDTH = 10.76;
     // static constexpr double IDEAL_RECTANGLE_HEIGHT = 5.325;
     // static constexpr double PI = 3.14159265;

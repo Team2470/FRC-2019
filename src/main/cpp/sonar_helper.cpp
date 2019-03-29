@@ -7,6 +7,7 @@ MaxSonar::MaxSonar(int ultrasonicChannel, UltrasonicSensorType sonarType)
     this->ultrasonicSensor = new frc::AnalogInput(ultrasonicChannel);
     this->sensorFamily = sonarType;
     
+	//Hopefully inches
     switch(sensorFamily)
 	{
 		case UltrasonicSensorType::HRLV:

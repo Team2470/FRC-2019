@@ -1,10 +1,36 @@
 <xml version="1.0">
 <dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.RobotPreferences">
+		<location x="439" y="195"/>
+		<width>295</width>
+		<height>195</height>
+	</static-widget>
+	<widget field="Pressure Value" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="450" y="140"/>
+	</widget>
+	<widget field="Climber Ready (Full Pressure)" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="450" y="160"/>
+	</widget>
+	<widget field="Y Offset" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="377"/>
+	</widget>
+	<widget field="X Offset" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="356"/>
+	</widget>
+	<widget field="HasTargets" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="335"/>
+	</widget>
+	<widget field="limelight_Stream" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="241"/>
+	</widget>
+	<widget field="limelight_Interface" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="111"/>
+	</widget>
+	<widget field="limelight_PipelineName" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="90"/>
+	</widget>
 	<widget field="Intake Active" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="21" y="69"/>
-	</widget>
-	<widget field="Climber Ready" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="450" y="90"/>
 	</widget>
 	<widget field="Compressor Low Pressure Activate" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
 		<location x="7" y="320"/>

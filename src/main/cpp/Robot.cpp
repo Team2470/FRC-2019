@@ -16,6 +16,9 @@ void Robot::RobotInit()
 	chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
 	frc::SmartDashboard::PutData("Auto Modes", &chooser);
 
+	prefs = Preferences::GetInstance();
+	climberDelay = prefs->GetInt("pneumaticDelay", 0);
+
 	frontLeftMotor->Feed();
 	frontRightMotor->Feed();
 	backLeftMotor->Feed();
@@ -304,31 +307,39 @@ void Robot::BasicControl(ControlMode mode)
 			climbExtend->deactivate();
 			climberReady = false;
 		}*/
+
+		/////////////trying reversed values to hopefully fix an issu
+		//reversing the reverse
+		//reversing the reversed reverse
+
 		//Extends and retracts the front pnuematics
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE1)) //ButtonXbox::XBOX_START
 		{
 			//climberFrontLeft->activate();
 			//climberFrontRight->activate();
-			frontClimbers->Set(false);
+			frontClimbers->Set(true);
 		}
 		else
 		{
 			//climberFrontLeft->deactivate();
 			//climberFrontRight->deactivate();
-			frontClimbers->Set(true);
+			frontClimbers->Set(false);
 		}
 		//Extends and retracts the back pnuematics
 		if (RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_COVERED_SAFE2)) //ButtonXbox::XBOX_BACK
 		{
 			//climberBackLeft->activate();
 			//climberBackRight->activate();
-			backClimbers->Set(false);
+			climberDelayCount++;
+			if (climberDelayCount == climberDelay)
+			backClimbers->Set(true);
 		}
 		else
 		{
 			//climberBackLeft->deactivate();
 			//climberBackRight->deactivate();
-			backClimbers->Set(true);
+			climberDelayCount = 0;
+			backClimbers->Set(false);
 		}
 
 		// Auto-aligment?
@@ -336,6 +347,11 @@ void Robot::BasicControl(ControlMode mode)
 		if(RightButtonHub.GetRawButton(GenericControllerRight::SWITCH_X))
 		{
 			// std::cout << "SWITCH_X\n";
+
+
+			//////////////////Maybe change this idk
+
+
 
 			// Auto-Align robot to closest target
 			// Check safety switch
@@ -394,7 +410,7 @@ void Robot::BasicControl(ControlMode mode)
 		frc::SmartDashboard::PutBoolean("Compressor Low Pressure Activate", compressorLowPressureActivate);
 
 		//Pneumatic Stuff
-		frc::SmartDashboard::PutBoolean("Climber Ready", climberReady);
+		//frc::SmartDashboard::PutBoolean("Climber Ready", climberReady);
 		frc::SmartDashboard::PutNumber("Pressure Value", robotPressure);
 		frc::SmartDashboard::PutBoolean("Climber Ready (Full Pressure)", (robotPressure >= 59));
 

@@ -4,6 +4,7 @@
 #define ROBOT_H
 
 #include <string>
+
 #include <frc/Joystick.h>
 #include <frc/PWMVictorSPX.h>
 #include <frc/TimedRobot.h>
@@ -15,6 +16,7 @@
 #include <frc/Preferences.h>
 #include <frc/DigitalOutput.h>
 #include <frc/ADXRS450_Gyro.h>
+#include <frc/Preferences.h>
 
 #include "AutoAlignment.hpp"
 #include "channel_helper.hpp"
@@ -90,7 +92,7 @@ class Robot : public frc::TimedRobot
   private:
 	static constexpr int KNOWN_PRESSURE = 60;
 	static constexpr double EXPERIMENTAL_VOLTAGE_OUTPUT = 1.5;
-	static constexpr int HATCH_DISTANCE = 24;
+	static constexpr int HATCH_DISTANCE = 12;
 	//256 * 2 = 512 for pulses per rev (Hi-Res CIM encoder)
 	//diameter for the mecanum wheels is 6 inches
 	//value for encoder mult = (1 / 512) * M_PI * 6 ~= 0.0369
@@ -101,6 +103,8 @@ class Robot : public frc::TimedRobot
 	
 	const std::string kAutoNameDefault = "Default";
 	const std::string kAutoNameCustom = "My Auto";
+
+	frc::Preferences *prefs;
 
 	frc::PowerDistributionPanel *pdp = new frc::PowerDistributionPanel();
 
@@ -123,7 +127,7 @@ class Robot : public frc::TimedRobot
 	// frc::Spark *placeholderMotor = new frc::Spark(ChannelPWM::PLACEHOLDER_MOTOR);
 
 	frc::ADXRS450_Gyro *gyro = new frc::ADXRS450_Gyro(); // TODO: ENSURE CORRECT CHANNEL
-	MaxSonar *ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::HRLV);
+	MaxSonar *ultrasonicHatch = new MaxSonar(ChannelAnalog::ULTRASONIC_SENSOR_HATCH, UltrasonicSensorType::LV);
 	VisionProcessing *limelight = new VisionProcessing();
 	AutoAlignment *autoAlignment = new AutoAlignment(gyro, ultrasonicHatch, limelight);
 
@@ -163,6 +167,8 @@ class Robot : public frc::TimedRobot
 	DoubleSolenoid *climbExtend = new DoubleSolenoid(ChannelSolenoid::CLIMBER_EXTEND_FORWARDS, ChannelSolenoid::CLIMBER_EXTEND_BACKWARDS);
 
 	// bool currentlyResolving = false;
+	double climberDelay = 0;		//Value Obtained Via Preferences
+	int climberDelayCount = 0;
 	double inputVoltage = -1;
 	double totalCurrent = -1;
 	double temp = -1;

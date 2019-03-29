@@ -10,9 +10,9 @@
  */ 
 enum UltrasonicSensorType
 {
-	HRLV,
+	HRLV,		//30 cm to 500 cm
 	HRUSB,
-	LV,
+	LV,			//6 to 254 inches
 	XL
 };
 
