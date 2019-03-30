@@ -37,6 +37,7 @@ void Robot::TeleopInit()
 	//trying these out here
 	prefs = frc::Preferences::GetInstance();
 	climberDelay = prefs->GetInt("pneumaticDelay", 0);
+	std::cout << "climber delay: " << climberDelay << std::endl;
 
 	return;
 }
@@ -336,9 +337,11 @@ void Robot::BasicControl(ControlMode mode)
 			if (climberDelayCount < climberDelay)
 			{
 				climberDelayCount++;
+				std::cout << "climber delay count: " << climberDelayCount << std::endl;
 			}
 			else if (climberDelayCount >= climberDelay)
 			{
+				std::cout << "climber activated" << std::endl;
 				backClimbers->Set(true);
 			}
 		}
