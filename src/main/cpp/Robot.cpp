@@ -161,6 +161,7 @@ void Robot::BasicControl(ControlMode mode)
 
 		//Sensor
 		hatchReady = ultrasonicHatch->sonarRange() <= HATCH_DISTANCE;
+		ultraValue = ultrasonicHatch->sonarRange();
 
 		//Drive
 		moveJoyVal = RightDriveJoystick.GetY();
@@ -426,6 +427,8 @@ void Robot::BasicControl(ControlMode mode)
 
 		// Sensor Stuff
 		frc::SmartDashboard::PutBoolean("Hatch Ready", hatchReady);
+		frc::SmartDashboard::PutNumber("Ultrasonic Distance", ultraValue);
+		std::cout << "ultrasonic sensor value: " << ultraValue << std::endl;
 		frc::SmartDashboard::PutBoolean("Hatch Popping", hatchPopping);
 
 		// Drive stuff

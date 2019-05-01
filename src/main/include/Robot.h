@@ -181,6 +181,7 @@ class Robot : public frc::TimedRobot
 	bool compressorLowPressureActivate = true;
 	bool climberReady = false;
 	bool hatchReady = false;
+	double ultraValue = -1;
 	bool hatchPopping = false;
 	bool halfSpeed = false;
 	bool stopDrive = false;

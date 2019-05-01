@@ -12,7 +12,7 @@ double AutoAlignment::getShiftCorrection()
 {
 
 	double strafeCorrection = 0.0;
-	double kp = 0.6;  // if we are moving the wrong way we need to make this positive
+	double kp = 0.8;  // if we are moving the wrong way we need to make this positive
 
 	// TODO: Something is up with the camera/network tables.  I'm not sure why we aren't
 	// seeing the robot being able to control the camera....  
@@ -315,6 +315,8 @@ double AutoAlignment::moveCorrectionViaVision()
 double AutoAlignment::moveCorrectionViaPing()
 {
 	double distanceCorrection = 0;
+	double kpforwards = 0.4;
+	double kpbackwards = 0.6;
 	double yLength = m_sonarSensor->sonarRange();
 
 	//int sign = yLength > IDEAL_SONAR_RANGE ? 1 : -1;
@@ -331,7 +333,14 @@ double AutoAlignment::moveCorrectionViaPing()
 		yLength = MAX_SONAR_RANGE;
 	}
 
-	distanceCorrection = ((yLength - IDEAL_SONAR_RANGE) / MAX_SONAR_RANGE);
+	if ((yLength - IDEAL_SONAR_RANGE) < 0)
+	{
+		distanceCorrection = kpbackwards * ((yLength - IDEAL_SONAR_RANGE) / MAX_SONAR_RANGE);
+	}
+	else
+	{
+		distanceCorrection = kpforwards * ((yLength - IDEAL_SONAR_RANGE) / MAX_SONAR_RANGE);
+	}
 
 	// validate output
 	if ( distanceCorrection < -1 || distanceCorrection > 1 )
