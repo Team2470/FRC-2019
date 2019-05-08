@@ -5,6 +5,7 @@
 #include <frc/ADXRS450_Gyro.h>
 #include <frc/Joystick.h>
 #include <frc/Spark.h>
+#include <frc/PIDOutput.h>
 
 #include "sonar_helper.hpp"
 #include "AutoAlignment.hpp"
@@ -15,7 +16,7 @@
  * @description This class operates a SpeedController group using the mecanum drive;
  *				it has the ability to control the mecanum drive.
  */
-class BjorgMecanumDrive
+class BjorgMecanumDrive : public frc::PIDOutput
 {
 public:
 	int moveCtrl = 0;
@@ -145,6 +146,8 @@ private:
 	 */
 	double speedLimiter( double speed );
 	double speedLimiter( double speed, double max );
+
+	void PIDWrite(double output) override;
 };
 
 #endif

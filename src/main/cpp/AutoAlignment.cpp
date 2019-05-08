@@ -6,6 +6,9 @@ AutoAlignment::AutoAlignment(frc::ADXRS450_Gyro* gyroSensor, MaxSonar* sonarSens
 	m_gyroSensor = gyroSensor;
 	m_sonarSensor = sonarSensor;
 	m_visionProcessing = visionProcessing;
+
+
+	//need to input a mec drive class, and set the pit controller here
 }
 
 double AutoAlignment::getShiftCorrection()

@@ -70,6 +70,8 @@ void BjorgMecanumDrive::mecanumDrive(double movement, double shift, double rotat
 	m_robotDrive->DriveCartesian(movement, shift, rotate);
 }
 
+
+//TODO: MOVE THIS FUNCTION TO THE AUTO ALIGN CLASS NOT MEC
 void BjorgMecanumDrive::mecanumDriveAutoAlign()
 {
 	double xSpeed = 0.0;
@@ -193,4 +195,9 @@ double BjorgMecanumDrive::speedLimiter( double speed, double max )
 	}
 
 	return speed * sign;
+}
+
+void BjorgMecanumDrive::PIDWrite(double output)
+{
+	std::cout << "output: " << output << std::endl;
 }

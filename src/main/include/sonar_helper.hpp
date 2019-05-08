@@ -3,6 +3,7 @@
 
 #include <frc/Ultrasonic.h>
 #include <frc/AnalogInput.h>
+#include <frc/PIDSource.h>
 
 /**
  * @enum 	UltrasonicSensorType
@@ -22,7 +23,7 @@ enum UltrasonicSensorType
  * 		   LV, HRLV, HRUSB, XL
  *		This class has the ability to return the current distance.
  */
-class MaxSonar
+class MaxSonar : public frc::PIDSource 
 {
 public:
 	/**
@@ -46,6 +47,10 @@ public:
 	 * @returns     The calculated voltage.
 	 */
 	double voltage();
+
+	//void SetPIDSourceType(frc::PIDSourceType pidSource) override;
+
+	double PIDGet() override;
 
 private:
 	double voltageScaling = 0.0098; // Roughly 9.8mV per inch

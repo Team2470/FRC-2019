@@ -41,3 +41,11 @@ double MaxSonar::voltage()
 	volt = this->ultrasonicSensor->GetVoltage();
 	return volt;
 }
+
+//void MaxSonar::SetPIDSourceType(frc::PIDSourceType pidSource)
+//{}
+
+double MaxSonar::PIDGet()
+{
+	return 0.0;
+}

@@ -2,7 +2,9 @@
 #define AUTO_ALIGNMENT_HPP
 
 #include <math.h>
+
 #include <frc/ADXRS450_Gyro.h>
+#include <frc/PIDController.h>
 
 #include "sonar_helper.hpp"
 #include "VisionProcessing.hpp"
@@ -66,6 +68,9 @@ public:
 
 
 private:
+    static constexpr double kP = 0.5;
+    static constexpr double kI = 0.5;
+    static constexpr double kD = 0.5;
     static constexpr double MAX_SONAR_RANGE = 36;       //36 inches (or more) gives full power
     static constexpr double IDEAL_SONAR_RANGE = 24;     //12 inches away from the target
     static constexpr double SONAR_DEADZONE = 2;         //2 inch deadzone
@@ -78,6 +83,7 @@ private:
     frc::ADXRS450_Gyro* m_gyroSensor;
     MaxSonar* m_sonarSensor;
     VisionProcessing* m_visionProcessing;
+    frc::PIDController pidSystem;
 
     /**
      * @function    inRange
