@@ -319,6 +319,7 @@ double AutoAlignment::moveCorrectionViaPing()
 	double kpbackwards = 0.6;
 	double yLength = m_sonarSensor->sonarRange();
 
+	std::cout << "Ultrasonic Sensor: " << yLength << std::endl;
 	//int sign = yLength > IDEAL_SONAR_RANGE ? 1 : -1;
 
 	//Checks to see if the sonar range is in the deadzone 12 inches +- 2 inches
@@ -348,6 +349,8 @@ double AutoAlignment::moveCorrectionViaPing()
 		std::cout << "AutoAlignment::moveCorrectionViaPing() : ERROR on output : distanceCorrection = " << distanceCorrection << std::endl;
 		distanceCorrection = 0.0;
 	}
+
+	std::cout << "Distance Correction: " << distanceCorrection << std::endl;
 
 	return distanceCorrection;
 }
