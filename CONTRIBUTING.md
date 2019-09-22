@@ -1,4 +1,4 @@
-# FRC-2018 Contribution Guidelines
+# FRC-2019 Contribution Guidelines
 
 When contributing to this repository, the following guidelines should be kept in mind: 
 
